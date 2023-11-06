@@ -29,9 +29,12 @@ github_username:  JasmineRuixiang
 
 author: Ruixiang Li
 
+copyright: Ruixiang Li Ownership
+
+
+
 # Build settings
 
-# Remove the minima here since its now a regular theme
 theme: minima
 plugins:
   - jekyll-feed
