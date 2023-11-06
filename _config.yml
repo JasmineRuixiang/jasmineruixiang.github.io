@@ -29,8 +29,9 @@ github_username:  JasmineRuixiang
 
 author: Ruixiang Li
 
+# New fields not default
 copyright: Ruixiang Li Ownership
-
+title_logo: images/title_bat.png
 
 
 # Build settings

@@ -3,7 +3,21 @@
   <div class="wrapper">
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
-    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+    
+    <!--I modify here for customary brand display!-->
+    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">
+      {%- if site.title_logo -%}
+        <img src="{{ site.title_logo | relative_url }}" width="40" height="45" alt="site.title | escape"></img>
+        &nbsp
+        {%- else-%}
+          {{site.title | escape}}
+      {%- endif-%}
+    </a>
+
+    <a class="site-title" rel="author" href="{{ "/" | relative_url }}"> {{site.title | escape}}</a>
+
+  
+
 
     {%- if page_paths -%}
       <nav class="site-nav">
