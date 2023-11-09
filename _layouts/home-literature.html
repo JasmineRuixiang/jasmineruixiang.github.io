@@ -14,11 +14,9 @@ layout: default
     <ul class="post-list">
       {%- for post in site.posts -%}
 
-      <!--I modify here for customary home layout setup!-->
-      {%- if post.image -%}
-        <img src="{{- post.image | relative_url -}}" alt="" width = "10%" height = "10%" float = "left" class="blog-roll-image">
-      {%- endif -%}
-
+      
+      <!--I modify here for customary layout setup!-->
+      {%- if post.category == "literature" -%}
       <li>
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         <span class="post-meta">{{ post.date | date: date_format }}</span>
@@ -31,6 +29,9 @@ layout: default
           {{ post.excerpt }}
         {%- endif -%}
       </li>
+      {%- endif -%}
+
+
       {%- endfor -%}
     </ul>
 
