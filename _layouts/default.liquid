@@ -13,6 +13,13 @@
       <meta http-equiv="refresh" content="3; url={{ redirect }}">
     {% endif %}
     {% include head.liquid %}
+    <!-- 2025/8/17 I added the following to enable math rendering-->
+    {% if page.layout == "post" or site.enable_math %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body);"></script>
+    {% endif %}
   </head>
 
   <!-- Body -->
