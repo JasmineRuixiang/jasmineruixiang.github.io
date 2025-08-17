@@ -8,7 +8,10 @@ categories: sample-posts
 thumbnail: assets/img/9.jpg
 featured: true
 disqus_comments: true
+giscus_comments: true
 related_posts: false
+related_publications: true
+citation: true
 ---
 
 
@@ -145,7 +148,24 @@ An example of pulling from a timeline:
 For more details on using the plugin visit: [jekyll-twitter-plugin](https://github.com/rob-murray/jekyll-twitter-plugin)
 
 
+<br>
+For post-citation:
 
+This is an example post that can be cited. The content of the post ends here, while the citation information is automatically provided below. The only thing needed is for you to set the `citation` key in the front matter to `true`.
+
+<br>
+For post-bibliography:
+
+That means simple citation like {% cite einstein1950meaning %}, multiple citations like {% cite einstein1950meaning einstein1905movement %}, long references like {% reference einstein1905movement %} or also quotes:
+
+{% quote einstein1905electrodynamics %}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+sed do eiusmod tempor.
+
+Lorem ipsum dolor sit amet, consectetur adipisicing.
+{% endquote %}
+
+If you would like something more academic, check the [distill style post]({% post_url 2018-12-22-distill %}).
 
 
 
