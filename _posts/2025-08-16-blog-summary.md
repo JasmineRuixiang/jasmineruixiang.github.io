@@ -12,6 +12,9 @@ giscus_comments: true
 related_posts: false
 related_publications: true
 citation: true
+toc:
+  beginning: true
+  sidebar: left
 ---
 
 
@@ -168,6 +171,30 @@ Lorem ipsum dolor sit amet, consectetur adipisicing.
 If you would like something more academic, check the [distill style post]({% post_url 2018-12-22-distill %}).
 
 
+<br>
+Table of contents:
+To add a table of contents to a post, simply add
+
+```yml
+toc:
+  beginning: true
+```
+
+to the front matter of the post. The table of contents will be automatically generated from the headings in the post.
+
+To add a table of contents to a post as a sidebar, simply add
+
+```yml
+toc:
+  sidebar: left
+```
+
+to the front matter of the post. The table of contents will be automatically generated from the headings in the post. If you wish to display the sidebar to the right, simply change `left` to `right`.
+
+If you want to learn more about how to customize the table of contents of your sidebar, you can check the [bootstrap-toc](https://afeld.github.io/bootstrap-toc/) documentation. Notice that you can even customize the text of the heading that will be displayed on the sidebar.
+
+
+<br>
 
 
 
