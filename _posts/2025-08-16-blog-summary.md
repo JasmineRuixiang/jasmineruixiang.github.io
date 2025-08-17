@@ -7,6 +7,8 @@ tags: latent dynamics, neural population
 categories: sample-posts
 thumbnail: assets/img/9.jpg
 featured: true
+disqus_comments: true
+related_posts: false
 ---
 
 
@@ -108,6 +110,40 @@ Produces something like this:
     print(j + i)
 
 {% endhighlight %}
+
+<br>
+For displaying math, for example:
+
+$$
+\sum_{k=1}^\infty |\langle x, e_k \rangle|^2 \leq \|x\|^2
+$$
+
+or 
+
+\begin{equation}
+\label{eq:cauchy-schwarz}
+\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+\end{equation}
+
+and by adding `\label{...}` inside the equation environment, we can now refer to the equation using `\eqref`.
+
+<br>
+Could also include Twitter:
+
+# Tweet
+
+An example of displaying a tweet:
+{% twitter https://twitter.com/rubygems/status/518821243320287232 %}
+
+# Timeline
+
+An example of pulling from a timeline:
+{% twitter https://twitter.com/jekyllrb maxwidth=500 limit=3 %}
+
+# Additional Details
+
+For more details on using the plugin visit: [jekyll-twitter-plugin](https://github.com/rob-murray/jekyll-twitter-plugin)
+
 
 
 
