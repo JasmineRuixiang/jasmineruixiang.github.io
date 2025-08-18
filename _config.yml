@@ -259,9 +259,10 @@ defaults:
       sitemap: false
 
 sass:
-  # style: compressed
-  # Comment out the previous line and add the following for custom.scss
-  style: custom
+  style: compressed
+  
+# Add the following for custom.scss
+style: custom
 
 # -----------------------------------------------------------------------------
 # Jekyll Minifier
