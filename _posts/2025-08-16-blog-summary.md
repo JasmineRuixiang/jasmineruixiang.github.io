@@ -39,7 +39,7 @@ Here's how to embed a weblink: [Pinterest](https://www.pinterest.com), or Direct
 - [x] Go to school
 
 For indented section:
-> We do not grow absolutely, chronologically. We grow sometimes in one dimension, and not in another, unevenly. We grow partially. We are relative. We are mature in one realm, childish in another.
+> We do not grow absolutely, chronologically. We grow sometimes in one dimension, and not in another, unevenly. We grow partially. We are relative. We are mature in one realm, childish in another. 
 > —Anais Nin
 
 <hr>
