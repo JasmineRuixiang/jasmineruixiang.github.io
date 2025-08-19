@@ -16,8 +16,6 @@ profile:
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
-
-# Note: I deleted about_einstein.md on 8/18/2025
 ---
 
 I'm currently a 2nd year Ph.D. student working in BrainGate Lab at Brown University, focusing on novel decoding algorithms for Brain-Computer Interface (BCI). I majored in BME, Applied Math, and Pure Math for Undergraduate back in Johns Hopkins University. I play classic piano, acoustic guitar, and make post rock music. I also write modern Chinese poems. 
