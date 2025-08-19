@@ -1,7 +1,7 @@
 ---
 layout: page
 title: submenus
-nav: true
+nav: false # Hide on 8/18/2025
 nav_order: 8
 dropdown: true
 children:
