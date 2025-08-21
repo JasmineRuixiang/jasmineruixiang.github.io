@@ -128,7 +128,11 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name:  # blog_name will be displayed in your blog page
-blog_description: blogs for my reflections on certain concepts, topics, and research in BCI, Computational Neuroscience, Deep Learning, Differential Geometry, and Topology
+blog_description: >
+  Welcome to my blogs! Here I'm delighted to share my reflections on certain concepts, 
+  theorems, methods, and research papers in BCI, Computational Neuroscience, Deep Learning, Differential Geometry, and Topology.
+  Each blog is not meant to be a comprehensive summary of the correponsding topic, but I'd be more than excited if 
+  you feel like having a dialogue with me from the past while reading. 
 permalink: /blog/:year/:title/
 lsi: true # produce an index for related posts
 
