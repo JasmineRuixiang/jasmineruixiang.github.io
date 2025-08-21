@@ -6,7 +6,7 @@ description: start to write blog posts
 tags: latent dynamics, neural population
 categories: sample-posts
 thumbnail: assets/img/9.jpg
-featured: true
+# featured: true
 disqus_comments: true
 giscus_comments: true
 related_posts: false
