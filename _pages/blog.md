@@ -25,7 +25,8 @@ pagination:
 
   <div class="header-bar">
     <h1>{{ site.blog_name }}</h1>
-    <h2>{{ site.blog_description }}</h2>
+    <h4>{{ site.blog_description }}</h4> 
+    <!-- Change the font size above from h2 to h4 on 8/20/2025 -->
   </div>
   {% endif %}
 
@@ -73,7 +74,7 @@ pagination:
 <div class="float-right">
 <i class="fa-solid fa-thumbtack fa-xs"></i>
 </div>
-<h3 class="card-title text-lowercase">{{ post.title }}</h3>
+<h3 class="card-title">{{ post.title }}</h3>
 <p class="card-text">{{ post.description }}</p>
 
                     {% if post.external_source == blank %}
