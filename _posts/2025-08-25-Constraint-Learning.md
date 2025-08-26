@@ -20,8 +20,8 @@ toc:
 ---
 
 
-## Neural constraints on learning
-### Experiment setup
+# Neural constraints on learning
+## Experiment setup
 For {% cite Sadtler2014 %}, two male Rhesus macaques were trained to perform closed-loop BCI cursor task (Radial 8). Around 85-91 neural units (threshold-crossings) were recorded. The experiment pipeline is demonstrated below:
 
 <div class="row mt-3">
@@ -35,7 +35,7 @@ For {% cite Sadtler2014 %}, two male Rhesus macaques were trained to perform clo
 </div>
 
 
-### Dimensionality reduction paradigm
+## Dimensionality reduction paradigm
 The control space is just 2D because the decoder output is cursor velocities in $$\mathbb{R}^2$$, illustrated as black line in Fig.2 black line (Note: it's actually a 2D plane, but here for simplicity shown as a black line ($$\mathbb{R}^1$$)). 
 
 They used XXX to extract what they called the "intrinsic manifold", which captures the co-modulation patterns among the recorded neural population. This is shown as the underlying yellow plane in Fig.2 (might be confusing, but it's not the 2D control space). Note that at the time of publication, neural manifold was not yet in a popular trend, so the authors briefly characterized the term "intrinsic manifold" with the following illustration:
@@ -50,11 +50,11 @@ They used XXX to extract what they called the "intrinsic manifold", which captur
     Adapted from Fig. 1b in {% cite Sadtler2014 %}. .
 </div>
 
+The authors further elaborated on the intrinsic manifold and its associated dimensionality at the end of the paper. For consistency of comparisons, Sadtler et. al. used a 10-D intrinsic manifold across all days. They then performed some offline analysis 
 
 
 
-
-### Perturbation method
+## Perturbation method
 Then the core methodology of this study is to change the BCI mapping so that the altered control space would be lying either within or outside of the insintric manifold. The paper does present some confusion as to how intuitive mapping and control space would be distinguished. My interpretation is that the control space refers to the ideal potential neural subspace for which to control the cursor optimally. Since within a short time neural connectivity is kept unaltered, the true intrinsic manifold is approximately invariant and thus the required potential neural subspace might not be reachable. By default the control space/intuitive mapping lies within the intrinsic manifold (that's why it's called "intuitive", because that's is what the neural network system has learned to achieve). 
 
 The neuronal connectivity statistics is referred to as the natural co-modulation patterns.
@@ -75,8 +75,8 @@ After the perturbation, the authors observed if the monkeys could eventually lea
 
 Other than that, I do want to dive deep into how such within/outside-manifold perturbations were implemented. Specifically, 
 
-### Quantifiable metric
-#### Amount of the learning
+## Quantifiable metric
+### Amount of the learning
 To quantify the potential amount of learning under two perturbation kinds, the authors resorted primarily to two performance metric: (the change of) relative acquisition time and relative success rate across perturbation blocks. Specifically, as shown below, the black dot represents the intuitive mapping, while the red and blue dots indicate the imediate performance just after corresponding perturbations. Red and blue asterisks represent the best performance during the within the perturbation sessions. The dashed line indicates the maximum learning vector $$l_{max}$$ (note that it starts on the red dot), and thus the aount of learning ($$L \in \mathbb{R}$$) is quantified as the length of the projection of the raw learning vector onto the maximum learning vector, normalized by the length of the maximum learning vector:
 
 $$
@@ -107,7 +107,7 @@ The amount of learning for all sessions was presented above in the right pannel.
     Adapted from Extended Figure 2 in {% cite Sadtler2014 %}. .
 </div>
 
-#### After-effects
+### After-effects
 A second metric Sadtler et. al. employed is observe how the monkeys performed as they reintroduce the intuitive mapping, or the so-called after-effects after washout of the perturbed mapping. Specifically, the after-effect is measured as the amount of performance imparement (tentative: acquisition time, success rate) at the beginning at the wash-out block (like how impairement was measured at the beginning of a perturbation block). A large wash-out effect indicates that the monkeys have learned and adapted to the perturbed mapping. For within-manifold perturbation, the authors did observe brief impaired performance but not so for outside-manifold perturbation, indicating that learning did occur during the former. 
 
 <div class="row mt-3">
@@ -122,7 +122,7 @@ A second metric Sadtler et. al. employed is observe how the monkeys performed as
 
 
 
-### Discussions
+## Discussions
 Since Sadtler et. al. employed closed-looop BCI control, they were able to causally alter the model/map from neural activities to the decoded cursor velocities. 
 
 This paper highlights a potential methodology of BCI research: since the mapping from neural activities to control correlates is __fully specified__, thus could be causally perturbed to explore the corresponding changes of controlled behavior. This allowed the authors to __design/know apriori__ the optimal/required neural activities (specified by the altered mapping) to achieve task success, and thus to observe if animals could generate such neural patterns. 
@@ -139,21 +139,21 @@ The authors also showed that learning did not improve through sessions (readers 
 
 The perspective and consideration that Sadtler et.al took to ensure alternative explanations for the observed distinction of learnability do not hold are informative. I enjoyed its rigorosity, especially when they considered perturbed maps which might be initialy difficult to learn and carefully implement the controls (demonstrate that they have controled). To not diverge from the main focus of this blog, I'll not cover those dicussions. The way that the authors listed clearly alternative explanations and how they tackled each is a very inviting, powerful, and efficient way of writing. 
 
-### Conclusions
+## Conclusions
 The neural manifold reflects the inherent connectivity which constrains (in a short term) the potentially learnable patterns. Consequently, the neural connectivity network structure dictates possible neural patterns and corresponding behavior repertoire the animals are capable of performing. 
 
 This paper strengthens my belief in the legit usability of the low dimensional structure among neural population, and more crucially the value of perturbation methods to causally verify the neural manifold. 
 
 
-## Batista 2025
-
-### Discussions
-
-
-### Conclusions
-
+# Batista 2025
 
 ## Discussions
-These two studies offer powerful information that dimensionality reduction could be not just a visualization tool, but a causal summary of the underlying neural connectivity and anatomical constraints, which correlates to the neural computations that neural population could implement. 
+
 
 ## Conclusions
+
+
+# Discussions
+These two studies offer powerful information that dimensionality reduction could be not just a visualization tool, but a causal summary of the underlying neural connectivity and anatomical constraints, which correlates to the neural computations that neural population could implement. 
+
+# Conclusions
