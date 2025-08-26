@@ -292,7 +292,7 @@ jekyll-archives:
     tag: "/blog/tag/:name/"
     category: "/blog/category/:name/"
 
-display_tags: ["Latent Dynamics", "Neural Manifold", "Dimensionality Reduction"] # these tags will be displayed on the front page of your blog
+display_tags: ["Latent Dynamics", "Neural Manifold", "Dimensionality Reduction", "Learning"] # these tags will be displayed on the front page of your blog
 display_categories: ["Brain-Computer Interface", "Computational Neuroscience", "Deep Learning", "Differential Geometry", "Topology"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
