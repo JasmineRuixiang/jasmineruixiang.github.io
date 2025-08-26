@@ -79,14 +79,14 @@ Here the covariance matrix $$\psi$$ is diagonal. Consequently, the intrinsic man
 
 
 ### Intuitive mapping
-The intuitive mapping is selected by fitting a modified Kalman Filter ({cite Wu W. Gao Y., Bayesian population decoding of motor cortical activity using a Kalman filter}). Specifically, after obtaining the posterior mean $$\hat{z}_{t} = E[z_t|u_t]$$ and z-scoring each dimension, the authors started with the common linear dynamical system (LDS) assumption of Kalman Filter:
+The intuitive mapping is selected by fitting a modified Kalman Filter ({cite Wu W. Gao Y., Bayesian population decoding of motor cortical activity using a Kalman filter}). Specifically, for each __z-scored__ spike count $$z_t$$, after obtaining the posterior mean $$\hat{z}_{t} = E[z_t|u_t]$$ and __z-scoring__ each dimension (these z-scorings are important, which will be stressed a multiple times later), the authors started with the common linear dynamical system (LDS) assumption of Kalman Filter:
 
 $$
 x_t|x_{t-1} \sim N(Ax_{t-1} + b, Q) 
 \hat{z}_t|x_t \sim N(Cx_t + d, R)
 $$
 
-The parameters $$A,b,Q,C,d,R$$ are obtained by maximum likelihood estimation, where $$x_t$$ is the estimate of monkey's intended velocity (label for the data). Since z-scoring, $$\mu = d = b = 0$$. 
+The parameters $$A,b,Q,C,d,R$$ are obtained by maximum likelihood estimation, where $$x_t$$ is the estimate of monkey's intended velocity (label for the data). Since the spike counts and the latent factors were both __z-scored__ and the calibration kinematics were centered, $$\mu = d = b = 0$$. 
 
 Consequently, by filtering the goal is to estimate $$\hat{x}_t = E[x_t| \hat{z}_1, \;, ... \;, \hat{z}_t]$$. The authors directly gave out the formula below to express $$\hat{x}_t$$ interms of the decoded velocity at the previous step $$\hat{x}_{t-1}$$ and the current z-scored spike count $$u_t$$:
 
@@ -97,13 +97,12 @@ M_2 = K\Sigma_{z}\beta
 \beta = \Lambda^T(\Lambda \Lambda^T + \Psi)^{-1}
 $$
 
-where $$K$$ is the steady-state Kalman gain matrix. 
+where $$K$$ is the steady-state Kalman gain matrix. As part of the process of z-scoring the latent factors, $$\Sigma_z$$ is a __diagonal__ matrix whose diagonal element ($$p, p$$) refers to the inverse of standard deviation of the $$pth$$ factor. Since both spike counts and latent factors are __z-scored__, the perturbed mappings (see in the next section) ""would not require a neural unit to fire outside of its observed spike count range"".
 
-
+The above formula might sound confusing, so I present below a detailed derivation. It's not so complicated but readers who are not interested in derivation feel free to skip it. 
 
 #### Derivation of the iterative filtering equation
 Let me write down the pure Kalman Filter filtering equation based on the above intutive map (linear dynamical system):
-
 
 
 
