@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Constraints upon Learning from a Neural Manifold Perspective 
+title: Constraints upon learning from a neural manifold perspective 
 date: 2025-08-25 22:09:34
 description: Employ perturbations of neural manifold to explore learning constraints
 tags: 
@@ -25,7 +25,7 @@ For {% cite Sadtler2014 %}, two male Rhesus macaques were trained to perform clo
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
-        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/fig.1a.png" class="img-fluid rounded z-depth-1" zoomable=true
+        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Fig_1a.png" class="img-fluid rounded z-depth-1" zoomable=true
         width="65%" %}
     </div>
 </div>
@@ -41,7 +41,7 @@ They used XXX to extract what they called the "intrinsic manifold", which captur
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
-        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/fig.1b.png" class="img-fluid rounded z-depth-1" zoomable=true
+        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Fig_1b.png" class="img-fluid rounded z-depth-1" zoomable=true
         width="65%" %}
     </div>
 </div>
@@ -57,7 +57,7 @@ In short, a within-manifold perturbation only reoriented the control space such 
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
-        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/fig.1c.png" class="img-fluid rounded z-depth-1" zoomable=true
+        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Fig_1c.png" class="img-fluid rounded z-depth-1" zoomable=true
         width="65%" %}
     </div>
 </div>
