@@ -88,7 +88,7 @@ where $$i \in \{red, blue\}$$. Pictorially, it's illustrated as below:
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Fig_2cd.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="50%" %}
+        width="65%" %}
     </div>
 </div>
 <div class="caption">
@@ -100,7 +100,7 @@ The amount of learning for all sessions was presented above in the right pannel.
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Ext_Fig_2.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="50%" %}
+        width="65%" %}
     </div>
 </div>
 <div class="caption">
@@ -113,7 +113,7 @@ A second metric Sadtler et. al. employed is observe how the monkeys performed as
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Ext_Fig_3.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="50%" %}
+        width="65%" %}
     </div>
 </div>
 <div class="caption">
@@ -141,6 +141,8 @@ The perspective and consideration that Sadtler et.al took to ensure alternative 
 
 ### Conclusions
 The neural manifold reflects the inherent connectivity which constrains (in a short term) the potentially learnable patterns. Consequently, the neural connectivity network structure dictates possible neural patterns and corresponding behavior repertoire the animals are capable of performing. 
+
+This paper strengthens my belief in the legit usability of the low dimensional structure among neural population, and more crucially the value of perturbation methods to causally verify the neural manifold. 
 
 
 ## Batista 2025
