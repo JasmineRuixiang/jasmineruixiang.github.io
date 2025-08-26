@@ -55,7 +55,7 @@ The authors further elaborated on the intrinsic manifold and its associated dime
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Fig_4.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="65%" %}
+        width="70%" %}
     </div>
 </div>
 <div class="caption">
@@ -73,7 +73,7 @@ In short, a within-manifold perturbation only reoriented the control space such 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Fig_1c.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="50%" %}
+        width="45%" %}
     </div>
 </div>
 <div class="caption">
@@ -83,6 +83,9 @@ In short, a within-manifold perturbation only reoriented the control space such 
 After the perturbation, the authors observed if the monkeys could eventually learn to readapt to the new mapping, to achieve great cursor control performance. For within-manifold perturbation, the monkeys only need to learn to associate cursor kinemaitcs to a new set of neural comodulation patterns (still within reach because lying in the same intrinsic manifold). However, for outside-manifold perturbation, they had to generate new co-modulation patterns in order to reach outside of the existing intrinsic manifold. Consequently, the authors predicted that within-manifold perturbation is easier to learn compared to outside-manifold perturbation. The authors did find results to back up this claim and since they are not the main focus of this blog, I'll refer interested readers to the original paper to take a look (FIgure 2). 
 
 Other than that, I do want to dive deep into how such within/outside-manifold perturbations were implemented. Specifically, 
+
+
+
 
 ## Quantifiable metric
 ### Amount of the learning
@@ -97,7 +100,7 @@ where $$i \in \{red, blue\}$$. Pictorially, it's illustrated as below:
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Fig_2cd.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="65%" %}
+        width="70%" %}
     </div>
 </div>
 <div class="caption">
@@ -109,7 +112,7 @@ The amount of learning for all sessions was presented above in the right pannel.
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Ext_Fig_2.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="65%" %}
+        width="75%" %}
     </div>
 </div>
 <div class="caption">
