@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Constraints upon learning from a neural manifold perspective 
+title: Learning and constraints  
 date: 2025-08-25 22:09:34
 description: Employ perturbations of neural manifold to explore learning constraints
 tags: 
@@ -79,7 +79,31 @@ Here the covariance matrix $$\psi$$ is diagonal. Consequently, the intrinsic man
 
 
 ### Intuitive mapping
-The intuitive mapping is selected by fitting a modified Kalman Filter ({cite Wu W. Gao Y., Bayesian population decoding of motor cortical activity using a Kalman filter})
+The intuitive mapping is selected by fitting a modified Kalman Filter ({cite Wu W. Gao Y., Bayesian population decoding of motor cortical activity using a Kalman filter}). Specifically, after obtaining the posterior mean $$\hat{z}_{t} = E[z_t|u_t]$$ and z-scoring each dimension, the authors started with the common linear dynamical system (LDS) assumption of Kalman Filter:
+
+$$
+x_t|x_{t-1} \sim N(Ax_{t-1} + b, Q) 
+\hat{z}_t|x_t \sim N(Cx_t + d, R)
+$$
+
+The parameters $$A,b,Q,C,d,R$$ are obtained by maximum likelihood estimation, where $$x_t$$ is the estimate of monkey's intended velocity (label for the data). Since z-scoring, $$\mu = d = b = 0$$. 
+
+Consequently, by filtering the goal is to estimate $$\hat{x}_t = E[x_t| \hat{z}_1, \;, ... \;, \hat{z}_t]$$. The authors directly gave out the formula below to express $$\hat{x}_t$$ interms of the decoded velocity at the previous step $$\hat{x}_{t-1}$$ and the current z-scored spike count $$u_t$$:
+
+$$
+\hat{x}_t = M_1 \hat{x}_{t-1} + M_2 u_t
+M_1 = A - KCA
+M_2 = K\Sigma_{z}\beta
+\beta = \Lambda^T(\Lambda \Lambda^T + \Psi)^{-1}
+$$
+
+where $$K$$ is the steady-state Kalman gain matrix. 
+
+
+
+#### Derivation of the iterative filtering equation
+Let me write down the pure Kalman Filter filtering equation based on the above intutive map (linear dynamical system):
+
 
 
 
@@ -173,6 +197,9 @@ The perspective and consideration that Sadtler et.al took to ensure alternative 
 
 From the methods the authors used, they only estimated a linear manifold. According to {cite}, linear manfolds should require more dimensions than a nonlinear manifold which could explain similar amount of variance. 
 
+The dissection of control into an estimation of intrinsic manifold (Factor Analysis) and then build an intuitive mapping (decoder, Kalman Filter) to relate the latent factors to cursor kinematics is different from directly mapping neural activities to movement. Such dissection becomes a common theme for the past two decades, with the emphasis on latent manifold structure beecomes increasingly popular. More than a theoretical refinement, practically speaking, such dissection also allows the authors to perform two different types of perturbation.
+
+Talk more here and also relate this to the nonlinear manifold paper 2025. 
 
 
 ## Conclusions
