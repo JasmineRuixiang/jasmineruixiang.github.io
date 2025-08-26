@@ -52,6 +52,15 @@ They used XXX to extract what they called the "intrinsic manifold", which captur
 
 The authors further elaborated on the intrinsic manifold and its associated dimensionality at the end of the paper. For consistency of comparisons, Sadtler et. al. used a __linear__ 10-D intrinsic manifold across all days. They then performed some offline analysis to explore if 10 is a legitimate choice. Specifically, they estimated the intrinsic dimensionality (EID) as the peak of maximal cross-validated log-likelihood (LL). In panel a the vertical bars represent the standard error of LL from across 4 cross-validation folds. Panel b. shows EID for all days and both 2 monkeys. The authors also showed the LL difference between 10D manifold vs manifold with EID (panel c., with units being the the number of standard errors of LL for the EID model). From panel c. the authors observed that 89% of days the 10-D manifold only differs within one standard error of LL with the EID manifold. Panel d. indicates the cumulative explained variance by the 10-D manifold. Notice that 10 dimensions already explained almost all neural variance. 
 
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0 text-center">
+        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Fig_4.png" class="img-fluid rounded z-depth-1" zoomable=true
+        width="65%" %}
+    </div>
+</div>
+<div class="caption">
+    Adapted from Fig.4 in {% cite Sadtler2014 %}.
+</div>
 
 
 ## Perturbation method
@@ -68,7 +77,7 @@ In short, a within-manifold perturbation only reoriented the control space such 
     </div>
 </div>
 <div class="caption">
-    Adapted from Fig. 1c in {% cite Sadtler2014 %}. .
+    Adapted from Fig.1c in {% cite Sadtler2014 %}.
 </div>
 
 After the perturbation, the authors observed if the monkeys could eventually learn to readapt to the new mapping, to achieve great cursor control performance. For within-manifold perturbation, the monkeys only need to learn to associate cursor kinemaitcs to a new set of neural comodulation patterns (still within reach because lying in the same intrinsic manifold). However, for outside-manifold perturbation, they had to generate new co-modulation patterns in order to reach outside of the existing intrinsic manifold. Consequently, the authors predicted that within-manifold perturbation is easier to learn compared to outside-manifold perturbation. The authors did find results to back up this claim and since they are not the main focus of this blog, I'll refer interested readers to the original paper to take a look (FIgure 2). 
@@ -92,7 +101,7 @@ where $$i \in \{red, blue\}$$. Pictorially, it's illustrated as below:
     </div>
 </div>
 <div class="caption">
-    Adapted from Fig.2c and Fig.2d in {% cite Sadtler2014 %}. .
+    Adapted from Fig.2c and Fig.2d in {% cite Sadtler2014 %}.
 </div>
 
 The amount of learning for all sessions was presented above in the right pannel. Notice that a value of 1 indicates "complete" learning of the new relationship between the required neural co-modulation and cursor kinematics, reverting to the performance level of the intuitive control, while 0 indicates no learning. The authors did observe that there's significant amount of learning for within-manifold perturbations than outside-manifold perturbation. To see changes in success rates and acquisition time during perturbation blocks, instead of a single metric $$L$$ as shown above, the authors also plotted them separately as below:
@@ -104,7 +113,7 @@ The amount of learning for all sessions was presented above in the right pannel.
     </div>
 </div>
 <div class="caption">
-    Adapted from Extended Figure 2 in {% cite Sadtler2014 %}. .
+    Adapted from Extended Fig.2 in {% cite Sadtler2014 %}.
 </div>
 
 ### After-effects
@@ -117,7 +126,7 @@ A second metric Sadtler et. al. employed is observe how the monkeys performed as
     </div>
 </div>
 <div class="caption">
-    Adapted from Extended Figure 3 in {% cite Sadtler2014 %}.
+    Adapted from Extended Fig.3 in {% cite Sadtler2014 %}.
 </div>
 
 
