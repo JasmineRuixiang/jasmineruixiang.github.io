@@ -50,7 +50,7 @@ They used XXX to extract what they called the "intrinsic manifold", which captur
     Adapted from Fig. 1b in {% cite Sadtler2014 %}. .
 </div>
 
-The authors further elaborated on the intrinsic manifold and its associated dimensionality at the end of the paper. For consistency of comparisons, Sadtler et. al. used a 10-D intrinsic manifold across all days. They then performed some offline analysis 
+The authors further elaborated on the intrinsic manifold and its associated dimensionality at the end of the paper. For consistency of comparisons, Sadtler et. al. used a __linear__ 10-D intrinsic manifold across all days. They then performed some offline analysis to explore if 10 is a legitimate choice. Specifically, they estimated the intrinsic dimensionality (EID) as the peak of maximal cross-validated log-likelihood (LL). In panel a the vertical bars represent the standard error of LL from across 4 cross-validation folds. Panel b. shows EID for all days and both 2 monkeys. The authors also showed the LL difference between 10D manifold vs manifold with EID (panel c., with units being the the number of standard errors of LL for the EID model). From panel c. the authors observed that 89% of days the 10-D manifold only differs within one standard error of LL with the EID manifold. Panel d. indicates the cumulative explained variance by the 10-D manifold. Notice that 10 dimensions already explained almost all neural variance. 
 
 
 
@@ -138,6 +138,10 @@ Notice that the after-effects analysis echoed a lot of research methodology in f
 The authors also showed that learning did not improve through sessions (readers might refer to Extended Figure 4 in {% cite Sadtler2014 %} for further information). 
 
 The perspective and consideration that Sadtler et.al took to ensure alternative explanations for the observed distinction of learnability do not hold are informative. I enjoyed its rigorosity, especially when they considered perturbed maps which might be initialy difficult to learn and carefully implement the controls (demonstrate that they have controled). To not diverge from the main focus of this blog, I'll not cover those dicussions. The way that the authors listed clearly alternative explanations and how they tackled each is a very inviting, powerful, and efficient way of writing. 
+
+From the methods the authors used, they only estimated a linear manifold. According to {cite}, linear manfolds should require more dimensions than a nonlinear manifold which could explain similar amount of variance. 
+
+
 
 ## Conclusions
 The neural manifold reflects the inherent connectivity which constrains (in a short term) the potentially learnable patterns. Consequently, the neural connectivity network structure dictates possible neural patterns and corresponding behavior repertoire the animals are capable of performing. 
