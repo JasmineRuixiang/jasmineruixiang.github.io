@@ -35,10 +35,11 @@ For {% cite Sadtler2014 %}, two male Rhesus macaques were trained to perform clo
 </div>
 
 
-## Dimensionality reduction paradigm
+## Decoding paradigm
+### Dimensionality reduction technique
 The control space is just 2D because the decoder output is cursor velocities in $$\mathbb{R}^2$$, illustrated as black line in Fig.2 black line (Note: it's actually a 2D plane, but here for simplicity shown as a black line ($$\mathbb{R}^1$$)). 
 
-They used XXX to extract what they called the "intrinsic manifold", which captures the co-modulation patterns among the recorded neural population. This is shown as the underlying yellow plane in Fig.2 (might be confusing, but it's not the 2D control space). Note that at the time of publication, neural manifold was not yet in a popular trend, so the authors briefly characterized the term "intrinsic manifold" with the following illustration:
+They used Factor Analysis ({cite (Factor-analysis methods for higher-performance neural prostheses) }{cite (Gaussian Process Factor analysis)}; I'll write a blog on GPFA later) to extract what they called the "intrinsic manifold", which captures the co-modulation patterns among the recorded neural population. This is shown as the underlying yellow plane in Fig.2 (might be confusing, but it's not the 2D control space). Note that at the time of publication, neural manifold was not yet in a popular trend, so the authors briefly characterized the term "intrinsic manifold" with the following illustration:
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
@@ -61,6 +62,25 @@ The authors further elaborated on the intrinsic manifold and its associated dime
 <div class="caption">
     Adapted from Fig.4 in {% cite Sadtler2014 %}.
 </div>
+
+The factor analysis method works in the following way (I'll keep the same notation as the paper). Let's assume the high dimensional neural signal (here the z-scored spike counts) acquired every 45$$ms$$ time bin is denoted as $$u \in \mathbb{R}^{q \times 1}$$ (naturally, $$q$$ neural units), and $$z \in \mathbb{R}^{10}$$ the latent variable. Factor analysis assumes the observed neural activity is related to the unobservable latent variables under a Gaussian distribution:
+
+$$
+u | z \sim N(\Lambda z + \mu, \psi)
+$$
+
+where the latent vector is assumed to come from 
+
+$$
+z \sim N(0, I)
+$$
+
+Here the covariance matrix $$\psi$$ is diagonal. Consequently, the intrinsic manifold is defined on the span of the columns of $$\Lambda$$, and each column of $$\Lambda$$ represents a latent dimension where $$z$$ encodes the corresponding projections/coordinates. All three parameters $$\Lambda, \mu, \psi$$ are estimated from __Expectation-Maximization (EM)__ method (I'll also write a blog about this later, especially how it as a classical inferenc engine is closely related to Evidence Lower Bound (__ELBO__), a populat loss/objective function for modern-day generative models based on DNN like VAE and Diffusion). 
+
+
+### Intuitive mapping
+The intuitive mapping is selected by fitting a modified Kalman Filter ({cite Wu W. Gao Y., Bayesian population decoding of motor cortical activity using a Kalman filter})
+
 
 
 ## Perturbation method
