@@ -58,7 +58,7 @@ In short, a within-manifold perturbation only reoriented the control space such 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Fig_1c.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="65%" %}
+        width="50%" %}
     </div>
 </div>
 <div class="caption">
