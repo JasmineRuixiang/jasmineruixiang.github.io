@@ -94,7 +94,9 @@ $$
 
 The parameters $$A,b,Q,C,d,R$$ are obtained by maximum likelihood estimation, where $$x_t$$ is the estimate of monkey's intended velocity (label for the data). Since the spike counts and the latent factors were both __z-scored__ and the calibration kinematics were centered, $$\mu = d = b = 0$$. 
 
-Consequently, by filtering the goal is to estimate $$\hat{x}_t = E[x_t| \hat{z}_1, \;, ... \;, \hat{z}_t]$$. The authors directly gave out the formula below to express $$\hat{x}_t$$ interms of the decoded velocity at the previous step $$\hat{x}_{t-1}$$ and the current z-scored spike count $$u_t$$: 
+Consequently, by filtering the goal is to estimate $$\hat{x}_{t} = E[x_t| \hat{z}_{1}, \;, ... \;, \hat{z}_{t}]$$. 
+
+The authors directly gave out the formula below to express $$\hat{x}_t$$ in terms of the final decoded velocity at the previous step $$\hat{x}_{t-1}$$ and the current z-scored spike count $$u_{t}$$: 
 
 $$
 \begin{align}
@@ -125,9 +127,89 @@ where $$K$$ is the steady-state Kalman gain matrix. As part of the process of z-
 The above formula might sound confusing, so I present below a detailed derivation. It's not so complicated but readers who are not interested in derivation feel free to skip it. 
 
 #### Derivation of the iterative filtering equation
-Let me write down the pure Kalman Filter filtering equation based on the above intutive map (linear dynamical system):
+I'll derive the above formula (5 - 8) in the following 3 steps. In the end, this is nothing brand new and elusive. 
 
+> Step 1: Obtain the posterior of $$z|u$$
+>
+> Step 2: z-score the latents
+>
+> Step 3: Apply Kalman filter
+>
 
+##### Linear Gaussian system 
+I'll start with a well-known fact about linear Gaussian system (this derivation is also the core of Gaussian Process and Kalman Filter; Stop for a second and marvel again at the all-encompassing power of Gaussian distribution). Assume two random vectors $$z \in \mathbb{R}^m$$ and $$x \in \mathbb{R}^n$$ which follow the Gaussian distribution:
+
+$$
+\begin{align}
+p(z) = N(z| \mu, \Sigma)
+\end{align}
+$$
+
+$$
+\begin{align}
+p(x|z) = N(x|Az + b, \Omega)
+\end{align}
+$$
+
+The above illustrates a __linear Gaussian system__. Note that $$A \in \mathbb{R}^{n \times m}$$. Consequently, the correponsding joint distribution $$p(z, x) = p(z)p(x|z)$$ is also a Gaussian with an $$(m + n)$$ dimensional random vector:
+
+$$
+\begin{align}
+p(z, x) = N(
+\begin{bmatrix}
+z \\
+x
+\end{bmatrix}
+|\tilde{\mu}, \tilde{\Sigma})
+\end{align}
+$$
+
+where
+
+$$
+\begin{align}
+\tilde{\mu} = 
+\begin{bmatrix}
+\mu \\
+A\mu + b
+\end{bmatrix}
+\end{align}
+$$
+
+$$
+\begin{align}
+\tilde{\Sigma} = 
+\begin{bmatrix}
+\Sigma & \Sigma A^T \\
+A\Sigma & A\Sigma A^T + \Omega
+\end{bmatrix}
+\end{align}
+$$
+
+The above could be easily derived from matching the corresponding moments, so I will not show in full details. From this joint Gaussian, we could thus easily continue to write out the posterior distribution:
+
+$$
+\begin{align}
+p(z|x) = N(z|\mu', \Sigma')
+\end{align}
+$$
+
+where
+$$
+\begin{align}
+\mu' = \mu + \Sigma A^T(\Omega + A\Sigma A^T)^{-1}(x - (A\mu + b))
+\end{align}
+$$
+
+$$
+\begin{align}
+\Sigma' = \Sigma - \Sigma A^T(\Omega + A \Sigma A^T)^{-1}A \Sigma
+\end{align}
+$$
+
+The above posterior is known as __Bayes' rule for Gaussians__. It states that if both the prior $$p(z)$$ and the likelihood $$p(x|z)$$ are Gaussian, so is the posterior $$p(z|x)$$ (equivalently, Gaussian prior is a __conjugate prior__ of Gaussian likelihood or Gaussians are __closed under updating__, {cite pml2Book} P29).  One interesting fact is that although the posterior mean is a linear function of $$x$$, the posterior covariance is entirely independent of $$x$$. This is a peculiar property of Gaussian distribution (Interested readers please see more explanations in {cite pml2Book} sections 2.3.1.3, 2.3.2.1-2, and 8.2). Finally, keen readers might already perceive the equation (15,16) prelude the form of the Kalman Filter posterior update equations. 
+
+From the above posterior Gaussian form, by plugging in 
 
 ## Perturbation method
 Then the core methodology of this study is to change the BCI mapping so that the altered control space would be lying either within or outside of the insintric manifold. The paper does present some confusion as to how intuitive mapping and control space would be distinguished. My interpretation is that the control space refers to the ideal potential neural subspace for which to control the cursor optimally. Since within a short time neural connectivity is kept unaltered, the true intrinsic manifold is approximately invariant and thus the required potential neural subspace might not be reachable. By default the control space/intuitive mapping lies within the intrinsic manifold (that's why it's called "intuitive", because that's is what the neural network system has learned to achieve). 
