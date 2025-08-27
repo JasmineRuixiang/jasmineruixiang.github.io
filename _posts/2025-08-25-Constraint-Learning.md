@@ -198,11 +198,11 @@ $$
 \end{equation}
 $$
 
-$$
+<!-- $$
 \begin{equation}
 \Sigma' = \Sigma_z - \Sigma_z A^T(\Omega + A \Sigma_z A^T)^{-1}A \Sigma_z
 \end{equation}
-$$
+$$ -->
 
 The above posterior is known as __Bayes' rule for Gaussians__. It states that if both the prior $$p(z)$$ and the likelihood $$p(x \mid z)$$ are Gaussian, so is the posterior $$p(z \mid x)$$ (equivalently, Gaussian prior is a __conjugate prior__ of Gaussian likelihood or Gaussians are __closed under updating__, {% cite pml2Book %} P29).  One interesting fact is that although the posterior mean is a linear function of $$x$$, the posterior covariance is entirely independent of $$x$$. This is a peculiar property of Gaussian distribution (Interested readers please see more explanations in {% cite pml2Book %} sections 2.3.1.3, 2.3.2.1-2, and 8.2). Finally, keen readers might already perceive the equation (15,16) prelude the form of the Kalman Filter posterior update equations. 
 
