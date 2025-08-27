@@ -197,6 +197,12 @@ $$
 \end{equation}
 $$
 
+$$
+\begin{equation}
+p(z \mid x) = N(z \mid \mu', \Sigma')
+\end{equation}
+$$
+
 <!-- $$
 \begin{equation}
 \Sigma' = \Sigma_z - \Sigma_z A^T(\Omega + A \Sigma_z A^T)^{-1}A \Sigma_z
