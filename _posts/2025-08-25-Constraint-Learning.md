@@ -138,51 +138,49 @@ I'll derive the above formula (5 - 8) in the following 3 steps. In the end, this
 I'll start with a well-known fact about linear Gaussian system (this derivation is also the core of Gaussian Process and Kalman Filter; Stop for a second and marvel again at the all-encompassing power of Gaussian distribution). Assume two random vectors $$z \in \mathbb{R}^m$$ and $$x \in \mathbb{R}^n$$ which follow the Gaussian distribution:
 
 $$
-\begin{align}
+\begin{equation}
 p(z) = N(z \mid \mu_z, \Sigma_z)
-\end{align}
+\end{equation}
 $$
 
 $$
-\begin{align}
+\begin{equation}
 p(x \mid z) = N(x \mid Az + b, \Omega)
-\end{align}
+\end{equation}
 $$
 
 The above illustrates a __linear Gaussian system__. Note that $$A \in \mathbb{R}^{n \times m}$$. Consequently, the correponsding joint distribution $$p(z, x) = p(z)p(x \mid z)$$ is also a Gaussian with an $$(m + n)$$ dimensional random vector:
 
 $$
-\begin{align}
+\begin{equation}
 p(z, x) = N(
 \begin{bmatrix}
 z \\
 x
 \end{bmatrix} \mid
 \tilde{\mu}, \tilde{\Sigma})
-\end{align}
+\end{equation}
 $$
 
 where
 
 $$
 \begin{align}
-\tilde{\mu} = 
+\tilde{\mu} &= 
 \begin{bmatrix}
 \mu_z \\
 A\mu_z + b
-\end{bmatrix}
-\end{align}
-$$
+\end{bmatrix} \\
 
-$$
-\begin{align}
-\tilde{\Sigma} = 
+\tilde{\Sigma} &= 
 \begin{bmatrix}
 \Sigma & \Sigma A^T \\
 A\Sigma & A\Sigma A^T + \Omega
 \end{bmatrix}
+
 \end{align}
 $$
+
 
 The above could be easily derived from matching the corresponding moments, so I will not show in full details. From this joint Gaussian, we could thus easily continue to write out the posterior distribution:
 
@@ -219,14 +217,14 @@ where
 
 $$
 \begin{align}
-\mu_{post} &= 0 + I \Lambda(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu)) \\
+\mu_{post} &= 0 + I \Lambda(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu))\nonumber\\
 &= \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t
 \end{align}
 $$
 
 $$
 \begin{align}
-\Sigma_{post} &= I - I\Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Sigma I \\
+\Sigma_{post} &= I - I\Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Sigma I \nonumber\\
 &= I - \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}\Sigma
 \end{align}
 $$
@@ -243,7 +241,7 @@ $$
 The second step is to z-score the posterior mean $$\hat{z}_t$$, which, here, is dividing each position of this vector by the corresponding standard deviation:
 
 $$
-\begin{align}
+\begin{equation}
 \hat{z}_{t, z-scored} = 
 \begin{bmatrix}
 \hat{z}_{t}^{1} / \sigma_{1} \\
@@ -260,7 +258,7 @@ $$
 \end{bmatrix} \hat{z}_t = 
 \Sigma_z \hat{z}_t
 
-\end{align}
+\end{equation}
 $$
 
 For simplicity, for the below I'll replace $$\hat{z}_{t, z-scored}$$ with $$\hat{z}_t$$.
@@ -282,10 +280,10 @@ Again, we play the trick of substitution, starting with (27):
 
 $$
 \begin{align}
-\hat{x}_{t|t} &= \hat{x}_{t|t-1} + K_t(\hat{z}_{t} - C\hat{x}_{t|t-1}) \\
-&= A\hat{x}_{t-1|t-1} + K_t(\hat{z}_t - CA\hat{x}_{t-1|t-1}) \\
-&= (A - K_tCA)\hat{x}_{t-1|t-1} + K_t \hat{z}_t\\
-&= (A - K_tCA)\hat{x}_{t-1|t-1} + K_t\Sigma_z( \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t) \\
+\hat{x}_{t|t} &= \hat{x}_{t|t-1} + K_t(\hat{z}_{t} - C\hat{x}_{t|t-1}) \nonumber \\
+&= A\hat{x}_{t-1|t-1} + K_t(\hat{z}_t - CA\hat{x}_{t-1|t-1}) \nonumber\\
+&= (A - K_tCA)\hat{x}_{t-1|t-1} + K_t \hat{z}_t \nonumber\\
+&= (A - K_tCA)\hat{x}_{t-1|t-1} + K_t\Sigma_z( \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t) \nonumber \\
 &= (A - K_tCA)\hat{x}_{t-1|t-1} + K_t\Sigma_z \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t 
 \end{align}
 $$
