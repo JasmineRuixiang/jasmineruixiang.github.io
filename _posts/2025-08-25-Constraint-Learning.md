@@ -187,22 +187,22 @@ $$
 The above could be easily derived from matching the corresponding moments, so I will not show in full details. From this joint Gaussian, we could thus easily continue to write out the posterior distribution:
 
 $$
-\begin{align}
+\begin{equation}
 p(z \mid x) = N(z \mid \mu', \Sigma')
-\end{align}
+\end{equation}
 $$
 
 where
 $$
-\begin{align}
+\begin{equation}
 \mu' = \mu_z + \Sigma_z A^T(\Omega + A\Sigma_z A^T)^{-1}(x - (A\mu_z + b))
-\end{align}
+\end{equation}
 $$
 
 $$
-\begin{align}
+\begin{equation}
 \Sigma' = \Sigma_z - \Sigma_z A^T(\Omega + A \Sigma_z A^T)^{-1}A \Sigma_z
-\end{align}
+\end{equation}
 $$
 
 The above posterior is known as __Bayes' rule for Gaussians__. It states that if both the prior $$p(z)$$ and the likelihood $$p(x \mid z)$$ are Gaussian, so is the posterior $$p(z \mid x)$$ (equivalently, Gaussian prior is a __conjugate prior__ of Gaussian likelihood or Gaussians are __closed under updating__, {% cite pml2Book %} P29).  One interesting fact is that although the posterior mean is a linear function of $$x$$, the posterior covariance is entirely independent of $$x$$. This is a peculiar property of Gaussian distribution (Interested readers please see more explanations in {% cite pml2Book %} sections 2.3.1.3, 2.3.2.1-2, and 8.2). Finally, keen readers might already perceive the equation (15,16) prelude the form of the Kalman Filter posterior update equations. 
@@ -210,12 +210,13 @@ The above posterior is known as __Bayes' rule for Gaussians__. It states that if
 From the above posterior Gaussian form, by plugging in the notations specified in (1-2) with $$z = z_t, \; x = u_t, \; \mu_z = 0, \; \Sigma_z = I \;, A = \Lambda, \; b = \mu \;, \Omega = \Psi$$ we obtain the following:
 
 $$
-\begin{align}
+\begin{equation}
 p(z_t \mid u_t) = N(z_t \mid \mu_{post}, \Sigma_{post})
-\end{align}
+\end{equation}
 $$
 
 where
+
 $$
 \begin{align}
 \mu_{post} &= 0 + I \Lambda(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu)) \\
@@ -233,9 +234,9 @@ $$
 I deliberately used a different set of notations for the posterior linear Gaussian system, so if you are interested please do this little derivation on your own. Since $$\hat{z}_t = E[z_t \mid u_t]$$, from above we know that 
 
 $$
-\begin{align}
+\begin{equation}
 \hat{z}_t = \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t
-\end{align}
+\end{equation}
 $$
 
 ##### Step 2: Perform z-scoring
@@ -295,7 +296,7 @@ $$
 \hat{x}_t = M_1 \hat{x}_{t-1} + M_2 u_t
 $$
 
-What I wrote as $$\hat{x}_{t \mid t}$$ is the posterior prediction which the authors denoted $$\hat{x}_{t}$$ for simplicity (same logic for $$t-1$$). The only subtlety that remains here is that in the above derivation I used the dynamic Kalman Gain $$K_t$$, calculated for every time point $t$. In the paper the authos utilized steady Kalman Gain (that's why there's no subscript $$t$$) but that's basically iterate the above filtering equations many times with the given set of model parameters ($$A,Q,C,R$$) until $$K_t$$ converges to some matrix $$K$$, and then use that matrix for all time steps. Basically, you could just replace $$K$$ with $$K_t$$ without changing the backbone of the inference structure. 
+What I wrote as $$\hat{x}_{t \mid t}$$ is the posterior prediction which the authors denoted $$\hat{x}_{t}$$ for simplicity (same logic for $$t-1$$). The only subtlety that remains here is that in the above derivation I used the dynamic Kalman Gain $$K_t$$, calculated for every time point $t$. In the paper the authos utilized steady Kalman Gain (that's why there's no subscript $$t$$) but that's basically iterate the above filtering equations many times with the given set of model parameters ($$A,Q,C,R$$) until $$K_t$$ converges to some matrix $$K = \lim_{t \rightarrow \infty} K_t$$, and then use that matrix for all time steps. Basically, you could just replace $$K$$ with $$K_t$$ without changing the backbone of the inference structure. 
 
 Before we jump into the perturbation method, the formula (5) does inform us the central philosophy of Kalman Filter: it integrates model prediction by its specified linear dynamics and the observation together, to arrive at an optimal (I'll not dive deep into what optimality represents here) posterior inference. Extracting out the linear relationship between prediction at timestep $$t$$ and the previous step $$t-1$$ together with the observation input would help understanding the perturbation method below.
 
