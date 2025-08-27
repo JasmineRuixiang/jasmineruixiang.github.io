@@ -20,14 +20,14 @@ toc:
 ---
 
 
-# Neural constraints on learning
+# Neural constraints on learning (Sadtler et.al. 2014)
 ## Experiment setup
 For {% cite Sadtler2014 %}, two male Rhesus macaques were trained to perform closed-loop BCI cursor task (Radial 8). Around 85-91 neural units (threshold-crossings) were recorded. The experiment pipeline is demonstrated below:
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Fig_1a.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="65%" %}
+        width="70%" %}
     </div>
 </div>
 <div class="caption">
@@ -244,5 +244,7 @@ This paper strengthens my belief in the legit usability of the low dimensional s
 
 # Discussions
 These two studies offer powerful information that dimensionality reduction could be not just a visualization tool, but a causal summary of the underlying neural connectivity and anatomical constraints, which correlates to the neural computations that neural population could implement. 
+
+Associating Sadtler 2014 with Churchland 2012, there's a common convergence on using matrices to explore transformations. This again reinforces my idea that perhaps group theory needs to be rigorously introduced into neursocience for ... (also associate with Barack and Kraukauer "Two views on the cognitive brain", which relates __computation__ to __transformation of representations__ to explain cognitive phenomena)
 
 # Conclusions
