@@ -277,10 +277,27 @@ K_t &= \hat{P}_{t|t-1}C^T(C\hat{P}_{t|t-1}C^T + R)^{-1}\\
 \end{align}
 $$
 
-Again, we play the trick of substitution.
+Again, we play the trick of substitution, starting with (27):
 
+$$
+\begin{align}
+\hat{x}_{t|t} &= \hat{x}_{t|t-1} + K_t(\hat{z}_{t} - C\hat{x}_{t|t-1}) \\
+&= A\hat{x}_{t-1|t-1} + K_t(\hat{z}_t - CA\hat{x}_{t-1|t-1}) \\
+&= (A - K_tCA)\hat{x}_{t-1|t-1} + K_t \hat{z}_t\\
+&= (A - K_tCA)\hat{x}_{t-1|t-1} + K_t\Sigma_z( \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t) \\
+&= (A - K_tCA)\hat{x}_{t-1|t-1} + K_t\Sigma_z \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t 
+\end{align}
+$$
 
+Finally, if we define $$M_1 = A - KCA$$, $$M_2 = K\Sigma_z \beta$$, $$\beta = \Lambda(\Psi + \Lambda \Lambda^T)^{-1}$$ (formula (6-8)), we'd claim what we saw in (5):
 
+$$
+\hat{x}_t = M_1 \hat{x}_{t-1} + M_2 u_t
+$$
+
+What I wrote as $$\hat{x}_{t \mid t}$$ is the posterior prediction which the authors denoted $$\hat{x}_{t}$$ for simplicity (same logic for $$t-1$$). The only subtlety that remains here is that in the above derivation I used the dynamic Kalman Gain $$K_t$$, calculated for every time point $t$. In the paper the authos utilized steady Kalman Gain (that's why there's no subscript $$t$$) but that's basically iterate the above filtering equations many times with the given set of model parameters ($$A,Q,C,R$$) until $$K_t$$ converges to some matrix $$K$$, and then use that matrix for all time steps. Basically, you could just replace $$K$$ with $$K_t$$ without changing the backbone of the inference structure. 
+
+Before we jump into the perturbation method, the formula (5) does inform us the central philosophy of Kalman Filter: it integrates model prediction by its specified linear dynamics and the observation together, to arrive at an optimal (I'll not dive deep into what optimality represents here) posterior inference. Extracting out the linear relationship between prediction at timestep $$t$$ and the previous step $$t-1$$ together with the observation input would help understanding the perturbation method below.
 
 ## Perturbation method
 Then the core methodology of this study is to change the BCI mapping so that the altered control space would be lying either within or outside of the insintric manifold. The paper does present some confusion as to how intuitive mapping and control space would be distinguished. My interpretation is that the control space refers to the ideal potential neural subspace for which to control the cursor optimally. Since within a short time neural connectivity is kept unaltered, the true intrinsic manifold is approximately invariant and thus the required potential neural subspace might not be reachable. By default the control space/intuitive mapping lies within the intrinsic manifold (that's why it's called "intuitive", because that's is what the neural network system has learned to achieve). 
