@@ -205,7 +205,7 @@ $$
 \end{align}
 $$
 
-The above posterior is known as __Bayes' rule for Gaussians__. It states that if both the prior $$p(z)$$ and the likelihood $$p(x \mid z)$$ are Gaussian, so is the posterior $$p(z \mid x)$$ (equivalently, Gaussian prior is a __conjugate prior__ of Gaussian likelihood or Gaussians are __closed under updating__, {cite pml2Book} P29).  One interesting fact is that although the posterior mean is a linear function of $$x$$, the posterior covariance is entirely independent of $$x$$. This is a peculiar property of Gaussian distribution (Interested readers please see more explanations in {cite pml2Book} sections 2.3.1.3, 2.3.2.1-2, and 8.2). Finally, keen readers might already perceive the equation (15,16) prelude the form of the Kalman Filter posterior update equations. 
+The above posterior is known as __Bayes' rule for Gaussians__. It states that if both the prior $$p(z)$$ and the likelihood $$p(x \mid z)$$ are Gaussian, so is the posterior $$p(z \mid x)$$ (equivalently, Gaussian prior is a __conjugate prior__ of Gaussian likelihood or Gaussians are __closed under updating__, {% cite pml2Book %} P29).  One interesting fact is that although the posterior mean is a linear function of $$x$$, the posterior covariance is entirely independent of $$x$$. This is a peculiar property of Gaussian distribution (Interested readers please see more explanations in {% cite pml2Book %} sections 2.3.1.3, 2.3.2.1-2, and 8.2). Finally, keen readers might already perceive the equation (15,16) prelude the form of the Kalman Filter posterior update equations. 
 
 From the above posterior Gaussian form, by plugging in the notations specified in (1-2) with $$z = z_t, \; x = u_t, \; \mu_z = 0, \; \Sigma_z = I \;, A = \Lambda, \; b = \mu \;, \Omega = \Psi$$ we obtain the following:
 
@@ -218,15 +218,15 @@ $$
 where
 $$
 \begin{align}
-\mu_{post} = 0 + I\Lambda(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu)) \\
-= \Lambda(\Psi + \Lambda I \Lambda^T)^{-1}u_t
+\mu_{post} &= 0 + I \Lambda(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu)) \\
+&= \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t
 \end{align}
 $$
 
 $$
 \begin{align}
-\Sigma_{post} = I - I\Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Sigma I \\
-= I - \Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Sigma
+\Sigma_{post} &= I - I\Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Sigma I \\
+&= I - \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}\Sigma
 \end{align}
 $$
 
@@ -234,12 +234,51 @@ I deliberately used a different set of notations for the posterior linear Gaussi
 
 $$
 \begin{align}
-\hat{z}_t = \Lambda(\Psi + \Lambda I \Lambda^T)^{-1}u_t
+\hat{z}_t = \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t
 \end{align}
 $$
 
-##### Step 2: Apply z-scoring
-The second step 
+##### Step 2: Perform z-scoring
+The second step is to z-score the posterior mean $$\hat{z}_t$$, which, here, is dividing each position of this vector by the corresponding standard deviation:
+
+$$
+\begin{align}
+\hat{z}_{t, z-scored} = 
+\begin{bmatrix}
+\hat{z}_{t}^{1} / \sigma_{1} \\
+\hat{z}_{t}^{2} / \sigma_{2} \\
+\vdots \\
+\hat{z}_{t}^{p} / \sigma_{p}
+\end{bmatrix} = 
+
+\begin{bmatrix}
+\frac{1}{\sigma_1} & 0 & 0 &\cdots & 0 \\
+0 & \frac{1}{\sigma_2} & 0 & \cdots & 0 \\
+\vdots & & \ddots & & \vdots \\
+0 & 0 & 0 & \cdots & \frac{1}{\sigma_{p}}
+\end{bmatrix} \hat{z}_t = 
+\Sigma_z \hat{z}_t
+
+\end{align}
+$$
+
+For simplicity, for the below I'll replace $$\hat{z}_{t, z-scored}$$ with $$\hat{z}_t$$.
+
+##### Step 3: Apply Kalman Filter
+As in Step 1, let me right down the filtering equation for a pure Kalman Filter based on the Gaussian linear assumption made in (9-10) (For the following I'll drop off $$b, d$$ since they are 0). The notations below might be a little messy, but I want to keep it rigorous. The hat on $$x, P$$ refer to estimates not ground truth, and $$t \mid t-1$$ indicates prior estimation while $$t \mid t$$ indicates posterior estimation at time point $$t$$.
+
+$$
+\begin{align}
+\hat{x}_{t|t-1} &= A\hat{x}_{t-1|t-1} \\
+\hat{P}_{t|t-1} &= A\hat{P}_{t-1|t-1}A^T + Q \\
+K_t &= \hat{P}_{t|t-1}C^T(C\hat{P}_{t|t-1}C^T + R)^{-1}\\
+\hat{x}_{t|t} &= \hat{x}_{t|t-1} + K_t(\hat{z}_{t} - C\hat{x}_{t|t-1}) \\
+\hat{P}_{t|t} &= (I - K_tC)\hat{P}_{t|t-1}
+\end{align}
+$$
+
+Again, we play the trick of substitution.
+
 
 
 
