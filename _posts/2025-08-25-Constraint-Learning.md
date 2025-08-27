@@ -63,7 +63,7 @@ The authors further elaborated on the intrinsic manifold and its associated dime
     Adapted from Fig.4 in {% cite Sadtler2014 %}.
 </div>
 
-The factor analysis method works in the following way (I'll keep the same notation as the paper). Let's assume the high dimensional neural signal (here the z-scored spike counts) acquired every 45$$ms$$ time bin is denoted as $$u \in \mathbb{R}^{q \times 1}$$ (naturally, $$q$$ neural units), and $$z \in \mathbb{R}^{10}$$ the latent variable. Factor analysis assumes the observed neural activity is related to the unobservable latent variables under a Gaussian distribution:
+The factor analysis method works in the following way (I'll keep the same notation as the paper). Let's assume the high dimensional neural signal (here the z-scored spike counts) acquired every 45ms time bin is denoted as $$u \in \mathbb{R}^{q \times 1}$$ (naturally, $$q$$ neural units), and $$z \in \mathbb{R}^{10}$$ the latent variable. Factor analysis assumes the observed neural activity is related to the unobservable latent variables under a Gaussian distribution:
 
 $$
 \begin{align}
@@ -120,7 +120,7 @@ $$
 \end{align}
 $$
 
-where $$K$$ is the steady-state Kalman gain matrix. As part of the process of z-scoring the latent factors, $$\Sigma_z$$ is a __diagonal__ matrix whose diagonal element ($$p, p$$) refers to the inverse of standard deviation of the $$pth$$ factor. Since both spike counts and latent factors are __z-scored__, the perturbed mappings (see in the next section) ""would not require a neural unit to fire outside of its observed spike count range"".
+where $$K$$ is the steady-state Kalman gain matrix. As part of the process of z-scoring the latent factors, $$\Sigma_z$$ is a __diagonal__ matrix whose diagonal element ($$p, p$$) refers to the inverse of standard deviation of the $$pth$$ factor. Since both spike counts and latent factors are __z-scored__, the perturbed mappings (see in the next section) "would not require a neural unit to fire outside of its observed spike count range".
 
 The above formula might sound confusing, so I present below a detailed derivation. It's not so complicated but readers who are not interested in derivation feel free to skip it. 
 
@@ -193,7 +193,8 @@ $$
 where
 $$
 \begin{equation}
-\mu' = \mu_z + \Sigma_z A^T(\Omega + A\Sigma_z A^T)^{-1}(x - (A\mu_z + b))
+1 = 2
+% \mu' = \mu_z + \Sigma_z A^T(\Omega + A\Sigma_z A^T)^{-1}(x - (A\mu_z + b))
 \end{equation}
 $$
 
@@ -225,7 +226,7 @@ $$
 $$
 \begin{align}
 \Sigma_{post} &= I - I\Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Sigma I \nonumber\\
-&= I - \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}\Sigma
+\Sigma_{post} &= I - \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}\Sigma
 \end{align}
 $$
 
