@@ -159,10 +159,10 @@ Other than that, I do want to dive deep into how such within/outside-manifold pe
 
 ## Quantifiable metric
 ### Amount of the learning
-To quantify the potential amount of learning under two perturbation kinds, the authors resorted primarily to two performance metric: (the change of) relative acquisition time and relative success rate across perturbation blocks. Specifically, as shown below, the black dot represents the intuitive mapping, while the red and blue dots indicate the imediate performance just after corresponding perturbations. Red and blue asterisks represent the best performance during the within the perturbation sessions. The dashed line indicates the maximum learning vector $$l_{max}$$ (note that it starts on the red dot), and thus the aount of learning ($$L \in \mathbb{R}$$) is quantified as the length of the projection of the raw learning vector onto the maximum learning vector, normalized by the length of the maximum learning vector:
+To quantify the potential amount of learning under two perturbation kinds, the authors resorted primarily to two performance metric: (the change of) relative acquisition time and relative success rate across perturbation blocks. Specifically, as shown below, the black dot represents the intuitive mapping, while the red and blue dots indicate the imediate performance just after corresponding perturbations. Red and blue asterisks represent the best performance during the within the perturbation sessions. The dashed line indicates the maximum learning vector $$L_{max}$$ (note that it starts on the red dot), and thus the aount of learning ($$A_i \in \mathbb{R}$$) is quantified as the length of the projection of the raw learning vector onto the maximum learning vector, normalized by the length of the maximum learning vector:
 
 $$
-L = \frac{l_{raw, i} \cdot l_{max}}{||l_{max}||^2}
+A_i = \frac{L_{raw, i} \cdot L_{max}}{||L_{max}||^2}
 $$
 
 where $$i \in \{red, blue\}$$. Pictorially, it's illustrated as below:
@@ -176,6 +176,8 @@ where $$i \in \{red, blue\}$$. Pictorially, it's illustrated as below:
 <div class="caption">
     Adapted from Fig.2c and Fig.2d in {% cite Sadtler2014 %}.
 </div>
+
+Note that the asterisks in the above represent the time point/bin corresponding to __maximal__ amount of learning. In real case, for each time bin the authors would pinpoint the end points for the learning vectors (for calculations in details, please refer to the METHODS section of the paper), and compute the amount of learning correspondingly (the red and blue learning vectors might end in different positions with a diferent set of relative acquisition time and success rate up to that time bin).
 
 The amount of learning for all sessions was presented above in the right pannel. Notice that a value of 1 indicates "complete" learning of the new relationship between the required neural co-modulation and cursor kinematics, reverting to the performance level of the intuitive control, while 0 indicates no learning. The authors did observe that there's significant amount of learning for within-manifold perturbations than outside-manifold perturbation. To see changes in success rates and acquisition time during perturbation blocks, instead of a single metric $$L$$ as shown above, the authors also plotted them separately as below:
 
@@ -202,6 +204,14 @@ A second metric Sadtler et. al. employed is observe how the monkeys performed as
     Adapted from Extended Fig.3 in {% cite Sadtler2014 %}.
 </div>
 
+### Principal/canonical angles
+To quantify the comparisons between the intuitive and the perturbed mappings, Sadtler et.al. also calculated the principal angles between two linear subspaces. Notice that by formula () above, both subspaces are spanned by the rows of $$M_2$$ ($$M_{2, WM}$$ for within-manifold perturbation, and $$M_{2, OM}$$ for outside-manifold perturbation). Consuquently, the two principal angles specify the maximum and minimum angles of separation between the intuitive and the perturbed control spaces. Notice that since the spike counts are z-scored, the control spaces also center at the origin.  
+
+Sidenote: How do principal angles relate with principal eigenvalues and principal curvatures?
+
+To give a short summary of principal angles calculation:
+
+Note the role of SVD decompsition. 
 
 
 ## Discussions
