@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Learning and constraints  
+title: Learning and constraints (in progress)
 date: 2025-08-25 22:09:34
 description: Employ perturbations of neural manifold to explore learning constraints
 tags: 
@@ -66,13 +66,17 @@ The authors further elaborated on the intrinsic manifold and its associated dime
 The factor analysis method works in the following way (I'll keep the same notation as the paper). Let's assume the high dimensional neural signal (here the z-scored spike counts) acquired every 45$$ms$$ time bin is denoted as $$u \in \mathbb{R}^{q \times 1}$$ (naturally, $$q$$ neural units), and $$z \in \mathbb{R}^{10}$$ the latent variable. Factor analysis assumes the observed neural activity is related to the unobservable latent variables under a Gaussian distribution:
 
 $$
+\begin{align}
 u | z \sim N(\Lambda z + \mu, \psi)
+\end{align}
 $$
 
 where the latent vector is assumed to come from 
 
 $$
+\begin{align}
 z \sim N(0, I)
+\end{align}
 $$
 
 Here the covariance matrix $$\psi$$ is diagonal. Consequently, the intrinsic manifold is defined on the span of the columns of $$\Lambda$$, and each column of $$\Lambda$$ represents a latent dimension where $$z$$ encodes the corresponding projections/coordinates. All three parameters $$\Lambda, \mu, \psi$$ are estimated from __Expectation-Maximization (EM)__ method (I'll also write a blog about this later, especially how it as a classical inferenc engine is closely related to Evidence Lower Bound (__ELBO__), a populat loss/objective function for modern-day generative models based on DNN like VAE and Diffusion). 
@@ -80,13 +84,6 @@ Here the covariance matrix $$\psi$$ is diagonal. Consequently, the intrinsic man
 
 ### Intuitive mapping
 The intuitive mapping is selected by fitting a modified Kalman Filter ({cite Wu W. Gao Y., Bayesian population decoding of motor cortical activity using a Kalman filter}). Specifically, for each __z-scored__ spike count $$z_t$$, after obtaining the posterior mean $$\hat{z}_{t} = E[z_t|u_t]$$ and __z-scoring__ each dimension (these z-scorings are important, which will be stressed a multiple times later), the authors started with the common linear dynamical system (LDS) assumption of Kalman Filter:
-
-$$
-x_t|x_{t-1} \sim N(Ax_{t-1} + b, Q) 
-$$
-$$
-\hat{z}_t|x_t \sim N(Cx_t + d, R)
-$$
 
 $$
 \begin{align}
@@ -100,16 +97,27 @@ The parameters $$A,b,Q,C,d,R$$ are obtained by maximum likelihood estimation, wh
 Consequently, by filtering the goal is to estimate $$\hat{x}_t = E[x_t| \hat{z}_1, \;, ... \;, \hat{z}_t]$$. The authors directly gave out the formula below to express $$\hat{x}_t$$ interms of the decoded velocity at the previous step $$\hat{x}_{t-1}$$ and the current z-scored spike count $$u_t$$: 
 
 $$
+\begin{align}
 \hat{x}_t = M_1 \hat{x}_{t-1} + M_2 u_t
+\end{align}
 $$
+
 $$
+\begin{align}
 M_1 = A - KCA
+\end{align}
 $$
+
 $$
+\begin{align}
 M_2 = K\Sigma_{z}\beta
+\end{align}
 $$
+
 $$
+\begin{align}
 \beta = \Lambda^T(\Lambda \Lambda^T + \Psi)^{-1}
+\end{align}
 $$
 
 where $$K$$ is the steady-state Kalman gain matrix. As part of the process of z-scoring the latent factors, $$\Sigma_z$$ is a __diagonal__ matrix whose diagonal element ($$p, p$$) refers to the inverse of standard deviation of the $$pth$$ factor. Since both spike counts and latent factors are __z-scored__, the perturbed mappings (see in the next section) ""would not require a neural unit to fire outside of its observed spike count range"".
@@ -140,8 +148,12 @@ In short, a within-manifold perturbation only reoriented the control space such 
 
 After the perturbation, the authors observed if the monkeys could eventually learn to readapt to the new mapping, to achieve great cursor control performance. For within-manifold perturbation, the monkeys only need to learn to associate cursor kinemaitcs to a new set of neural comodulation patterns (still within reach because lying in the same intrinsic manifold). However, for outside-manifold perturbation, they had to generate new co-modulation patterns in order to reach outside of the existing intrinsic manifold. Consequently, the authors predicted that within-manifold perturbation is easier to learn compared to outside-manifold perturbation. The authors did find results to back up this claim and since they are not the main focus of this blog, I'll refer interested readers to the original paper to take a look (FIgure 2). 
 
+
+### Perturbation as permutation
 Other than that, I do want to dive deep into how such within/outside-manifold perturbations were implemented. Specifically, 
 
+
+### Select perturbed mappings
 
 
 
