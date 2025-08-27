@@ -170,7 +170,7 @@ where $$i \in \{red, blue\}$$. Pictorially, it's illustrated as below:
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Fig_2cd.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="70%" %}
+        width="75%" %}
     </div>
 </div>
 <div class="caption">
@@ -182,7 +182,7 @@ The amount of learning for all sessions was presented above in the right pannel.
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Ext_Fig_2.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="75%" %}
+        width="80%" %}
     </div>
 </div>
 <div class="caption">
@@ -195,7 +195,7 @@ A second metric Sadtler et. al. employed is observe how the monkeys performed as
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Ext_Fig_3.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="65%" %}
+        width="70%" %}
     </div>
 </div>
 <div class="caption">
