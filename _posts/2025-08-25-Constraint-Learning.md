@@ -134,12 +134,12 @@ I'll derive the above formula (5 - 8) in the following 3 steps. In the end, this
 > Step 3: Apply Kalman filter
 >
 
-##### Linear Gaussian system 
+##### Step 1: Linear Gaussian system 
 I'll start with a well-known fact about linear Gaussian system (this derivation is also the core of Gaussian Process and Kalman Filter; Stop for a second and marvel again at the all-encompassing power of Gaussian distribution). Assume two random vectors $$z \in \mathbb{R}^m$$ and $$x \in \mathbb{R}^n$$ which follow the Gaussian distribution:
 
 $$
 \begin{align}
-p(z) = N(z \mid \mu, \Sigma)
+p(z) = N(z \mid \mu_z, \Sigma_z)
 \end{align}
 $$
 
@@ -157,7 +157,7 @@ p(z, x) = N(
 \begin{bmatrix}
 z \\
 x
-\end{bmatrix}
+\end{bmatrix} \mid
 \tilde{\mu}, \tilde{\Sigma})
 \end{align}
 $$
@@ -168,8 +168,8 @@ $$
 \begin{align}
 \tilde{\mu} = 
 \begin{bmatrix}
-\mu \\
-A\mu + b
+\mu_z \\
+A\mu_z + b
 \end{bmatrix}
 \end{align}
 $$
@@ -195,19 +195,53 @@ $$
 where
 $$
 \begin{align}
-\mu' = \mu + \Sigma A^T(\Omega + A\Sigma A^T)^{-1}(x - (A\mu + b))
+\mu' = \mu_z + \Sigma_z A^T(\Omega + A\Sigma_z A^T)^{-1}(x - (A\mu_z + b))
 \end{align}
 $$
 
 $$
 \begin{align}
-\Sigma' = \Sigma - \Sigma A^T(\Omega + A \Sigma A^T)^{-1}A \Sigma
+\Sigma' = \Sigma_z - \Sigma_z A^T(\Omega + A \Sigma_z A^T)^{-1}A \Sigma_z
 \end{align}
 $$
 
 The above posterior is known as __Bayes' rule for Gaussians__. It states that if both the prior $$p(z)$$ and the likelihood $$p(x \mid z)$$ are Gaussian, so is the posterior $$p(z \mid x)$$ (equivalently, Gaussian prior is a __conjugate prior__ of Gaussian likelihood or Gaussians are __closed under updating__, {cite pml2Book} P29).  One interesting fact is that although the posterior mean is a linear function of $$x$$, the posterior covariance is entirely independent of $$x$$. This is a peculiar property of Gaussian distribution (Interested readers please see more explanations in {cite pml2Book} sections 2.3.1.3, 2.3.2.1-2, and 8.2). Finally, keen readers might already perceive the equation (15,16) prelude the form of the Kalman Filter posterior update equations. 
 
-From the above posterior Gaussian form, by plugging in 
+From the above posterior Gaussian form, by plugging in the notations specified in (1-2) with $$z = z_t, \; x = u_t, \; \mu_z = 0, \; \Sigma_z = I \;, A = \Lambda, \; b = \mu \;, \Omega = \Psi$$ we obtain the following:
+
+$$
+\begin{align}
+p(z_t \mid u_t) = N(z_t \mid \mu_{post}, \Sigma_{post})
+\end{align}
+$$
+
+where
+$$
+\begin{align}
+\mu_{post} = 0 + I\Lambda(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu)) \\
+= \Lambda(\Psi + \Lambda I \Lambda^T)^{-1}u_t
+\end{align}
+$$
+
+$$
+\begin{align}
+\Sigma_{post} = I - I\Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Sigma I \\
+= I - \Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Sigma
+\end{align}
+$$
+
+I deliberately used a different set of notations for the posterior linear Gaussian system, so if you are interested please do this little derivation on your own. Since $$\hat{z}_t = E[z_t \mid u_t]$$, from above we know that 
+
+$$
+\begin{align}
+\hat{z}_t = \Lambda(\Psi + \Lambda I \Lambda^T)^{-1}u_t
+\end{align}
+$$
+
+##### Step 2: Apply z-scoring
+The second step 
+
+
 
 ## Perturbation method
 Then the core methodology of this study is to change the BCI mapping so that the altered control space would be lying either within or outside of the insintric manifold. The paper does present some confusion as to how intuitive mapping and control space would be distinguished. My interpretation is that the control space refers to the ideal potential neural subspace for which to control the cursor optimally. Since within a short time neural connectivity is kept unaltered, the true intrinsic manifold is approximately invariant and thus the required potential neural subspace might not be reachable. By default the control space/intuitive mapping lies within the intrinsic manifold (that's why it's called "intuitive", because that's is what the neural network system has learned to achieve). 
