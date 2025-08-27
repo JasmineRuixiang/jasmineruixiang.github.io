@@ -83,17 +83,32 @@ The intuitive mapping is selected by fitting a modified Kalman Filter ({cite Wu 
 
 $$
 x_t|x_{t-1} \sim N(Ax_{t-1} + b, Q) 
+$$
+$$
 \hat{z}_t|x_t \sim N(Cx_t + d, R)
+$$
+
+$$
+\begin{align}
+x_t \mid x_{t-1} &\sim N(Ax_{t-1} + b, Q) \\
+\hat{z}_t \mid x_t &\sim N(Cx_t + d, R)
+\end{align}
 $$
 
 The parameters $$A,b,Q,C,d,R$$ are obtained by maximum likelihood estimation, where $$x_t$$ is the estimate of monkey's intended velocity (label for the data). Since the spike counts and the latent factors were both __z-scored__ and the calibration kinematics were centered, $$\mu = d = b = 0$$. 
 
-Consequently, by filtering the goal is to estimate $$\hat{x}_t = E[x_t| \hat{z}_1, \;, ... \;, \hat{z}_t]$$. The authors directly gave out the formula below to express $$\hat{x}_t$$ interms of the decoded velocity at the previous step $$\hat{x}_{t-1}$$ and the current z-scored spike count $$u_t$$:
+Consequently, by filtering the goal is to estimate $$\hat{x}_t = E[x_t| \hat{z}_1, \;, ... \;, \hat{z}_t]$$. The authors directly gave out the formula below to express $$\hat{x}_t$$ interms of the decoded velocity at the previous step $$\hat{x}_{t-1}$$ and the current z-scored spike count $$u_t$$: 
 
 $$
 \hat{x}_t = M_1 \hat{x}_{t-1} + M_2 u_t
+$$
+$$
 M_1 = A - KCA
+$$
+$$
 M_2 = K\Sigma_{z}\beta
+$$
+$$
 \beta = \Lambda^T(\Lambda \Lambda^T + \Psi)^{-1}
 $$
 
