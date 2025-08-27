@@ -194,7 +194,6 @@ where
 $$
 \begin{equation}
 1 = 2
-% \mu' = \mu_z + \Sigma_z A^T(\Omega + A\Sigma_z A^T)^{-1}(x - (A\mu_z + b))
 \end{equation}
 $$
 
