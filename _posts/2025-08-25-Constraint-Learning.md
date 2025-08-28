@@ -226,10 +226,19 @@ $$
 
 $$
 \begin{align}
-\mu_{post} &= 0 + I \Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu))\nonumber\\
+\mu_{post} &= 0 + I \Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu)) \\
 &= \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}u_t
 \end{align}
 $$
+
+$$
+\begin{aligned}
+\mu_{post} &= 0 + I \Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu)) \\
+&= \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}u_t
+\end{aligned}
+$$
+
+and 
 
 $$
 \begin{align}
@@ -237,8 +246,6 @@ x_t \mid x_{t-1} &\sim N(Ax_{t-1} + b, Q) \\
 \hat{z}_t \mid x_t &\sim N(Cx_t + d, R)
 \end{align}
 $$
-
-and 
 
 $$
 \begin{align}
