@@ -453,8 +453,10 @@ For defining the candidate set of potential outside-manifold perturbation for th
 
 Additionally, though I do appreciate the flavor of group assignment (there's even a flavor of group action here; anyway, permutation matrices form a permutation group), I am not sure if each of the $$10!$$ permutations on groups of neural units is "equivalent" to a permutation among 10 latent axes. 
 
+Another question is outside-manifold perturbation is not necessarily guaranteed to be outside the manifold?
+
 ### Required changes in preferred directions
-There's one interesting method that I don't have enough time to delve into, which is the calculation of changes in preferred directions for each neural unit. The authors began by discussing comparing the columns of $$M_2, \; M_{WM, or OM}$$, which reflects how each neural unit impacts the decoded cursor kinematics. This strategy is not adopted because for the second monkey $$M_2$$ and $$M_{OM}$$ share many columns for the un-permuted columns, making it an unfair comparison. However, it's informative if we associate this view of $$M_2 u_t$$ by assiging each column of $$M_2$$ with a coordinate in $$u_t$$ with that mentioned in the principal angles section where rows of $$M_2$$ represnet an axis upon which $$u_t$$ is projected. These two perspectives which interpret linear matrix multiplication as either a __transformation__ (of basis vectors in space) or a __projection__ which will be further illustrated in an upcoming post. 
+There's one interesting method that I don't have enough time to delve into, which is the calculation of changes in preferred directions for each neural unit. This is calculated to make sure that learning two perturbation types would require similar effort for the monkeys to adapt (interested readers might refer to Figure 3b in the paper). The authors began by discussing comparing the columns of $$M_2, \; M_{WM, or OM}$$, which reflects how each neural unit impacts the decoded cursor kinematics. This strategy is not adopted because for the second monkey $$M_2$$ and $$M_{OM}$$ share many columns for the un-permuted columns, making it an unfair comparison. However, it's informative if we associate this view of $$M_2 u_t$$ by assiging each column of $$M_2$$ with a coordinate in $$u_t$$ with that mentioned in the principal angles section where rows of $$M_2$$ represnet an axis upon which $$u_t$$ is projected. These two perspectives which interpret linear matrix multiplication as either a __transformation__ (of basis vectors in space) or a __projection__ which will be further illustrated in an upcoming post. 
 
 Then, the authors came up with another technique. They assumed that 
 
@@ -494,13 +496,19 @@ $$
 \end{equation}
 $$
 
+### Selection of intrinsic dimensionality
+Usually we do not have a coherent and systematic way to detemrine the optimal intrinsic dimensionality. Here for factor analysis, based on its explicit probabilistic inference structure, the authors could easily compute the likelihood for cross-validated data. 
 
+### Measurement of cumulative shared variance
+Based on equations (13), the original covariance of $$u$$ is decomposed (with minor substitutions) into a shared component $$\Lambda \Lambda^T$$ and an independent component $$\Psi$$. In order to calculate the amount of shared variance along orthogonal directions within the manifold (notice this is a linear manifold), consequently, the authors calculated the eigenvalues of $$\Lambda \Lambda^T$$ which present the shared variances, each corresponds to an orthonormalized latent dimension. This is similar to Churchland 2012 the last blog...
 
 
 ## Conclusions
 The neural manifold reflects the inherent connectivity which constrains (in a short term) the potentially learnable patterns. Consequently, the neural connectivity network structure dictates possible neural patterns and corresponding behavior repertoire the animals are capable of performing. 
 
-This paper strengthens my belief in the legit usability of the low dimensional structure among neural population, and more crucially the value of perturbation methods to causally verify the neural manifold. 
+This paper strengthens my belief in the legit usability of the low dimensional structure among neural population, and more crucially the value of perturbation methods to causally verify the neural manifold. Specifically, the extraction of latent factors, other than directly mapping neural activties to cursor kinematics, not only adds more interpretability to the framework, but also provies a readily distinguishable strategy of within/outside-manifold perturbations. This reminds me of many other models with latent factors in between: (xxx, xxx, xxx, xxx). 
+
+
 
 
 # Batista 2025
