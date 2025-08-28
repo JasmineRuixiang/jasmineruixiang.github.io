@@ -346,14 +346,17 @@ M_{2, OM} = K\Sigma_z\beta \eta_{OM}
 \end{align}
 $$
 
-and $$\eta_{OM}$$ is a $$q \times q$$ permutation matrix. The underlying logic is that in the __neural space__ for $$u_t$$, the monkeys might not be able to adapt to conteract the perturbation brought by permutation, since $$\eta_{OM}$$ directly acts upon $$u_t$$. 
+and $$\eta_{OM}$$ is a $$q \times q$$ permutation matrix ($$q$$ is the number of neural units). The underlying logic is that in the __neural space__ for $$u_t$$, the monkeys might not be able to adapt to conteract the perturbation brought by permutation, since $$\eta_{OM}$$ directly acts upon $$u_t$$. 
 
 ### Select perturbed mappings
-The authors also devised a clever plan to dictate the specific permutation matrices to choose (for a permutation matrix with size $$k \times k$$, there're $$k!$$ numbers of them) in three steps, with the central goal that the perturbed mapping would not be too difficult nor easy to learn:
+The authors also devised a clever plan to dictate the specific permutation matrices to choose (for a permutation matrix with size $$k \times k$$, there're $$k!$$ numbers of them) in three steps, with the central goal that the perturbed mapping would not be too difficult nor easy to learn: 
 
 #### Step 1: Find the candidate set
+For within-manifold perturbations, all $$10!$$ possible permutation matrices are treated as the candidate set. For outside-manifold perturbations, th strategy differs for two monkeys. For one monkey only permutations of nueral units with largetst modulation depths are selected. For the other monkey, the solution is to randomly put all units with the highest modulation depths into 10 groups of $$m$$ each (the rest with low modulation forms an 11th group). The outside-manifold perturbation is formed by permutating these 10 groups instead of each unit (thus $$10!$$ in total matching that of within-manifold perturbation). 
 
 #### Step 2: Open-loop velocities prediction per  perturbation
+The second step hinges on estimating the open-loop velocities for each candidate permutation. 
+
 #### Step 3: Determine candidate perturbations
 
 
@@ -437,6 +440,10 @@ From the methods the authors used, they only estimated a linear manifold. Accord
 The dissection of control into an estimation of intrinsic manifold (Factor Analysis) and then build an intuitive mapping (decoder, Kalman Filter) to relate the latent factors to cursor kinematics is different from directly mapping neural activities to movement. Such dissection becomes a common theme for the past two decades, with the emphasis on latent manifold structure beecomes increasingly popular. More than a theoretical refinement, practically speaking, such dissection also allows the authors to perform two different types of perturbation.
 
 Talk more here and also relate this to the nonlinear manifold paper 2025. 
+
+For defining the candidate set of potential outside-manifold perturbation for the second monkey,  while the group looping strategy is a clever way to equalize possible permutation matrices with within-manifold perturbation ($$10!$$), I'm not completely persuaded by the logic behind it. When explaning the logic for the second monkey outside-manifold perturbation, the authors stated that the within-maifold perturbation only permutes the neural space with $$10$$ dimensions, while the outside-manifold perturbation on average deal with 39 dimensions (number of permuted units). Thus the monkey would have to search for more space for outside-manifold perturbation. I think the subtlety here lies in the fact that within-manifold perturbation is not performed on the level of the ambient neural space, but on the latent 10-dimensional space which is extracted out of the original neural space and each basis vector of the latent space is a __linear combination__ of the neural units. Its is not explicitly clear to me whether/how these two spaces should be compared solely based on the dimensonality it carries. 
+
+Additionally, though I do appreciate the flavor of group assignment (there's even a flavor of group action here; anyway, permutation matrices form a permutation group), I am not sure if each of the $$10!$$ permutations on groups of neural units is "equivalent" to a permutation among 10 latent axes. 
 
 
 ## Conclusions
