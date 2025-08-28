@@ -174,8 +174,8 @@ A\mu_z + b
 
 \tilde{\Sigma} &= 
 \begin{bmatrix}
-\Sigma & \Sigma A^T \\
-A\Sigma & A\Sigma A^T + \Omega
+\Sigma_z & \Sigma_z A^T \\
+A\Sigma_z & A\Sigma_z A^T + \Omega
 \end{bmatrix}
 
 \end{align}
@@ -194,21 +194,15 @@ where
 
 $$
 \begin{equation}
-1 = 2
+\mu' = \mu_z + \Sigma_z A^T(A\Sigma_z A^T + \Omega)^{-1}(x - (A \mu_z + b))
 \end{equation}
 $$
 
 $$
 \begin{equation}
-p(z \mid x) = N(z \mid \mu', \Sigma')
+\Sigma' = \Sigma_z - \Sigma_z A^T(A\Sigma_z A^T + \Omega)^{-1}A\Sigma_z
 \end{equation}
 $$
-
-<!-- $$
-\begin{equation}
-\Sigma' = \Sigma_z - \Sigma_z A^T(\Omega + A \Sigma_z A^T)^{-1}A \Sigma_z
-\end{equation}
-$$ -->
 
 The above posterior is known as __Bayes' rule for Gaussians__. It states that if both the prior $$p(z)$$ and the likelihood $$p(x \mid z)$$ are Gaussian, so is the posterior $$p(z \mid x)$$ (equivalently, Gaussian prior is a __conjugate prior__ of Gaussian likelihood or Gaussians are __closed under updating__, {% cite pml2Book %} P29).  One interesting fact is that although the posterior mean is a linear function of $$x$$, the posterior covariance is entirely independent of $$x$$. This is a peculiar property of Gaussian distribution (Interested readers please see more explanations in {% cite pml2Book %} sections 2.3.1.3, 2.3.2.1-2, and 8.2). Finally, keen readers might already perceive the equation (15,16) prelude the form of the Kalman Filter posterior update equations. 
 
@@ -224,15 +218,17 @@ where
 
 $$
 \begin{align}
-\mu_{post} &= 0 + I \Lambda(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu))\nonumber\\
-&= \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t
+\mu_{post} &= 0 + I \Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu))\nonumber\\
+&= \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}u_t
 \end{align}
 $$
 
+and 
+
 $$
 \begin{align}
-\Sigma_{post} &= I - I\Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Sigma I \nonumber\\
-\Sigma_{post} &= I - \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}\Sigma
+\Sigma_{post} &= I - I\Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Lambda I \nonumber\\
+\Sigma_{post} &= I - \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}\Lambda
 \end{align}
 $$
 
@@ -287,11 +283,11 @@ Again, we play the trick of substitution, starting with (27):
 
 $$
 \begin{align}
-\hat{x}_{t|t} &= \hat{x}_{t|t-1} + K_t(\hat{z}_{t} - C\hat{x}_{t|t-1}) \nonumber \\
-&= A\hat{x}_{t-1|t-1} + K_t(\hat{z}_t - CA\hat{x}_{t-1|t-1}) \nonumber\\
-&= (A - K_tCA)\hat{x}_{t-1|t-1} + K_t \hat{z}_t \nonumber\\
-&= (A - K_tCA)\hat{x}_{t-1|t-1} + K_t\Sigma_z( \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t) \nonumber \\
-&= (A - K_tCA)\hat{x}_{t-1|t-1} + K_t\Sigma_z \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t 
+\hat{x}_{t\mid t} &= \hat{x}_{t \mid t-1} + K_t(\hat{z}_{t} - C\hat{x}_{t \mid t-1}) \nonumber \\
+&= A\hat{x}_{t-1 \mid t-1} + K_t(\hat{z}_t - CA\hat{x}_{t-1 \mid t-1}) \nonumber\\
+&= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t \hat{z}_t \nonumber\\
+&= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t\Sigma_z( \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t) \nonumber \\
+&= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t\Sigma_z \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t 
 \end{align}
 $$
 
