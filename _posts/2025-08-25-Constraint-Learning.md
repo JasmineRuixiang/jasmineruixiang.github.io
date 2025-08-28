@@ -326,9 +326,37 @@ After the perturbation, the authors observed if the monkeys could eventually lea
 
 ### Perturbation as permutation
 Other than that, I do want to dive deep into how such within/outside-manifold perturbations were implemented. Specifically, 
+from the derivation section readers should be already familiar with equations (5-8), the intuitive mapping. The perturbed mappings are the corresponding modified versions.
 
+The within-manifold perturbation still manages to maintain the relationship between neural units to latent factors, but perturb that between latents and cursor kinematics: $$\hat{z}_{t}$$ is permuted before going into the Kalman inference (multiplying with the Kalman Gain)(Figure 1 red). Since permutation is simply re-orientation, the within-manifold perturbation is equivalent to re-orientating the coordinate system within the manifold (the manifold is preserved because the row space of $$\Lambda^T$$ is preserved (equation (7))). Mathematically, 
+
+$$
+\begin{align}
+\hat{x}_t = M_1 \hat{x}_{t-1} + M_{2, WM}u_t \\
+M_{2, WM} = K\eta_{WM}\Sigma_z\beta 
+\end{align}
+$$
+
+and $$\eta_{WM}$$ is a $$10 \times 10$$ permutation matrix (10 because of the latent dimensionality)
+
+For outside-manifold perturbation, it changes the relationship between the neural units and latent factors by permuting $$u_t$$ before passing it into factor analysis (Figure 1 blue). Specifically, 
+
+$$
+\begin{align}
+\hat{x}_t = M_1 \hat{x}_{t-1} + M_{2, OM}u_t \\
+M_{2, OM} = K\Sigma_z\beta \eta_{OM}
+\end{align}
+$$
+
+and $$\eta_{OM}$$ is a $$q \times q$$ permutation matrix. The underlying logic is that in the __neural space__ for $$u_t$$, the monkeys might not be able to adapt to conteract the perturbation brought by permutation, since $$\eta_{OM}$$ directly acts upon $$u_t$$. 
 
 ### Select perturbed mappings
+The authors also devised a clever plan to dictate the specific permutation matrices to choose (for a permutation matrix with size $$k \times k$$, there're $$k!$$ numbers of them) in three steps, with the central goal that the perturbed mapping would not be too difficult nor easy to learn:
+
+#### Step 1: Find the candidate set
+
+#### Step 2: Open-loop velocities prediction per  perturbation
+#### Step 3: Determine candidate perturbations
 
 
 
