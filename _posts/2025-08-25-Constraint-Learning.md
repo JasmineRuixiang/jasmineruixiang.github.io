@@ -66,17 +66,17 @@ The authors further elaborated on the intrinsic manifold and its associated dime
 The factor analysis method works in the following way (I'll keep the same notation as the paper). Let's assume the high dimensional neural signal (here the z-scored spike counts) acquired every 45ms time bin is denoted as $$u \in \mathbb{R}^{q \times 1}$$ (naturally, $$q$$ neural units), and $$z \in \mathbb{R}^{10}$$ the latent variable. Factor analysis assumes the observed neural activity is related to the unobservable latent variables under a Gaussian distribution:
 
 $$
-\begin{align}
+\begin{equation}
 u \mid z \sim N(\Lambda z + \mu, \psi)
-\end{align}
+\end{equation}
 $$
 
 where the latent vector is assumed to come from 
 
 $$
-\begin{align}
+\begin{equation}
 z \sim N(0, I)
-\end{align}
+\end{equation}
 $$
 
 Here the covariance matrix $$\psi$$ is diagonal. Consequently, the intrinsic manifold is defined on the span of the columns of $$\Lambda$$, and each column of $$\Lambda$$ represents a latent dimension where $$z$$ encodes the corresponding projections/coordinates. All three parameters $$\Lambda, \mu, \psi$$ are estimated from __Expectation-Maximization (EM)__ method (I'll also write a blog about this later, especially how it as a classical inferenc engine is closely related to Evidence Lower Bound (__ELBO__), a populat loss/objective function for modern-day generative models based on DNN like VAE and Diffusion). 
@@ -97,27 +97,27 @@ The parameters $$A,b,Q,C,d,R$$ are obtained by maximum likelihood estimation, wh
 Consequently, by filtering the goal is to estimate $$\hat{x}_{t} = E[x_t \mid \hat{z}_{1}, \;, ... \;, \hat{z}_{t}]$$. The authors directly gave out the formula below to express $$\hat{x}_t$$ in terms of the final decoded velocity at the previous step $$\hat{x}_{t-1}$$ and the current z-scored spike count $$u_{t}$$: 
 
 $$
-\begin{align}
+\begin{equation}
 \hat{x}_t = M_1 \hat{x}_{t-1} + M_2 u_t
-\end{align}
+\end{equation}
 $$
 
 $$
-\begin{align}
+\begin{equation}
 M_1 = A - KCA
-\end{align}
+\end{equation}
 $$
 
 $$
-\begin{align}
+\begin{equation}
 M_2 = K\Sigma_{z}\beta
-\end{align}
+\end{equation}
 $$
 
 $$
-\begin{align}
+\begin{equation}
 \beta = \Lambda^T(\Lambda \Lambda^T + \Psi)^{-1}
-\end{align}
+\end{equation}
 $$
 
 where $$K$$ is the steady-state Kalman gain matrix. As part of the process of z-scoring the latent factors, $$\Sigma_z$$ is a __diagonal__ matrix whose diagonal element ($$p, p$$) refers to the inverse of standard deviation of the $$pth$$ factor. Since both spike counts and latent factors are __z-scored__, the perturbed mappings (see in the next section) "would not require a neural unit to fire outside of its observed spike count range".
@@ -166,6 +166,7 @@ where
 
 $$
 \begin{align}
+
 \tilde{\mu} &= 
 \begin{bmatrix}
 \mu_z \\
@@ -218,8 +219,22 @@ where
 
 $$
 \begin{align}
+x_t \mid x_{t-1} &\sim N(Ax_{t-1} + b, Q) \\
+\hat{z}_t \mid x_t &\sim N(Cx_t + d, R)
+\end{align}
+$$
+
+$$
+\begin{align}
 \mu_{post} &= 0 + I \Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu))\nonumber\\
 &= \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}u_t
+\end{align}
+$$
+
+$$
+\begin{align}
+x_t \mid x_{t-1} &\sim N(Ax_{t-1} + b, Q) \\
+\hat{z}_t \mid x_t &\sim N(Cx_t + d, R)
 \end{align}
 $$
 
@@ -286,12 +301,12 @@ $$
 \hat{x}_{t\mid t} &= \hat{x}_{t \mid t-1} + K_t(\hat{z}_{t} - C\hat{x}_{t \mid t-1}) \nonumber \\
 &= A\hat{x}_{t-1 \mid t-1} + K_t(\hat{z}_t - CA\hat{x}_{t-1 \mid t-1}) \nonumber\\
 &= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t \hat{z}_t \nonumber\\
-&= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t\Sigma_z( \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t) \nonumber \\
-&= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t\Sigma_z \Lambda(\Psi + \Lambda \Lambda^T)^{-1}u_t 
+&= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t\Sigma_z( \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}u_t) \nonumber \\
+&= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t\Sigma_z \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}u_t 
 \end{align}
 $$
 
-Finally, if we define $$M_1 = A - KCA$$, $$M_2 = K\Sigma_z \beta$$, $$\beta = \Lambda(\Psi + \Lambda \Lambda^T)^{-1}$$ (formula (6-8)), we'd claim what we saw in (5):
+Finally, if we define $$M_1 = A - KCA$$, $$M_2 = K\Sigma_z \beta$$, $$\beta = \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}$$ (formula (6-8)), we'd claim what we saw in (5):
 
 $$
 \hat{x}_t = M_1 \hat{x}_{t-1} + M_2 u_t
