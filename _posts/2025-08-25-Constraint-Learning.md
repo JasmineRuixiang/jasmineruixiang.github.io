@@ -229,7 +229,7 @@ and
 $$
 \begin{align}
 \Sigma_{post} &= I - I\Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Lambda I \\
-\Sigma_{post} &= I - \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}\Lambda
+&= I - \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}\Lambda
 \end{align}
 $$
 
