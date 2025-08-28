@@ -355,10 +355,18 @@ The authors also devised a clever plan to dictate the specific permutation matri
 For within-manifold perturbations, all $$10!$$ possible permutation matrices are treated as the candidate set. For outside-manifold perturbations, th strategy differs for two monkeys. For one monkey only permutations of nueral units with largetst modulation depths are selected. For the other monkey, the solution is to randomly put all units with the highest modulation depths into 10 groups of $$m$$ each (the rest with low modulation forms an 11th group). The outside-manifold perturbation is formed by permutating these 10 groups instead of each unit (thus $$10!$$ in total matching that of within-manifold perturbation). 
 
 #### Step 2: Open-loop velocities prediction per  perturbation
-The second step hinges on estimating the open-loop velocities for each candidate permutation. 
+The second step hinges on estimating the open-loop velocities for each candidate permutation. Specifically, it approximates the decoded cursor kinematics if the monkeys did not learn to adapt:
 
-#### Step 3: Determine candidate perturbations
+$$
+\begin{equation}
+x_{OL}^i = M_{2, P}u_{B}^i
+\end{equation}
+$$
 
+where $$u_{B}^i$$ is the mean z-scored spike counts across all trials on the $$i^{th}$$ target($$8$$ in total), and $$P$$ represents either $$OM$$ or $$WM$$. The method here echoes the dissection made explicity in equation(5), where the current step prediction $$\hat{x}_t$$ is a linear combination of prediction from last step $$\hat{x}_{t-1}$$ and neural activities at the present $$M_2 u_t$$. 
+
+#### Step 3: Determine potential perturbations
+Finally, to determine a perturbation the authors compared the open-loop velocities under the perturbed mapping with those under the intuitive mapping for each target. These velocities should only differ in an acceptable range so the monkeys would not find it too simple nor difficult to learn. The authors quantified this metric by defining a range over differences in velocity angles and magnitude, and chose perturbations that fall in this specified range for all targets. 
 
 
 ## Quantifiable metric
