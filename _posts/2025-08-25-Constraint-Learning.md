@@ -191,6 +191,7 @@ p(z \mid x) = N(z \mid \mu', \Sigma')
 $$
 
 where
+
 $$
 \begin{equation}
 1 = 2
