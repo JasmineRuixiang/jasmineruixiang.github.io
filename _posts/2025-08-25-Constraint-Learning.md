@@ -453,6 +453,49 @@ For defining the candidate set of potential outside-manifold perturbation for th
 
 Additionally, though I do appreciate the flavor of group assignment (there's even a flavor of group action here; anyway, permutation matrices form a permutation group), I am not sure if each of the $$10!$$ permutations on groups of neural units is "equivalent" to a permutation among 10 latent axes. 
 
+### Required changes in preferred directions
+There's one interesting method that I don't have enough time to delve into, which is the calculation of changes in preferred directions for each neural unit. The authors began by discussing comparing the columns of $$M_2, \; M_{WM, or OM}$$, which reflects how each neural unit impacts the decoded cursor kinematics. This strategy is not adopted because for the second monkey $$M_2$$ and $$M_{OM}$$ share many columns for the un-permuted columns, making it an unfair comparison. However, it's informative if we associate this view of $$M_2 u_t$$ by assiging each column of $$M_2$$ with a coordinate in $$u_t$$ with that mentioned in the principal angles section where rows of $$M_2$$ represnet an axis upon which $$u_t$$ is projected. These two perspectives which interpret linear matrix multiplication as either a __transformation__ (of basis vectors in space) or a __projection__ which will be further illustrated in an upcoming post. 
+
+Then, the authors came up with another technique. They assumed that 
+
+> 1] under perturbation the monkeys would still manage to keep the same cursor velocity in the intutive mapping, 
+>
+> 2] The perturbed firing rates should be as close as possible to those in the intuitive mapping
+
+and these two assumptions transform into a constrained optimization problem: Find $$u_p^{i}$$ such that its Euclidean distance with $$u_B^{i}$$ is minimized when $$M_2u_B^i = M_{2, P}u_p^i$$:
+
+> $$u_p^{i, *} = \arg\min_{u_p^i} ||u_p^i - u_B^i||_2$$
+>
+> s.t. $$M_2u_B^i = M_{2, P}u_p^i$$
+
+This can be solved in closed-form with Lagrange multipliers (for rigorosity, the inverse below should be replaced with the Moore-Penrose Pseudoinverse, unless $$M_{2, P}$$ is full-rank, which I'm not sure I could theoretically make that claim). Due to limited space, I'll not leave the proof to another blog on linear transformation, which I also illustrate its relationship with CCA and another paper (Juan Gallego, trajectory alignment):
+
+$$
+\begin{equation}
+u_p^i = u_B^i + M_{2, P}^T(M_{2, P}M_{2, P}^T)^{-1}(M_2 - M_{2, P})u_B^i
+\end{equation}
+$$
+
+where $$u_B^i$$ is the mean normalized spike count vector across all trials for each target $$i$$ in the basline blocks. 
+
+Then the authors fit a standard cosine tuning model for each unit $$k$$ with all targets:
+
+$$
+\begin{equation}
+u_B^i(k) = m_k \cdot cos(\theta_i - \theta_B(k)) + b_k
+\end{equation}
+$$
+
+where for each neural unit $$k$$, its preferred direction is encoded as $$\theta_B(k)$$, $$m_k$$ the depth of modulation, $$b_k$$ the model offset, $$\theta_i$$ the direction of the $$ith$$ target. Apply the same calculation for $$u_P^i$$ to obtain the preferred direction $$\theta_P(k)$$ for each unit $$k$$ under the perturbaed mapping. Finally, the preferred direction changes (for each neural unit) is calculated as:
+
+$$
+\begin{equation}
+\mid \theta_P(k) - \theta_B(k) \mid
+\end{equation}
+$$
+
+
+
 
 ## Conclusions
 The neural manifold reflects the inherent connectivity which constrains (in a short term) the potentially learnable patterns. Consequently, the neural connectivity network structure dictates possible neural patterns and corresponding behavior repertoire the animals are capable of performing. 
