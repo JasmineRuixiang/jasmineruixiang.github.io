@@ -219,37 +219,16 @@ where
 
 $$
 \begin{align}
-x_t \mid x_{t-1} &\sim N(Ax_{t-1} + b, Q) \\
-\hat{z}_t \mid x_t &\sim N(Cx_t + d, R)
-\end{align}
-$$
-
-$$
-\begin{align}
 \mu_{post} &= 0 + I \Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu)) \\
 &= \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}u_t
 \end{align}
-$$
-
-$$
-\begin{aligned}
-\mu_{post} &= 0 + I \Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}(u_t - (\Lambda 0 + \mu)) \\
-&= \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}u_t
-\end{aligned}
 $$
 
 and 
 
 $$
 \begin{align}
-x_t \mid x_{t-1} &\sim N(Ax_{t-1} + b, Q) \\
-\hat{z}_t \mid x_t &\sim N(Cx_t + d, R)
-\end{align}
-$$
-
-$$
-\begin{align}
-\Sigma_{post} &= I - I\Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Lambda I \nonumber\\
+\Sigma_{post} &= I - I\Lambda^T(\Psi + \Lambda I \Lambda^T)^{-1}\Lambda I \\
 \Sigma_{post} &= I - \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}\Lambda
 \end{align}
 $$
@@ -305,10 +284,10 @@ Again, we play the trick of substitution, starting with (27):
 
 $$
 \begin{align}
-\hat{x}_{t\mid t} &= \hat{x}_{t \mid t-1} + K_t(\hat{z}_{t} - C\hat{x}_{t \mid t-1}) \nonumber \\
-&= A\hat{x}_{t-1 \mid t-1} + K_t(\hat{z}_t - CA\hat{x}_{t-1 \mid t-1}) \nonumber\\
-&= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t \hat{z}_t \nonumber\\
-&= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t\Sigma_z( \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}u_t) \nonumber \\
+\hat{x}_{t\mid t} &= \hat{x}_{t \mid t-1} + K_t(\hat{z}_{t} - C\hat{x}_{t \mid t-1})  \\
+&= A\hat{x}_{t-1 \mid t-1} + K_t(\hat{z}_t - CA\hat{x}_{t-1 \mid t-1}) \\
+&= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t \hat{z}_t \\
+&= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t\Sigma_z( \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}u_t)  \\
 &= (A - K_tCA)\hat{x}_{t-1 \mid t-1} + K_t\Sigma_z \Lambda^T(\Psi + \Lambda \Lambda^T)^{-1}u_t 
 \end{align}
 $$
