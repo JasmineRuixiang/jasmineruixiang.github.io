@@ -525,7 +525,7 @@ This paper strengthens my belief in the legit usability of the low dimensional s
 
 
 ## Discussions
-A dynamical system does not simply allow flowing back. 
+A dynamical system does not simply allow flowing back!
 
 ## Conclusions
 
