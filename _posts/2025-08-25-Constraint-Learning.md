@@ -513,7 +513,7 @@ This paper strengthens my belief in the legit usability of the low dimensional s
 
 
 
-# Dynamical Constraints(Oby et.al. 2025)
+# Dynamical Constraints (Oby et.al. 2025)
 
 ## Different views of the high dimeensional neural space
 
