@@ -1,6 +1,11 @@
 // Added on 08/29/2025, could add more customized changes here
 
 /* Make blog titles thicker */
-.post-title {
-  font-weight: 900;   /* normal=400, medium=500, bold=700, extra-bold=800 */
+ul.post-list .post-title {
+  font-weight: 700;   /* normal=400, medium=500, bold=700, extra-bold=800 */
+}
+
+.post-content {
+  max-width: 1000px;   /* default is ~800px */
+  margin: 0 auto;      /* keeps it centered */
 }
