@@ -515,8 +515,17 @@ This paper strengthens my belief in the legit usability of the low dimensional s
 
 # Dynamical Constraints(Oby et.al. 2025)
 
-## Discussions
+## Different views of the high dimeensional neural space
 
+## Task 1:
+
+## Task 2: IT task
+
+## Task 3: Instructed path task
+
+
+## Discussions
+A dynamical system does not simply allow flowing back. 
 
 ## Conclusions
 
