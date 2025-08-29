@@ -20,7 +20,7 @@ toc:
 ---
 
 
-# Neural constraints on learning (Sadtler et.al. 2014)
+# Spatial constraints (Sadtler et.al. 2014)
 ## Experiment setup
 For {% cite Sadtler2014 %}, two male Rhesus macaques were trained to perform closed-loop BCI cursor task (Radial 8). Around 85-91 neural units (threshold-crossings) were recorded. The experiment pipeline is demonstrated below:
 
@@ -511,7 +511,7 @@ This paper strengthens my belief in the legit usability of the low dimensional s
 
 
 
-# Batista 2025
+# Dynamical Constraints(Oby et.al. 2025)
 
 ## Discussions
 
