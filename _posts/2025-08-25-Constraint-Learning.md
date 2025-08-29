@@ -18,7 +18,7 @@ toc:
   beginning: true
   sidebar: left
 ---
-This blog covers two papers, with the emphasis on the first to ... 
+This blog covers two papers which focuses on exploring constraints during learning in monkey's behavior from different perspectives. The first one {% cite Sadtler2014 %} approaches the constraint as a spatial restriction of neural activities residing upon some low dimensional neural manifold, while the second {% cite Oby2025 %} deliberately perturbs the motion sequence, the temporal order movement to explore whether the monkeys are capabable of adapting neural dynamics. In terms of methods, these two papers share much in common in terms of latent space calculation, and in order not to make this blog unbearably long, I will elaborate more on the first paper's algorithms, while glossing over many details in the second. In total, through juxtaposing these studies, hopefully we could glean some integrated thoughts on the constraints of neural dynamics form both the spatial and temporal perspectives. 
 
 Both spatial (neural manifold view) and temporal (dynamical system view) on constraints of neural activities. 
 
@@ -514,6 +514,7 @@ This paper strengthens my belief in the legit usability of the low dimensional s
 
 
 # Dynamical Constraints (Oby et.al. 2025)
+This paper {% cite Oby2025 %} presented some surprising facts about neural dynamics. 
 
 ## Different views of the high dimeensional neural space
 
