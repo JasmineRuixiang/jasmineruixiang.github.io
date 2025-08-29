@@ -18,7 +18,9 @@ toc:
   beginning: true
   sidebar: left
 ---
-This blog
+This blog covers two papers, with the emphasis on the first to ... 
+
+Both spatial (neural manifold view) and temporal (dynamical system view) on constraints of neural activities. 
 
 # Spatial constraints (Sadtler et.al. 2014)
 ## Experiment setup

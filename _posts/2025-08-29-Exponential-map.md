@@ -17,4 +17,8 @@ toc:
   sidebar: left
 ---
 
-Exponential map as dynamical flow
+Exponential map as dynamical flow in differential geometry and dynamical systems. 
+
+# Differential geoetry (Lie group)
+
+# Dynamical system (Linear)
