@@ -534,20 +534,21 @@ Note that unlike many previous BCI works, neural activities are mapped to curosr
   <!-- Left column: text -->
   <div class="col-sm-7">
     <p>
-      There're two mappings the authors emphasizd, one is called "movement-intention" (MoveInt) mapping, under which the monkeys could intuitively control the cursor to move between two diametrically placed targets $$A$$ and $$B$$. Indeed, under MoveInt, the neural trajectories (equivalent to cursor motion here) could go back and forth between $$A$$ and $$B$$ with significant overlapping. This might lead readers to believe that the neural dyanmcis are also reversible. 
+      There're two mappings the authors emphasizd, one is called "movement-intention" (MoveInt) mapping, under which the monkeys could intuitively control the cursor to move between two diametrically placed targets <strong>A</strong> and <strong>B</strong>. Indeed, under MoveInt, the neural trajectories (equivalent to cursor motion here) could go back and forth between <strong>A</strong> and <strong>B</strong> with significant overlapping. This might lead readers to believe that the neural dyanmcis are also reversible. 
     </p>
   </div>
 
   <!-- Right column: image -->
   <div class="col-sm-5 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Fig_2.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="60%" %}
+        %}
   </div>
-</div>
-
-<div class="caption">
+  <div class="caption">
     Adapted from Fig. 2 in {% cite Oby2025 %}. Panel a.: decoding pipeline. Panel b.: Overlapping neural/cursor trajectories under multipl orientations. From this it seems that time courses of neural dynamics are flexible for different orientations (thus including reversing the temporal order). 
 </div>
+</div>
+
+
 
 However, under another 2D mapping selected as maximizing the separations ($$SepMax$$) between $$A$$ to $$B$$ trajectories v.s. $$B$$ to $$A$$ trajectories, the neural trajectories overlapping by $$MoveInt$$ projection are clearly distinguished. This is shown below:
 
@@ -558,8 +559,11 @@ However, under another 2D mapping selected as maximizing the separations ($$SepM
     </div>
 </div>
 <div class="caption">
-    Adapted from Fig. 3 in {% cite Oby2025 %}. 
+    Adapted from Fig. 3 in {% cite Oby2025 %}. See panels a. and b. where A-B and B-A trajectories are distinct. Panels c. and d. show results from quantitative metric (discriminability $$d'$$ between midpoints of trajectories signify separation of trajectories).  
 </div>
+
+The calculation of the MoveInt and SepMax maps: 
+
 
 
 ## Task 1: Visual feedback task
