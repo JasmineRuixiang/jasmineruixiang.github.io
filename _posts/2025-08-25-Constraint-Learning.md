@@ -518,48 +518,36 @@ This paper {% cite Oby2025 %} presented some surprising facts about neural dynam
 ## Different views of the high dimeensional neural space
 Note that unlike many previous BCI works, neural activities are mapped to curosr __positions__ directly instead of velocities. The modeling framework is similar to {% cite Sadtler2014 %}, in that high dimensional neural activities (~ $$90D$$) are mapped into $$10D$$ latents by $$GPFA$$ (instead of simply $$FA$$ in {% cite Sadtler2014 %}), and then build corresponding linear maps from $$10D$$ latent factors to $$2D$$ cursor positions using different maps. Since each map is a linear projection of latent factors to $$2D$$ space, it is geoemtrically equivalant to observing the high dimensional signals from a specified angle. The key ingredient of this paper is that the authors found if with some linear $$2D$$ mapping/projection, the neural trajectories are readily flexible and reversible, whereas some other views robustly exhibited no significant change even if the monkeys were inspired to alter the neural trajectories. 
 
-<div class="row mt-3">
-    <div class="col-sm mt-3 mt-md-0 text-center">
-        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Fig_2.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="60%" %}
-    </div>
-</div>
-<div class="caption">
-    Adapted from Fig. 2 in {% cite Oby2025 %}. Panel a.: decoding pipeline. Panel b.: Overlapping neural/cursor trajectories under multipl orientations. From this it seems that time courses of neural dynamics are flexible for different orientations (thus including reversing the temporal order). 
-</div>
-
 
 <div class="row mt-3">
 
   <!-- Left column: text -->
-  <div class="col-sm-7">
+  <div class="col-sm-4">
     <p>
       There're two mappings the authors emphasizd, one is called "movement-intention" (MoveInt) mapping, under which the monkeys could intuitively control the cursor to move between two diametrically placed targets <strong>A</strong> and <strong>B</strong>. Indeed, under MoveInt, the neural trajectories (equivalent to cursor motion here) could go back and forth between <strong>A</strong> and <strong>B</strong> with significant overlapping. This might lead readers to believe that the neural dyanmcis are also reversible. 
     </p>
   </div>
 
   <!-- Right column: image -->
-  <div class="col-sm-5 text-center">
+  <div class="col-sm-8 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Fig_2.png" class="img-fluid rounded z-depth-1" zoomable=true
         %}
+    <div class="caption">
+      Adapted from Fig. 2 in {% cite Oby2025 %}. Panel a.: decoding pipeline. Panel b.: Overlapping neural/cursor trajectories under multipl orientations. From this it seems that time courses of neural dynamics are flexible for different orientations (thus including reversing the temporal order). 
+    </div>
   </div>
-  <div class="caption">
-    Adapted from Fig. 2 in {% cite Oby2025 %}. Panel a.: decoding pipeline. Panel b.: Overlapping neural/cursor trajectories under multipl orientations. From this it seems that time courses of neural dynamics are flexible for different orientations (thus including reversing the temporal order). 
 </div>
-</div>
-
-
 
 However, under another 2D mapping selected as maximizing the separations ($$SepMax$$) between $$A$$ to $$B$$ trajectories v.s. $$B$$ to $$A$$ trajectories, the neural trajectories overlapping by $$MoveInt$$ projection are clearly distinguished. This is shown below:
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Fig_3.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="60%" %}
+        width="70%" %}
     </div>
 </div>
 <div class="caption">
-    Adapted from Fig. 3 in {% cite Oby2025 %}. See panels a. and b. where A-B and B-A trajectories are distinct. Panels c. and d. show results from quantitative metric (discriminability $$d'$$ between midpoints of trajectories signify separation of trajectories).  
+    Adapted from Fig. 3 in {% cite Oby2025 %}. See panels a. and b. where A-B and B-A trajectories are distinct. Panels c. and d. show results from quantitative metric (discriminability <strong>d'</strong> between midpoints of trajectories signify separation of trajectories).  
 </div>
 
 The calculation of the MoveInt and SepMax maps: 
