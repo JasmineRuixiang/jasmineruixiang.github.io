@@ -517,7 +517,39 @@ This paper strengthens my belief in the legit usability of the low dimensional s
 This paper {% cite Oby2025 %} presented some surprising facts about neural dynamics. One key question the authors are interested is whether the sequential representation or computation that neural population could perform is temporally locked. The critical assumption is that if neural dynamics does reflect the underlying connectivity, then it should be robust and difficult to alter. More specifically, they tested if such neural population patterns could be produced but in a __reversed__ time ordering and the results show otherwise: even when the animals were presented with different visual feedback or strong incentive to change the time order (for example, reversing the time course) of the neural activities, the temporal evolution of the neural dynamics is still robust and difficult to violate (thought I think the claim might be too strong. See more in the discussions).   
 
 ## Different views of the high dimeensional neural space
+Note that unlike many previous BCI works, neural activities are mapped to curosr __positions__ directly instead of velocities. The modeling framework is similar to {% cite Sadtler2014 %}, in that high dimensional neural activities (~ $$90D$$) are mapped into $$10D$$ latents by $$GPFA$$ (instead of simply $$FA$$ in {% cite Sadtler2014 %}), and then build corresponding linear maps from $$10D$$ latent factors to $$2D$$ cursor positions using different maps. Since each map is a linear projection of latent factors to $$2D$$ space, it is geoemtrically equivalant to observing the high dimensional signals from a specified angle. The key ingredient of this paper is that the authors found if with some linear $$2D$$ mapping/projection, the neural trajectories are readily flexible and reversible, whereas some other views robustly exhibited no significant change even if the monkeys were inspired to alter the neural trajectories. There're two mappings the authors emphasizd, one is called "movement-intention" (MoveInt) mapping, under which the monkeys could intuitively control the cursor to move between two diametrically placed targets $$A$$ and $$B$$. Indeed, under MoveInt, the neural trajectories (equivalent to cursor motion here) could go back and forth between $$A$$ and $$B$$ with significant overlapping. This might lead readers to believe that the neural dyanmcis are also reversible. 
 
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0 text-center">
+        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Fig_2.png" class="img-fluid rounded z-depth-1" zoomable=true
+        width="60%" %}
+    </div>
+</div>
+<div class="caption">
+    Adapted from Fig. 2 in {% cite Oby2025 %}. Panel a.: decoding pipeline. Panel b.: Overlapping neural/cursor trajectories under multipl orientations. From this it seems that time courses of neural dynamics are flexible for different orientations (thus including reversing the temporal order). 
+</div>
+
+
+<div class="row mt-3">
+
+  <!-- Left column: text -->
+  <div class="col-sm-8">
+    <p>
+      Here is some text describing the image. You can include Markdown inline formatting,
+      <strong>bold</strong>, <em>italics</em>, links, etc.
+    </p>
+  </div>
+
+    <!-- Right column: image -->
+  <div class="col-sm-4">
+    <img src="{{ '/assets/img/example.png' | relative_url }}" 
+         class="img-fluid rounded z-depth-1" alt="Example image">
+  </div>
+
+</div>
+
+
+However, under another 2D mapping, 
 
 ## Task 1:
 
@@ -533,6 +565,11 @@ Instead of an abrupt change of the experiment, graduallly apply the changes: not
 
 Would this be a byproduct of the training process itself? ---- if the monkeys were trained with visual feedback of the maximum separation view, would that be different?
 
+
+### Linear mapping
+Linear manifold, linear mapping, orthogonal/null space
+
+
 ### Dynamical systems explanation
 The authors claimed that the observed time course activities reflect the underlying connectivity among the neural population. They made associations with network models where at any present, the activities of each node is determined by the previous time behavior of all nodes, the network connectivity, and the external input. This is explicitly reflected by the dynamical systems perspective (let's not go to SDE for now):
 
@@ -542,7 +579,7 @@ $$
 \end{equation}
 $$
 
-Discretizing the above would reveal previous time step dependence, and the dynamics is specified by $$f$$ determined by network connectivity. The paper {% cite jPCA %} discussed in [my earlier post]({% post_url 2025-08-16-jPCA %}) made this the backbone of modeling. From this perspective, it seems not surprising that neural trajectories do not necessarily need to be reversible. One extreme hypothetical case would be the following:
+Discretizing the above would reveal previous time step dependence, and the dynamics is specified by $$f$$ determined by network connectivity. The paper {% cite jpca %} discussed in [my earlier post]({% post_url 2025-08-16-jPCA %}) made this the backbone of modeling. From this perspective, it seems not surprising that neural trajectories do not necessarily need to be reversible. One extreme hypothetical case would be the following:
 
 Consequently, to alter the time course would require substantial adjustment of the connectivity itself to change $$f$$, which in a short time span is not quite likely readily achievable. 
 
