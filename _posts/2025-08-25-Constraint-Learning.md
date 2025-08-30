@@ -522,14 +522,14 @@ Note that unlike many previous BCI works, neural activities are mapped to curosr
 <div class="row mt-3">
 
   <!-- Left column: text -->
-  <div class="col-sm-4">
+  <div class="col-sm-6">
     <p>
       There're two mappings the authors emphasizd, one is called "movement-intention" (MoveInt) mapping, under which the monkeys could intuitively control the cursor to move between two diametrically placed targets <strong>A</strong> and <strong>B</strong>. Indeed, under MoveInt, the neural trajectories (equivalent to cursor motion here) could go back and forth between <strong>A</strong> and <strong>B</strong> with significant overlapping. This might lead readers to believe that the neural dyanmcis are also reversible. 
     </p>
   </div>
 
   <!-- Right column: image -->
-  <div class="col-sm-8 text-center">
+  <div class="col-sm-6 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Fig_2.png" class="img-fluid rounded z-depth-1" zoomable=true
         %}
     <div class="caption">
