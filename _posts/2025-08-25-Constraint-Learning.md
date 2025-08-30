@@ -514,9 +514,10 @@ This paper strengthens my belief in the legit usability of the low dimensional s
 
 
 # Dynamical Constraints (Oby et.al. 2025)
-This paper {% cite Oby2025 %} presented some surprising facts about neural dynamics. 
+This paper {% cite Oby2025 %} presented some surprising facts about neural dynamics. One key question the authors are interested is whether the sequential representation or computation that neural population could perform is temporally locked. More specifically, they tested if such dynamics could be reversed and the results show otherwise (thought I think the claim might be too strong. See more in the discussions).   
 
 ## Different views of the high dimeensional neural space
+
 
 ## Task 1:
 
@@ -526,7 +527,15 @@ This paper {% cite Oby2025 %} presented some surprising facts about neural dynam
 
 
 ## Discussions
-A dynamical system does not simply allow flowing back!
+A dynamical system does not simply allow flowing back.
+
+Instead of an abrupt change of the experiment, graduallly apply the changes: not to go to reversa in total in an instant: reminds me of hysterisis. The conclusion seems so strong. 
+
+Would this be a byproduct of the training process itself? ---- if the monkeys were trained with visual feedback of the maximum separation view, would that be different?
+
+The authors claimed that 
+
+
 
 ## Conclusions
 
