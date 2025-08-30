@@ -514,7 +514,7 @@ This paper strengthens my belief in the legit usability of the low dimensional s
 
 
 # Dynamical Constraints (Oby et.al. 2025)
-This paper {% cite Oby2025 %} presented some surprising facts about neural dynamics. One key question the authors are interested is whether the sequential representation or computation that neural population could perform is temporally locked. More specifically, they tested if such dynamics could be reversed and the results show otherwise (thought I think the claim might be too strong. See more in the discussions).   
+This paper {% cite Oby2025 %} presented some surprising facts about neural dynamics. One key question the authors are interested is whether the sequential representation or computation that neural population could perform is temporally locked. The critical assumption is that if neural dynamics does reflect the underlying connectivity, then it should be robust and difficult to alter. More specifically, they tested if such neural population patterns could be produced but in a __reversed__ time ordering and the results show otherwise: even when the animals were presented with different visual feedback or strong incentive to change the time order (for example, reversing the time course) of the neural activities, the temporal evolution of the neural dynamics is still robust and difficult to violate (thought I think the claim might be too strong. See more in the discussions).   
 
 ## Different views of the high dimeensional neural space
 
@@ -533,8 +533,18 @@ Instead of an abrupt change of the experiment, graduallly apply the changes: not
 
 Would this be a byproduct of the training process itself? ---- if the monkeys were trained with visual feedback of the maximum separation view, would that be different?
 
-The authors claimed that 
+### Dynamical systems explanation
+The authors claimed that the observed time course activities reflect the underlying connectivity among the neural population. They made associations with network models where at any present, the activities of each node is determined by the previous time behavior of all nodes, the network connectivity, and the external input. This is explicitly reflected by the dynamical systems perspective (let's not go to SDE for now):
 
+$$
+\begin{equation}
+\dot{x}(t) = f(x(t)) + u(t)
+\end{equation}
+$$
+
+Discretizing the above would reveal previous time step dependence, and the dynamics is specified by $$f$$ determined by network connectivity. The paper {% cite jPCA %} discussed in [my earlier post]({% post_url 2025-08-25-jPCA %}) made this the backbone of modeling. From this perspective, it seems not surprising that neural trajectories do not necessarily need to be reversible. One extreme hypothetical case would be the following:
+
+Consequently, to alter the time course would require substantial adjustment of the connectivity itself to change $$f$$, which in a short time span is not quite likely readily achievable. 
 
 
 ## Conclusions
