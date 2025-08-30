@@ -512,7 +512,6 @@ This paper strengthens my belief in the legit usability of the low dimensional s
 
 
 
-
 # Dynamical constraints (Oby et.al. 2025)
 This paper {% cite Oby2025 %} presented some surprising facts about neural dynamics. One key question the authors are interested is whether the sequential representation or computation that neural population could perform is temporally locked. The critical assumption is that if neural dynamics does reflect the underlying connectivity, then it should be robust and difficult to alter. More specifically, they tested if such neural population patterns could be produced but in a __reversed__ time ordering and the results show otherwise: even when the animals were presented with different visual feedback or strong incentive to change the time order (for example, reversing the time course) of the neural activities, the temporal evolution of the neural dynamics is still robust and difficult to violate (thought I think the claim might be too strong. See more in the discussions).   
 
@@ -550,10 +549,20 @@ Note that unlike many previous BCI works, neural activities are mapped to curosr
     Adapted from Fig. 2 in {% cite Oby2025 %}. Panel a.: decoding pipeline. Panel b.: Overlapping neural/cursor trajectories under multipl orientations. From this it seems that time courses of neural dynamics are flexible for different orientations (thus including reversing the temporal order). 
 </div>
 
+However, under another 2D mapping selected as maximizing the separations ($$SepMax$$) between $$A$$ to $$B$$ trajectories v.s. $$B$$ to $$A$$ trajectories, the neural trajectories overlapping by $$MoveInt$$ projection are clearly distinguished. This is shown below:
 
-However, under another 2D mapping, 
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0 text-center">
+        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Fig_3.png" class="img-fluid rounded z-depth-1" zoomable=true
+        width="60%" %}
+    </div>
+</div>
+<div class="caption">
+    Adapted from Fig. 3 in {% cite Oby2025 %}. 
+</div>
 
-## Task 1:
+
+## Task 1: Visual feedback task
 
 ## Task 2: IT task
 
