@@ -568,9 +568,20 @@ Firstly, the authors gave monkeys the visual feedback of neural trajectory mappi
     Adapted from Fig. 4 in {% cite Oby2025 %}. Given visual feedback from the <strong>SepMax</strong> projection (b.), the authors still do not observe straightening of cursor trajectories for <strong>SepMax</strong> projection (c.). In fact, projections in either linear subspace are robust whether which visual feedback is presented (d.). 
 </div>
 
+One key remaining question is whether the robustness of constraint exists only in the $$SepMax$$ projection subspace, or if it's a common phenomena also observable in other dimensions. Consequently, the authors applied random $$2D$$ projections of the $$10D$$ latents and conducted flow field analysis (I did not have space to go into details, but flow field analysis was employed to quantify the discrimination of trajectories). 
 
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0 text-center">
+        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Ext_Fig_4.png" class="img-fluid rounded z-depth-1" zoomable=true
+        width="60%" %}
+    </div>
+</div>
+<div class="caption">
+    Adapted from Extended Fig.4 in {% cite Oby2025 %}.  
+</div>
 
 ## Task 2: IT task
+
 
 ## Task 3: Instructed path task
 
