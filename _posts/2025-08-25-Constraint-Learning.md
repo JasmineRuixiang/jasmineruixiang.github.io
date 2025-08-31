@@ -521,16 +521,16 @@ This paper {% cite Oby2025 %} presented some surprising facts about neural dynam
 <div class="row mt-3">
 
   <!-- Left column: text -->
-  <div class="col-sm-6">
+  <div class="col-sm-7">
     <p>
-      Note that unlike many previous BCI works, neural activities are mapped to curosr __positions__ directly instead of velocities. The modeling framework is similar to {% cite Sadtler2014 %}, in that high dimensional neural activities <strong>90D</strong> are mapped into $$10D$$ latents by $$GPFA$$ (instead of simply <strong>FA</strong> in {% cite Sadtler2014 %}), and then build corresponding linear maps from <strong>10D</strong> latent factors to <strong>2D</strong> cursor positions using different maps. Since each map is a linear projection of latent factors to $$2D$$ space, it is geoemtrically equivalant to observing the high dimensional signals from a specified angle. The key ingredient of this paper is that the authors found if with some linear <strong>2D</strong> mapping/projection, the neural trajectories are readily flexible and reversible, whereas some other views robustly exhibited no significant change even if the monkeys were inspired to alter the neural trajectories.
+      Note that unlike many previous BCI works, neural activities are mapped to curosr __positions__ directly instead of velocities. The modeling framework is similar to {% cite Sadtler2014 %}, in that high dimensional neural activities <strong>90D</strong> are mapped into <strong>10D</strong> latents by <strong>GPFA</strong> (instead of simply <strong>FA</strong> in {% cite Sadtler2014 %}), and then build corresponding linear maps from <strong>10D</strong> latent factors to <strong>2D</strong> cursor positions using different maps. Since each map is a linear projection of latent factors to <strong>2D</strong> space, it is geoemtrically equivalant to observing the high dimensional signals from a specified angle. The key ingredient of this paper is that the authors found if with some linear <strong>2D</strong> mapping/projection, the neural trajectories are readily flexible and reversible, whereas some other views robustly exhibited no significant change even if the monkeys were inspired to alter the neural trajectories.
 
       There're two mappings the authors emphasizd, one is called "movement-intention" (MoveInt) mapping, under which the monkeys could intuitively control the cursor to move between two diametrically placed targets <strong>A</strong> and <strong>B</strong>. Indeed, under MoveInt, the neural trajectories (equivalent to cursor motion here) could go back and forth between <strong>A</strong> and <strong>B</strong> with significant overlapping. This might lead readers to believe that the neural dyanmcis are also reversible. 
     </p>
   </div>
 
   <!-- Right column: image -->
-  <div class="col-sm-6 text-center">
+  <div class="col-sm-5 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Fig_2.png" class="img-fluid rounded z-depth-1" zoomable=true
         %}
     <div class="caption">
@@ -565,7 +565,7 @@ Firstly, the authors gave monkeys the visual feedback of neural trajectory mappi
     </div>
 </div>
 <div class="caption">
-    Adapted from Fig. 4 in {% cite Oby2025 %}.   
+    Adapted from Fig. 4 in {% cite Oby2025 %}. Given visual feedback from the <strong>SepMax</strong> projection (b.), the authors still do not observe straightening of cursor trajectories for <strong>SepMax</strong> projection (c.). In fact, projections in either linear subspace are robust whether which visual feedback is presented (d.). 
 </div>
 
 
