@@ -525,7 +525,7 @@ This paper {% cite Oby2025 %} presented some surprising facts about neural dynam
     <p>
       Note that unlike many previous BCI works, neural activities are mapped to curosr __positions__ directly instead of velocities. The modeling framework is similar to {% cite Sadtler2014 %}, in that high dimensional neural activities <strong>90D</strong> are mapped into <strong>10D</strong> latents by <strong>GPFA</strong> (instead of simply <strong>FA</strong> in {% cite Sadtler2014 %}), and then build corresponding linear maps from <strong>10D</strong> latent factors to <strong>2D</strong> cursor positions using different maps. Since each map is a linear projection of latent factors to <strong>2D</strong> space, it is geoemtrically equivalant to observing the high dimensional signals from a specified angle. The key ingredient of this paper is that the authors found if with some linear <strong>2D</strong> mapping/projection, the neural trajectories are readily flexible and reversible, whereas some other views robustly exhibited no significant change even if the monkeys were inspired to alter the neural trajectories.
     </p>
-    
+
     <p>
       There're two mappings the authors emphasizd, one is called "movement-intention" (MoveInt) mapping, under which the monkeys could intuitively control the cursor to move between two diametrically placed targets <strong>A</strong> and <strong>B</strong>. Indeed, under MoveInt, the neural trajectories (equivalent to cursor motion here) could go back and forth between <strong>A</strong> and <strong>B</strong> with significant overlapping. This might lead readers to believe that the neural dyanmcis are also reversible. 
     </p>
@@ -563,7 +563,7 @@ Firstly, the authors gave monkeys the visual feedback of neural trajectory mappi
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Fig_4.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="75%" %}
+        width="80%" %}
     </div>
 </div>
 <div class="caption">
@@ -575,7 +575,7 @@ One key remaining question is whether the robustness of constraint exists only i
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Ext_Fig_4.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="75%" %}
+        width="85%" %}
     </div>
 </div>
 <div class="caption">
