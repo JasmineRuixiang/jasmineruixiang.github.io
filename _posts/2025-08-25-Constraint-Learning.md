@@ -604,10 +604,33 @@ One key remaining question is whether the robustness of constraint exists only i
 
 
 ## Task 3: Instructed path task
-In the third task, in order to further motivate the monkeys to adapt, 
+In the third task, in order to further motivate the monkeys to reverse neural trajectories, the authors appied an "instructed path task" where a visualb boundary was applied to the time-reversed trajectory. However, the monkeys only minimally modified the cursor trajectories as the bounday was reduced in size, and the trajectories followed the flow field instead of violating it while showcasing the reverting/hooking phenomena in the $$IT$$ task. This again demonstrates that the temporal evolution of neural activity patterns is robust and thus it is robustly constrained. 
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0 text-center">
+        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Fig_7.png" class="img-fluid rounded z-depth-1" zoomable=true
+        width="85%" %}
+    </div>
+</div>
+<div class="caption">
+    Adapted from Fig.7 in {% cite Oby2025 %}.  
+</div>
 
 
 ## Discussions
+I like how the experiments are built upon each other to add more constraints and motivation for the monkeys to reverse the time course of neural activities. The quantification methods used (flow field analysis, initial angle comparison among trajectories) are great tools to add to future research. Many adjustments and tweaks of experiment sessions to enable further exploration are interesting to read, like for Task 1 the authors also flipped the projection on the screen along the axis connecting two targets, in order to observe if cursor trajectories would also be reflected or not (details not discussed in this blog, illustration shown below; should be self-explanatory). 
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0 text-center">
+        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Ext_Fig_5.png" class="img-fluid rounded z-depth-1" zoomable=true
+        width="85%" %}
+    </div>
+</div>
+<div class="caption">
+    Adapted from Extended Fig.5 in {% cite Oby2025 %}.  
+</div>
+
+
 A dynamical system does not simply allow flowing back.
 
 Instead of an abrupt change of the experiment, graduallly apply the changes: not to go to reversa in total in an instant: reminds me of hysterisis. The conclusion seems so strong. 
