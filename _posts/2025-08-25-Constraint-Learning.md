@@ -584,6 +584,25 @@ One key remaining question is whether the robustness of constraint exists only i
 
 ## Task 2: IT task
 
+<div class="row mt-3">
+
+  <div class="col-sm-5 text-center">
+        {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Fig_7.png" class="img-fluid rounded z-depth-1" zoomable=true
+        %}
+    <div class="caption">
+      Adapted from Fig.7 in {% cite Oby2025 %}. 
+    </div>
+  </div>
+
+  <div class="col-sm-7">
+    <p>
+        In the second task, the authors explicitly motivated the monkeys to present the neural activities (by the cursor movement) in a time-reversed ordering by motivating them to move against an empirically derived flow field (from past cursor trajectories) towards an "intermediate target" ($$IT$$) along the path from $$A$$ to $$B$$. The authors observed that in order to go from target $$B$$ to $$IT$$, the monkeys did not adopt the time-reversed pathway of $$A$$ to $$B$$, but followed, at least initially, the path specified by the flow field from $$B$$ to $$A$$ and then reverted back towards $$IT$$. Consequently, the monkeys failed to reproduce the existing neural activities patterns in the reversed time-ordering, and they did not (initially) violated the flow field. This is quantified by initial angles of trajectories across multiple control/comparison groups, the details of which I'll not cover here.
+    </p>
+  </div>
+
+</div>
+
+
 
 ## Task 3: Instructed path task
 
@@ -613,6 +632,9 @@ Discretizing the above would reveal previous time step dependence, and the dynam
 
 Consequently, to alter the time course would require substantial adjustment of the connectivity itself to change $$f$$, which in a short time span is not quite likely readily achievable. 
 
+### Hysteresis explanation
+
+### Eventual, but not initial, violation of flow field
 
 ## Conclusions
 
