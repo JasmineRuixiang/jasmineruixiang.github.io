@@ -606,7 +606,7 @@ The goal for step 7] is that after projection the starting points of $$A$$ to $$
 
 > 1) Scaling the axes of $$P_{SM}$$ with a diagonal matrix $$S \in \mathbb{R}^{2 \times 2}$$ such that distance between $$\bar{z}_A$$ and $$\bar{z}_B$$ is identical to $$A$$ and $$B$$ in $$MoveInt$$ projection, 
 >
-> 2) Optionally flip the projection along the $$A - B$$ axis with $$O \in \mathbb{R}^{2 \times 2}$$, such that the controlled cursor movements align with the expected orientation,
+> 2) Optionally flip the projection along the $$A - B$$ axis with $$O \in \mathbb{R}^{2 \times 2}$$ (see more in discussion), such that the controlled cursor movements align with the expected orientation,
 >
 > 3) Rotation with $$R_{\theta}$$ so the projection aligns with workspace targets $$A$$ and $$B$$. 
 
@@ -632,7 +632,7 @@ One key remaining question is whether the robustness of constraint exists only i
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Ext_Fig_4.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="85%" %}
+        width="90%" %}
     </div>
 </div>
 <div class="caption">
@@ -686,7 +686,7 @@ I like how the experiments are built upon each other to add more constraints and
     </div>
 </div>
 <div class="caption">
-    Adapted from Extended Fig.5 in {% cite Oby2025 %}.  
+    Adapted from Extended Fig.5 in {% cite Oby2025 %}. When reflection of the projection is added (a., rotation matrix <strong>O</strong>), two possilibies based on whether the neural trajectories were dependent on visual preference (curvature is preserved, Possibility 1) or the underlying network connectivity (curvature is also flipped, Possibility 2). c. shows that the orientation of the cursor trajectories under the reflected <strong>SepMax</strong> feedback in the reflected <strong>SepMax</strong> projection is also flipped compared to those under the <strong>SepMax</strong> feedback in the <strong>SepMax</strong> projection (A typo above the third panel of c., should be "Reflected Separation-Maximizing Projection" instead of "Reflected Separation-Maximizing Feedback"). d.: quantified flow field difference between <strong>SepMax</strong> and reflected <strong>SepMax</strong> projections (under corresopnding feedbacks) is significantly larger than the difference between <strong>SepMax</strong> under <strong>MoveInt</strong> and <strong>SepMax</strong> feedbacks. Consequently, the neural trajectories are determined not by visual preference but underlying connectivity constraints.  
 </div>
 
 
