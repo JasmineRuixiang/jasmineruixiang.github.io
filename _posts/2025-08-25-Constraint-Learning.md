@@ -2,7 +2,7 @@
 layout: post
 title: Learning and constraints (in progress)
 date: 2025-08-25 22:09:34
-description: Employ perturbations of neural manifold to explore learning constraints
+description: Neural constraints, both spatial and temporal
 tags: 
     - "Learning"
     - "Neural Manifold"
