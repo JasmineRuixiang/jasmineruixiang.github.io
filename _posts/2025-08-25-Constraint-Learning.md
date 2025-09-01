@@ -610,15 +610,15 @@ The goal for step 7] is that after projection the starting points of $$A$$ to $$
 >
 > 3) Rotation with $$R_{\theta}$$ so the projection aligns with workspace targets $$A$$ and $$B$$. 
 
-The above process is illustrated below in panels d. and e. Notice that the above postprocessing is not an isometry, in that a scaling is also applied ($$P_{SM}). 
+The above process is illustrated below in panels d. and e. Notice that the above postprocessing is not an isometry, in that a scaling is also applied ($$P_{SM}$$). 
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/learning_constraint/Oby_Ext_Fig_10.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="75%" %}
+        width="80%" %}
     </div>
 </div>
-<div class="caption">
+<div class="caption" markdown="1">
     Adapted from Extended Fig.10 in {% cite Oby2025 %}. d., e.: demonstration of the above quantatities. f.: projection of the midpoints of both way trajectories, $\bar{z}_{AB}$ and $\bar{z}_{BA}$, onto an axis <strong>a</strong> with maximal midpoint separation. The discriminability <strong>d'</strong> is calculated from the projected mean and variance: $d' = \frac{\mid \bar{z}_{AB}^Ta - \bar{z}_{BA}^Ta\mid}{\sqrt{\frac{1}{2}a^T(\Sigma_{AB} + \Sigma_{BA})a}}$ 
 </div>
 
