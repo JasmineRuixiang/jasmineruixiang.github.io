@@ -553,6 +553,7 @@ However, under another 2D mapping selected as maximizing the separations ($$SepM
     Adapted from Fig. 3 in {% cite Oby2025 %}. See a. and b. where A-B and B-A trajectories are distinct. Panels c. and d. show results from quantitative metric (discriminability <strong>d'</strong> between midpoints of trajectories signify separation of trajectories).  
 </div>
 
+### MoveInt vs SepMax projections
 Both $$MoveInt$$ and $$SepMax$$ projections are calculated by fitting a simple linear transformation to the extracted $$10D$$ latents $$\hat{z}_t$$ to acquire $$2D$$ cursor positions $$\hat{x}_t$$, which is used to displace the cursor in closed-loop control:
 
 $$
@@ -574,6 +575,29 @@ $$
 
 where $$Z = [\hat{z}_1, \hat{z}_2, ..., \hat{z}_n] \in \mathbb{R}^{10 \times n}$$ represents the collection of $$GPFA$$ latent states, and $$X = [x_1, x_2, ..., x_n] \in \mathbb{R}^{2 \times n}$$ indicates the intended cursor position. $$n$$ is the total number of timesteps during calibration. 
 
+For $$SepMax$$ projection, the goal is to identify subspace upon which cursor trajectories showcased maximal separation during the two-target task from target pair $$A$$ to $$B$$ and $$B$$ to $$A$$. The projections is acquired by satisfying the following 3 objectives: 1] maximizing separation between midpoints of both ways ($$\bar{z}_{AB}$$ and $$\bar{z}_{BA}$$); 2] minimizing trial-to-trial variance at midpoints ($$\Sigma_{AB}$$ and $$\Sigma_{BA}$$); and 3] maximizing projections of $$\bar{z}_{A}$$ and $$\bar{z}_{B}$$. 
+
+The algorithm for $$SepMax$$ projection could be summarized in the following:
+
+> 1] Compute trial-averaged starting points $$\bar{z}_{A}, \; \bar{z}_{B} from $$A$$ to $$B$$ and $$B$$ to $$A$$ trials, respectively, 
+>
+> 2] Calculate midpoint $$m = \frac{\bar{z}_{A} + \bar{z}_{B}}{2}$$
+> 
+> 3] For a given trial, project the trajectory $$\hat{z}_t$$ onto the axis connecting $$\bar{z}_{A}$$ and $$\bar{z}_{B}$$. Define $$\hat{z}_{t_{c}}$$ as the trial midpoint, where $$t_{c}$$ is the timepoint where the projection is closes to $$m$$, 
+>
+> 4] Define $$\bar{z}_{AB}$$ as the trial-averaged midpoint over $$\hat{z}_{t_{c}}$$ from $$A$$ to $$B$$ trajectories, similarly $$\bar{z}_{BA}$$ from $$B$$ to $$A$$, 
+>
+> 5] Simiar to 4], calculate covariance $$\Sigma_{AB}$$ the covariance over $$\hat{z}_{t_{c}}$$ for $$A$$ to $$B$$ trials, and simiarly for $$\Sigma_{BA}$$, 
+>
+>
+>
+>
+>
+>
+>
+>
+>
+Note that $$\bar{z}_{A}, \bar{z}_{B}, m, \bar{z}_{AB}, \bar{z}_{BA} \in \mathbb{R}^{10 \times 1}$$ 
 
 After identifying the existence of irreversible neural trajectories, the authors continued to explore how robust time course evolution is, with 3 experiments that built upon the previous ones which increasingly motivated the monkeys to adapt neural dynamics.  
 
