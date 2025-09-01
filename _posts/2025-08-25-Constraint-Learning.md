@@ -553,7 +553,27 @@ However, under another 2D mapping selected as maximizing the separations ($$SepM
     Adapted from Fig. 3 in {% cite Oby2025 %}. See a. and b. where A-B and B-A trajectories are distinct. Panels c. and d. show results from quantitative metric (discriminability <strong>d'</strong> between midpoints of trajectories signify separation of trajectories).  
 </div>
 
-The calculation of the MoveInt and SepMax maps: [TODO]. 
+Both $$MoveInt$$ and $$SepMax$$ projections are calculated by fitting a simple linear transformation to the extracted $$10D$$ latents $$\hat{z}_t$$ to acquire $$2D$$ cursor positions $$\hat{x}_t$$, which is used to displace the cursor in closed-loop control:
+
+$$
+\begin{equation}
+\hat{x}_t = W\hat{z}_t + c
+\end{equation}
+$$
+
+except they have different weight matrices and bias $$W$$ and $$c$$.
+
+For $$MoveInt$$ projection, $$\hat{x}_t$$ is selected as the label velocity vectors, and thus $$W_{MI} \in \mathbb{R}^{2 \times 10}$$ and $$c_{MI} \in \mathbb{R}^{2 \times 1}$$ are obtained by the correpsonding linear regression:
+
+$$
+\begin{align}
+W_{MI} = XZ^{T}(ZZ^T)^{-1} \\
+c_{MI} = -W_{MI}(\frac{1}{n}\sum_{t=1}^{n}\hat{z}_t)
+\end{align}
+$$
+
+where $$Z = [\hat{z}_1, \hat{z}_2, ..., \hat{z}_n] \in \mathbb{R}^{10 \times n}$$ represents the collection of $$GPFA$$ latent states, and $$X = [x_1, x_2, ..., x_n] \in \mathbb{R}^{2 \times n}$$ indicates the intended cursor position. $$n$$ is the total number of timesteps during calibration. 
+
 
 After identifying the existence of irreversible neural trajectories, the authors continued to explore how robust time course evolution is, with 3 experiments that built upon the previous ones which increasingly motivated the monkeys to adapt neural dynamics.  
 
