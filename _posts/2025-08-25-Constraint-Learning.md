@@ -665,6 +665,16 @@ Since the monkeys were assumed to freely change their neural activities input to
 ### Determinism and the exception
 To arrive at a given state $$z(t)$$, $$z(t-1)$$ is pre-determined. The only exception is attractor and limit cycle? 
 
+### Relation with rotational dynamics
+The study might remind us of rotational dynamics (cite jPCA paper). Previous study showed that simply by reversing the hand kinematics would not necessarily lead to reversal of the direction of the rotational dynamics (% cite russo2018 %). What's even more striking here is that there's no arm movement component included here, thus further emphasizing that kinematic movement or somatosensory feedback (as shown coupling many monkey studies) is not a necessary condition for engendering the neural dynamics, which nonetheless carries on an inherent property of the underlying neuronal connectivity. 
+
+### Relation with low-tangling
+On another hand, the monkeys were motivated to produce neural latents that evolve with high-tangeling, but in fact neural trajectories showed only low tangling. 
+
+### Relation with output-null/potent space
+Finally, this does echoe the flavor of output-potent/null subspace (another blog coming soon). Indeed, the distingushed properties of neural dynamics observed in $$MoveInt$$ v.s. $$SepMax$$ projections echoe the observation that different perspectives of viewing neural dynamics might lead to functionally distinguished inerpretations: preparatory activities encoded in the null-space are not read out as they are projected onto the "same" coordinates on the readout output-potent space, but they specify the initial conditions to drive the temporal evolution of neural activities along the output-potent space. 
+
+
 ## Conclusions
 The animals' dynamical structure is robust and highly constrained. 
 
