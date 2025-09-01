@@ -2,7 +2,7 @@
 layout: post
 title: "Geom/Topo/Dynam Mumble (1): Exponential map (in progress)"
 date: 2025-08-29 02:25:33
-description: Illustrate exponential maps applied in Lie group and dynamical systems
+description: Exponential maps applied in Lie group & dynamical systems
 tags: 
     - "Geometry Concepts/Tools"
 categories: 

@@ -592,9 +592,25 @@ The algorithm for $$SepMax$$ projection could be summarized in the following:
 > 6] Finally, to obtain the ideal $$2D$$ projection and find two orthonormal vectors collected in $$P_{SM} = [p_1, p_2] \in \mathbb{R}^{10 \times 2}$$, solve the optimization problem below:
 > 
 > $$ J = -w_{mid}p_{1}^T(\bar{z}_{AB} - \bar{z}_{BA}) + w_{var}p_{1}^T(\Sigma_{AB} + \Sigma_{BA})p_1 - w_{start}p_{2}^T(\bar{z}_B - \bar{z}_A)$$
+>
+> 7] To align the space from $$P_{SM}$$ with animals' workspace: 
+> $$W_{SM} = AP_{SM}^T, \;, c_{SM} = -AP_{SM}^Tm$$
+> 
+> where
+> 
+> $$A = R_{\theta}OS$$
 
+Note that $$\bar{z}_{A}, \bar{z}_{B}, m, \bar{z}_{AB}, \bar{z}_{BA} \in \mathbb{R}^{10 \times 1}$$, $$W_{SM} \in \mathbb{R}^{2 \times 10}, A \in \mathbb{R}^{2 \times 2}, c_{SM} \in \mathbb{R}^{2 \times 1}$$ and $$w_{mid}, w_{var}, w_{start}$$ are all weighting hyperparameters. The above objective function is composed of 3 separate aims which match exactly the those mentioned in above. Consequently, along $$p_1$$ trajectories of different directions are maximally separated, while targets are distinguished on an orthogonal $$p_2$$ axis.
 
-Note that $$\bar{z}_{A}, \bar{z}_{B}, m, \bar{z}_{AB}, \bar{z}_{BA} \in \mathbb{R}^{10 \times 1}$$, and. $$w_{mid}, w_{var}, w_{start}$$ are all weighting hyperparameters. The above objective function is composed of 3 separate aims which match exactly the those mentioned in above. Consequently, along $$p_1$$ trajectories of different directions are maximally separated, while targets are distinguished on an orthogonal $$p_2$$ axis. 
+The goal for step 7] is that after projection the starting points of $$A$$ to $$B$$ and $$B$$ to $$A$$ align with the two targets $$A$$ and $$B$$ in animals' workspace. $$A$$ is comprised with 3 transformations:
+
+> 1) Scaling the axes of $$P_{SM}$$ with a diagonal matrix $$S \in \mathbb{R}^{2 \times 2}$$ such that distance between $$\bar{z}_A$$ and $$\bar{z}_B$$ is identical to $$A$$ and $$B$$ in $$MoveInt$$ projection, 
+>
+> 2) Optionally flip the projection along the $$A - B$$ axis with $$O \in \mathbb{R}^{2 \times 2}$$, such that the controlled cursor movements align with the expected orientation,
+>
+> 3) Rotation with $$R_{\theta}$$ so the projection aligns with workspace targets $$A$$ and $$B$$. 
+
+Notice that the above postprocessing is not an isometry, in that a scaling is also applied ($$P_{SM}). 
 
 After identifying the existence of irreversible neural trajectories, the authors continued to explore how robust time course evolution is, with 3 experiments that built upon the previous ones which increasingly motivated the monkeys to adapt neural dynamics.  
 
@@ -620,7 +636,7 @@ One key remaining question is whether the robustness of constraint exists only i
     </div>
 </div>
 <div class="caption">
-    Adapted from Extended Fig.4 in {% cite Oby2025 %}.  
+    Adapted from Extended Fig.4 in {% cite Oby2025 %}. Latent factors are projected into <strong>2D</strong> space by random projection matrices and the flow field is calculated. This is repeated for 400 times and the corresponding comparisons of flow fields under different feedbacks are shown in cyan distribution as "other feedback" in g. and h. Note that d. is an example comparison of flow fields for <strong>SepMax</strong> projection. The authors also devised two control groups. 
 </div>
 
 ## Task 2: IT task
