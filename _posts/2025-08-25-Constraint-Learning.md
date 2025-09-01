@@ -579,22 +579,22 @@ For $$SepMax$$ projection, the goal is to identify subspace upon which cursor tr
 
 The algorithm for $$SepMax$$ projection could be summarized in the following:
 
-> 1] Compute trial-averaged starting points $$\bar{z}_{A}, \; \bar{z}_{B} from $$A$$ to $$B$$ and $$B$$ to $$A$$ trials, respectively, 
+> 1] Compute trial-averaged starting points $$\bar{z}_{A}, \; \bar{z}_{B}$$ from $$A$$ to $$B$$ and $$B$$ to $$A$$ trials, respectively, 
 >
 > 2] Calculate midpoint $$m = \frac{\bar{z}_{A} + \bar{z}_{B}}{2}$$
 > 
-> 3] For a given trial, project the trajectory $$\hat{z}_t$$ onto the axis connecting $$\bar{z}_{A}$$ and $$\bar{z}_{B}$$. Define $$\hat{z}_{t_{c}}$$ as the trial midpoint, where $$t_{c}$$ is the timepoint where the projection is closes to $$m$$, 
+> 3] For a given trial, project the trajectory $$\hat{z}_t$$ onto the axis connecting $$\bar{z}_{A}$$ and $$\bar{z}_{B}$$. Define $$\hat{z}_{t_{c}}$$ as the trial midpoint, where $$t_{c}$$ is the timepoint where the projection is closest to $$m$$, 
 >
 > 4] Define $$\bar{z}_{AB}$$ as the trial-averaged midpoint over $$\hat{z}_{t_{c}}$$ from $$A$$ to $$B$$ trajectories, similarly $$\bar{z}_{BA}$$ from $$B$$ to $$A$$, 
 >
-> 5] Simiar to 4], calculate covariance $$\Sigma_{AB}$$ the covariance over $$\hat{z}_{t_{c}}$$ for $$A$$ to $$B$$ trials, and simiarly for $$\Sigma_{BA}$$, 
+> 5] Simiar to 4], calculate covariance $$\Sigma_{AB}$$ over $$\hat{z}_{t_{c}}$$ for $$A$$ to $$B$$ trials, and simiarly $$\Sigma_{BA}$$ for $$B$$ to $$A$$ trials, 
 >
-> 6] Finally, to obtain the $$2D$$ projection $$P_{SM} = [p_1, p_2] \in \mathbb{R}^{10 \times 2}$$, solve the optimization problem below:
-> $$
-> \begin{equation}
-> J = -w_{mid}p_{1}^T(\bar{z}_{AB} - \bar{z}_{BA}) + w_{var}p_{1}^T(\Sigma_{AB} + \Sigma_{BA})p_1 - w_{start}p_{2}^T(\bar{z}_B - \bar{z}_A)
-> \end{equation}
-> $$
+> 6] Finally, to obtain the ideal $$2D$$ projection and find two orthonormal vectors collected in $$P_{SM} = [p_1, p_2] \in \mathbb{R}^{10 \times 2}$$, solve the optimization problem below:
+$$
+\begin{equation}
+J = -w_{mid}p_{1}^T(\bar{z}_{AB} - \bar{z}_{BA}) + w_{var}p_{1}^T(\Sigma_{AB} + \Sigma_{BA})p_1 - w_{start}p_{2}^T(\bar{z}_B - \bar{z}_A)
+\end{equation}
+$$
 > 
 > 7] 
 >
@@ -602,7 +602,8 @@ The algorithm for $$SepMax$$ projection could be summarized in the following:
 >
 >
 >
-Note that $$\bar{z}_{A}, \bar{z}_{B}, m, \bar{z}_{AB}, \bar{z}_{BA} \in \mathbb{R}^{10 \times 1}$$ 
+
+Note that $$\bar{z}_{A}, \bar{z}_{B}, m, \bar{z}_{AB}, \bar{z}_{BA} \in \mathbb{R}^{10 \times 1}$$, and. $$w_{mid}, w_{var}, w_{start}$$ are all weighting hyperparameters. 
 
 After identifying the existence of irreversible neural trajectories, the authors continued to explore how robust time course evolution is, with 3 experiments that built upon the previous ones which increasingly motivated the monkeys to adapt neural dynamics.  
 
