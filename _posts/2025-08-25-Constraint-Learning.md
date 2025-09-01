@@ -589,9 +589,14 @@ The algorithm for $$SepMax$$ projection could be summarized in the following:
 >
 > 5] Simiar to 4], calculate covariance $$\Sigma_{AB}$$ the covariance over $$\hat{z}_{t_{c}}$$ for $$A$$ to $$B$$ trials, and simiarly for $$\Sigma_{BA}$$, 
 >
->
->
->
+> 6] Finally, to obtain the $$2D$$ projection $$P_{SM} = [p_1, p_2] \in \mathbb{R}^{10 \times 2}$$, solve the optimization problem below:
+> $$
+> \begin{equation}
+> J = -w_{mid}p_{1}^T(\bar{z}_{AB} - \bar{z}_{BA}) + w_{var}p_{1}^T(\Sigma_{AB} + \Sigma_{BA})p_1 - w_{start}p_{2}^T(\bar{z}_B - \bar{z}_A)
+> \end{equation}
+> $$
+> 
+> 7] 
 >
 >
 >
