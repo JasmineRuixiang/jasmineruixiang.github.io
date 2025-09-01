@@ -618,8 +618,13 @@ The above process is illustrated below in panels d. and e. Notice that the above
         width="80%" %}
     </div>
 </div>
-<div class="caption" markdown="1">
-    Adapted from Extended Fig.10 in {% cite Oby2025 %}. d., e.: demonstration of the above quantatities. f.: projection of the midpoints of both way trajectories, $\bar{z}_{AB}$ and $\bar{z}_{BA}$, onto an axis <strong>a</strong> with maximal midpoint separation. The discriminability <strong>d'</strong> is calculated from the projected mean and variance: $d' = \frac{\mid \bar{z}_{AB}^Ta - \bar{z}_{BA}^Ta\mid}{\sqrt{\frac{1}{2}a^T(\Sigma_{AB} + \Sigma_{BA})a}}$ 
+<div class="caption">
+    Adapted from Extended Fig.10 in {% cite Oby2025 %}. d., e.: demonstration of the above quantities.  
+    f.: projection of the midpoints of both way trajectories, 
+    <span class="math">\(\bar{z}_{AB}\)</span> and <span class="math">\(\bar{z}_{BA}\)</span>, 
+    onto an axis <strong>a</strong> with maximal midpoint separation.  
+    The discriminability <strong>d'</strong> is calculated from the projected mean and variance:  
+    <span class="math">\(d' = \frac{|\bar{z}_{AB}^Ta - \bar{z}_{BA}^Ta|}{\sqrt{\tfrac{1}{2}a^T(\Sigma_{AB} + \Sigma_{BA})a}}\)</span>
 </div>
 
 
