@@ -590,20 +590,11 @@ The algorithm for $$SepMax$$ projection could be summarized in the following:
 > 5] Simiar to 4], calculate covariance $$\Sigma_{AB}$$ over $$\hat{z}_{t_{c}}$$ for $$A$$ to $$B$$ trials, and simiarly $$\Sigma_{BA}$$ for $$B$$ to $$A$$ trials, 
 >
 > 6] Finally, to obtain the ideal $$2D$$ projection and find two orthonormal vectors collected in $$P_{SM} = [p_1, p_2] \in \mathbb{R}^{10 \times 2}$$, solve the optimization problem below:
-$$
-\begin{equation}
-J = -w_{mid}p_{1}^T(\bar{z}_{AB} - \bar{z}_{BA}) + w_{var}p_{1}^T(\Sigma_{AB} + \Sigma_{BA})p_1 - w_{start}p_{2}^T(\bar{z}_B - \bar{z}_A)
-\end{equation}
-$$
 > 
-> 7] 
->
->
->
->
->
+> $$ J = -w_{mid}p_{1}^T(\bar{z}_{AB} - \bar{z}_{BA}) + w_{var}p_{1}^T(\Sigma_{AB} + \Sigma_{BA})p_1 - w_{start}p_{2}^T(\bar{z}_B - \bar{z}_A)$$
 
-Note that $$\bar{z}_{A}, \bar{z}_{B}, m, \bar{z}_{AB}, \bar{z}_{BA} \in \mathbb{R}^{10 \times 1}$$, and. $$w_{mid}, w_{var}, w_{start}$$ are all weighting hyperparameters. 
+
+Note that $$\bar{z}_{A}, \bar{z}_{B}, m, \bar{z}_{AB}, \bar{z}_{BA} \in \mathbb{R}^{10 \times 1}$$, and. $$w_{mid}, w_{var}, w_{start}$$ are all weighting hyperparameters. The above objective function is composed of 3 separate aims which match exactly the those mentioned in above. Consequently, along $$p_1$$ trajectories of different directions are maximally separated, while targets are distinguished on an orthogonal $$p_2$$ axis. 
 
 After identifying the existence of irreversible neural trajectories, the authors continued to explore how robust time course evolution is, with 3 experiments that built upon the previous ones which increasingly motivated the monkeys to adapt neural dynamics.  
 
