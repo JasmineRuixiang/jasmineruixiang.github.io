@@ -726,7 +726,19 @@ $$
 \end{equation}
 $$
 
-Discretizing the above would reveal previous time step dependence, and the dynamics is specified by $$f$$ determined by network connectivity. The paper {% cite jpca %} discussed in [my earlier post]({% post_url 2025-08-16-jPCA %}) made this the backbone of modeling. From this perspective, it seems not surprising that neural trajectories do not necessarily need to be reversible. One extreme hypothetical case would be the following:
+Discretizing the above would reveal previous time step dependence, and the dynamics is specified by $$f$$ determined by network connectivity. The paper {% cite jpca %} discussed in [my earlier post]({% post_url 2025-08-16-jPCA %}) made this the backbone of modeling. From this perspective, it seems not surprising that neural trajectories do not necessarily need to be reversible. One extreme hypothetical case would: Imagine the following simple $$2D$$ linear dynamical system:
+
+$$
+\begin{equation}
+\dot{x}(t) = x(t)
+\end{equation}
+$$
+
+The phase space could be visualized as below:
+
+
+It's not difficult to observe that the vector field on each state $$\dot{x}_t$$ is perpendicular to the state itself $$x_t$$. Consequently, the dynamics exhibit as pure rotation. If the starting point is $$p_1$$, then to move towards $$p_2$$, it cannot go counter-clockwise, although it seems closer, but it has to travel through longer distance clockwise and reach $$p_2$$. 
+
 
 Consequently, to alter the time course would require substantial adjustment of the connectivity itself to change $$f$$, which in a short time span is not quite likely readily achievable. 
 
