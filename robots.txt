@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://jasmineruixiang.github.io/blog//sitemap.xml
+Sitemap: https://jasmineruixiang.github.io/blog/sitemap.xml
