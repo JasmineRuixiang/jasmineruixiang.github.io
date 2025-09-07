@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /PhiarLitSic/
-title: PhiarLitSic
+title: PhiArLitSic
 nav: true
 nav_order: 2
 ---
