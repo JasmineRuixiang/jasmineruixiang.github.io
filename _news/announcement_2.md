@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I presented a poster at the Society of Neuroscience (SfN) annual meeting in San Diego, California. 
+I presented a [poster]({{ "/assets/pdf/SfN2022_Ruixiang.pdf" | relative_url }}) at the Society of Neuroscience (SfN) annual meeting in San Diego, California. 
