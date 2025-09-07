@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Equivalence: What does being equal represent?"
+title: 'Equivalence: What does "being equal" represent?'
 date: 2025-09-7 00:23:16
 description: Compare various equivalences in geometry/topology/group theory
 tags: 
