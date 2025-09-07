@@ -5,4 +5,5 @@ inline: true
 related_posts: false
 ---
 
-I presented a [poster]({{ "/assets/pdf/SfN2022_Ruixiang.pdf" | relative_url }}) at the Society of Neuroscience (SfN) annual meeting in San Diego, California. 
+<!-- Add this part {:target="_blank"} so a new tab will be open-->
+I presented a [poster]({{ "/assets/pdf/SfN2022_poster.pdf" | relative_url }}){:target="_blank"} at the Society of Neuroscience (SfN) annual meeting in San Diego, California.
