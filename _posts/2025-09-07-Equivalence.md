@@ -19,4 +19,6 @@ toc:
   sidebar: left
 ---
 
-Explain and compare multiple equivalences from differential geometry and topology, including homeomorphism, diffeomorphism, homotopy equivalence, homomorphism, isomorphism. 
+Explain and compare multiple equivalences from differential geometry and topology, including homeomorphism, diffeomorphism, homotopy equivalence, homomorphism, isomorphism, etc.
+
+Also discussions on cardinality among sets (including finite and infinite (countably infinite $$N0$$? and uncountably infinite), Hillbert Hotel problem, equipotent sets)
