@@ -291,7 +291,7 @@ jekyll-archives:
     category: "/blog/category/:name/"
 
 display_tags: ["Latent Dynamics", "Neural Manifold", "Dimensionality Reduction", "Learning", "Geometry Concepts/Tools", "Topology Concepts/Tools"] # these tags will be displayed on the front page of your blog
-display_categories: ["Brain-Computer Interface", "Computational Neuroscience", "Deep Learning", "Differential Geometry", "Topology"] # these categories will be displayed on the front page of your blog
+display_categories: ["Brain-Computer Interface", "Computational Neuroscience", "Deep Learning", "Differential Geometry", "Topology", "Optimal Transport"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar

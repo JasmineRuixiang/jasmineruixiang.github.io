@@ -21,4 +21,6 @@ toc:
 
 Explain and compare multiple equivalences from differential geometry and topology, including homeomorphism, diffeomorphism, homotopy equivalence, homomorphism, isomorphism, etc.
 
+Invariant and equivariant functions (CNN is equivariant). 
+
 Also discussions on cardinality among sets (including finite and infinite (countably infinite $$N0$$? and uncountably infinite), Hillbert Hotel problem, equipotent sets)
