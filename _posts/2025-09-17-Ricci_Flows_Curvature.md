@@ -42,6 +42,8 @@ $$
 
 This tensor captures all information about curvature. Succinctly, this is a 4-tensor: $$R_{ijkl}$$. 
 
+The above is an unfair treatment of Riemannian geometry. I'll have a separate blog on that subject soon. 
+
 
 ### Ricci Curvature 
 To get Ricci curvature, we take a __trace__ of the Riemann tensor:
