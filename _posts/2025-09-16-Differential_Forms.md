@@ -1,8 +1,9 @@
 ---
 layout: post
 title: 'The Dance of Space (2): Differential Forms'
-date: 2025-09-7 00:23:16
-description: Intuitions/definitions/applications of differential forms 
+date: 2025-09-16 16:34:22
+description: Intuite and define differential forms 
+tags:
     - "Geometry Concepts/Tools"
 categories: 
     - "Differential Geometry"
