@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'The Dance of Space (2): Differential Forms'
+title: 'The Dance of Space (2): Differential Forms (in progress)'
 date: 2025-09-16 16:34:22
 description: Intuite and define differential forms 
 tags:

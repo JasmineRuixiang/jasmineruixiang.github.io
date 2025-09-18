@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'Geom/Topo/Dynam Mumble(2): Ricci Flow and Ricci Curvature'
+title: 'Geom/Topo/Dynam Mumble(2): Ricci Flow and Ricci Curvature (in progress)'
 date: 2025-09-17 17:49:33
 description: Introduction of Ricci flows/curvatures 
 tags:
