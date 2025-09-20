@@ -18,3 +18,26 @@ toc:
 ---
 
 The second episode to appreciate the inner workings of space is through the differential forms. Differential forms is not an ancient subject, ... 
+
+
+### Vector Outer Product
+
+
+### Wedge Product/Exterior Derivative
+
+
+### Three in One 
+
+Green's theorem, Gauss' theorem, Stoke's theorem. 
+
+Green's theorem: 
+
+$$
+\int_{L} Pdx + Qdy = \iint_{D}(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y})dxdy
+$$
+
+Generalized Stoke's theorem. 
+
+
+### Fundamental Theorem of Calculus (FTOC)
+High dimensional Stoke's theorem is exactly the fundamental theorem of calculus (FTOC) in high-dimensional space. 
