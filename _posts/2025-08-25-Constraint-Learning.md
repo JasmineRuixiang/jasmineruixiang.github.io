@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Learning and constraints (in progress)
+title: Learning and Constraints (in progress)
 date: 2025-08-25 22:09:34
-description: Neural constraints, both spatial and temporal
+description: Neural onstraints, both spatial and temporal
 tags: 
     - "Learning"
     - "Neural Manifold"
