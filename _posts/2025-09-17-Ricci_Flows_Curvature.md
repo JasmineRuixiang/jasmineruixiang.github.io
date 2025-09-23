@@ -44,8 +44,12 @@ This tensor captures all information about curvature. Succinctly, this is a 4-te
 
 The above is an unfair treatment of Riemannian geometry. I'll have a separate blog on that subject soon. 
 
+How to understand: Riemannian metric tensor informs the manifold where to expand, shrink, and curve.  How does Riemannian metric tensor relate with curvature? 
+
 
 ### Ricci Curvature 
+Based on the Riemann tensor, what is the curvature? 
+
 To get Ricci curvature, we take a __trace__ of the Riemann tensor:
 
 $$
@@ -96,5 +100,14 @@ In a nutshell, irregular geometries with bumps or folds (different curvature in 
 
 
 ### Application of Ricci Flow
+Poincare conjecture, Ricci flow, surgery theory, what Terrence Tao called "one of the most impressive recent achievements of modern mathematics"
+
+Poincare conjecture: 
+> Any closed 3-manifold that is simply-connected, compact, and boundless is homeomorphic to a 3-sphere. 
+
+Specifically, Poincare conjecture in higher dimensions has been solved around 1961, and dimension 4 case has been proved by Michael Freedman who by which won Fields medal in 1986. The $$n = 3$$ case seemed really difficult to crack and it was only at 2002 that Grisha Perelman proved it using Ricci flow.
+
+Very briefly, since a sphere has positive curvature, by applying Ricci flow through time such sphere will contract and eventually vanish. Perelman proved the opposite also holds: if metric goes to 0, it must have been a sphere. To prove Poincare's conjecture using Ricci flow, 
+
 One of the most triumphant use of Ricci flow happens when Grigori Perelman (2002–2003) to prove __the Poincaré conjecture__ and the more general __Thurston geometrization conjecture__. He showed how Ricci flow with “surgery” (cutting and patching when singularities form) classifies 3-manifolds.
 
