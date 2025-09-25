@@ -38,6 +38,7 @@ $$
 
 Generalized Stoke's theorem. 
 
+A k-form is supposed to be integrated over an oriented k-dimensional manifold
 
 ### Fundamental Theorem of Calculus (FTOC)
 High dimensional Stoke's theorem is exactly the fundamental theorem of calculus (FTOC) in high-dimensional space. 
