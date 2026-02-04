@@ -9,7 +9,7 @@ tags:
 categories: 
     - "Differential Geometry"
     - "Topology"
-featured: true
+featured: false
 related_posts: true
 related_publications: true
 citation: true

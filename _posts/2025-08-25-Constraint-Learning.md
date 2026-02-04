@@ -9,7 +9,7 @@ tags:
     - "Dimensionality Reduction"
 categories: 
     - "Brain-Computer Interface"
-featured: true
+featured: false
 related_posts: true
 related_publications: true
 citation: true

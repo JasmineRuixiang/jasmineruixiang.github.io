@@ -7,7 +7,7 @@ tags:
     - "Geometry Concepts/Tools"
 categories: 
     - "Differential Geometry"
-featured: true
+featured: false
 related_posts: true
 related_publications: true
 citation: true
