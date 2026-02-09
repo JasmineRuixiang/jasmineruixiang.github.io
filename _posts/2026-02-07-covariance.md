@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'BCI nitty-gritty (2): Zscoring before PCA?'
-date: 2026-02-07 01:18:24
+date: 2026-02-09 01:22:40
 description: Zscoring, covariance, PCA
 tags: 
     - "Brain Computer Interface"
@@ -17,3 +17,6 @@ toc:
   sidebar: left
 ---
 
+Zero vector-holer here
+
+Will add here soon. 
