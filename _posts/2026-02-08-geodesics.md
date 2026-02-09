@@ -193,13 +193,19 @@ However, here the Gauss-Bonnet theorem says there are two ways to pay for this 3
 
 The equation is thus: 
 
-$$\text{Steering} + \text{Surface Curvature} = 360^\circ$$$$\oint \kappa_g ds + \iint K dA = 2\pi$$
+$$\text{Steering} + \text{Surface Curvature} = 360^\circ$$
+$$\oint \kappa_g ds + \iint K dA = 2\pi$$
 
 Note that a geodesic is defined as a path where we do not steer. Our steering wheel is locked in the straight-ahead position.
 
 Therefore: Steering = 0. 
 
-Now look at our budget equation again:$$0 + \text{Surface Curvature} = 360^\circ$$$$\iint K dA = 2\pi$$. This means the only way to close a loop without steering is if the surface itself does 100% of the turning for us.
+Now look at our budget equation again:
+
+$$0 + \text{Surface Curvature} = 360^\circ$$
+$$\iint K dA = 2\pi$$. 
+
+This means the only way to close a loop without steering is if the surface itself does 100% of the turning for us.
 
 Consequently, this would explain why it fails on the plane ($$K = 0$$). The surface or the plane is flat, which contributes 0° of turning. The geodesic contributes 0° of steering. Hence the result: $$0 + 0 = 0$$. We have turned 0° and we are walking in a straight line forever. We will never close the loop. Thus our conclusion: simple closed geodesics cannot exist on a plane.
 
@@ -214,8 +220,10 @@ Well, you may wonder in the above interpretation where do the exterior angle sum
 > The "Conservation of Turning"
 * Usually, when we smooth out a shape (like turning a square into a circle), we don't lose the turning angles; we just spread them out.
 * Square (Polygon): We walk straight ($$\kappa_g=0$$) and make four sharp $$90^{\circ}$$ turns. 
+
 - $$\text{Turning} = \sum \alpha_i = 360^{\circ}$$. I'd more think about these sharp turns/kinks as some colossal mechanical arm sticking from space and grabs our car to turn it around certain angles at the current position. 
 * Circle (Smooth Curve): We never make a sharp turn ($$\alpha_i=0$$), but we are constantly steering a tiny bit to the side ($$\kappa_g = \text{constant}$$). 
+
 - $$\text{Turning} = \oint \kappa_g \, ds = 360^{\circ}$$. 
 
 In both cases, we provided the turning. However, for the geodesic "miracle", a smooth closed geodesic is a bizarre object because it refuses to turn in either way: there's no sharp corners (smooth, $$\sum \alpha_i = 0$$) and no steering (geodesic, $$\kappa_g = 0$$). So where does the mandatory $$360^{\circ}$$ ($$2\pi$$) turning come from to close the loop? It must come entirely from the Gaussian Curvature ($$K$$) of the area we enclosed. The surface itself has to rotate the universe under our feet by exactly $$360^{\circ}$$ while we walk in a "straight" line.
