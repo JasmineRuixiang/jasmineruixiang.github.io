@@ -40,13 +40,15 @@ The very first step: a quick review of what PCA is doing, shall we.
 2. Compute the covariance matrix: $$\Sigma = \frac{1}{n}X^TX$$
 3. Find eigenvectors of $$\Sigma$$
 
-So PCA finds directions of maximal variance in the original coordinate system. There're many other interpretations of PCA, for example in terms of minimizatin of reconstruction errors, or constrained non-Euclidean optimization, but this covariance interpretation is what we will grapple with in this blog ---
+So PCA finds directions of maximal variance in the original coordinate system. We could also interpret PCA as finding minimization of reconstruction error, but that's explicitly helpful for interpretation here. However, I'll provide another useful interpretation in section 3] from the perspective of constrained optimization, but this covariance interpretation is what we will grapple with now for this section ---
 
 Because it already makes it obvious that
 
 > PCA is sensitive to feature scale.
 
 If one electrode has variance 100 and another has variance 1, the first will dominate the principal components — even if its structure is not more meaningful.
+
+---
 
 ### 2] What does z-scoring do?
 Column-wise z-scoring transforms
@@ -84,12 +86,75 @@ So they become correlations (or we could say that the correlations are preserved
 
 But this leads to the next natural question, or the question ---
 
-### 3] What geometry are we preserving?
+---
+
+### 3] A geometric way to think about this
+
+The above covariance calculation is clear, yet we could reinterpret PCA in a different way by variational characterization of eigenvectors, i.e. the Rayleigh quotient formulation of PCA. Let me explain below. 
+
+
+
+
+
+
+
+### 4] What geometry are we preserving?
 
 To some extent, this is the real conceptual issue. 
 
 If we do PCA without z-scoring, it preserves the Euclidean geometry in the original feature space. Variance magnitude is meaningful because we indeed keep such information. We'd hold the underlying premise that 
 
 > Electrodes with larger variance are considered more important.
+
+This suggests that this methood is good if variance magnitude reflects real neural signal strength or the feature scale is physically meaningful.
+
+On the other hand, if we do PCA after z-scoring, then it would preserves geometry under a reweighted metric and all dimensions are treated equally. Each electrode is thus given equal prior importance.
+
+This should work if variance differences are arbitrary (e.g., electrode gain differences) and we care about patterns of co-variation, not absolute magnitude.
+
+Since neural data often has:
+
+* Different firing rates across electrodes
+* Different noise levels
+* Different dynamic ranges
+
+If we don’t z-score:
+
+> High firing-rate neurons dominate PCA.
+
+whereas if we do z-score:
+
+> Each neuron contributes equally in variance units.
+
+---
+
+### 5] Which one preserves global geometry?
+
+This depends on what geometry we think is meaningful.
+
+If our raw space is: $$\mathbb{R}^d$$ with standard Euclidean metric, then PCA without z-scoring preserves global geometry better. 
+
+If we believe that true geometry should not depend on firing rate scale, then z-scoring defines a more appropriate metric:
+
+$$<x, y>_D = x^T(D^{-1})^{2}y$$
+
+which means we could alternatively interpret this as keeping the underlying space unchanged but essentially altering the metric before doing PCA. 
+
+Usually in systems neuroscience people often z-score across time and then do PCA. The reason behind is that neural manifold studies often care about relative population patterns, not which neuron fires more
+
+If we want true population variance magnitude, then we should not z-score. If we intend to obtain population structure independent of scale, then z-score. 
+
+---
+
+### 6] Summary
+In conclusion, if we do z-scoring before PCA, then 
+
+* Z-scoring does NOT preserve the covariance matrix.
+* It converts covariance to correlation.
+* Off-diagonal terms are divided by product of standard deviations.
+* Equivalently, we are changing the metric of the space.
+* PCA result can change dramatically depending on scaling.
+
+Finally, in practice we often have more than one kind of features. For example, we could obtain both threshold crossings and spike band power from each electrode at the same. However, these two measures have drastically different scales. In this scenario, of course we could look into them separately, but if combined, the spike power would dominate. Consequently, z-scoring also helps to re-weight the feature importance apriori.  
 
 
