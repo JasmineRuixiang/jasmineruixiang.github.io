@@ -17,10 +17,12 @@ toc:
   sidebar: left
 ---
 
+This blog originates from a daily discussion of neural signal (pre)processing with my mentor and peers. We all utilize z-scoring and PCA all the time, and it's a little shameful to admit by hindsight that I haven't dwelled on the following problem deep enough. Again, high dimensional observations haunted by irreducible noise, under which our ambitious intent to extract robust and effective information. 
+
 ### 0] Problem Setup
 Let's say we have a collection of neural data in the format $$X \in \mathbb{R}^{n \times d}$$, where $$n$$ is the number of samples, and $$d$$ the number of features. These are raw features each coming from a single electrode. For simplicity let's assume that there is only 1 kind of feature, like threshold crossing. Let's further say that we want to visualize the low dimensional structure of this collection of data, preserving its global geometry as much as possible (we'll clarify this later). 
 
-Now we'd like to apply PCA on it for the first try, meaning to transform from $$\mathbb{R}^{n \times d}$$ into $$\mathbb{R}^{n \times d'}$$, where $$d'$$ might be just $$3$$, for example. Many methods would start by z-scoring $$X$$ for each feature (so for each column of $$X$$, after z-scoring would be mean 0 and standard deviation 1; more discussion see the [previous blog](2026-02-06-zscore.md) of this series) before applying PCA. 
+Now we'd like to apply PCA on it for the first try, meaning to transform from $$\mathbb{R}^{n \times d}$$ into $$\mathbb{R}^{n \times d'}$$, where $$d'$$ might be just $$3$$, for example. Many methods would start by z-scoring $$X$$ for each feature (so for each column of $$X$$, after z-scoring would be mean 0 and standard deviation 1; more discussion see the [previous blog](https://jasmineruixiang.github.io/blog/2026/zscore/) of this series) before applying PCA. 
 
 I'm a little unsure about the motivation behind it. There're many but what's the conclusive answer?
 
@@ -61,17 +63,33 @@ $$\tilde{\Sigma} = \frac{1}{n}\tilde{X}^T\tilde{X} = \frac{1}{n}D^{-1}X^TXD^{-1}
 
 This is obviously not the same covariance matrix.
 
-In fact, it's not hard to see that:
+In fact, it's not hard to see that, from simple linear algebra:
 
 $$\tilde{\Sigma}_{ij} = \frac{\Sigma_{ij}}{\sigma_i \sigma_j}$$
 
-Back to one of our original questions: does normalization preserve covariance between original features?
-
-But this is exactly the correlation matrix.
+And this is exactly the correlation matrix.
 
 So:
-
 > PCA on z-scored data = PCA on the correlation matrix
+
 > PCA on raw centered data = PCA on the covariance matrix
+
+So back to one of our original questions: does normalization preserve covariance between original features?
+
+No. The off-diagonal terms change as:
+
+$$\Sigma_{ij} \leftarrow \frac{\Sigma_{ij}}{\sigma_i \sigma_j}$$
+
+So they become correlations (or we could say that the correlations are preserved). The important distinction is that _covariance_ measures co-variation in physical units, while _correlation_ measures co-variation relative to each variable's scale. So z-scoring does not preserve the original covariance geometry: It preserves the __correlation structure__ instead.
+
+But this leads to the next natural question, or the question ---
+
+### 3] What geometry are we preserving?
+
+To some extent, this is the real conceptual issue. 
+
+If we do PCA without z-scoring, it preserves the Euclidean geometry in the original feature space. Variance magnitude is meaningful because we indeed keep such information. We'd hold the underlying premise that 
+
+> Electrodes with larger variance are considered more important.
 
 
