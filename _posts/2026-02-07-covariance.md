@@ -90,11 +90,203 @@ But this leads to the next natural question, or the question ---
 
 ### 3] A geometric way to think about this
 
-The above covariance calculation is clear, yet we could reinterpret PCA in a different way by variational characterization of eigenvectors, i.e. the Rayleigh quotient formulation of PCA. Let me explain below. 
+The above covariance calculation is clear, yet we could reinterpret PCA in a different way by variational characterization of eigenvectors, i.e. the Rayleigh quotient formulation of PCA (depending on your views, these two migth be considered the exact same thing; but even as an explanation for why we care about eigenvectors of the covariance, let me explain below). 
+
+#### 3.1] PCA as a Variational Problem
+
+Let $$X \in \mathbb{R}^{n \times d}$$ be the centered data and the sample covariance matrix 
+
+$$
+\Sigma = \frac{1}{n} X^\top X
+$$
+
+If we project the data onto a direction $$v \in \mathbb{R}^d$$, the projected variance is:
+
+$$
+\mathrm{Var}(Xv)
+= \frac{1}{n} \|Xv\|^2
+= v^\top \Sigma v
+$$
+
+Therefore, the first principal component solves:
+
+$$
+\max_{\|v\| = 1} v^\top \Sigma v
+$$
+
+This is the Rayleigh quotient, and the solution is the top eigenvector of $$\Sigma$$ (not proved here; many other sources exist online).
+
+#### 3.2] PCA After Z-Scoring
+
+Suppose we z-score each feature (column-wise normalization). Again, let me reiterate from above that
+
+$$
+D = \mathrm{diag}(\sigma_1, \dots, \sigma_d)
+$$
+
+and the transformed data is:
+
+$$
+\tilde{X} = X D^{-1}
+$$
+
+The new covariance matrix becomes:
+
+$$
+\tilde{\Sigma}
+= \frac{1}{n} \tilde{X}^\top \tilde{X}
+= D^{-1} \Sigma D^{-1}
+$$
+
+PCA on z-scored data solves:
+
+$$
+\max_{\|v\| = 1}
+v^\top D^{-1} \Sigma D^{-1} v
+$$
+
+---
+
+#### 3.3] Equivalent Reformulation (Changing the Constraint)
+
+Now let's do a simple trick. Let:
+
+$$
+w = D^{-1} v
+\quad \text{so that} \quad
+v = D w
+$$
+
+Substitute into the objective:
+
+$$
+v^\top D^{-1} \Sigma D^{-1} v
+= (Dw)^\top D^{-1} \Sigma D^{-1} (Dw)
+= w^\top \Sigma w
+$$
+
+Now examine the constraint:
+
+$$
+\|v\|^2 = 1
+$$
+
+$$
+v^\top v
+= (Dw)^\top (Dw)
+= w^\top D^2 w
+$$
+
+So the optimization becomes:
+
+$$
+\max_{w^\top D^2 w = 1}
+w^\top \Sigma w
+$$
+
+---
+
+#### 3.4] Geometric Interpretation
+
+The raw PCA solves:
+
+$$
+\max_{v^\top v = 1}
+v^\top \Sigma v
+$$
+
+Now, the Z-scored PCA solves:
+
+$$
+\max_{w^\top D^2 w = 1}
+w^\top \Sigma w
+$$
+
+So at a glance, z-scoring rescales the covariance matrix into the correlation matrix. 
+
+But viewed from a different perspective, it __changes the metric constraint__. Instead of using the standard Euclidean norm:
+
+$$
+v^\top v
+$$
+
+we now use a weighted norm:
+
+$$
+w^\top D^2 w
+$$
+
+This means:
+
+- Raw PCA assumes the standard Euclidean inner product.
+- Z-scored PCA uses a different inner product induced by $D^2$.
+
+---
+
+#### 3.5] Multi-Dimensional PCA (k Components)
+
+Up to this point, you might object that the above is just to find one single direction. Usually we do multiple components. Well, there isn't too much effort for extension. 
+
+Raw PCA solves:
+
+$$
+\max_{V^\top V = I}
+\mathrm{Tr}(V^\top \Sigma V)
+$$
+
+where $V \in \mathbb{R}^{d \times k}$. The solution is the top-$$k$$ eigenvectors of $$\Sigma$$. Compared with 4.3], this is a natural extension, and I'll leave out the formal proof. 
+
+After z-scoring, we solve:
+
+$$
+\max_{V^\top V = I}
+\mathrm{Tr}(V^\top D^{-1} \Sigma D^{-1} V)
+$$
+
+Using the substitution $V = D W$, this naturally becomes (similar to 4.3]):
+
+$$
+\max_{W^\top D^2 W = I}
+\mathrm{Tr}(W^\top \Sigma W)
+$$
+
+---
+
+#### 3.6] Generalized Eigenvalue Interpretation
+What does this mean geometrically? 
+
+* For the raw PCA: 
+    * Orthonormal basis in standard __Euclidean__ metric
+    * Maximizes variance
+* For Z-scored PCA:
+    * Orthonormal basis under __weighted__ metric $$D^2$$
+    * This is equivalent to solving a __generalized eigenvalue__ problem:
+
+$$
+\Sigma w = \lambda D^2 w
+$$
+
+I'll also skip the details of why the solution is equivalent to finding the generalized eigenvalues/eigenvectors. However, this fact informs us of the fundamental framework of PCA:
+
+the big geometric insight is that PCA always solves:
+
+$$
+\max_{W^\top G W = I}
+\mathrm{Tr}(W^\top \Sigma W)
+$$
+
+where $$G$$ defines the metric.
+
+* Raw PCA: $$G = I$$
+* Z-scored PCA: $$G = D^2$$
+
+So z-scoring means that we are not trusting that Euclidean length in raw coordinates is meaningful. We redefine what unit length means.
 
 
+Therefore:
 
-
+- Raw PCA preserves covariance geometry.
+- Z-scored PCA preserves correlation geometry.
 
 
 
@@ -134,7 +326,7 @@ This depends on what geometry we think is meaningful.
 
 If our raw space is: $$\mathbb{R}^d$$ with standard Euclidean metric, then PCA without z-scoring preserves global geometry better. 
 
-If we believe that true geometry should not depend on firing rate scale, then z-scoring defines a more appropriate metric:
+If we believe that true geometry should not depend on firing rate scale, then z-scoring defines a more appropriate metric (as elaborated in section 3):
 
 $$<x, y>_D = x^T(D^{-1})^{2}y$$
 
