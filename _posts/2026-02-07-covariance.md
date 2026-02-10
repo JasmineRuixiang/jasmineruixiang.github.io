@@ -17,7 +17,7 @@ toc:
   sidebar: left
 ---
 
-This blog originates from a daily discussion of neural signal (pre)processing with my mentor and peers. We all utilize z-scoring and PCA all the time, and it's a little shameful to admit by hindsight that I haven't dwelled on the following problem deep enough. Again, high dimensional observations haunted by irreducible noise, under which our ambitious intent to extract robust and effective information. 
+This blog originates from a daily discussion of neural signal (pre)processing with my mentors and peers. People utilize z-scoring and PCA all the time, and it's a little shameful to admit by hindsight that I haven't dwelled on the following problem deep enough. Again, we reencounter the conundrum in high dimensional observations haunted by irreducible noise, under which lies our ambitious intent to extract robust and effective information. 
 
 ### 0] Problem Setup
 Let's say we have a collection of neural data in the format $$X \in \mathbb{R}^{n \times d}$$, where $$n$$ is the number of samples, and $$d$$ the number of features. These are raw features each coming from a single electrode. For simplicity let's assume that there is only 1 kind of feature, like threshold crossing. Let's further say that we want to visualize the low dimensional structure of this collection of data, preserving its global geometry as much as possible (we'll clarify this later). 
