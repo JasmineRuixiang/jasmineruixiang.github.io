@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'BCI nitty-gritty (2): Zscoring before PCA?'
+title: 'High Dimensional Nitty-gritty (2): Z-scoring before PCA?'
 date: 2026-02-09 01:22:40
 description: Zscoring, covariance, PCA
 tags: 
@@ -288,7 +288,7 @@ Therefore:
 - Raw PCA preserves covariance geometry.
 - Z-scored PCA preserves correlation geometry.
 
-
+---
 
 ### 4] What geometry are we preserving?
 
