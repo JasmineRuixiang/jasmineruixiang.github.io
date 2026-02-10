@@ -92,7 +92,7 @@ So they become `correlations` (or we could say that the correlations are preserv
 
 ### 3] A geometric way to think about this
 
-The above covariance calculation is clear, yet we could reinterpret PCA in a different way by variational characterization of eigenvectors, i.e. the Rayleigh quotient formulation of PCA (depending on your views, these two migth be considered the exact same thing; but even as an explanation for why we care about eigenvectors of the covariance, let me explain below). 
+The above covariance calculation is clear, yet we could reinterpret PCA in a different way by variational characterization of eigenvectors, i.e. the Rayleigh quotient formulation of PCA (depending on your views, these two migth be considered the exact same thing; but even as an explanation for why we care about eigenvectors of the covariance, let me elaborate below). 
 
 #### 3.1] PCA as a Variational Problem
 
@@ -120,7 +120,7 @@ This is the Rayleigh quotient, and the solution is the top eigenvector of $$\Sig
 
 #### 3.2] PCA After Z-Scoring
 
-Suppose we z-score each feature (column-wise normalization). Again, let me reiterate from above that
+Suppose we z-score each feature (column-wise normalization). Again, let me reiterate from the above that
 
 $$
 D = \mathrm{diag}(\sigma_1, \dots, \sigma_d)
@@ -197,16 +197,16 @@ $$
 v^\top \Sigma v
 $$
 
-Now, the Z-scored PCA solves:
+Now, the z-scored PCA solves:
 
 $$
 \max_{w^\top D^2 w = 1}
 w^\top \Sigma w
 $$
 
-So at a glance, z-scoring rescales the covariance matrix into the correlation matrix. 
+So at a glance from 2], z-scoring rescales the covariance matrix into the correlation matrix. 
 
-But viewed from a different perspective, it __changes the metric constraint__. Instead of using the standard Euclidean norm:
+But viewed from this different perspective, it __changes the metric constraint__. Instead of using the standard Euclidean norm:
 
 $$
 v^\top v
@@ -220,14 +220,14 @@ $$
 
 This means:
 
-- Raw PCA assumes the standard Euclidean inner product.
-- Z-scored PCA uses a different inner product induced by $D^2$.
+- Raw PCA assumes the __standard Euclidean__ inner product.
+- Z-scored PCA uses a different inner product __induced by $$D^2$$__.
 
 ---
 
 #### 3.5] Multi-Dimensional PCA (k Components)
 
-Up to this point, you might object that the above is just to find one single direction. Usually we do multiple components. Well, there isn't too much effort for extension. 
+Up to this point, you might object that the above is just to find one single direction/one principal component. Usually we do multiple components. Well, there isn't too much effort for an extension. 
 
 Raw PCA solves:
 
@@ -236,16 +236,14 @@ $$
 \mathrm{Tr}(V^\top \Sigma V)
 $$
 
-where $V \in \mathbb{R}^{d \times k}$. The solution is the top-$$k$$ eigenvectors of $$\Sigma$$. Compared with 4.3], this is a natural extension, and I'll leave out the formal proof. 
-
-After z-scoring, we solve:
+where $$V \in \mathbb{R}^{d \times k}$$. The solution is the top-$$k$$ eigenvectors of $$\Sigma$$ (proof omitted, similar as 3.1]). As in 3.2], After z-scoring, we solve:
 
 $$
 \max_{V^\top V = I}
 \mathrm{Tr}(V^\top D^{-1} \Sigma D^{-1} V)
 $$
 
-Using the substitution $V = D W$, this naturally becomes (similar to 4.3]):
+Using the substitution $$V = D W$$, this naturally becomes (similar to 3.3]):
 
 $$
 \max_{W^\top D^2 W = I}
@@ -255,7 +253,7 @@ $$
 ---
 
 #### 3.6] Generalized Eigenvalue Interpretation
-What does this mean geometrically? 
+What does this mean geometrically about the solution? 
 
 * For the raw PCA: 
     * Orthonormal basis in standard __Euclidean__ metric
@@ -285,7 +283,7 @@ where $$G$$ defines the metric.
 So z-scoring means that we are not trusting that Euclidean length in raw coordinates is meaningful. We redefine what unit length means.
 
 
-Therefore:
+Which is consistent with the previous observation that
 
 - Raw PCA preserves covariance geometry.
 - Z-scored PCA preserves correlation geometry.
@@ -302,7 +300,7 @@ If we do PCA without z-scoring, it preserves the Euclidean geometry in the origi
 
 This suggests that this methood is good if variance magnitude reflects real neural signal strength or the feature scale is physically meaningful.
 
-On the other hand, if we do PCA after z-scoring, then it would preserves geometry under a reweighted metric and all dimensions are treated equally. Each electrode is thus given equal prior importance.
+On the other hand, if we do PCA after z-scoring, then it would preserve geometry under a __reweighted metric__ and all dimensions are treated equally. Each electrode is thus given equal prior importance.
 
 This should work if variance differences are arbitrary (e.g., electrode gain differences) and we care about patterns of co-variation, not absolute magnitude.
 
@@ -326,29 +324,25 @@ whereas if we do z-score:
 
 This depends on what geometry we think is meaningful.
 
-If our raw space is: $$\mathbb{R}^d$$ with standard Euclidean metric, then PCA without z-scoring preserves global geometry better. 
-
-If we believe that true geometry should not depend on firing rate scale, then z-scoring defines a more appropriate metric (as elaborated in section 3):
+If our raw space is: $$\mathbb{R}^d$$ with standard Euclidean metric, then PCA without z-scoring preserves global geometry better. If we believe that true geometry should not depend on firing rate scale, then z-scoring defines a more appropriate metric (as elaborated in section 3]):
 
 $$<x, y>_D = x^T(D^{-1})^{2}y$$
 
 which means we could alternatively interpret this as keeping the underlying space unchanged but essentially altering the metric before doing PCA. 
 
-Usually in systems neuroscience people often z-score across time and then do PCA. The reason behind is that neural manifold studies often care about relative population patterns, not which neuron fires more
-
-If we want true population variance magnitude, then we should not z-score. If we intend to obtain population structure independent of scale, then z-score. 
+Usually in systems neuroscience people often z-score across time and then do PCA. The reason behind is that neural manifold studies often care about relative population patterns, not which neuron fires more. If we want true population variance magnitude, then we should not z-score. If we intend to obtain population structure independent of scale, then z-score. 
 
 ---
 
 ### 6] Summary
 In conclusion, if we do z-scoring before PCA, then 
 
-* Z-scoring does NOT preserve the covariance matrix.
-* It converts covariance to correlation.
+* Z-scoring does NOT preserve the `covariance` matrix.
+* It converts `covariance` to `correlation`.
 * Off-diagonal terms are divided by product of standard deviations.
-* Equivalently, we are changing the metric of the space.
+* Equivalently, we are changing the __metric__ of the space.
 * PCA result can change dramatically depending on scaling.
 
-Finally, in practice we often have more than one kind of features. For example, we could obtain both threshold crossings and spike band power from each electrode at the same. However, these two measures have drastically different scales. In this scenario, of course we could look into them separately, but if combined, the spike power would dominate. Consequently, z-scoring also helps to re-weight the feature importance apriori.  
+Finally, in practice we often have more than one kind of features. For example, we could obtain both threshold crossings and spike band power from each electrode at the same time. However, these two measures have drastically different scales. In this scenario, of course we could look into them separately, but if combined, the spike power would dominate. Consequently, z-scoring also helps to re-weight the feature importance apriori.  
 
 
