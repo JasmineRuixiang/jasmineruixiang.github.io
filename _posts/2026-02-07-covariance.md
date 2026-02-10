@@ -17,25 +17,25 @@ toc:
   sidebar: left
 ---
 
-This blog originates from a daily discussion of neural signal (pre)processing with my mentors and peers. People utilize z-scoring and PCA all the time, and it's a little shameful to admit by hindsight that I haven't dwelled on the following problem deep enough. Again, we reencounter the conundrum in high dimensional observations haunted by irreducible noise, under which lies our ambitious intent to extract robust and effective information. 
+This blog originates from a daily discussion of neural signal (pre)processing with my mentors and peers. People utilize z-scoring and PCA all the time, and it's a little shameful to admit by hindsight that I haven't dwelled on the following question deep enough. Again, we reencounter the conundrum in high dimensional observations haunted by irreducible noise, under which lies our ambitious intent to extract robust and effective information. 
 
 ---
 
 ### 0] Problem Setup
 Let's say we have a collection of neural data in the format $$X \in \mathbb{R}^{n \times d}$$, where $$n$$ is the number of samples, and $$d$$ the number of features. These are raw features each coming from a single electrode. For simplicity let's assume that there is only 1 kind of feature, like threshold crossing. Let's further say that we want to visualize the low dimensional structure of this collection of data, preserving its global geometry as much as possible (we'll clarify this later). 
 
-Now we'd like to apply PCA on it for the first try, meaning to transform from $$\mathbb{R}^{n \times d}$$ into $$\mathbb{R}^{n \times d'}$$, where $$d'$$ might be just $$3$$, for example. Many methods would start by z-scoring $$X$$ for each feature (so for each column of $$X$$, after z-scoring would be mean 0 and standard deviation 1; more discussion see the [previous blog](https://jasmineruixiang.github.io/blog/2026/zscore/) of this series) before applying PCA. 
+Now we'd like to apply PCA on it for the first try, meaning to transform from $$\mathbb{R}^{n \times d}$$ into $$\mathbb{R}^{n \times d'}$$, where $$d'$$ might be just $$3$$, for example. Many methods would start by z-scoring $$X$$ for each feature (so for each column of $$X$$, after z-scoring would be mean 0 and standard deviation 1; for more discussions please refer to the [previous blog](https://jasmineruixiang.github.io/blog/2026/zscore/) of this series) before applying PCA. 
 
-I'm a little unsure about the motivation behind it. There're many but what's the conclusive answer?
+I'm a little unsure about the motivation behind it. There're of course many but I cannot pinpoint a conclusive answer.
 
-More importantly, I'm naively concerned that if we apply this feature-wise normalization, whether that would still preserve the covariance matrix between the original features (the diagonal will be 1, but I'm wondering how the off-diagonal terms would change, or would they). 
+More importantly, I'm naively concerned that if we apply this feature-wise normalization, whether that would still preserve the covariance matrix between the original features (the diagonal will be 1, but I'm wondering how the off-diagonal terms would possibly change, or ... would they). 
 
 Let's begin. 
 
 ---
 
 ### 1] What PCA actually does
-The very first step: a quick review of what PCA is doing, shall we.
+The very first step: a quick review of what PCA is doing:
 
 > Standard PCA:
 1. Center the data (subtracts column-wise/global means across samples; For the following, $$X$$ will denote the centered data, if without specifications) 
