@@ -39,7 +39,7 @@ The very first step: a quick review of what PCA is doing:
 
 > Standard PCA:
 1. Center the data (subtracts column-wise/global means across samples; For the following, $$X$$ will denote the centered data, if without specifications) 
-2. Compute the covariance matrix: $$\Sigma = \frac{1}{n}X^TX$$
+2. Compute the __covariance matrix__: $$\Sigma = \frac{1}{n}X^TX$$
 3. Find eigenvectors of $$\Sigma$$
 
 PCA finds directions of maximal variance in the original coordinate system. We could also interpret PCA as finding minimization of reconstruction error, but that's not explicitly helpful for deepening our interpretation here. However, I'll provide another useful perspective in section 3] from the angle of constrained optimization, but this covariance interpretation is what we will grapple with now for this section ---
@@ -67,27 +67,26 @@ Now if we look at the new covariance matrix:
 
 $$\tilde{\Sigma} = \frac{1}{n}\tilde{X}^T\tilde{X} = \frac{1}{n}D^{-1}X^TXD^{-1} = D^{-1}\Sigma D^{-1}$$
 
-This is obviously __not the same__ `covariance matrix`.
+This is obviously __not the same__ covariance matrix.
 
 In fact, it's not hard to see that, from simple linear algebra:
 
 $$\tilde{\Sigma}_{ij} = \frac{\Sigma_{ij}}{\sigma_i \sigma_j}$$
 
-And this turns out to be exactly the `correlation matrix`.
+And this turns out to be exactly the __correlation matrix__.
 
 So:
-> PCA on z-scored data = PCA on the correlation matrix
-> PCA on raw centered data = PCA on the covariance matrix
+> PCA on z-scored data = PCA on the `correlation matrix`
 
-So back to one of our original questions: does normalization preserve covariance between original features?
+> PCA on raw centered data = PCA on the `covariance matrix`
+
+So back to one of our original questions: does normalization preserve `covariance` between original features?
 
 No. The off-diagonal terms change as:
 
-$$\Sigma_{ij} \leftarrow \frac{\Sigma_{ij}}{\sigma_i \sigma_j}$$
+$$\frac{\Sigma_{ij}}{\sigma_i \sigma_j} \leftarrow \Sigma_{ij}$$
 
-So they become correlations (or we could say that the correlations are preserved). The important distinction is that _covariance_ measures co-variation in physical units, while _correlation_ measures co-variation relative to each variable's scale. So z-scoring does not preserve the original covariance geometry: It preserves the __correlation structure__ instead.
-
-But this leads to the next natural question, or the question ---
+So they become `correlations` (or we could say that the correlations are preserved). The important distinction is that `covariance` measures co-variation in physical units, while `correlation` measures co-variation relative to each variable's scale. So z-scoring does not preserve the original covariance geometry: It preserves the `correlation` _structure_ instead.
 
 ---
 
