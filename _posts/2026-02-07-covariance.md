@@ -42,13 +42,13 @@ The very first step: a quick review of what PCA is doing:
 2. Compute the covariance matrix: $$\Sigma = \frac{1}{n}X^TX$$
 3. Find eigenvectors of $$\Sigma$$
 
-So PCA finds directions of maximal variance in the original coordinate system. We could also interpret PCA as finding minimization of reconstruction error, but that's explicitly helpful for interpretation here. However, I'll provide another useful interpretation in section 3] from the perspective of constrained optimization, but this covariance interpretation is what we will grapple with now for this section ---
+PCA finds directions of maximal variance in the original coordinate system. We could also interpret PCA as finding minimization of reconstruction error, but that's not explicitly helpful for deepening our interpretation here. However, I'll provide another useful perspective in section 3] from the angle of constrained optimization, but this covariance interpretation is what we will grapple with now for this section ---
 
 Because it already makes it obvious that
 
 > PCA is sensitive to feature scale.
 
-If one electrode has variance 100 and another has variance 1, the first will dominate the principal components — even if its structure is not more meaningful.
+If one electrode has variance 100 and another has variance 1, the first will dominate the principal components — even if its structure might not be more meaningful. And that's exactly where z-scoring makes a huge distinction. 
 
 ---
 
@@ -56,6 +56,8 @@ If one electrode has variance 100 and another has variance 1, the first will dom
 Column-wise z-scoring transforms
 
 $$\tilde{X}_{ij} = \frac{X_{ij} - \mu_j}{\sigma_j}$$
+
+(Here's a bit of abuse of notation, as $$\tilde{X}_{ij}, X_{ij}$$ are scalars while $$\mu_j, \sigma_j \in \mathbb{R}^{1\times d}$$)
 
 If we use matrix notation, $$D = diag{(\sigma_1, \cdots, \sigma_n)}$$, then the above could be simplified into (again, assume it's already centered):
 
@@ -65,17 +67,16 @@ Now if we look at the new covariance matrix:
 
 $$\tilde{\Sigma} = \frac{1}{n}\tilde{X}^T\tilde{X} = \frac{1}{n}D^{-1}X^TXD^{-1} = D^{-1}\Sigma D^{-1}$$
 
-This is obviously not the same covariance matrix.
+This is obviously __not the same__ `covariance matrix`.
 
 In fact, it's not hard to see that, from simple linear algebra:
 
 $$\tilde{\Sigma}_{ij} = \frac{\Sigma_{ij}}{\sigma_i \sigma_j}$$
 
-And this is exactly the correlation matrix.
+And this turns out to be exactly the `correlation matrix`.
 
 So:
 > PCA on z-scored data = PCA on the correlation matrix
-
 > PCA on raw centered data = PCA on the covariance matrix
 
 So back to one of our original questions: does normalization preserve covariance between original features?
