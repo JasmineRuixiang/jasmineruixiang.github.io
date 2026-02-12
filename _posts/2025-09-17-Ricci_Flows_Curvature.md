@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 'Geom/Topo/Dynam Mumble(2): Ricci Flow and Ricci Curvature (in progress)'
+title: 'The Dance of Space: Geom/Topo/Dynam Mumble(2) (in progress)' 
 date: 2025-09-17 17:49:33
-description: Introduction of Ricci flows/curvatures 
+description: Introduction of Ricci flows and Ricci curvatures 
 tags:
     - "Geometry Concepts/Tools"
 categories: 

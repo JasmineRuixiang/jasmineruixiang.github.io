@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 'Geom/Topo/Dynam Mumble(4): from Geodesics Strip to Gauss Theorem Egregium'
+title: 'The Dance of Space: Geom/Topo/Dynam Mumble(5)'
 date: 2026-02-08 14:58:02
-description: Geodescis and its construction, Egregium, Gauss-Bonnet and Chern
+description: Geodesic and its construction, Gauss Theorem Egregium, Gauss-Bonnet and Chern
 tags: 
     - "Manifold"
     - "Differential Geometry"
