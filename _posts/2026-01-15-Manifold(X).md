@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Manifold and Riemannian Geometry (4): Connections (in progress)"
+title: "Manifold and Riemannian Geometry (X): Connections (in progress)"
 date: 2026-01-15 15:48:02
 description: Exploration of Connection
 tags: 
@@ -166,7 +166,7 @@ $$
 \nabla_{\frac{\partial}{\partial x_i}}\frac{\partial}{\partial x_j} = \sum_{k = 1}^n \Gamma^k_{ij} \frac{\partial}{\partial x_k}
 $$
 
-We use above the Einstein summation notation as convention (to simplify notations). In below, whenever summation might be obvious I will drop it. Here the $\Gamma^k_{ij}$ are called the **Christoffel symbols**, which tell us how the coordinate basis vectors change as we move.
+We use above the Einstein summation notation as convention (to simplify notations). In below, whenever summation might be obvious I will drop it. Here the $\Gamma^k_{ij}$ are called the ``Christoffel symbols``, which tell us how the coordinate basis vectors change as we move.
 
 Now use the above notation, say for two vector fields:
 
@@ -196,13 +196,13 @@ This will be our main formula. If we stair at it for a bit, the following should
 - First term: change in components, what we shall expect in Euclidean space. It measures how the components of $$Y$$ change. If the manifold were flat and the basis vectors didn’t vary, this would be enough. 
 - Second term: correction for changes in basis, because on a curved manifold, the basis vectors $$\frac{\partial}{\partial x^j}$$ change from point to point. So even if the components $$Y^j$$ stay constant, the vector field itself might change because the basis is rotating or stretching. This change is captured by the second term including the Christoffel symbols, which measure how the coordinate frame twists and turns.
 
-Consequently, covariant derivative is basically the combination of component change and basis change.
+Consequently, covariant derivative is basically the combination of component change and basis change, and it's obvious from above the Christoffel symbols entirely dictate the properties of the chosen connection.
 
 ---
 
-## 4] A Short Reflection
+## 4] A Short Reflection and Discussion
 
-Based on the above definition, what is an affine connection conceptually? Well, an affine connection gives us a way to compare vectors at nearby points, which later will turn out to be our abilities to define 
+Let's do a short summary and discussion before we continue. Based on the above definition, what is an affine connection conceptually? Well, an affine connection gives us a way to compare vectors at nearby points, which later will turn out to be our abilities to define 
 
 * 1] a notion of parallel transport
 * 2] a notion of geodesics
@@ -210,11 +210,21 @@ Based on the above definition, what is an affine connection conceptually? Well, 
 
 It is the structure that tells us how to move vectors around on a manifold. Without it, differentiation makes no sense.  
 
-You may also ask why it is called "affine connection". That's because it preserves affine combinations: If a vector is transported parallelly, it behaves like in affine geometry — no metric required.
+At the same time, notice that apriori we __choose__ this arbitrary connection. There are infinitely many affine connections on a manifold. Why? Recall the local definition of connection in coordinates $$\nabla_{X_i} X_j = \Gamma^k_{ij} X_k$$. The Christoffel symbols $$\Gamma^k_{ij}$$ can be any smooth functions. This already tells us that there are infinitely many possible connections. Nothing forces a specific choice at this stage. In fact, If $$\nabla$$ is a connection and $$A$$ is any smooth $$(1,2)$$-tensor field, then $$\tilde{\nabla}_XY = \nabla_XY + A(X, Y)$$ is another connection. So the space of connections is affine, not linear and thus there is enormous freedom. This is why it's called "affine connection". 
 
-Let me reinforce the idea that at this stage, no Riemannian metric at all is assumed. The definition of connection has nothing to do with any metric (we will see shortly that in some sense we do need to marry these two notions in a nice way; if this is your intuition, keep immersing yourself in it).
+It's only after we impose some natural geometric conditions that one becomes canonical (more to reveal below). And after introducing ``Riemmanian metric``, there're specific properties of connection that we demand which render only one unique option left (kind of miracle). That's why we do not drown in choices. 
 
----
+But let me also reinforce the idea that at this stage, no Riemannian metric at all is assumed. The definition of connection has nothing to do with any metric (we will see shortly that in some sense we do need to marry these two notions in a nice way; if this is your intuition, keep immersing yourself in it).
+
+Another crucial point is that, you might object that after all why can’t we just subtract tangent vectors using the ambient Euclidean structure? If you visualize a manifold as a curved surface floating in 3D, there's clearly a nice inner product structure already defined in $$\mathbb{R}^3$$ which we effortlessly borrow. 
+
+Well, this is the deeper part, echoeing all the way back to why we even want a manifold. Suppose $$M \in \mathbb{R}^n$$.
+We embed it. Vectors lie in tangent planes inside $$\mathbb{R}^n$$. Then yes, we can subtract them as vectors in $$\mathbb{R}^n$$. So what’s the problem? Well, it lies in again the insight Gauss offered back in 1827: __intrinsic vs extrinsic__ geometry. 
+
+> Let $$V(t) \in T_{\alpha(t)}M$$. If we compute the ordinary derivative $$\frac{dV}{dt}$$ (pretend that $$M$$ never has existed), it sure lives in in $$\mathbb{R}^n$$ , but generally $$\frac{dV}{dt} \notin T_{\alpha(t)}M$$. It usually has a normal component. That normal component measures how the surface bends in space. But that bending __depends on the specific embedding__ we chose.
+
+For example, on the sphere, if we carry a tangent vector along a great circle, the ambient derivative will point slightly inward (the normal component). But that normal part has nothing to do with intrinsic geometry, and it only reflects how the sphere sits in space. To get intrinsic change, we would take ambient derivative and project back to the tangent plane. Spoiler alert: this projection then defines the Levi-Civita connection of the induced metric.
+
 
 ## 5] Covariant Derivative Along a Curve
 
@@ -257,21 +267,19 @@ We could interpret it this way: Imagine walking on a sphere. We carry an arrow t
 
 > The coordinate basis changes.
 
-So $$\frac{D V}{dt}$$ actually measures the true rate of change of the vector relative to the manifold’s geometry. There are two kinds of change: 1)Intrinsic change — the vector itself changes' 2) Fake change — the coordinate frame changes. But $$\frac{D V}{dt}$$ removes the fake change. It measures intrinsic change.
+So $$\frac{D V}{dt}$$ actually measures the true rate of change of the vector relative to/correcting for the manifold’s geometry. There are two kinds of change: 1)Intrinsic change — the vector itself changes' 2) Fake change — the coordinate frame changes. But $$\frac{D V}{dt}$$ removes the fake change. It measures intrinsic change.
 
 ---
 
-## 6] Parallel Transport
+## 6] Parallel Vector Field and Parallel Transport
 
-If:
+Then the natural question to ask is what does it mean to have $$\frac{DV}{dt} = 0$$? 
 
-$$
-\frac{DV}{dt} = 0
-$$
+Well, there's a specific name for it --- the vector field $$V$$ such $$\frac{DV}{dt} = 0$$ for a specific curve $$c$$ is called a `parallel vector field` along the $$c$$. Geometrically, this means that the vector is being transported without turning according to the manifold’s geometry.
 
-Then $V$ is **parallel transported**.
+On the other hand, the vector $$V(t)$$ on $$V$$ is said to `parallel transport` along $$c$$. 
 
-Parallel transport is obtained by solving the ODE:
+Parallel transport is obtained by solving the following system of ODE:
 
 $$
 \frac{dV^k}{dt}
@@ -281,15 +289,19 @@ $$
 = 0
 $$
 
-Pointwise Christoffel data determines global comparison via integration.
+Notice that this is just $$n$$ first order equations. Pointwise Christoffel data determines global comparison via integration.
 
-Local rule → differential equation → global comparison.
+This offers us another way to think of $\frac{D V}{dt}$:
+
+> Take $$V(t+h)$$, parallel transport it back to $$T_{\alpha(t)}M$$, subtract $$V(t)$$, divide by $h$. Then take the limit. 
+
+This is the hidden geometric definition.
 
 ---
 
-# 6. Geodesics
+## 7] Geodesics
 
-A curve is a geodesic if:
+Closely building upon the above idea of parallelism, we define a curve to be a ``geodesic`` if:
 
 $$
 \frac{D\alpha'}{dt} = 0
@@ -299,7 +311,27 @@ Meaning:
 
 > The velocity vector transports itself parallelly.
 
-Geodesics generalize straight lines.
+Geometric, this means that there is no intrinsic acceleration and the curve does not “turn” inside the manifold. This generalizes straight lines.
+
+Another physical way to interpret this is that a geodesic has only acceleration perpendicular to the surface. 
+
+A quick sanity check: In Euclidean space $$\mathbb{R}$$, since the basis vectors then Christoffel symbols vanish.
+
+Consequently, $$\frac{DV}{dt} = \frac{dV}{dt}$$ --- Covariant derivative reduces to ordinary derivative, and this demonstrates that the definition of connection is truly a generalization.
+
+And if we solve 
+
+$$
+\frac{d^2\alpha^k}{dt^2}
++
+\Gamma^k_{ij}
+\frac{dx^i}{dt}\alpha^j
+= 0
+$$
+
+where we plug in $$V^j = \alpha^j$$,
+
+we will arrive at a straight line, which is __the straight line__ in Euclidean space. 
 
 ---
 
