@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Manifold and Riemannian Geometry (X): Connections (in progress)"
-date: 2026-01-15 15:48:02
+title: "Manifold and Riemannian Geometry (X): Connections, Parallel Transport, and Geodesics (in progress)"
+date: 2026-02-13 16:36:23
 description: Exploration of Connection
 tags: 
     - "Geometry Concepts/Tools"
@@ -18,10 +18,10 @@ toc:
   sidebar: left
 ---
 
-This is episode 4 on the smooth manifold series. Today we will be exploring more on tangent vectors, and another key concept related to tangent spaces for different tangent planes: connections. 
+This is episode X on the Manifold and Riemannian Geometry series. Today we will be exploring more on tangent vectors, vector fields, another key concept about how to relate tangent spaces together, and many other derivative notions crucial for the development of Riemannian Geometry. 
+
 
 ## Intuition: Directional Derivatives
-
 
 🌐 The Connection: Bridging Derivatives from $\mathbb{R}^3$ to Curved Manifolds
 The concept of a connection is the necessary tool that allows us to perform differential calculus on curved spaces (manifolds), such as the surface of a sphere. It generalizes the familiar idea of the directional derivative from flat Euclidean space ($\mathbb{R}^3$).
@@ -218,13 +218,49 @@ But let me also reinforce the idea that at this stage, no Riemannian metric at a
 
 Another crucial point is that, you might object that after all why can’t we just subtract tangent vectors using the ambient Euclidean structure? If you visualize a manifold as a curved surface floating in 3D, there's clearly a nice inner product structure already defined in $$\mathbb{R}^3$$ which we effortlessly borrow. 
 
-Well, this is the deeper part, echoeing all the way back to why we even want a manifold. Suppose $$M \in \mathbb{R}^n$$.
-We embed it. Vectors lie in tangent planes inside $$\mathbb{R}^n$$. Then yes, we can subtract them as vectors in $$\mathbb{R}^n$$. So what’s the problem? Well, it lies in again the insight Gauss offered back in 1827: __intrinsic vs extrinsic__ geometry. 
+Well, this is the deeper part, echoeing all the way back to why we even want a manifold. Recall that a general manifold has no built-in shape. A smooth manifold is just a set of points with coordinate charts which are glued together smoothly. That’s it. There's no concept of length, angle, curvature, or embedding. Just smooth structure. We should __NOT__ think of a general manifold as a curved surface floating in space. That is only a visualization aid.
+
+Shape appears only after adding extra structure. For a smooth manifold, only differentiability exists. We can talk about vector fields, Lie brackets, and differential forms. But there's __no metric__ yet. Now if we add an affine connection, we could then ifferentiate vector fields (and also define parallel transport and talk about geodesics, see below). However, there's still __no notion of length or angle__. It's only after we introduce a Riemannian metric that we get a notion of lengths, angles, volumes, and curvature. Only here does something resembling "shape" emerge. And remarkably, all of this can be defined without embedding.
+
+But before Riemannian metric, for a generic smooth manifold, embeddings are misleading. When we picture a sphere in $$\mathbb{R}^3$$ or torus in space, we are seeing extrinsic geometry. But intrinsic geometry ignores how the object sits in space. A famous example is imagine a flat sheet of paper vs a cylinder made by rolling it. They look totaly different in $$\mathbb{R}^3$$, but __intrinsically they are the same geometry__, because distances measured along the surface are unchanged. Consequently, intrinsic geometry does not care about bending in ambient space.
+
+Recall that Gauss proved in his Theorema Egregium that
+
+> Curvature of a surface can be computed entirely from the __metric__.
+
+(Here Curvature specifically refers to Gaussian Curvature). It does not depend on how the surface sits in space. This was revolutionary, only to be pushed further by Riemann later that:
+
+> Manifolds need not be embedded at all.
+
+They can exist abstractly.
+
+[TODO]: That means to talk about intrinsic geometry we need to define a metric first? Also, the definition of Riemannian metric has nothing to do with the embedding. 
+
+Consequently, if you are still thinking that a manifold is a curved surface in space, it might be helpful if you instead interpret manifold as an abstract smooth space and geometry is an additional structure placed on it. And more importantly, 
+
+> The __metric__ determines what “curved” even means.
+
+The manifold is just an abstract collection of points with smooth structure, not an object with a fixed geometric shape. Shape emerges only after adding a metric.
+
+Now, with the above discussions, suppose we do have an embedding: $$M \in \mathbb{R}^n$$. We embed it. Vectors lie in tangent planes inside $$\mathbb{R}^n$$. Then yes, we can subtract them as vectors in $$\mathbb{R}^n$$. So what’s the problem? Well, it lies in again the insight Gauss offered back in 1827: __intrinsic vs extrinsic__ geometry. 
 
 > Let $$V(t) \in T_{\alpha(t)}M$$. If we compute the ordinary derivative $$\frac{dV}{dt}$$ (pretend that $$M$$ never has existed), it sure lives in in $$\mathbb{R}^n$$ , but generally $$\frac{dV}{dt} \notin T_{\alpha(t)}M$$. It usually has a normal component. That normal component measures how the surface bends in space. But that bending __depends on the specific embedding__ we chose.
 
 For example, on the sphere, if we carry a tangent vector along a great circle, the ambient derivative will point slightly inward (the normal component). But that normal part has nothing to do with intrinsic geometry, and it only reflects how the sphere sits in space. To get intrinsic change, we would take ambient derivative and project back to the tangent plane. Spoiler alert: this projection then defines the Levi-Civita connection of the induced metric.
 
+To answer the question why we cannot always use this trick?
+
+> Not all manifolds come with a preferred embedding. Manifolds might be embedded but the embedding is not unique. Different embeddings give different ambient derivatives and the induced extrinsic correction indeed depends on embedding. 
+
+> On the other hand, intrinsic geometry should not depend on how we sit in space. If we rely on ambient subtraction, we're measuring extrinsic curvature. But Riemannian geometry is centered around exploring intrinsic properties. The connection should not depend on embedding.
+
+Using Euclidean subtraction measures the intrinsic change plus the extrinsic bending, whereas the covariant derivative isolates and includes intrinsic change only. 
+
+[TODO]: This leads to yet another interesting observation: is covariant derivative just a projection of the Euclidean derivative back onto the manifold?
+
+Enough deliberation for now, let's continue our story. 
+
+---
 
 ## 5] Covariant Derivative Along a Curve
 
@@ -604,5 +640,41 @@ A connection encodes infinitesimal comparison of tangent spaces;
 metric compatibility preserves lengths and angles;  
 torsion-free removes artificial twisting;  
 and from these local rules, global geometry emerges.
+
+
+--------------
+
+Now your earlier question becomes clearer:
+
+If we define derivatives using an embedding, we are using extra structure.
+
+But intrinsic geometry should depend only on data defined on the manifold itself.
+
+That’s why the Levi-Civita connection is defined purely from the metric.
+
+No embedding required.
+
+
+Theoretical (sanity check) questions to ponder:
+1] Why curvature is intrinsic
+2] Why connections exist even without metrics
+3] Or how geodesics make sense without embedding
+
+
+## Discussions
+When I first learned about connection/parallel transport/geodesics, I have tons of questions and different topics seem to mingle with one another, each defying the others' validity. After months of delibration and study, I finally figured out the inner workings of these concepts, and I have to admit that I'm still deepening my understanding. 
+
+I'll not regurgitate statements and clarifications made in the previous "short summary" section 4], but instead think back on a few other critical questions to ponder. I highly recommen that readers go through 4] before reading this section. 
+
+> 1) Why do connections exist even without metrics?
+
+I had this thought which I deemed natural and hard to wrap my head aroud: If connections are about measuring changes, and metrics measure geometry, why can a connection exist without a metric?
+
+Well, let's stay back a ste and think towards what a connection does and does _NOT_ do. Notice that a connection gives us a way to differentiate vector fields, to compare nearby tangent spaces. From there the notion of parallel transport and geodesics. However, notice that there's nowhere we mentioned lengths or angles. A connection is about how vectors move, not about how long they are.
+
+Furthermore, _differentiation itself does not require a metric_. Think about perhaps ordinary calculus. When we compute $$\frac{df}{dx}$$, we do not need an inner product. Differentiation only needs smooth structure.
+
+Similarly, on a manifold, to differentiate vector fields, we only need a mooth structure, a rule for comparing tangent spaces which we call/define as the connection. A metric is not logically required for this.
+
 
 
