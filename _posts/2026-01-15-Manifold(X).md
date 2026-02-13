@@ -154,6 +154,8 @@ $$
 X_i = \frac{\partial}{\partial x^i}
 $$
 
+Note that for the following I might interchange these two symbols, but they are always equivalent. 
+
 Define:
 
 $$
@@ -439,7 +441,9 @@ $$
 \Gamma^k_{ij} = \Gamma^k_{ji}
 $$
 
-that's why many people also call it symmetric. Notice that the above equation is straightforward since coordinate vector fields (coming from a coordinate chart) always commute ($$[\frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j}] = 0$$; Lie bracket has nothing to do with a connection apriori)
+that's why many people also call it symmetric. Notice that the above equation is straightforward since coordinate vector fields (coming from a coordinate chart) always commute ($$[\frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j}] = 0$$; Lie bracket has nothing to do with a connection apriori). Then just plug in $$\nabla_{X_i} X_j - \nabla_{X_j} X_i = 0$$ and the above resulst should surface naturally. In short, the symmetry of Christoffel symbols comes from both torsion-free condition and the fact that coordinate vector fields commute. 
+
+Let me state it clearly: Coordinate vector fields always commute, independent of connection. Torsion-free means the connection respects that commutation structure. The connection does not determine the Lie bracket since the Lie bracket exists before any connection is chosen. Likewise, torsion-free does not make the Lie bracket zero — it only ensures that the connection respects whatever the Lie bracket already is.
 
 This formula appears very bizarre, what does it mean? Recall that the Lie bracket between two vector fields $$[X, Y]$$ measures failure of flows to commute. If we first flow along $$X$$ and then $$Y$$, v.s. first $$Y$$ and then $$X$$, the difference is the Lie bracket: it measures intrinsic non-commutativity of directions. Now we look at $$\nabla_X Y - \nabla_Y X$$. This is what the connection says about the difference between directions.
 
@@ -457,6 +461,8 @@ An intuitive picture is that imagine walking on a surface. Take two small steps,
 
 Torsion measures the second. If torsion = 0, the connection __introduces no artificial twisting__. All the remaning non-commutativity comes purely from the underlying geometry itself, which is exactly what we want.
 
+On the other way around, if we choose a connection with torsion. Then even though $$[X_i, X_j] = 0$$, we would have $$\nabla_{X_i} X_j - \nabla_{X_j} X_i \neq 0$$. That “extra part” would be torsion. Consequently, we could say that torsion measures deviation from symmetry beyond the intrinsic commutation.
+
 Why does Riemannian geometry prefer torsion-free? Since Riemannian geometry models distance and angles, there is no natural “twisting” built into length geometry: the most natural connection is metric compatible and torsion-free, which ensures that geodesics behave like natural straightest paths.
 
 In summary, a connection that is torsion-free does not introduce any artificial twisting beyond the natural commutation of vector fields.
@@ -465,89 +471,22 @@ In summary, a connection that is torsion-free does not introduce any artificial 
 
 ## 10] Levi-Civita Connection
 
-From the above, we know that metric compatibility controls stretching, whereas torsion-free controls twisting. Together they mean:
+From the above, we know that metric compatibility controls stretching, whereas torsion-free controls twisting. Together they mean that the connection is the most natural differentiation compatible with smooth geometry and measurement.
 
-- The connection is the most natural differentiation compatible with smooth geometry and measurement.
-
-
-
-Imposing:
+Indeed, now we will manually impose 
 
 1. Metric compatibility
 2. Torsion-free
 
-There exists exactly one such connection.
+And, remarkably, there only exists exactly one such connection, which is called the ``Levi-Civita connection``.
 
-This is the **Levi-Civita connection**.
+As demanded by its defining property it removes stretching and twisting. Only intrinsic curvature remains.
 
-It removes stretching and twisting.
-
-Only curvature remains.
-
-There are three possible geometric distortions:
-
-Stretching → controlled by metric compatibility
-
-Twisting → controlled by torsion
-
-Curving → measured by curvature
-
-Levi-Civita removes (1) and (2).
-
-Only curvature remains.
-
-
+[TODO]: local coordinate representation calculation
 
 ---
 
-# 11. Lie Brackets of Coordinate Vector Fields
 
-For coordinate fields:
-
-$$
-X_i = \frac{\partial}{\partial x^i}
-$$
-
-We always have:
-
-$$
-[X_i, X_j] = 0
-$$
-
-This is independent of connection.
-
-Torsion-free does not force Lie bracket to vanish.
-
-It ensures the connection respects the bracket structure:
-
-$$
-\nabla_{X_i}X_j - \nabla_{X_j}X_i = [X_i,X_j]
-$$
-
----
-
-# 12. Why Christoffel Symbols Are Defined Pointwise
-
-Concern:
-
-Connection compares vectors at different points,
-yet $\Gamma^k_{ij}$ are defined at one point.
-
-Resolution:
-
-A connection describes infinitesimal change.
-
-Just like:
-
-$$
-f(b) - f(a) = \int_a^b f'(t)\,dt
-$$
-
-Christoffel symbols encode infinitesimal twisting of the frame.
-
-Solving the parallel transport ODE gives comparison between points.
-
-Local data → differential equation → global transport.
 
 ---
 
@@ -710,8 +649,24 @@ Gauge theory in physics uses connections without metrics since metrics are addit
 Each layer adds new capability and they are independent choices.
 
 
-### 2) 
+### 2) Point-wise definition of Christoffel symbols?
+Another concern that haunted me for quite a while is the following: Now hopefully we are clear that connection is entirely dependent upon the Christoffel symbols, and connection is meant to differentiate vector fields at different points. Yet based on the definition of Christoffel symbols, it seems that it's just using the connection upon pairwise basis vectors at the same exact point. So how can something defined pointwise encode comparison between different tangent spaces?
 
+Well, notice that a connection does not directly subtract vectors at different points. Instead, it gives an "infinitesimal rule" for how vector fields change. Indeed, a connection describes infinitesimal change. The comparison between different points comes from integrating this infinitesimal rule.
+
+A simple analogy in $$\mathbb{R}^n$$. The derivative of a function is defined by $$f'(x)$$, which is computed at a single point. Yet from this local rule, we can compare values at different points by integrating:
+
+$$
+f(b) - f(a) = \int_a^b f'(t)\,dt
+$$
+
+so local derivative $$\rightarrow$$ global comparison. The same story here. 
+
+Christoffel symbols encode infinitesimal twisting of the frame.
+
+Solving the parallel transport ODE gives comparison between points.
+
+Local data → differential equation → global transport.
 
 
 ---
