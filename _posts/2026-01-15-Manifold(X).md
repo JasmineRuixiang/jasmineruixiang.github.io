@@ -418,43 +418,58 @@ And this comes not for free. We demand it by imposing such constraint. In genera
 
 ---
 
-# 9. Torsion-Free (Symmetry)
+## 9] Torsion-Free (Symmetry)
+We now understand that a connection is a rule for differentiating, and metric compatibility is to ensure that we preserve lengths and angles. There's only last remaning piece before we narrow down our infinite choices of connection. 
 
-Torsion tensor:
+The formal definition of torsion-free, or symmetric, starts with the torsion tensor:
 
 $$
-T(X,Y)
-=
-\nabla_X Y
--
-\nabla_Y X
--
-[X,Y]
+T(X,Y) = \nabla_X Y - \nabla_Y X - [X,Y]
 $$
 
-If $T = 0$:
+If $$T = 0$$, then
 
 $$
 \nabla_X Y - \nabla_Y X = [X,Y]
 $$
 
-Geometric meaning:
-
-- No artificial twisting.
-- Infinitesimal parallelograms close.
-- Connection respects intrinsic commutation of flows.
-
-In coordinates:
+We call such connection torsion-free. In coordinate, we would have
 
 $$
 \Gamma^k_{ij} = \Gamma^k_{ji}
 $$
 
-Torsion-free controls twisting.
+that's why many people also call it symmetric. Notice that the above equation is straightforward since coordinate vector fields (coming from a coordinate chart) always commute ($$[\frac{\partial}{\partial x^i}, \frac{\partial}{\partial x^j}] = 0$$; Lie bracket has nothing to do with a connection apriori)
+
+This formula appears very bizarre, what does it mean? Recall that the Lie bracket between two vector fields $$[X, Y]$$ measures failure of flows to commute. If we first flow along $$X$$ and then $$Y$$, v.s. first $$Y$$ and then $$X$$, the difference is the Lie bracket: it measures intrinsic non-commutativity of directions. Now we look at $$\nabla_X Y - \nabla_Y X$$. This is what the connection says about the difference between directions.
+
+Consequently, Torsion compares between 
+
+- What the connection thinks the commutator is, and 
+- What the actual geometric commutator (Lie bracket) is
+
+and that's why it measures how much the connection _artificially twists_ the geometry beyond the natural commutator.
+
+An intuitive picture is that imagine walking on a surface. Take two small steps, first in direction $$X$$, and then in direction $$Y$$, and compare with reversing the order. There are two possible reasons the final positions differ:
+
+- The surface itself curves (intrinsic geometry), or 
+- The connection is twisting things an extra amount.
+
+Torsion measures the second. If torsion = 0, the connection __introduces no artificial twisting__. All the remaning non-commutativity comes purely from the underlying geometry itself, which is exactly what we want.
+
+Why does Riemannian geometry prefer torsion-free? Since Riemannian geometry models distance and angles, there is no natural “twisting” built into length geometry: the most natural connection is metric compatible and torsion-free, which ensures that geodesics behave like natural straightest paths.
+
+In summary, a connection that is torsion-free does not introduce any artificial twisting beyond the natural commutation of vector fields.
 
 ---
 
-# 10. Levi-Civita Connection
+## 10] Levi-Civita Connection
+
+From the above, we know that metric compatibility controls stretching, whereas torsion-free controls twisting. Together they mean:
+
+- The connection is the most natural differentiation compatible with smooth geometry and measurement.
+
+
 
 Imposing:
 
@@ -468,6 +483,20 @@ This is the **Levi-Civita connection**.
 It removes stretching and twisting.
 
 Only curvature remains.
+
+There are three possible geometric distortions:
+
+Stretching → controlled by metric compatibility
+
+Twisting → controlled by torsion
+
+Curving → measured by curvature
+
+Levi-Civita removes (1) and (2).
+
+Only curvature remains.
+
+
 
 ---
 
