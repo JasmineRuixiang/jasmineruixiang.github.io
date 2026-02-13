@@ -371,53 +371,50 @@ we will arrive at a straight line, which is __the straight line__ in Euclidean s
 
 ---
 
-# 7. Infinite Choices of Connections
+## 8] Metric Compatibility
 
-There are infinitely many connections.
-
-If $\nabla$ is a connection and $A$ is a $(1,2)$-tensor:
-
-$$
-\widetilde{\nabla}_X Y = \nabla_X Y + A(X,Y)
-$$
-
-is another connection.
-
-The space of connections is affine.
-
----
-
-# 8. Metric Compatibility
-
-Condition:
+There're several ways to characterize metric compatibility. Let's start with the following: a connection $$\nabla$$ is compatible with a given metric $$<,>$$ if 
 
 $$
 X \langle Y,Z \rangle
-=
-\langle \nabla_X Y, Z \rangle
+= \langle \nabla_X Y, Z \rangle
 +
 \langle Y, \nabla_X Z \rangle
 $$
 
-Equivalent to:
+This must hold for all vector fields $$X,Y,Z,\in \mathfrak{X}(M) $$. Intuitively, this represents that the derivative of the inner product equals the inner product of the derivatives. In other words, the connection differentiates vectors in a way that respects the metric. Note that here's where we start to marry connection with metric!
+
+Another way to look at metric compatibility is through the lens of geodesic, which I think more closely epitomizes the essence of this concept: If a vector field $$V(t)$$ along a curve satisfies $$\frac{dV}{dt} = 0$$ (i.e., it's parallelly transported), then metric compatibility implies:
+
+$$\frac{d}{dt}<V(t), V(t)> = 0$$
+
+which means that the length of the geodesic $$V(t)$$ stays constant. 
+
+More generally, if both $$V$$ and $$W$$ are parallel, then 
+
+$$\frac{d}{dt}<V(t), W(t)> = 0$$
+
+then the angles are also preserved. 
+
+Consequently, this is equivalent to saying that, in coordinates, 
+
+$$
+\nabla_k g_{ij} = 0
+$$
+
+or just 
 
 $$
 \nabla g = 0
 $$
 
-Meaning:
+This means that the metric tensor has zero covariant derivative. Consequently, the metric looks “constant” under parallel transport. Notice that this generalizes the idea that in Euclidean space $$\partial_k​ \delta_{ij} = 0$$.
 
-Parallel transport preserves:
+A physical analogy will be that imagine each tangent space is a tiny rigid measuring device. Metric compatibility means that when we transport a measuring stick along a curve, its length does not change. If it did change, our notion of length would depend on the path we used to move it. That would be geometrically inconsistent.
 
-- Length
-- Angles
-- Inner products
+Intuitively, metric compatibility suggests that when we move vectors around using the connection, we are not distorting the metric structure. There's no stretching, shrinking, nor skewing of angles. Metric compatibility ensures that parallel transport acts like an orthogonal transformation between tangent spaces. If we move a basis along a curve via parallel transport, it stays orthonormal. Or in other words, parallel transport behaves like rigid motion inside each tangent space. This is perhaps the cleanest geometric picture. 
 
-Interpretation:
-
-> The connection moves vectors without distorting measurement.
-
-Metric compatibility controls stretching.
+And this comes not for free. We demand it by imposing such constraint. In general, connections are arbitrary. Most connections will change the length of a vector during parallel transport or distort angles. That would mean that the connection and the metric are fighting each other. However, metric compatibility forces harmony.
 
 ---
 
@@ -642,8 +639,55 @@ torsion-free removes artificial twisting;
 and from these local rules, global geometry emerges.
 
 
---------------
+---
 
+## Discussions
+When I first learned about connection/parallel transport/geodesics, I have tons of questions and different topics seem to mingle with one another, each defying the others' validity. After months of delibration and study, I finally figured out the inner workings of these concepts, and I have to admit that I'm still deepening my understanding. 
+
+I'll not regurgitate statements and clarifications made in the previous "short summary" section 4], but instead think back on a few other critical questions to ponder. I highly recommen that readers go through 4] before reading this section. 
+
+### 1) Why do connections exist even without metrics?
+
+I had this thought which I deemed natural and hard to wrap my head aroud: If connections are about measuring changes, and metrics measure geometry, why can a connection exist without a metric?
+
+Well, let's stay back a ste and think towards what a connection does and does _NOT_ do. Notice that a connection gives us a way to differentiate vector fields, to compare nearby tangent spaces. From there the notion of parallel transport and geodesics. However, notice that there's nowhere we mentioned lengths or angles. A connection is a rule about how vectors move, not about how long they are. It only needs to satisfies linearity in $$X$$ and Leibniz rule in $$Y$$. That’s purely algebraic and smooth structure, and there is no inner product in the definition. So logically:
+
+> Connections exist on any smooth manifold; but metrics are optional.
+
+Furthermore, _differentiation itself does not require a metric_. Think about perhaps ordinary calculus. When we compute $$\frac{df}{dx}$$, we do not need an inner product. Differentiation only needs smooth structure.
+
+Similarly, on a manifold, to differentiate vector fields, we only need a mooth structure, a rule for comparing tangent spaces which we call/define as the connection. A metric is not logically required for this.
+
+A simple analogy is roads vs ruler: Imagine that the manifold is a landscape. A connection tells us how to "carry arrows" while walking, and a metric tells us how long arrows are. We can describe how an arrow rotates along a path without knowing its length.
+
+A concrete example here: Lie group. Take a Lie group $$G$$, we can define a connection using left translation:
+
+$$\nabla_XY = 0$$
+
+for left-invariant vector fields. This defines parallel transport algebraically, but there's no metric involved. This works because the group structure already lets use compare tangent spaces.
+
+In Riemannian geometry, we care about length-minimizing curves and curvature measured from metric, and that's why we impose metric compatibility and torsion-free which produces the unique Levi-Civita connection. Howver, that’s a _specialization_.
+
+In some sense, connections are more primitive than metrics, because 
+
+> we can define curvature and geodesics from a connection alone.
+
+Gauge theory in physics uses connections without metrics since metrics are additional structure, whereas connections are about differentiation — a more basic concept. A mental picture I have is that 
+
+- Smooth structure $$\rightarrow$$ allows calculus
+- Connection $$\rightarrow$$ allows differentiation of vector fields
+- Metric $$\rightarrow$$ allows measurement
+
+Each layer adds new capability and they are independent choices.
+
+
+### 2) 
+
+
+
+---
+
+[TODO]
 Now your earlier question becomes clearer:
 
 If we define derivatives using an embedding, we are using extra structure.
@@ -657,24 +701,7 @@ No embedding required.
 
 Theoretical (sanity check) questions to ponder:
 1] Why curvature is intrinsic
-2] Why connections exist even without metrics
+2] Why do we say that we can define curvature and geodesics from a connection alone 
 3] Or how geodesics make sense without embedding
-
-
-## Discussions
-When I first learned about connection/parallel transport/geodesics, I have tons of questions and different topics seem to mingle with one another, each defying the others' validity. After months of delibration and study, I finally figured out the inner workings of these concepts, and I have to admit that I'm still deepening my understanding. 
-
-I'll not regurgitate statements and clarifications made in the previous "short summary" section 4], but instead think back on a few other critical questions to ponder. I highly recommen that readers go through 4] before reading this section. 
-
-> 1) Why do connections exist even without metrics?
-
-I had this thought which I deemed natural and hard to wrap my head aroud: If connections are about measuring changes, and metrics measure geometry, why can a connection exist without a metric?
-
-Well, let's stay back a ste and think towards what a connection does and does _NOT_ do. Notice that a connection gives us a way to differentiate vector fields, to compare nearby tangent spaces. From there the notion of parallel transport and geodesics. However, notice that there's nowhere we mentioned lengths or angles. A connection is about how vectors move, not about how long they are.
-
-Furthermore, _differentiation itself does not require a metric_. Think about perhaps ordinary calculus. When we compute $$\frac{df}{dx}$$, we do not need an inner product. Differentiation only needs smooth structure.
-
-Similarly, on a manifold, to differentiate vector fields, we only need a mooth structure, a rule for comparing tangent spaces which we call/define as the connection. A metric is not logically required for this.
-
-
-
+4] Why metric compatibility implies symmetry of Christoffel symbols in Levi-Civita
+5] How curvature arises from metric compatibility
