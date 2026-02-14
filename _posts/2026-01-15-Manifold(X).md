@@ -248,7 +248,15 @@ Now, with the above discussions, suppose we do have an embedding: $$M \in \mathb
 
 > Let $$V(t) \in T_{\alpha(t)}M$$. If we compute the ordinary derivative $$\frac{dV}{dt}$$ (pretend that $$M$$ never has existed), it sure lives in in $$\mathbb{R}^n$$ , but generally $$\frac{dV}{dt} \notin T_{\alpha(t)}M$$. It usually has a normal component. That normal component measures how the surface bends in space. But that bending __depends on the specific embedding__ we chose.
 
-For example, on the sphere, if we carry a tangent vector along a great circle, the ambient derivative will point slightly inward (the normal component). But that normal part has nothing to do with intrinsic geometry, and it only reflects how the sphere sits in space. To get intrinsic change, we would take ambient derivative and project back to the tangent plane. Spoiler alert: this projection then defines the Levi-Civita connection of the induced metric.
+For example, on the sphere, if we carry a tangent vector along a great circle, the ambient derivative will point slightly inward (the normal component). But that normal part has nothing to do with intrinsic geometry, and it only reflects how the sphere sits in space. To get intrinsic change, we would take ambient derivative and project back to the tangent plane. (Spoiler alert: this projection then defines the Levi-Civita connection of the induced metric)
+
+However, projecting back to tangent space gives intrinsic derivative.
+
+- Different embeddings give different projections.
+- Intrinsic geometry should not depend on embedding.
+
+Connections defined intrinsically avoid embedding dependence.
+
 
 To answer the question why we cannot always use this trick?
 
@@ -487,129 +495,29 @@ As demanded by its defining property it removes stretching and twisting. Only in
 ---
 
 
-
----
-
-# 13. Intrinsic vs Extrinsic Derivative
-
-If $M \subset \mathbb{R}^n$:
-
-You can compute ambient derivative $\frac{dV}{dt}$.
-
-But generally:
-
-$$
-\frac{dV}{dt} \notin T_{\alpha(t)}M
-$$
-
-It has a normal component.
-
-Projecting back to tangent space gives intrinsic derivative.
-
-However:
-
-- Different embeddings give different projections.
-- Intrinsic geometry should not depend on embedding.
-
-Connections defined intrinsically avoid embedding dependence.
-
----
-
-# 14. What Is a Manifold?
-
-A smooth manifold is:
-
-- An abstract set of points
-- With smooth coordinate charts
-
-No built-in:
-
-- Length
-- Angles
-- Curvature
-
-Shape appears only after adding structure.
-
----
-
-# 15. Structural Hierarchy
-
-Smooth structure → calculus  
-Connection → differentiation  
-Metric → measurement  
-Curvature → failure of parallel transport to commute  
-
-Connections exist without metrics.
-
-Metrics are additional structure.
-
----
-
-# 16. Why Connections Exist Without Metrics
-
-Differentiation requires:
-
-- Smooth structure
-- Rule comparing tangent spaces infinitesimally
-
-It does not require:
-
-- Inner product
-- Length
-- Angle
-
-Connections are about motion of vectors.
-
-Metrics are about measurement.
-
----
-
-# 17. Embedding Is Not Essential
-
-Manifolds need not be embedded.
-
-Geometry should not depend on ambient space.
-
-Intrinsic geometry depends only on internal structures:
-
-- Connection
-- Metric
-
----
-
-# 18. Final Synthesis
+## 11] Quick Summary
 
 Connection:
-> Infinitesimal rule for comparing tangent spaces.
+* Infinitesimal rule for comparing tangent spaces.
 
 Christoffel symbols:
-> Local coefficients describing how frames twist.
+* Local coefficients describing how frames twist.
 
 Metric compatibility:
-> No stretching under transport.
+* No stretching under transport.
 
 Torsion-free:
-> No artificial twisting.
+* No artificial twisting.
 
-Levi-Civita:
-> Unique natural connection for a Riemannian metric.
+Levi-Civita connection :
+* Unique natural connection for a Riemannian metric.
 
 Intrinsic geometry:
-> Independent of embedding.
+* Independent of embedding.
 
 ---
 
-# One-Sentence Summary
-
-A connection encodes infinitesimal comparison of tangent spaces;  
-metric compatibility preserves lengths and angles;  
-torsion-free removes artificial twisting;  
-and from these local rules, global geometry emerges.
-
-
----
-
-## Discussions
+## 12] Discussions
 When I first learned about connection/parallel transport/geodesics, I have tons of questions and different topics seem to mingle with one another, each defying the others' validity. After months of delibration and study, I finally figured out the inner workings of these concepts, and I have to admit that I'm still deepening my understanding. 
 
 I'll not regurgitate statements and clarifications made in the previous "short summary" section 4], but instead think back on a few other critical questions to ponder. I highly recommen that readers go through 4] before reading this section. 
@@ -691,17 +599,12 @@ $$
 
 for all $$k$$. This is an ODE! Given initial vector $$V(0)$$, the Christoffel symbols determine $$V(t)$$ uniquely. Consequently, they determine how vectors are transported from one point to another.
 
-
-
-Solving the parallel transport ODE gives comparison between points.
-
-Local data → differential equation → global transport.
-
+In summary we could think of Christoffel symbols as the “connection coefficients” describing how the local coordinate grid bends and twists. They encode infinitesimal change, from which we build parallel transport, geodesics, and later curvature. Consequently, yes indeed that Christoffel symbols are defined pointwise because connections describe infinitesimal variation, and infinitesimal variation is all we need to compare vectors at different points via integration.
 
 ---
 
 [TODO]
-Now your earlier question becomes clearer:
+Now our earlier question becomes clearer:
 
 If we define derivatives using an embedding, we are using extra structure.
 
