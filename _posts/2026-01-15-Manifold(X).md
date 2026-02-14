@@ -21,74 +21,43 @@ toc:
 This is episode X on the Manifold and Riemannian Geometry series. Today we will be exploring more on tangent vectors, vector fields, another key concept about how to relate tangent spaces together, and many other derivative notions crucial for the development of Riemannian Geometry. 
 
 
-## Intuition: Directional Derivatives
+## 0] Intuition and Introduction: Directional Derivatives
 
-🌐 The Connection: Bridging Derivatives from $\mathbb{R}^3$ to Curved Manifolds
-The concept of a connection is the necessary tool that allows us to perform differential calculus on curved spaces (manifolds), such as the surface of a sphere. It generalizes the familiar idea of the directional derivative from flat Euclidean space ($\mathbb{R}^3$).
-1. Directional Derivatives in Euclidean Space ($\mathbb{R}^3$)
-In $\mathbb{R}^3$ with Cartesian coordinates $(x, y, z)$, the directional derivative provides a simple way to measure change. The basis vectors $\left\{ \mathbf{i}, \mathbf{j}, \mathbf{k} \right\}$ (or the equivalent operators $\left\{ \frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z} \right\}$) are constant, allowing us to define derivatives simply as component-wise partial derivatives.
-Let $p=(1, 2, 0)$ be a point, $X=(y, -x, 3x)$ be the direction vector field, and $V=(xz, y^2, -2x)$ be a vector field.
-A. Derivative of a Scalar Function ($D_X f$)
-This is the directional derivative of a smooth scalar function $f$ in the direction $X$.
+Connection: Bridging derivatives from $$\mathbb{R}^n$$ to curved manifolds. The concept of a connection is the necessary tool that allows us to perform differential calculus on curved spaces (manifolds), such as the surface of a sphere. It generalizes the familiar idea of the directional derivative from flat Euclidean space ($$\mathbb{R}^n$$).
 
-Perspective
-Formula
-Example Result for f(x,y,z)=xy2+z at p
-Vector-Based (Calculus)
-$D_X f = \nabla f \cdot X$
-$D_X f(p) = \langle 4, 4, 1 \rangle \cdot \langle 2, -1, 3 \rangle = \mathbf{7}$
+Directional Derivatives in Euclidean Space ($$\mathbb{R}^3$$)
+In $$\mathbb{R}^3$$ with Cartesian coordinates $$(x, y, z)$$, the directional derivative provides a simple way to measure change. The basis vectors $$\left\{ \mathbf{i}, \mathbf{j}, \mathbf{k} \right\}$$ (or the equivalent operators $$\left\{ \frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z} \right\}$$) are constant, allowing us to define derivatives simply as component-wise partial derivatives.
+Let $$p=(1, 2, 0)$$ be a point, $$X=(y, -x, 3x)$$ be the direction vector field, and $$V=(xz, y^2, -2x)$$ be a vector field.
+
+There are two things we could implement:
+
+### 1] Derivative of a Scalar Function ($$D_X f$$).
+This is the directional derivative of a smooth scalar function $$f$$ in the direction $$X$$.
+
+For example, for $$f(x,y,z)=xy^2+z$$ at $$p$$:
+By definition, $$D_X f = \nabla f \cdot X$$, so 
+$$D_X f(p) = \langle 4, 4, 1 \rangle \cdot \langle 2, -1, 3 \rangle = \mathbf{7}$$
+
 Point Derivation (Geometry)
-$X[f] = X^i \frac{\partial f}{\partial x^i}$
-$Xf = (y^3 - 2x^2y + 3x)\big
+$$X[f] = X^i \frac{\partial f}{\partial x^i}$$
+$$Xf = (y^3 - 2x^2y + 3x)$$
 
-This confirms that in differential geometry, a tangent vector $X$ is rigorously defined as a point derivation—an operator that mimics the directional derivative by satisfying the Leibniz rule.
-B. Derivative of a Vector Field ($D_X V$)
-This derivative measures how the vector field $V$ changes as we move in the direction $X$. In $\mathbb{R}^3$, this is calculated by taking the directional derivative of each component of $V$.
-Using the vector fields $X$ and $V$:
-The $k$-th component of the resulting vector $D_X V$ is $(D_X V)^k = \sum_{i} X^i \frac{\partial V^k}{\partial x^i}$.
-Component 1 (i.e., $k=1$): $(D_X V)^1 = yz + 3x^2$
-Component 2 (i.e., $k=2$): $(D_X V)^2 = -2xy$
-Component 3 (i.e., $k=3$): $(D_X V)^3 = -2y$
-Evaluating at $p=(1, 2, 0)$ gives:
+This confirms that in differential geometry, a tangent vector $$X$$ is rigorously defined as a point derivation: an operator that mimics the directional derivative by satisfying the Leibniz rule (please see my [previous blog](https://jasmineruixiang.github.io/blog/2025/Manifold(2)/) on the definition and interpretation of tangent vectors).
 
+### 2] Derivative of a Vector Field ($$D_X V$$)
+This derivative measures how the vector field $$V$$ changes as we move in the direction $$X$$. In $$\mathbb{R}^3$$, this is calculated by taking the directional derivative of each component of $$V$$.
+
+Using the vector fields $$X$$ and $$V$$, we notice that the $$k$$-th component of the resulting vector $$D_X V$$ is $$(D_X V)^k = \sum_{i} X^i \frac{\partial V^k}{\partial x^i}$$.
+
+Component 1 (i.e., $$k=1$$): $$(D_X V)^1 = yz + 3x^2$$
+Component 2 (i.e., $$k=2$$): $$(D_X V)^2 = -2xy$$
+Component 3 (i.e., $$k=3$$): $$(D_X V)^3 = -2y$$
+
+Evaluating at $$p=(1, 2, 0)$$ gives:
 
 $$D_X V(p) = \langle 3, -4, -4 \rangle$$
-2. The General Connection: The Covariant Derivative ($\nabla_X V$)
-The formula for $D_X V$ fails on a curved manifold $M$ because the tangent spaces $T_p M$ and $T_q M$ at nearby points $p$ and $q$ are distinct. We cannot simply subtract the vector $V(p)$ from $V(q)$.
-A Connection ($\nabla$) is the rule that provides the necessary "correction" to define the derivative intrinsically on $M$. The resulting derivative is called the covariant derivative $\nabla_X V$.
-A. Definition and Axioms
-The connection is an operator $\nabla: C^{\infty}(M) \times C^{\infty}(M) \to C^{\infty}(M)$ that maps two vector fields, $X$ and $V$, to a new vector field $\nabla_X V$, satisfying:
-Linearity over Functions in $X$: $\nabla_{fX} V = f \nabla_X V$
-Linearity in $V$: $\nabla_X (aV + bW) = a \nabla_X V + b \nabla_X W$
-Leibniz Rule: $\nabla_X (fV) = (Xf) V + f \nabla_X V$ (where $Xf$ is the directional derivative of $f$)
-B. The Coordinate Form and Christoffel Symbols
-In local coordinates, the covariant derivative $\nabla_X V$ is defined using the Christoffel symbols ($\Gamma^k_{ij}$), which represent the rate of change of the coordinate basis vectors $\left\{ \frac{\partial}{\partial x^i} \right\}$:
-
-$$(\nabla_X V)^k = \underbrace{X^i \frac{\partial V^k}{\partial x^i}}_{\text{I. Flat-Space Derivative Term}} + \underbrace{X^i \Gamma^k_{ij} V^j}_{\text{II. Curvature Correction Term}}$$
-The Christoffel symbols $\Gamma^k_{ij}$ are defined by the action of the connection on the basis vectors:
-
-
-$$\nabla_{\frac{\partial}{\partial x^i}} \frac{\partial}{\partial x^j} = \sum_{k} \Gamma^k_{ij} \frac{\partial}{\partial x^k}$$
-Difference from Euclidean Case: In $\mathbb{R}^3$ with Cartesian coordinates, $\Gamma^k_{ij} = 0$, and the second term vanishes, resulting in $\nabla_X V = D_X V$. On a curved manifold, $\Gamma^k_{ij} \neq 0$, and the correction term is essential.
-3. The Levi-Civita Connection
-In Riemannian Geometry, a Riemannian metric $g$ is introduced to measure lengths and angles.
-The Levi-Civita Connection is the unique connection that respects this metric structure. It is defined by two crucial properties:
-Metric Compatibility: The connection must preserve the metric $g$ under parallel transport.
-
-$$X(g(V, W)) = g(\nabla_X V, W) + g(V, \nabla_X W)$$
-Zero Torsion: The connection must satisfy:
-
-$$\nabla_X Y - \nabla_Y X = [X, Y]$$
-
-where $[X, Y]$ is the Lie bracket.
-The Christoffel symbols of the Levi-Civita Connection are thus entirely determined by the components of the metric $g_{ij}$ and their first derivatives:
-
-$$\Gamma^k_{ij} = \frac{1}{2} g^{k\ell} \left( \frac{\partial g_{j\ell}}{\partial x^i} + \frac{\partial g_{i\ell}}{\partial x^j} - \frac{\partial g_{ij}}{\partial x^\ell} \right)$$
-
 
 ---
-
-## 0] Introduction
 
 ## 1] Why Do We Need a Connection?
 In Euclidean space $$\mathbb{R}^{n}$$, if we have a vector field
@@ -116,7 +85,7 @@ This rule is an **affine connection**. And we __choose__ such a rule.
 
 ## 2] Definition of an Affine Connection
 
-A connection $$\nabla$$ assigns to vector fields X and Y a new vector field: $$\nabla_X Y$$
+A connection is an operator operator $$\nabla: C^{\infty}(M) \times C^{\infty}(M) \to C^{\infty}(M)$$ that maps two vector fields, $$X$$ and $$Y$$, to a new vector field $$\nabla_X Y$$.
 
 We could think of it as:
 
@@ -139,7 +108,7 @@ $$
 \nabla_X (fY) = X(f)Y + f\nabla_X Y
 $$
 
-This last property is crucial, as it mirrors ordinary differentiation (notice that we also require the definition of derivation when in tangent vector to also satisfy the Leibniz rule).
+where $X(f) = Xf$ is the directional derivative of $$f$$. This last property is crucial, as it mirrors ordinary differentiation (notice that we also require the definition of derivation when in tangent vector to also satisfy the Leibniz rule).
 
 Also note that this definition does **not** require a metric.
 
@@ -184,13 +153,16 @@ We could obtain:
 $$
 \boxed{
 \nabla_X Y
-= \left(
+= \left(\underbrace{
 X^i \frac{\partial Y^k}{\partial x^i}
+}_{\text{I. Flat-Space Derivative Term}}
 +
-X^i \Gamma^k_{ij} Y^j
+\underbrace{X^i \Gamma^k_{ij} Y^j
+}_{\text{II. Curvature Correction Term}}
 \right)\frac{\partial}{\partial{x^k}}
 }
 $$
+
 
 
 This will be our main formula. If we stair at it for a bit, the following should be intuitive:
@@ -490,7 +462,14 @@ And, remarkably, there only exists exactly one such connection, which is called 
 
 As demanded by its defining property it removes stretching and twisting. Only intrinsic curvature remains.
 
-[TODO]: local coordinate representation calculation
+
+It could be shown without too much effort that the Levi-Civita connection entirely depends on the selected metric. The Christoffel symbols of the Levi-Civita Connection are thus entirely determined by the components of the metric $g_{ij}$ and their first derivatives:
+
+$$\Gamma^k_{ij} = \frac{1}{2} g^{k\ell} \left( \frac{\partial g_{j\ell}}{\partial x^i} + \frac{\partial g_{i\ell}}{\partial x^j} - \frac{\partial g_{ij}}{\partial x^\ell} \right)$$
+
+[TODO]: more calculation here
+
+
 
 ---
 
@@ -616,8 +595,7 @@ No embedding required.
 
 
 Theoretical (sanity check) questions to ponder:
-1] Why curvature is intrinsic
+1] Why curvature is intrinsic? Does intrinsic meaning only in need of a metric? Is metric required for intrinsic geometry or curvature?
 2] Why do we say that we can define curvature and geodesics from a connection alone 
 3] Or how geodesics make sense without embedding
-4] Why metric compatibility implies symmetry of Christoffel symbols in Levi-Civita
-5] How curvature arises from metric compatibility
+4] How curvature arises from metric compatibility
