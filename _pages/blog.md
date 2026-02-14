@@ -105,6 +105,28 @@ pagination:
 {% endif %}
 
 
+<hr>
+
+<div class="all-post-titles">
+  <h2>All Blog Posts</h2>
+  <ul>
+    {% assign all_posts = site.posts | sort: "date" | reverse %}
+    {% for post in all_posts %}
+      <li>
+        {% if post.redirect == blank %}
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        {% elsif post.redirect contains '://' %}
+          <a href="{{ post.redirect }}" target="_blank">{{ post.title }}</a>
+        {% else %}
+          <a href="{{ post.redirect | relative_url }}">{{ post.title }}</a>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<hr>
+
 
 
   <ul class="post-list">
