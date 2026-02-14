@@ -31,7 +31,7 @@ Let $$p=(1, 2, 0)$$ be a point, $$X=(y, -x, 3x)$$ be the direction vector field,
 
 There are two things we could implement:
 
-### 1] Derivative of a Scalar Function ($$D_X f$$).
+### 1) Derivative of a Scalar Function ($$D_X f$$).
 This is the directional derivative of a smooth scalar function $$f$$ in the direction $$X$$.
 
 For example, for $$f(x,y,z)=xy^2+z$$ at $$p$$:
@@ -44,7 +44,7 @@ $$Xf = (y^3 - 2x^2y + 3x)$$
 
 This confirms that in differential geometry, a tangent vector $$X$$ is rigorously defined as a point derivation: an operator that mimics the directional derivative by satisfying the Leibniz rule (please see my [previous blog](https://jasmineruixiang.github.io/blog/2025/Manifold(2)/) on the definition and interpretation of tangent vectors).
 
-### 2] Derivative of a Vector Field ($$D_X V$$)
+### 2) Derivative of a Vector Field ($$D_X V$$)
 This derivative measures how the vector field $$V$$ changes as we move in the direction $$X$$. In $$\mathbb{R}^3$$, this is calculated by taking the directional derivative of each component of $$V$$.
 
 Using the vector fields $$X$$ and $$V$$, we notice that the $$k$$-th component of the resulting vector $$D_X V$$ is $$(D_X V)^k = \sum_{i} X^i \frac{\partial V^k}{\partial x^i}$$.
@@ -465,9 +465,141 @@ As demanded by its defining property it removes stretching and twisting. Only in
 
 It could be shown without too much effort that the Levi-Civita connection entirely depends on the selected metric. The Christoffel symbols of the Levi-Civita Connection are thus entirely determined by the components of the metric $g_{ij}$ and their first derivatives:
 
-$$\Gamma^k_{ij} = \frac{1}{2} g^{k\ell} \left( \frac{\partial g_{j\ell}}{\partial x^i} + \frac{\partial g_{i\ell}}{\partial x^j} - \frac{\partial g_{ij}}{\partial x^\ell} \right)$$
+$$\boxed{\Gamma^k_{ij} = \frac{1}{2} g^{k\ell} \left( \frac{\partial g_{j\ell}}{\partial x^i} + \frac{\partial g_{i\ell}}{\partial x^j} - \frac{\partial g_{ij}}{\partial x^\ell} \right)}$$
 
-[TODO]: more calculation here
+(or if we just use the other notation: 
+$$
+\Gamma^k_{ij}
+= \frac{1}{2}g^{k\ell}
+\left(
+X_i(g_{j\ell}) +
+X_j(g_{i\ell}) -
+X_\ell(g_{ij})
+\right)
+$$)
+
+How do we obtain the above equation? We just directly calculate the Christoffel symbols using the metric compatibility and torsion-free conditions. It turns out to be not as messy as you might expect:
+
+By definition of the connection coefficients:
+
+$$
+\nabla_{X_i} X_j
+= \Gamma^k_{ij} X_k.
+$$
+
+By torsion-free condition we will have
+
+$$
+T(X_i,X_j) = \nabla_{X_i} X_j - \nabla_{X_j} X_i - [X_i,X_j] = 0.
+$$
+
+Since this is a coordinate frame, $$[X_i,X_j] = 0$$. Torsion-free implies: $$\nabla_{X_i} X_j = \nabla_{X_j} X_i$$, so $$\Gamma^k_{ij} = \Gamma^k_{ji}$$. Thus the lower indices are symmetric (remember I stated this property above!)
+
+By metric compatibility, we would have $$\nabla g = 0$$. This means that 
+
+$$
+X_i(g_{jk}) = g(\nabla_{X_i}X_j, X_k) + g(X_j,\nabla_{X_i}X_k).
+$$
+
+Now if we substitute the definition of $$\Gamma_{ij}^l$$, since $$\nabla_{X_i} X_j = \Gamma^l_{ij} X_l$$, we get:
+
+$$
+g(\nabla_{X_i}X_j, X_k) = \Gamma^\ell_{ij} g_{\ell k}
+$$
+
+and
+
+$$
+g(X_j,\nabla_{X_i}X_k) = \Gamma^\ell_{ik} g_{j\ell}
+$$
+
+Thus:
+
+$$
+X_i(g_{jk})
+= \Gamma^\ell_{ij} g_{\ell k} + \Gamma^\ell_{ik} g_{j\ell}
+$$
+
+Now comes a little tricky step: we write out the above formula but permute the indices (since they are choosen arbitrarily). We obtain:
+
+(1)
+$$
+X_i(g_{jk})
+= \Gamma^\ell_{ij} g_{\ell k} + \Gamma^\ell_{ik} g_{j\ell}
+$$
+
+(2)
+$$
+X_j(g_{ik}) = \Gamma^\ell_{ji} g_{\ell k} + \Gamma^\ell_{jk} g_{i\ell}
+$$
+
+(3)
+$$
+X_k(g_{ij}) = \Gamma^\ell_{ki} g_{\ell j} + \Gamma^\ell_{kj} g_{i\ell}
+$$
+
+Then, using the symmetry we obtained above from torsion-free condition, since
+
+$$
+\Gamma^\ell_{ij} = \Gamma^\ell_{ji},
+$$
+
+compute
+
+$$
+(1) + (2) - (3).
+$$
+
+The feft-hand side becomes
+
+$$
+X_i(g_{jk}) + X_j(g_{ik}) - X_k(g_{ij})
+$$
+
+Right-hand side simplifies to:
+
+$$
+2\,\Gamma^\ell_{ij} g_{\ell k}.
+$$
+
+Consequently, 
+
+$$
+X_i(g_{jk}) + X_j(g_{ik}) - X_k(g_{ij}) = 2\,\Gamma^\ell_{ij} g_{\ell k}.
+$$
+
+By rearranging terms and multiplying by the inverse metric $$g^{km}$$:
+
+$$
+g^{km} g_{\ell k} = \delta^m_\ell.
+$$
+
+We obtain:
+
+$$
+\Gamma^m_{ij} = \frac{1}{2} g^{mk} \left(X_i(g_{jk})+X_j(g_{ik})-X_k(g_{ij})\right).
+$$
+
+Renaming dummy indices:
+
+$$
+\boxed{
+\Gamma^k_{ij}=\frac{1}{2}g^{k\ell}\left(X_i(g_{j\ell})+X_j(g_{i\ell})-X_\ell(g_{ij})\right)}
+$$
+
+Remark: This formula relies crucially on the fact that the frame $\{X_i\}$ is a **coordinate frame**, meaning:
+
+$$
+[X_i, X_j] = 0.
+$$
+
+If instead we used a general (non-coordinate) frame where
+
+$$
+[X_i, X_j] \neq 0,
+$$
+
+then additional terms involving the structure constants of the frame would appear in the formula for the connection. Thus the classical Christoffel formula holds precisely because the coordinate vector fields commute.
 
 
 
@@ -476,23 +608,12 @@ $$\Gamma^k_{ij} = \frac{1}{2} g^{k\ell} \left( \frac{\partial g_{j\ell}}{\partia
 
 ## 11] Quick Summary
 
-Connection:
-* Infinitesimal rule for comparing tangent spaces.
-
-Christoffel symbols:
-* Local coefficients describing how frames twist.
-
-Metric compatibility:
-* No stretching under transport.
-
-Torsion-free:
-* No artificial twisting.
-
-Levi-Civita connection :
-* Unique natural connection for a Riemannian metric.
-
-Intrinsic geometry:
-* Independent of embedding.
+* Connection: Infinitesimal rule for comparing tangent spaces.
+* Christoffel symbols: Local coefficients describing how frames twist.
+* Metric compatibility: No stretching under transport.
+* Torsion-free: No artificial twisting.
+* Levi-Civita connection: Unique natural connection for a Riemannian metric.
+* Intrinsic geometry: Independent of embedding.
 
 ---
 
