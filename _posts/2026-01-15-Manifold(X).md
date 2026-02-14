@@ -174,7 +174,7 @@ Consequently, covariant derivative is basically the combination of component cha
 
 ---
 
-## 4] A Short Reflection and Discussion
+## --------------- 4] A Short Reflection and Discussion ---------------
 
 Let's do a short summary and discussion before we continue. Based on the above definition, what is an affine connection conceptually? Well, an affine connection gives us a way to compare vectors at nearby points, which later will turn out to be our abilities to define 
 
@@ -617,7 +617,7 @@ then additional terms involving the structure constants of the frame would appea
 
 ---
 
-## 12] Discussions
+## 12] --------------- Discussions ---------------
 When I first learned about connection/parallel transport/geodesics, I have tons of questions and different topics seem to mingle with one another, each defying the others' validity. After months of delibration and study, I finally figured out the inner workings of these concepts, and I have to admit that I'm still deepening my understanding. 
 
 I'll not regurgitate statements and clarifications made in the previous "short summary" section 4], but instead think back on a few other critical questions to ponder. I highly recommen that readers go through 4] before reading this section. 
