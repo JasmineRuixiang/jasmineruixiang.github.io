@@ -652,7 +652,11 @@ Each layer adds new capability and they are independent choices.
 ### 2) Point-wise definition of Christoffel symbols?
 Another concern that haunted me for quite a while is the following: Now hopefully we are clear that connection is entirely dependent upon the Christoffel symbols, and connection is meant to differentiate vector fields at different points. Yet based on the definition of Christoffel symbols, it seems that it's just using the connection upon pairwise basis vectors at the same exact point. So how can something defined pointwise encode comparison between different tangent spaces?
 
-Well, notice that a connection does not directly subtract vectors at different points. Instead, it gives an "infinitesimal rule" for how vector fields change. Indeed, a connection describes infinitesimal change. The comparison between different points comes from integrating this infinitesimal rule.
+Well, there're several persectives to look at this. 
+
+Firstly, the hidden “different points” are actually there already: when we compute $$\nabla_XY$$, we are not subtracting $$Y(p)$$ and $$Y(q)$$ directly. Instead, we are asking: If I move an infinitesimal step from $$p$$ in direction $$X$$, how does $$Y$$ change? This “infinitesimal move” already involves neighboring points. So even though the formula is evaluated at $$p$$, it contains directional information about nearby points. Moreover, Christoffel symbols tell us how the frame twists and turns as we move. Once we know how the frame moves, we can differentiate any vector field. The “comparison across points” is encoded in how the frame changes.
+
+Secondly, notice that a connection does not directly subtract vectors at different points. Instead, it gives an "infinitesimal rule" for how vector fields change. Indeed, a connection describes infinitesimal change. The comparison between different points comes from integrating this infinitesimal rule.
 
 A simple analogy in $$\mathbb{R}^n$$. The derivative of a function is defined by $$f'(x)$$, which is computed at a single point. Yet from this local rule, we can compare values at different points by integrating:
 
@@ -660,9 +664,34 @@ $$
 f(b) - f(a) = \int_a^b f'(t)\,dt
 $$
 
-so local derivative $$\rightarrow$$ global comparison. The same story here. 
+so local derivative $$\rightarrow$$ global comparison. The same story here: Christoffel symbols encode infinitesimal twisting of the frame, as the definition shows:
 
-Christoffel symbols encode infinitesimal twisting of the frame.
+$$
+\nabla_{X_i} X_j = \Gamma^k_{ij} X_k
+$$
+
+
+This is indeed pointwise. But what does it mean? It tells us how the coordinate basis vector $$\frac{\partial}{\partial x^j}$$ changes when we move infinitesimally in direction $$\frac{\partial}{\partial x^i}$$. Consequently, even though the expression is evaluated at a single point, it describes __variation in a direction__. That direction information encodes how things change from one point to nearby points. Then that means we are integrating these infinitesimal changes? 
+
+Exactly! Parallel transport along a curve is obtained by solving 
+
+$$\frac{DV}{dt} = 0$$
+
+To be more concrete, if we think in coordinates, we are solving 
+
+$$
+\boxed{
+\frac{dV^k}{dt}
++
+\Gamma^k_{ij}
+\frac{dx^i}{dt}
+V^j = 0
+}
+$$
+
+for all $$k$$. This is an ODE! Given initial vector $$V(0)$$, the Christoffel symbols determine $$V(t)$$ uniquely. Consequently, they determine how vectors are transported from one point to another.
+
+
 
 Solving the parallel transport ODE gives comparison between points.
 
