@@ -726,7 +726,7 @@ $$
 \end{equation}
 $$
 
-Discretizing the above would reveal previous time step dependence, and the dynamics is specified by $$f$$ determined by network connectivity. The paper {% cite jpca %} discussed in [my earlier post]({% post_url 2025-08-16-jPCA %}) made this the backbone of modeling. From this perspective, it seems not surprising that neural trajectories do not necessarily need to be reversible. One extreme hypothetical case would: Imagine the following simple $$2D$$ linear dynamical system:
+Discretizing the above would reveal previous time step dependence, and the dynamics is specified by $$f$$ determined by network connectivity. The paper {% cite jpca %} discussed in [my earlier post]({% post_url 2025-08-16-Research(1)-jPCA %}) made this the backbone of modeling. From this perspective, it seems not surprising that neural trajectories do not necessarily need to be reversible. One extreme hypothetical case would: Imagine the following simple $$2D$$ linear dynamical system:
 
 $$
 \begin{equation}
