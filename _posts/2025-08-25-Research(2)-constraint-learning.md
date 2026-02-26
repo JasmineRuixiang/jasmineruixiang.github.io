@@ -425,6 +425,7 @@ Sidenote: How do principal angles relate with principal eigenvalues and principa
 
 To give a short summary of principal angles calculation:
 
+
 Note the role of SVD decompsition. 
 
 
