@@ -46,7 +46,7 @@ $$
 d(A,B) = \|A - B\|_F.
 $$
 
-Here we just treat matrices and vectors. This is simple but not geometrically natural, and it's not invariant under coordinate changes. 
+Here we just treat matrices and vectors. This is simple but not geometrically natural, and it's not invariant under coordinate changes. Note that to make this Euclidean, we actually applied the Frobenius inner product $$<A, B>_X = Tr(A^\top B)$$. 
 
 * (B) Affine-Invariant Riemannian Metric (AIRM, Canonical)
 
