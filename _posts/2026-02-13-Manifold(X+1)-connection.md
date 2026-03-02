@@ -209,7 +209,7 @@ Recall that Gauss proved in his Theorema Egregium that
 
 They can exist abstractly.
 
-[TODO]: That means to talk about intrinsic geometry we need to define a metric first? Also, the definition of Riemannian metric has nothing to do with the embedding. 
+TODO: That means to talk about intrinsic geometry we need to define a metric first? Also, the definition of Riemannian metric has nothing to do with the embedding. 
 
 Consequently, if you are still thinking that a manifold is a curved surface in space, it might be helpful if you instead interpret manifold as an abstract smooth space and geometry is an additional structure placed on it. And more importantly, 
 
@@ -239,7 +239,7 @@ To answer the question why we cannot always use this trick?
 
 Using Euclidean subtraction measures the intrinsic change plus the extrinsic bending, whereas the covariant derivative isolates and includes intrinsic change only. 
 
-[TODO]: This leads to yet another interesting observation: is covariant derivative just a projection of the Euclidean derivative back onto the manifold?
+TODO: This leads to yet another interesting observation: is covariant derivative just a projection of the Euclidean derivative back onto the manifold?
 
 Enough deliberation for now, let's continue our story. 
 
@@ -704,7 +704,7 @@ In summary we could think of Christoffel symbols as the “connection coefficien
 
 ---
 
-[TODO]
+TODO
 Now our earlier question becomes clearer:
 
 If we define derivatives using an embedding, we are using extra structure.
