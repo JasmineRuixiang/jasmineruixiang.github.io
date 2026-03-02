@@ -24,7 +24,7 @@ This blog originates from a daily discussion of neural signal (pre)processing wi
 ### 0] Problem Setup
 Let's say we have a collection of neural data in the format $$X \in \mathbb{R}^{n \times d}$$, where $$n$$ is the number of samples, and $$d$$ the number of features. These are raw features each coming from a single electrode. For simplicity let's assume that there is only 1 kind of feature, like threshold crossing. Let's further say that we want to visualize the low dimensional structure of this collection of data, preserving its global geometry as much as possible (we'll clarify this later). 
 
-Now we'd like to apply PCA on it for the first try, meaning to transform from $$\mathbb{R}^{n \times d}$$ into $$\mathbb{R}^{n \times d'}$$, where $$d'$$ might be just $$3$$, for example. Many methods would start by z-scoring $$X$$ for each feature (so for each column of $$X$$, after z-scoring would be mean 0 and standard deviation 1; for more discussions please refer to the [previous blog]{% post_url 2026-02-06-HighDim(1)-zscore %} of this series) before applying PCA. 
+Now we'd like to apply PCA on it for the first try, meaning to transform from $$\mathbb{R}^{n \times d}$$ into $$\mathbb{R}^{n \times d'}$$, where $$d'$$ might be just $$3$$, for example. Many methods would start by z-scoring $$X$$ for each feature (so for each column of $$X$$, after z-scoring would be mean 0 and standard deviation 1; for more discussions please refer to the [previous blog]({% post_url 2026-02-06-HighDim(1)-zscore %}) of this series) before applying PCA. 
 
 I'm a little unsure about the motivation behind it. There're of course many but I cannot pinpoint a conclusive answer.
 

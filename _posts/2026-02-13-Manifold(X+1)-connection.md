@@ -43,7 +43,7 @@ Point Derivation (Geometry)
 $$X[f] = X^i \frac{\partial f}{\partial x^i}$$
 $$Xf = (y^3 - 2x^2y + 3x)$$
 
-This confirms that in differential geometry, a tangent vector $$X$$ is rigorously defined as a point derivation: an operator that mimics the directional derivative by satisfying the Leibniz rule (please see my [previous blog]{% post_url 2025-08-25-Research(2)-constraint-learning %} on the definition and interpretation of tangent vectors).
+This confirms that in differential geometry, a tangent vector $$X$$ is rigorously defined as a point derivation: an operator that mimics the directional derivative by satisfying the Leibniz rule (please see my [previous blog]({% post_url 2025-08-25-Research(2)-constraint-learning %}) on the definition and interpretation of tangent vectors).
 
 ### 2) Derivative of a Vector Field ($$D_X V$$)
 This derivative measures how the vector field $$V$$ changes as we move in the direction $$X$$. In $$\mathbb{R}^3$$, this is calculated by taking the directional derivative of each component of $$V$$.
