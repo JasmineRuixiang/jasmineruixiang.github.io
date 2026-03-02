@@ -200,7 +200,7 @@ pagination:
 
 </div>
 
-  <div class="col-sm-3">
+  <div class="col-sm-5">
     <img class="card-img" 
          src="{{post.thumbnail | relative_url}}"
          style="width:100%; height:auto;" 
