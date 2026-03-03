@@ -127,8 +127,6 @@ pagination:
 
 <hr>
 
-
-
   <ul class="post-list">
 
     {% if page.pagination.enabled %}
@@ -153,7 +151,7 @@ pagination:
 {% if post.thumbnail %}
 
 <div class="row">
-          <div class="col-sm-9">
+          <div class="col-sm-8">
 {% endif %}
         <h3>
         {% if post.redirect == blank %}
