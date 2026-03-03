@@ -3,7 +3,7 @@ layout: post
 title: "Manifold and Riemannian Geometry (X+1): Connections, Parallel Transport, and Geodesics (in progress)"
 date: 2026-02-13 16:36:23
 description: Exploration of Connection
-thumbnail: /assets/img/blogs/spd.png
+# thumbnail: /assets/img/blogs/spd.png
 tags: 
     - "Geometry Concepts/Tools"
     - "Topology Concepts/Tools"
