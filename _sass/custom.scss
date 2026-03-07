@@ -9,3 +9,8 @@ ul.post-list .post-title {
   max-width: 1000px;   /* default is ~800px */
   margin: 0 auto;      /* keeps it centered */
 }
+
+blockquote mjx-container[display="true"] {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
