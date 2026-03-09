@@ -324,3 +324,7 @@ Jordan–Kinderlehrer–Otto (1998) showed:
 > This PDE is the **gradient flow of entropy in Wasserstein space**.
 
 This connects optimal transport, diffusion equations, statistical physics, and Riemannian geometry into a unified framework.
+
+---
+
+## 2] Fisher Information 

@@ -27,7 +27,7 @@ In case we get confused, in this blog I will specifically add subscripts to dist
 
 ---
 
-### 1] The “manifold” of probability densities
+## 1] The “manifold” of probability densities
 
 Let
 
@@ -61,7 +61,7 @@ We treat \(\mathcal P_2(M)\) as an **infinite-dimensional manifold**.
 
 ---
 
-### 2] Curves of probability densities
+## 2] Curves of probability densities
 
 Consider a time-dependent probability density
 
@@ -99,7 +99,7 @@ Here
 
 ---
 
-### 3] Tangent vectors in probability space
+## 3] Tangent vectors in probability space
 
 At a fixed density $$\rho_t(x)$$, the time derivative
 
@@ -142,7 +142,7 @@ Therefore
 
 ---
 
-### 4] Otto’s Riemannian metric
+## 4] Otto’s Riemannian metric
 
 Felix Otto introduced a __Riemannian metric__ on $$\mathcal P_2(M)$$.
 
@@ -202,7 +202,7 @@ $$
 
 ---
 
-### 5] Wasserstein geodesic equations
+## 5] Wasserstein geodesic equations
 
 Under Otto’s metric, geodesics satisfy the continuity equation:
 
@@ -238,7 +238,7 @@ $$
 
 ---
 
-### 6] Entropy Functional and Variations
+## 6] Entropy Functional and Variations
 
 Define the **entropy functional** as (note whether to take negative sign is just a choice; you could also call it negative entropy if you are familiar with the negative sign in front of the integral)
 
@@ -306,7 +306,7 @@ This result is known as the **Jordan–Kinderlehrer–Otto (JKO) scheme**.
 
 ---
 
-### 7] Second Derivative of Entropy along a Geodesic
+## 7] Second Derivative of Entropy along a Geodesic
 
 Let
 
@@ -357,7 +357,7 @@ How to interpret this formula then? Well, notice that the Hessian splits into tw
 
 ---
 
-### 8] Convexity from Ricci Curvature
+## 8] Convexity from Ricci Curvature
 
 Suppose the manifold satisfies
 
@@ -414,7 +414,7 @@ $$
 
 ---
 
-### 9] Geometric Meaning
+## 9] Geometric Meaning
 
 This shows that
 
@@ -433,4 +433,4 @@ Or put it differently, the Ricci curvature ≥ $$K$$ if and only if
 
 ---
 
-### 10] Lott–Sturm–Villani Theory
+## 10] Lott–Sturm–Villani Theory
