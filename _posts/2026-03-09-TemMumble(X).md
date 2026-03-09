@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'The Flow of Time: Prob/Measure/Transport/Generative Mumble(X): Entropy Convexity and Ricci Curvature (in progress)'
+title: 'The Flow of Time: Prob/Measure/Transport/Generative Mumble(X): Entropy and Fisher Information (in progress)'
 date: 2026-03-09 00:16:01
 description: Displacement Convextiy, Ricci Curvature 
 # thumbnail: /assets/img/blogs/spd.png
@@ -19,418 +19,308 @@ toc:
   sidebar: left
 ---
 
-This blog post is dedicated to a specific topic that unites entropy, displacement convexity, and Ricci curvature. In my personal opinion, this is one of the deepest and aesthetically appealing results of modern optimal transport theory. I quickly alluded to it in the 4th blog post in this series, but here I will expand from there a little more.
+## 1] Entropy 
 
-In summary, what I will elaborate is where optimal transport becomes **shockingly close to Riemannian geometry**. The key idea is due to Felix Otto: the space of probability densities with the 2-Wasserstein metric behaves like an **infinite-dimensional Riemannian manifold**, and the **entropy Hessian in this manifold contains the Ricci tensor of the base manifold**.
+### 1.1] Entropy Definitions
+In this sectio, I mean to clarify the relationships between **entropy**, **negative entropy**, and their convexity properties under different interpolations of probability distributions.
 
-In case we get confused, in this blog I will specifically add subscripts to distinguish differentiation on $$t$$ vs on $$x$$. 
+#### 1.1.1] Discrete Shannon Entropy
+
+For a discrete distribution:
+
+$$
+H(p) = - \sum_i p_i \log p_i
+$$
+
+This is the original **Shannon entropy**.
 
 ---
 
-### 1] The “manifold” of probability densities
+#### 1.1.2] Differential Entropy (Continuous Case)
+
+For a continuous density $$p(x)$$:
+
+$$
+H(p) = -\int p(x)\log p(x)\,dx
+$$
+
+This is called **differential entropy**.
+
+Important properties:
+
+- It **depends on the coordinate system**
+- It can be **negative**
+- It is **not invariant under reparameterization**
+
+Note that this is not the continuous analogue of the discrete entropy (Shannon entropy). 
+
+---
+
+#### 1.1.3] Boltzmann / Gibbs Entropy
+
+In statistical physics:
+
+$$
+S = k_B \log W
+$$
+
+where $$W$$ is the number of microstates.
+
+In distribution form (Gibbs entropy):
+
+$$
+S = -k_B \int p(x)\log p(x)\,dx
+$$
+
+Thus, up to the constant $$k_B$$, this is the same functional as differential entropy.
+
+---
+
+#### 1.1.4] Negative Entropy
+
+Negative entropy is defined as
+
+$$
+F(p) = \int p(x)\log p(x)\,dx
+$$
+
+So
+
+- **Entropy** is concave
+- **Negative entropy** is convex
+
+---
+
+#### 1.1.5] Relative Entropy
+
+Relative entropy is also frequently known as and referred to by the name of Kullback Leibler (KL) Divergence:
+
+$$
+D_{KL}(p|q) = \int p(x)\log\frac{p(x)}{q(x)}dx
+$$
+
+This should be interpreted as the continuos counterpart of the discrete Shannon entropy. They are both scale invariant. I will elaborate this below. 
+
+---
+
+### 1.2] Mixture Interpolation of Distributions
+
+Given two distributions $$p$$ and $$q$$, their **mixture interpolation** is
+
+$$
+\rho_t = (1-t)p + tq, \quad t \in [0,1].
+$$
+
+Interpretation:
+
+- With probability $$1-t$$, sample from $$p$$
+- With probability $$t$$, sample from $$q$$
+
+This is a **straight line in the linear space of densities**.
+
+---
+
+### 1.3] Convexity Under Mixtures
+
+#### 1.3.1] Negative Entropy is Mixture Convex
+
+Remember the definition of the negative entropy:
+
+$$
+F(\rho) = \int \rho(x)\log \rho(x)\,dx
+$$
+
+For mixture interpolation
+
+$$
+\rho_t = (1-t)\rho_0 + t\rho_1
+$$
+
+we have
+
+$$
+F(\rho_t)
+\le
+(1-t)F(\rho_0) + tF(\rho_1).
+$$
+
+Therefore
+
+**Negative entropy is convex under mixtures.**
+
+The reason is that $$ \phi(x)=x\log x $$ is a convex function.
+
+---
+
+#### 1.3.2] Entropy is Mixture Concave
+
+Differential entropy is
+
+$$
+H(\rho) = -\int \rho\log\rho.
+$$
+
+Since it is the negative of a convex functional, then
+
+$$
+H(\rho_t)
+\ge
+(1-t)H(\rho_0) + tH(\rho_1).
+$$
+
+Thus **Differential entropy is concave under mixtures.**
+
+---
+
+### 1.4] Why Differential Entropy Depends on Coordinates
+
+Now we have a general feel about different kinds of entropy and its convexity properties, you might have a natural question as to why the differential entropy is not a continuous counterpart of the discrete Shannon entropy. Afterall, it seems to be just taking limits. Also, what does it mean to say that differential entropy is not invariant under change of variables. Let's investigate into this a little bit more. 
 
 Let
 
 $$
-(M,g)
+y = g(x).
 $$
 
-be a smooth $$d$$-dimensional Riemannian manifold with Riemannian metric $$g$$.
-
-Let $$dx$$ denote the Riemannian volume measure on $$M$$.
-
-We consider the space
+The density transforms according to the Jacobian:
 
 $$
-\mathcal P_2(M)
-= \left\{
-\rho(x) \ge 0 :
-\int_M \rho(x)\,dx = 1,
-\quad
-\int_M |x|^2 \rho(x)\,dx < \infty
-\right\}.
+p_Y(y) = p_X(x)\left|\frac{dx}{dy}\right|.
 $$
 
-Each element of $$\mathcal P_2(M)$$ is a **probability density function**
+Computing the entropy after transformation gives (this is not hard; consider as a little exercise for yourself)
 
 $$
-\rho : M \rightarrow \mathbb{R}_{\ge 0}.
+H(Y)
+= H(X) + \mathbb{E}[\log |g'(X)|].
 $$
 
-We treat \(\mathcal P_2(M)\) as an **infinite-dimensional manifold**.
+Thus differential entropy **changes under reparameterization**.
 
----
-
-### 2] Curves of probability densities
-
-Consider a time-dependent probability density
+For example, let
 
 $$
-\rho_t(x), \quad
-t \in [0,1],\; x \in M.
+X \sim \text{Uniform}(0,1).
 $$
 
-Thus we have a map (probability flow): 
+Then, perhaps a little surprisingly, 
 
 $$
-\rho : [0,1] \times M \rightarrow \mathbb{R}_{\ge 0},
-\quad
-(t,x) \mapsto \rho_t(x).
+H(X)=0.
 $$
 
-Assume mass is conserved over time:
+Define $$ Y=2X$$, then $$ Y\sim\text{Uniform}(0,2)$$ and thus
 
 $$
-\int_M \rho_t(x)\,dx = 1
-\quad
-\forall t.
+H(Y)=\log 2
 $$
 
-Mass conservation implies the **continuity equation**
+This demonstrates that simply **changing the scale** changes differential entropy.
+
+Why does this happen? Well, differential (continuous) entropy involves densities:
 
 $$
-\partial_t \rho_t(x) + \nabla \cdot \left(\rho_t(x) v_t(x) \right) = 0.
+p(x)=\frac{dP}{dx}.
 $$
 
-Here
+Since the base measure $$dx$$ depends on the coordinate system, entropy does too.
 
-- $$v_t(x) \in T_xM$$ is a velocity vector field
-- $$v : [0,1] \times M \to TM$$
+In other words, differential entropy is really **entropy relative to the Lebesgue measure**.
 
 ---
 
-### 3] Tangent vectors in probability space
+### 1.5] Coordinate-Invariant Quantities
 
-At a fixed density $$\rho_t(x)$$, the time derivative
-
-$$
-\dot{\rho}_t(x)
-= \partial_t \rho_t(x)
-$$
-
-acts as a **tangent vector** in the space of probability measures.
-
-From the continuity equation, we know that
+The good news is, quantities involving **density ratios** remain invariant. For example: **KL divergence**
 
 $$
-\dot{\rho}_t(x)
-= - \nabla \cdot \left( \rho_t(x) v_t(x) \right).
+D_{KL}(p||q) = \int p(x)\log\frac{p(x)}{q(x)}dx.
 $$
 
-Optimal transport theory shows that along **Wasserstein geodesics**, the velocity field is always a gradient field (we covered this in this previous blog post YY):
+Under coordinate change, Jacobians cancel:
 
 $$
-v_t(x) = \nabla \phi_t(x)
+\frac{p_Y(y)}{q_Y(y)} = \frac{p_X(x)}{q_X(x)}.
 $$
 
-for some scalar potential
-
-$$
-\phi_t : M \to \mathbb{R}.
-$$
-
-Thus tangent vectors take the form
-
-$$
-\dot{\rho}_t(x)
-= - \nabla \cdot \left( \rho_t(x)\nabla \phi_t(x) \right).
-$$
-
-Therefore
-
-- tangent vectors acquires a corresponding scalar potentials $$ \phi_t(x) $$
+Thus, **KL divergence is coordinate invariant.**
 
 ---
 
-### 4] Otto’s Riemannian metric
+### 1.6] Mixture Geometry vs Transport Geometry
 
-Felix Otto introduced a __Riemannian metric__ on $$\mathcal P_2(M)$$.
+Mixture interpolation does not move mass.
 
-Suppose we have two tangent vectors:
+Example:
 
-$$
-\dot{\rho}^{(1)}(x)
-= - \nabla \cdot \left( \rho(x)\nabla \phi_1(x) \right)
-$$
+- $$p$$: Gaussian centered at $$-5$$
+- $$q$$: Gaussian centered at $$5$$
 
-and
+Mixture interpolation produces **two bumps**, because the distributions coexist, but physical transport should produce **one bump moving across space**.
 
-$$
-\dot{\rho}^{(2)}(x) 
-= - \nabla \cdot \left( \rho(x)\nabla \phi_2(x) \right).
-$$
+I also discussed this difference in the previous blog XX. 
 
-The **Riemannian inner product** is defined as
-
-$$ 
-\langle
-\dot{\rho}^{(1)},
-\dot{\rho}^{(2)}
-\rangle_{\rho}
-= \int_M
-g_x
-\big(
-\nabla \phi_1(x),
-\nabla \phi_2(x)
-\big)
-\rho(x)\,dx.
-$$
-
-Here
-
-- $$g_x(\cdot,\cdot)$$ is the Riemannian metric at $$x$$.
-
-How to interpret this? Notice that the squared norm of a tangent vector becomes
+In optimal transport, particles move. If $$T(x)$$ is the optimal transport map, then
 
 $$
-\| \dot{\rho} \|_\rho^2 = \int_M | \nabla \phi(x) |_g^2 \rho(x)\,dx.
+x_t = (1-t)x + tT(x).
 $$
 
-This equals the **kinetic energy of moving mass**.
-
-Indeed, the Benamou–Brenier formula states
+The density evolves via
 
 $$
-W_2^2(\rho_0,\rho_1)
-= \inf_{\rho_t,v_t}
-\int_0^1
-\int_M
-|v_t(x)|^2
-\rho_t(x)
-\,dx\,dt.
+\rho_t = ((1-t)\mathrm{Id}+tT)_\# \rho_0.
 $$
+
+This path is the **Wasserstein geodesic**.
 
 ---
 
-### 5] Wasserstein geodesic equations
+### 1.7] Displacement Convexity
+The subjects of the following two sections have been discussed in the previous blog and I will expand them in the next post. For now, as a review and also to reinforce our interpreation, please allow me to state the findings again: 
 
-Under Otto’s metric, geodesics satisfy the continuity equation:
-
-$$
-\partial_t \rho_t(x) + \nabla \cdot \left( \rho_t(x)\nabla \phi_t(x) \right) = 0
-$$
-
-By the Hamilton–Jacobi equation
+McCann (1997) proved that the functional (negative entropy)
 
 $$
-\partial_t \phi_t(x) + \frac12 | \nabla \phi_t(x) |^2 = 0.
+U(\rho) = \int \rho\log\rho
 $$
 
-Solving these equations produces the **optimal transport interpolation** (optimal transport flow) between
+is convex along Wasserstein geodesics:
 
 $$
-\rho_0(x)
-\quad \text{and} \quad
-\rho_1(x).
+U(\rho_t)
+\le
+(1-t)U(\rho_0) + tU(\rho_1).
 $$
 
-Just as a sanity check, we should now be comfortable for connecting the static and dynamic view of optimal transport, and easily write out the optimal flow $$\rho_t(x)$$ as the law of the straight flow once we know the optimal map:
+Thus, **negative entropy is displacement convex.**
+
+Since entropy is the negative of this functional,
 
 $$
-\rho_t(x) = \text{Law}((1-t)x + t\Phi^{opt}(x))
+H(\rho) = -U(\rho),
 $$
 
-or, in other words
+we obtain that **entropy is displacement concave.**
 
-$$
-\rho_t = ((1-t) + t\Phi^{opt})_{\#}
-$$
+In summary, differnetial entropy is both mixture concave and displacement concave, and negative entropy is convex in both concepts. 
 
 ---
 
-### 6] Entropy Functional and Variations
+### 1.8] Why Displacement Convexity Matters
 
-Define the **entropy functional** as (not whether to take negative sign is just a choice)
+Mixture interpolation corresponds to **randomly choosing distributions**, where optimal transport corresponds to **moving mass in space**. 
 
-$$
-\mathrm{H}(\rho) = \int_M \rho(x)\log\rho(x) \,dx.
-$$
+This might sound trivial, but many physical and probabilistic dynamics follow transport geometry.
 
-This is a functional
+For example, the **Fokker–Planck equation**
 
 $$
-\mathrm{H} :
-\mathcal P_2(M)
-\rightarrow
-\mathbb{R}.
+\partial_t \rho = \nabla\cdot(\rho\nabla V)+\Delta\rho
 $$
 
-Then let's compute the first variation:
+Jordan–Kinderlehrer–Otto (1998) showed:
 
-$$
-\frac{\delta \mathrm{H}}{\delta \rho}(x) = 1+\log\rho(x).
-$$
+> This PDE is the **gradient flow of entropy in Wasserstein space**.
 
-The **Wasserstein gradient flow** equation for entropy then becomes
-
-$$
-\partial_t \rho_t(x)
-= \nabla \cdot
-\left(
-\rho_t(x)
-\nabla
-\frac{\delta \mathrm{H}}{\delta\rho}(\rho_t(x))
-\right).
-$$
-
-Substitute
-
-$$
-\frac{\delta \mathrm{H}}{\delta \rho}(x)= 1+\log\rho_t(x).
-$$
-
-Then
-
-$$
-\nabla (1+\log\rho_t(x))= \frac{\nabla\rho_t(x)}{\rho_t(x)}.
-$$
-
-Thus
-
-$$
-\partial_t\rho_t(x)
-= \nabla \cdot \left( \nabla \rho_t(x) \right).
-$$
-
-Therefore
-
-$$
-\partial_t\rho_t(x)= \Delta_x \rho_t(x).
-$$
-
-Very surprisingly:
-
-**The heat equation is the gradient flow of entropy in Wasserstein space.**
-
-This result is known as the **Jordan–Kinderlehrer–Otto (JKO) scheme**.
-
----
-
-### 7] Second Derivative of Entropy along a Geodesic
-
-Let
-
-$$
-\{\rho_t(x)\}_{t \, \in \, [0, 1]}
-$$
-
-be a Wasserstein geodesic generated by the potential
-
-$$
-\phi_t(x).
-$$
-
-Compute
-
-$$
-\frac{d^2}{dt^2}
-\mathrm{H}(\rho_t).
-$$
-
-After a long calculation using the continuity equation and the **Bochner identity**, we would obtain
-
-$$
-\frac{d^2}{dt^2} \mathrm{H}(\rho_t) =
-\int_M
-\Big(
-|\nabla^2 \phi_t(x)|^2
-+
-\mathrm{Ric}_x
-(
-\nabla \phi_t(x),
-\nabla \phi_t(x)
-)
-\Big)
-\rho_t(x)
-\,dx.
-$$
-
-Here
-
-- \( \nabla^2\phi_t(x) \) is the **Hessian** of \( \phi_t \)
-- \( \mathrm{Ric}_x(\cdot,\cdot) \) is the **Ricci curvature tensor** at \(x\).
-
-How to interpret this formula then? Well, notice that the Hessian splits into two terms:
-
-* Positive Hessian term $$ |\nabla^2\phi_t(x)|^2 \ge 0$$
-* Curvature term $$ \mathrm{Ric}_x ( \nabla\phi_t(x), \nabla\phi_t(x))$$, which depends on the geometry of the manifold.
-
----
-
-### 8] Convexity from Ricci Curvature
-
-Suppose the manifold satisfies
-
-$$
-\mathrm{Ric}_x(v,v)
-\ge
-K|v|^2
-\quad
-\text{for all } v\in T_xM.
-$$
-
-Then
-
-$$
-\mathrm{Ric}_x
-(
-\nabla\phi_t(x),
-\nabla\phi_t(x)
-)
-\ge
-K
-|
-\nabla\phi_t(x)
-|^2.
-$$
-
-Thus
-
-$$
-\frac{d^2}{dt^2}
-\mathrm{H}(\rho_t)
-\ge
-K
-\int_M
-|
-\nabla\phi_t(x)
-|^2
-\rho_t(x)
-\,dx.
-$$
-
-But along a Wasserstein geodesic,
-
-$$
-\int_M | \nabla\phi_t(x) |^2 \rho_t(x) \,dx = W_2^2(\rho_0,\rho_1)
-$$
-
-Therefore
-
-$$
-\mathrm{H}(\rho_t)
-\text{ is } K\text{-convex along Wasserstein geodesics}.
-$$
-
----
-
-### 9] Geometric Meaning
-
-This shows that
-
-$$
-\text{Hessian}_{W_2}
-\mathrm{H}
-\sim
-\mathrm{Ric}.
-$$
-
-So the **Ricci curvature of the manifold controls the convexity of entropy in Wasserstein space**. This insight leads to the **Lott–Sturm–Villani theory**, which defines curvature bounds using optimal transport.
-
-Or put it differently, the Ricci curvature ≥ $$K$$ if and only if
-
-> **The entropy functional is \(K\)-convex along Wasserstein geodesics in the space of probability measures.**
-
----
-
-### 10] Lott–Sturm–Villani Theory
+This connects optimal transport, diffusion equations, statistical physics, and Riemannian geometry into a unified framework.
