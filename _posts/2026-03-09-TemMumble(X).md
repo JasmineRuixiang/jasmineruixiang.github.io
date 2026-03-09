@@ -430,3 +430,7 @@ So the **Ricci curvature of the manifold controls the convexity of entropy in Wa
 Or put it differently, the Ricci curvature ≥ $$K$$ if and only if
 
 > **The entropy functional is \(K\)-convex along Wasserstein geodesics in the space of probability measures.**
+
+---
+
+### 10] Lott–Sturm–Villani Theory
