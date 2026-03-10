@@ -128,6 +128,8 @@ pagination:
 
 <div class="all-post-titles">
   <h2>All Blog Posts</h2>
+  
+  <br>
 
   {% assign grouped_posts = site.posts | group_by: "series" %}
 
