@@ -19,7 +19,7 @@ toc:
   sidebar: left
 ---
 
-We've talked about the collection of positive definite matrices on several occasions already, each time focusing on different facets. On [the post]({% post_url 2026-02-23-Manifold(4)-Lie %}) on Lie group/algebra, 
+We've talked about the collection of positive definite matrices on several occasions already, each time focusing on different facets. On [the post]({% post_url 2026-02-23-Manifold(5)-Lie %}) on Lie group/algebra, 
 I explained that it is not a Lie group but a smooth manifold, and then in [the later post]({% post_url 2026-02-24-Manifold(X)-metric %}), we saw that by introducing Riemannian metric we could turn 
 
 $$
