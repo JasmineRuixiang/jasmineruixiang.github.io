@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'The Dance of Space: Geom/Topo/Dynam Mumble(5)'
+title: 'The Dance of Space: Geom/Topo/Dynam Mumble(5): Geodesic, Gauss Theorem Egregium, and Gauss-Bonnet and Chern'
 date: 2026-02-08 14:58:02
 description: Geodesic and its construction, Gauss Theorem Egregium, Gauss-Bonnet and Chern
 series: The Dance of Space

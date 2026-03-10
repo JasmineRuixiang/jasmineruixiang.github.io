@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'The Dance of Space: Geom/Topo/Dynam Mumble(3) (in progress)'
+title: 'The Dance of Space: Geom/Topo/Dynam Mumble(3): Differential Forms (in progress)'
 date: 2025-09-17 17:49:33
 description: Intuite and define differential forms 
 series: The Dance of Space

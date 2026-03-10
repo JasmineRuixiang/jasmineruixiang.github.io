@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'The Dance of Space: Geom/Topo/Dynam Mumble(4) (in progress)' 
+title: 'The Dance of Space: Geom/Topo/Dynam Mumble(4): Subspace Geometry and Computation (in progress)' 
 date: 2026-02-03 21:49:38
 description: Subspace Geometry and Computation
 series: The Dance of Space
