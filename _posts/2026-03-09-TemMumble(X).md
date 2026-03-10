@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'The Flow of Time: Prob/Measure/Transport/Generative Mumble(X): Entropy and Fisher Information (in progress)'
+title: 'The Flow of Time: Prob/Measure/Transport/Generative Mumble(X): Entropy and Fisher Information'
 date: 2026-03-09 00:16:01
 description: Displacement Convextiy, Ricci Curvature 
 series: The Flow of Time

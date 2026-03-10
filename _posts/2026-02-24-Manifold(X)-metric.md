@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Manifold and Riemannian Geometry (X): Riemannian metric and Riemannian manifold (in progress)"
+title: "Manifold and Riemannian Geometry (X): Riemannian metric and Riemannian manifold"
 date: 2026-02-24 23:06:01
 description: Exploration of metric, and Riemannian manifold
 series: Manifold and Riemannian Geometry

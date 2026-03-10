@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Manifold and Riemannian Geometry (2): Tangent/Cotangent Space (in progress)"
+title: "Manifold and Riemannian Geometry (2): Tangent/Cotangent Space"
 date: 2025-09-17 23:30:02
 description: Intuition and definition of tangent/cotangent space
 series: Manifold and Riemannian Geometry

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Manifold and Riemannian Geometry (X+1): Connections, Parallel Transport, and Geodesics (in progress)"
+title: "Manifold and Riemannian Geometry (X+1): Connections, Parallel Transport, and Geodesics"
 date: 2026-03-10 11:48:52
 description: Exploration of Connection
 series: Manifold and Riemannian Geometry

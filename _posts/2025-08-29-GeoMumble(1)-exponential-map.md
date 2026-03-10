@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'The Dance of Space: Geom/Topo/Dynam Mumble(1): The Exponential Map'
+title: 'The Dance of Space: Geom/Topo/Dynam Mumble(1): The Exponential Map (in progress)'
 date: 2025-08-29 02:25:33
 description: Exponential maps applied in Lie group & dynamical systems
 series: The Dance of Space
