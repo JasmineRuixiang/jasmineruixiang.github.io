@@ -3,6 +3,7 @@ layout: post
 title: "Manifold and Riemannian Geometry (1): Rigorous Definition (in progress)"
 date: 2025-08-29 02:32:56
 description: Rigorous definition of manifold and related topology concepts
+series: Manifold and Riemannian Geometry
 tags: 
     - "Geometry Concepts/Tools"
     - "Topology Concepts/Tools"

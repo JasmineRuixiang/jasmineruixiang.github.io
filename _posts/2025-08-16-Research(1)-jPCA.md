@@ -2,7 +2,8 @@
 layout: post
 title: Rotational Dynamics in Neural Population
 date: 2025-08-16 18:30:16
-description: Introduce neural latent dynamics from jPCA 
+description: Introduce neural latent dynamics from jPCA
+series: Computational Neuroscience/BCI Research 
 tags: 
     - "Latent Dynamics"
     - "Neural Manifold"

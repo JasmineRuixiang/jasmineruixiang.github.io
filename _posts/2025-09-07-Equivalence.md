@@ -3,6 +3,7 @@ layout: post
 title: 'Equivalence: What does "being equal" represent? (in progress)'
 date: 2025-09-7 00:23:16
 description: Compare various equivalences in geometry/topology/group theory
+series: Miscellaneous
 tags: 
     - "Geometry Concepts/Tools"
     - "Topology Concepts/Tools"

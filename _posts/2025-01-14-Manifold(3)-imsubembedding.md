@@ -3,6 +3,7 @@ layout: post
 title: "Manifold and Riemannian Geometry (3): Immersion, Submersion and Embedding (in progress)"
 date: 2026-01-14 20:22:25
 description: Explore relations of maps between manifolds
+series: Manifold and Riemannian Geometry
 tags: 
     - "Geometry Concepts/Tools"
     - "Topology Concepts/Tools"

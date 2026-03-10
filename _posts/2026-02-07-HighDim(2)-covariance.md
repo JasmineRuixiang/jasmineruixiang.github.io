@@ -3,6 +3,7 @@ layout: post
 title: 'High Dimensional Nitty-gritty (2): Z-scoring before PCA?'
 date: 2026-02-09 01:22:40
 description: Zscoring, covariance, PCA
+series: Data Science Techniques
 tags: 
     - "Brain Computer Interface"
 categories: 

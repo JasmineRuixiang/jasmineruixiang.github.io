@@ -107,7 +107,7 @@ pagination:
 
 <hr>
 
-<div class="all-post-titles">
+<!-- <div class="all-post-titles">
   <h2>All Blog Posts</h2>
   <ul>
     {% assign all_posts = site.posts | sort: "date" | reverse %}
@@ -123,7 +123,39 @@ pagination:
       </li>
     {% endfor %}
   </ul>
+</div> -->
+
+
+<div class="all-post-titles">
+  <h2>All Blog Posts</h2>
+
+  {% assign grouped_posts = site.posts | group_by: "series" %}
+
+  {% for group in grouped_posts %}
+
+    {% if group.name != "" %}
+      <h3>{{ group.name }}</h3>
+    {% else %}
+      <h3>Other Posts</h3>
+    {% endif %}
+
+    <ul>
+      {% assign sorted_posts = group.items | sort: "date" | reverse %}
+      {% for post in sorted_posts %}
+        <li>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <br>
+
+  {% endfor %}
+
 </div>
+
+
+
 
 <hr>
 

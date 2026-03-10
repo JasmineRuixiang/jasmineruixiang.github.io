@@ -3,6 +3,7 @@ layout: post
 title: 'The Dance of Space: Geom/Topo/Dynam Mumble(4) (in progress)' 
 date: 2026-02-03 21:49:38
 description: Subspace Geometry and Computation
+series: The Dance of Space
 tags: 
     - "Neural Manifold"
     - "Dimensionality Reduction"

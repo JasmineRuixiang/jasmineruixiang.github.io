@@ -3,6 +3,7 @@ layout: post
 title: "Manifold and Riemannian Geometry (4): Vector Fields (in progress)"
 date: 2026-02-23 21:39:24
 description: Vector fields and Applications
+series: Manifold and Riemannian Geometry
 tags: 
     - "Geometry Concepts/Tools"
     - "Topology Concepts/Tools"

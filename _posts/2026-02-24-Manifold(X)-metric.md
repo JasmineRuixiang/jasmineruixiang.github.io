@@ -3,6 +3,7 @@ layout: post
 title: "Manifold and Riemannian Geometry (X): Riemannian metric and Riemannian manifold (in progress)"
 date: 2026-02-24 23:06:01
 description: Exploration of metric, and Riemannian manifold
+series: Manifold and Riemannian Geometry
 # thumbnail: /assets/img/blogs/rmx.png
 tags: 
     - "Geometry Concepts/Tools"

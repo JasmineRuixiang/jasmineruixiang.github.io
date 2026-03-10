@@ -3,6 +3,7 @@ layout: post
 title: 'High Dimensional Nitty-gritty (1): Equivalence (or Lack thereof) between Block-wise and Global Z-scoring'
 date: 2026-02-06 11:16:09
 description: Zscoring, block vs session level comparisons
+series: Data Science Techniques
 tags: 
     - "Brain Computer Interface"
 categories: 

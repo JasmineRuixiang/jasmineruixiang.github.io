@@ -3,6 +3,7 @@ layout: post
 title: "Manifold and Riemannian Geometry (5): Lie Group and Lie Algebra (in progress)"
 date: 2026-02-23 21:39:24
 description: Lie group, Lie algebra, and their computation
+series: Manifold and Riemannian Geometry
 tags: 
     - "Geometry Concepts/Tools"
     - "Topology Concepts/Tools"
