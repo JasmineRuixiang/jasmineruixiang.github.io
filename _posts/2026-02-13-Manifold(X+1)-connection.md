@@ -87,7 +87,7 @@ This rule is an **affine connection**. And we __choose__ such a rule.
 
 ## 2] Definition of an Affine Connection
 
-A connection is an operator operator $$\nabla: C^{\infty}(M) \times C^{\infty}(M) \to C^{\infty}(M)$$ that maps two vector fields, $$X$$ and $$Y$$, to a new vector field $$\nabla_X Y$$.
+A connection is an operator operator $$\nabla: \mathcal{X}^{\infty}(M) \times \mathcal{X}^{\infty}(M) \to \mathcal{X}^{\infty}(M)$$ that maps two vector fields, $$X$$ and $$Y$$, to a new vector field $$\nabla_X Y$$.
 
 We could think of it as:
 
