@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'The Flow of Time: Prob/Measure/Transport/Generative Mumble(X): Entropy and Fisher Information'
-date: 2026-03-09 00:16:01
+date: 2026-03-10 23:36:29
 description: Displacement Convextiy, Ricci Curvature 
 series: The Flow of Time
 # thumbnail: /assets/img/blogs/spd.png
@@ -329,3 +329,159 @@ This connects optimal transport, diffusion equations, statistical physics, and R
 ---
 
 ## 2] Fisher Information 
+
+**Fisher information** measures how much information an observable random variable carries about an unknown parameter of a statistical model. Intuitively, it quantifies **how sensitive the probability distribution is to changes in the parameter**. As the name indicates, this concept was introduced by Ronald A. Fisher.
+
+### 2.1] Setup and Definition
+
+Suppose
+
+- A random variable $$X$$ has probability density (or mass) function  
+
+$$
+p(x|\theta)
+$$
+
+- $$\theta$$ is an unknown parameter we want to estimate.
+
+The **score function** is
+
+$$
+s(x,\theta) = \frac{\partial}{\partial \theta} \log p(x|\theta)
+$$
+
+which measures how much the **log-likelihood changes with the parameter**.
+
+The `Fisher information` is the variance of this score:
+
+$$
+I(\theta) = \mathbb{E}\left[\left(\frac{\partial}{\partial\theta}\log p(X|\theta)\right)^2\right]
+$$
+
+where the expectation is taken over $$X \sim p(x|\theta)$$.
+
+An equivalent form (under regularity conditions) is
+
+$$
+I(\theta) =
+-\mathbb{E}\left[
+\frac{\partial^2}{\partial \theta^2}\log p(X|\theta)
+\right]
+$$
+
+(I'll leave it for the readers to prove it)
+
+---
+
+### 2.3] Intuition of Fisher Information
+
+Think of the log likelihood function (assume $$i.i.d$$ samples):
+
+$$
+\log (L(\theta)) = \log (p(X|\theta)) = \mathbb{E}\left[\log p(X|\theta)\right]
+$$
+
+and the folloiwng two scenarios:
+
+* 1) Low Fisher information: The likelihood is **flat** with respect to $$\theta$$: small changes in $$\theta$$ barely change the distribution and thus data tells you little about the parameter.
+* 2) High Fisher information: The likelihood is **sharp** around the true value: small changes in $$\theta$$ strongly change the distribution and thus data strongly determines $$\theta$$.
+
+Consequently, Fisher information measures **parameter identifiability from data**.
+
+---
+
+### 2.3] Example: Normal Mean
+
+Let
+
+$$
+X \sim N(\mu, \sigma^2)
+$$
+
+with known $$\sigma$$ and unknown $$\mu$$. The log likelihood is
+
+$$
+\log p(x|\mu)
+= -\frac{(x-\mu)^2}{2\sigma^2} + C
+$$
+
+and the derivative:
+
+$$
+\frac{\partial}{\partial \mu} \log p(x|\mu)
+= \frac{x-\mu}{\sigma^2}
+$$
+
+If we square and take expectation:
+
+$$
+I(\mu)
+= \mathbb{E}\left[\left(\frac{x-\mu}{\sigma^2}\right)^2\right]
+= \frac{1}{\sigma^4} \mathbb{E}[(x-\mu)^2]
+= \frac{1}{\sigma^2}
+$$
+
+this means that 
+
+$$
+I(\mu)=\frac{1}{\sigma^2}
+$$
+
+Notice that this is consisten with our interpretation:
+
+- Larger variance indicates less information
+- Smaller variance represents more information
+
+---
+
+### 2.4] Multiple Samples
+
+For $$n \;\; i.i.d.$$ samples:
+
+$$
+I_n(\theta) = n I(\theta)
+$$
+
+Information **adds linearly with independent data**.
+
+---
+
+### 2.5] Connection to Estimation (Cramér–Rao Bound)
+
+Fisher information determines the **best possible accuracy of estimators** via the **Cramér–Rao bound**:
+
+$$
+\text{Var}(\hat{\theta}) \ge \frac{1}{I_n(\theta)}
+$$
+
+**More Fisher information leads to lower possible estimation variance**.
+
+---
+
+### 2.6] Geometric Interpretation (Information Geometry)
+
+In **information geometry** (A major developer of this geometric viewpoint is Shun-ichi Amari), Fisher information defines a **Riemannian metric** on the space of probability distributions.
+
+The metric tensor is
+
+$$
+g_{ij}(\theta)
+= \mathbb{E}
+\left[
+\frac{\partial \log p}{\partial \theta_i}
+\frac{\partial \log p}{\partial \theta_j}
+\right]
+$$
+
+This is called the **Fisher information metric**. The geometry of statistical models (distances, geodesics, curvature) is built from this metric.
+
+---
+
+### 2.7] Conceptual Summary
+
+Fisher information measures:
+
+- **Sensitivity of the distribution to parameters**
+- **Amount of information data carries about parameters**
+- **Best possible precision of estimators**
+- **Riemannian metric on the statistical manifold**
