@@ -18,8 +18,10 @@ toc:
   sidebar: left
 ---
 
-### Introduction
+## 0] Introduction
 Today I will cover a beautiful subject in differenetial geometry: Ricci flows and Ricci curvature. 
+
+I highly recommend readers this [intro paper](https://differentialgeometri.wordpress.com/2022/01/13/an-illustrated-introduction-to-the-ricci-flow-third-version/) written by Gabriel Kahn. 
 
 Generally, in Riemannian geometry, curvature measures how space bends. For instance, on a sphere, geodesics (shortest paths) come closer together compared to flat space; on a hyperbolic surface, they diverge.
 
@@ -34,7 +36,36 @@ Intuitively, we could summarize into the following:
 
 Mathematically, Ricci curvature is obtained by “tracing” the __Riemann curvature tensor__. It compresses information about how different directions curve into a symmetric 2-tensor `Ric`. 
 
-### Riemannian Geometry and Tensor
+In order to provide somewht more historical context and motivation, please indulge me in belabouring a little on the story of Poincaré conjecture, because for many Ricci flow is famous as a central tool in proving Poincaré conjecture. But even before that, let's start with a similar (many consider a precursor) theorem in 2D.
+
+### 0.1] Classification Theorem of Surfaces
+
+> Every closed surface is topologically equivalent to
+either a sphere with $$g$$ handles (genus $$g$$) or a connected sum of projective planes.
+---
+
+### 0.2] The Uniformization Theorem
+
+---
+
+### 0.3] Poincaré Conjecture
+
+---
+
+### 0.4] Thurston's Geometrization Conjecture
+
+---
+
+### 0.5] Richard Hamilton's Ricci Flow
+
+---
+
+### 0.5] Obstacle and Final Puzzle by Grigori Perelman
+
+---
+
+
+## 1] Riemannian Geometry and Tensor
 The Riemann tensor is written in the following way:
 
 $$

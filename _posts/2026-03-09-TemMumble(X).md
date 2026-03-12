@@ -485,3 +485,9 @@ Fisher information measures:
 - **Amount of information data carries about parameters**
 - **Best possible precision of estimators**
 - **Riemannian metric on the statistical manifold**
+
+---
+
+### 2.8] Fisher Information, Grigori Perelman, and Ricci Flow
+
+
