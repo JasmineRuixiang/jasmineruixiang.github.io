@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'The Flow of Time: Prob/Measure/Transport/Generative Mumble(X+1): Entropy Convexity and Ricci Curvature'
-date: 2026-03-09 12:53:18
+date: 2026-03-12 12:53:18
 description: Displacement Convextiy, Ricci Curvature 
 series: The Flow of Time
 # thumbnail: /assets/img/blogs/spd.png
