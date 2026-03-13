@@ -45,7 +45,32 @@ either a sphere with $$g$$ handles (genus $$g$$) or a connected sum of projectiv
 ---
 
 ### 0.2] The Uniformization Theorem
-Classifies the geometries of two dimensional surfaces. 
+Classifies the geometries of two dimensional surfaces. As Poincaré argued:
+
+> Any two dimensional surfaces could be defomred into one of the three following kinds of geometry, depending on the number of holes they have:
+> 1) Round sphere if no holes;
+> 2) Flat space if one hole (for example, a donut);
+> 3) Hyperbolic plane if more than one hole.
+
+Note that the above is a gentler version. The actual theorem has a stronger claim (conformal transformation, and could also classify non-orientable surfaces). 
+
+As Gabriel Kahn put in his blog, this might seem very bizarre at first glance. I was once so confused here: If the surface has no hole, should not it be a plane? If it has one hole/donut, how could it be made into a flat space?
+
+Well, notice that the classification is towards geometry, not the underlying topology. The above confusion comes from mixing two different things:
+
+* 1) Topology of the surface (how many holes there are / its genus)
+* 2) Geometry placed on that surface (the metric and curvature)
+
+The Uniformization Theorem is about the geometry we can put on a given topological surface, not about changing the topology into another object like a plane. What this theorem actually says is that 
+
+> For any connected 2-dimensional surface, we can choose a metric so that its Gaussian curvature is constant everywhere. And here only the above three possibilities exist. 
+
+If the genus is 0, then the constant curvature is positive, which corresponds to a sphere model; if genus 1, then the constant curvature is 0, which corresponds to a flat plane; if genus larger than 1, negative curvature and thus hyperbolic space. 
+
+So the theorem says every surface admits a metric of one of these three constant curvatures. Importantly, the topology does not change but only the metric changes.
+
+
+Also notice that compact surfaces with non-positive curvature cannot be smoothly immersed in $$\mathbb{R}^3$$. 
 
 ---
 
