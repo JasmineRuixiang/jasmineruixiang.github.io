@@ -45,10 +45,15 @@ either a sphere with $$g$$ handles (genus $$g$$) or a connected sum of projectiv
 ---
 
 ### 0.2] The Uniformization Theorem
+Classifies the geometries of two dimensional surfaces. 
 
 ---
 
 ### 0.3] Poincaré Conjecture
+
+> __Poincaré Conjecture__: The only topology of a three dimensional compact simply-connected manifold is the three dimensional sphere. 
+
+
 
 ---
 
@@ -79,7 +84,7 @@ The above is an unfair treatment of Riemannian geometry. I'll have a separate bl
 How to understand: Riemannian metric tensor informs the manifold where to expand, shrink, and curve.  How does Riemannian metric tensor relate with curvature? 
 
 
-### Ricci Curvature 
+## 2] Ricci Curvature 
 Based on the Riemann tensor, what is the curvature? 
 
 To get Ricci curvature, we take a __trace__ of the Riemann tensor:
@@ -91,7 +96,7 @@ $$
 This reduces the information down to a 2-tensor (like the metric itself). Geometrically, this represents the volume distortion of geodesic balls.
 
 
-### Ricci Flow
+## 3] Ricci Flow
 Introduced by `Richard Hamilton (1982)`, Ricci flow is a process that evolves a Riemannian metric $$g(t)$$ over time:
 
 $$
@@ -143,3 +148,6 @@ Very briefly, since a sphere has positive curvature, by applying Ricci flow thro
 
 One of the most triumphant use of Ricci flow happens when Grigori Perelman (2002–2003) to prove __the Poincaré conjecture__ and the more general __Thurston geometrization conjecture__. He showed how Ricci flow with “surgery” (cutting and patching when singularities form) classifies 3-manifolds.
 
+---
+
+## 4] Heat Flow
