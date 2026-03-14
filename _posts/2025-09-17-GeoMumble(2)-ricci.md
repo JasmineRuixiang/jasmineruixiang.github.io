@@ -69,6 +69,21 @@ If the genus is 0, then the constant curvature is positive, which corresponds to
 
 So the theorem says every surface admits a metric of one of these three constant curvatures. Importantly, the topology does not change but only the metric changes.
 
+Now come back to the original confusion: Why does the sphere corresponds to “no holes”? 
+
+Well, a closed surface with no holes is topologically a 2-sphere. Uniformization says we can choose a metric with constant positive curvature. The canonical model is the 2-sphere. Very importantly, this does not mean the surface becomes a plane. The plane has different topology (it is even not compact).
+
+Interestingly, this also reveals one subtle phenomenon when we think about why a torus can be flat. Think of the following construction:
+
+Take a square in the plane and then glue opposite edges. This produces a torus, topologically. Then because the square came from the Euclidean plane, the metric inherited is flat everywhere. Formally this torus is
+
+$$
+\mathbb{T}^2 = \mathbb{R}^2/\mathbb{Z}^2
+$$
+
+Locally it looks exactly like the Euclidean plane, but globally the edges wrap around. A classic physical analogy is a video game map with periodic boundaries: you walk straight and eventually return to where you started (this might also be used to illustrate rational vs irrational cycling).
+
+
 
 Also notice that compact surfaces with non-positive curvature cannot be smoothly immersed in $$\mathbb{R}^3$$. 
 
