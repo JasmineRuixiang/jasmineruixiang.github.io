@@ -42,15 +42,29 @@ In order to provide somewht more historical context and motivation, please indul
 
 > Every closed surface is topologically equivalent to
 either a sphere with $$g$$ handles (genus $$g$$) or a connected sum of projective planes.
+
+> Every compact simply connected surface is homeomorphic to the sphere.
+
+This is a classification theorem about the topology, not the applied geometry (for geometry, please see the following two sections). 
+
 ---
 
 ### 0.2] The Uniformization Theorem
 Classifies the geometries of two dimensional surfaces. As Poincaré argued:
 
-> Any two dimensional surfaces could be defomred into one of the three following kinds of geometry, depending on the number of holes they have:
-> 1) Round sphere if no holes;
-> 2) Flat space if one hole (for example, a donut);
-> 3) Hyperbolic plane if more than one hole.
+> Any __two__ dimensional __closed__ surfaces could be defomred into one of the three following kinds of geometry with __constant curvature__, depending on the number of holes they have:
+> 1) Round sphere (curvature 1) if no holes;
+> 2) Flat space (curvature 0) if one hole (for example, a donut);
+> 3) Hyperbolic plane (curvature -1) if more than one hole.
+
+or 
+
+> Every simply connected Riemann surface is conformally equivalent to exactly one of three spaces:
+> 1) the 2-sphere;
+> 2) the Euclidean plane;
+> 3) the Hyperbolic plane.
+
+Consequently, all 2-dimensional geometries collapse into three universal models. This works because curvature in dimension 2 is very simple: the entire curvature tensor is determined by one scalar, the __Gaussian curvature__.
 
 Note that the above is a gentler version. The actual theorem has a stronger claim (conformal transformation, and could also classify non-orientable surfaces). 
 
@@ -71,7 +85,9 @@ So the theorem says every surface admits a metric of one of these three constant
 
 Now come back to the original confusion: Why does the sphere corresponds to “no holes”? 
 
-Well, a closed surface with no holes is topologically a 2-sphere. Uniformization says we can choose a metric with constant positive curvature. The canonical model is the 2-sphere. Very importantly, this does not mean the surface becomes a plane. The plane has different topology (it is even not compact).
+Well, __a closed surface with no holes is topologically a 2-sphere__. Uniformization says we can choose a metric with constant positive curvature. The canonical model is the 2-sphere. Very importantly, this does not mean the surface becomes a plane. The plane has different topology (it is even not compact).
+
+Remember that the Uniformalization theorem concerns only closed (compact and no boundary) surfaces, and a Euclidean plane is not compact at all. Uniformization does not change the surface into a plane or sphere. It says we can choose a metric on that same surface whose curvature is constant, and the sign of that curvature depends only on the number of holes.
 
 Interestingly, this also reveals one subtle phenomenon when we think about why a torus can be flat. Think of the following construction:
 
@@ -83,21 +99,70 @@ $$
 
 Locally it looks exactly like the Euclidean plane, but globally the edges wrap around. A classic physical analogy is a video game map with periodic boundaries: you walk straight and eventually return to where you started (this might also be used to illustrate rational vs irrational cycling).
 
-
-
 Also notice that compact surfaces with non-positive curvature cannot be smoothly immersed in $$\mathbb{R}^3$$. 
 
+You might have a natural question here: aren't there donuts everywhere in coffee shops (thus in this 3D world)? The key issue is the difference between intrinsic curvature and extrinsic shape. The above statement refers to intrinsic flatness, not just the object sitting in 3D space. 
+
+A physical donut shape in $$\mathbb{R}^3$$ is a torus embedded in space. Mathematically this is the standard Torus, but this surface is not __intrinsically__ flat.
+
+If we compute the Gaussian curvature of the standard torus in $$\mathbb{R}^3$$, the outer side has positive curvature whereas the inner side has negative curvature. Consequently, in general the curvature is not zero.
+
+However, here we are talking about _flat_ torus and flat surface means its Gaussian curvature is zero everywhere. For examples, Euclidean plane, cylinder, or a cone (away from the bottom). These are also called developable surfaces: we can cut them and lay them flat without stretching.
+
+The Uniformization Theorem says a genus-1 surface admits a flat metric. It says that it's __possible__ to choose this metric, but not necessarily it has to be a uniform constant metric (Gaussian curvature is intrinsic and could be determined entirely by the choosen metric). The standard construction for such flat torus is the $$T^2 = \mathbb{R}^2 / \mathbb{Z}^2$$ from above. 
+
+This object is intrinsically flat everywhere. The distance is just the Euclidean distance. But it __cannot be embedded smoothly into $$\mathbb{R}^3$$__ without distorting the metric.
+
+Why this is not possible? There is a deep geometric obstruction coming from Gauss’s Theorema Egregium. This theorem says that Gaussian curvature depends only on the metric, not on how the surface sits in space. If a torus embedded in $$\mathbb{R}^3$$
+were flat, then its Gaussian curvature would have to be zero everywhere. But any smooth torus embedded in $$\mathbb{R}^3$$ must have regions of positive and negative curvature, so a smooth flat embedding is impossible.
+
+Consequently, the everyday chocolate donut works fine because it "isn't flat". It stretches the metric compared with the flat torus. That stretching creates curvature:
+
+* outer rim: bulges (positive curvature)
+* inner rim: saddle-like (negative curvature)
+
+It lives in $$\mathbb{R}^3$$, but not with the flat metric anymore. It could have a flat metric, but then it would not live in $$\mathbb{R}^3$$ anymore. Think of trying to bend a sheet of paper: we can roll it into a cylinder without stretching, but making a donut requires stretching somewhere. Since the flat torus metric forbids stretching, it cannot be realized smoothly in $$\mathbb{R}^3$$. 
+
+A side note: although a flat torus cannot embed smoothly in $$\mathbb{R}^3$$, it can embed in $$\mathbb{R}^4$$. This is one of the first places where higher-dimensional geometry behaves very differently. 
+
+Also to be rigorous, even among flat metrics there are infinitely many choices. A flat torus is determined by a lattice in the plane. Instead of identifying edges of a square, we can identify edges of any parallelogram. Formally:
+
+$$
+T^2 = \mathbb{R}/\Lambda
+$$
+
+where $$\Lambda$$ is a lattice and different lattices produce different flat geometries. This parameter space is studied in _Teichmüller Theory_. 
+
+Finally, you might wonder why this has anything to do with our main topic today. Well, as we will learn later, the Ricci Flow evolves the metric so that the surface flows toward the uniformization metric. On a surface it essentially smooths the curvature until it becomes constant, recovering the three cases above.That is why the Uniformization Theorem is the 2-dimensional precursor to the Poincaré Conjecture program in 3 dimensions.
+
+If you are still confused, I would suggest dissecting the structure/object you are consideirng into the following three components:
+
+* 1) Topology;
+* 2) The (Riemannian) Metric;
+* 3) if any, the Embedding in $$\mathbb{R}^3$$
+
 ---
 
-### 0.3] Poincaré Conjecture
+### 0.3] Thurston's Geometrization Conjecture
+In dimensions $$n \geq 3$$, curvature is much more complicated. Instead of a single number $$K$$, we have the full Riemann curvature tensor, which contains many independent components. Because of this, manifolds can have wildly different curvature structures and there is no classification into just three geometries --- a direct analogue of uniformization does not exist. 
+
+The closest result is __Thurston's Geometrization Conjecture__, proved using Ricci Flow and completed by Grigori Perelman. Instead of three geometries, there are __8__ model geometries for 3-manifolds, including:
+
+* 1) spherical geometry
+* 2) Euclidean geometry
+* 3) hyperbolic geometry
+
+and several others like $$\mathbb{S}^2 \times \mathbb{R}$$, Nil, Sol, etc. A 3-manifold decomposes into pieces that each admit one of these geometries.Thus, geometrization is sometimes described as the 3-dimensional analogue of uniformization, but it is much more complicated.
+
+Unfortunately, for higher dimensions there is no general geometric classification theorem comparable to uniformization. Instead, geometers study special problems such as: constant scalar curvature metrics, Einstein metrics, or special holonomy manifolds. 
+
+A deep reason this happens (and one that surprises many people) is that dimension 2 is the only dimension where conformal geometry and curvature are tightly constrained, which is why Riemann surfaces are unusually rigid compared with higher-dimensional manifolds.
+
+---
+
+### 0.4] Poincaré Conjecture
 
 > __Poincaré Conjecture__: The only topology of a three dimensional compact simply-connected manifold is the three dimensional sphere. 
-
-
-
----
-
-### 0.4] Thurston's Geometrization Conjecture
 
 ---
 
