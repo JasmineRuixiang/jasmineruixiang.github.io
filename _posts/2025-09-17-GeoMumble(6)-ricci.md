@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 'The Dance of Space: Geom/Topo/Dynam Mumble(2): Ricci Flow and Ricci Curvature (in progress)' 
-date: 2025-09-16 16:34:22
+title: 'The Dance of Space: Geom/Topo/Dynam Mumble(6): Ricci Flow and Ricci Curvature (in progress)' 
+date: 2026-03-14 23:57:22
 description: Introduction of Ricci flows and Ricci curvatures 
 series: The Dance of Space
 tags:
@@ -44,6 +44,8 @@ In order to provide somewht more historical context and motivation, please indul
 either a sphere with $$g$$ handles (genus $$g$$) or a connected sum of projective planes.
 
 > Every compact simply connected surface is homeomorphic to the sphere.
+
+> any closed orientable surface of genus $$1$$ is topologically the same as a Torus.
 
 This is a classification theorem about the topology, not the applied geometry (for geometry, please see the following two sections). 
 
@@ -135,15 +137,22 @@ where $$\Lambda$$ is a lattice and different lattices produce different flat geo
 
 Finally, you might wonder why this has anything to do with our main topic today. Well, as we will learn later, the Ricci Flow evolves the metric so that the surface flows toward the uniformization metric. On a surface it essentially smooths the curvature until it becomes constant, recovering the three cases above.That is why the Uniformization Theorem is the 2-dimensional precursor to the Poincaré Conjecture program in 3 dimensions.
 
+### 0.3] An Important Reminder
 If you are still confused, I would suggest dissecting the structure/object you are consideirng into the following three components:
 
 * 1) Topology;
 * 2) The (Riemannian) Metric;
 * 3) if any, the Embedding in $$\mathbb{R}^3$$
 
+The topology could be determined by the surface classification theorem (if we know the genus, then the topology is fixed), whereas the (Riemannian) metric indicates the intrinsic geometry. And please endow me to reinforce the following:
+
+Geometry does __NOT__ necessarily mean a shape in $$\mathbb{R}^3$$. This is perhaps a subtle point: A metric defines intrinsic geometry, meaning measurements made within the surface itself. We already saw this idea from Gauss in his Theorema Egregium: It says curvature depends only on the metric, but __not on how the surface sits in space__. Consequently, a geometry does not require an embedding into $$\mathbb{R}^3$$.
+
+Some geometries cannot appear as smooth surfaces in $$\mathbb{R}^3$$. For example, the flat Torus exists as an intrinsic geometry but it cannot be smoothly embedded in $$\mathbb{R}^3$$.
+
 ---
 
-### 0.3] Thurston's Geometrization Conjecture
+### 0.4] Thurston's Geometrization Conjecture
 In dimensions $$n \geq 3$$, curvature is much more complicated. Instead of a single number $$K$$, we have the full Riemann curvature tensor, which contains many independent components. Because of this, manifolds can have wildly different curvature structures and there is no classification into just three geometries --- a direct analogue of uniformization does not exist. 
 
 The closest result is __Thurston's Geometrization Conjecture__, proved using Ricci Flow and completed by Grigori Perelman. Instead of three geometries, there are __8__ model geometries for 3-manifolds, including:
@@ -160,17 +169,17 @@ A deep reason this happens (and one that surprises many people) is that dimensio
 
 ---
 
-### 0.4] Poincaré Conjecture
+### 0.5] Poincaré Conjecture
 
 > __Poincaré Conjecture__: The only topology of a three dimensional compact simply-connected manifold is the three dimensional sphere. 
 
 ---
 
-### 0.5] Richard Hamilton's Ricci Flow
+### 0.6] Richard Hamilton's Ricci Flow
 
 ---
 
-### 0.5] Obstacle and Final Puzzle by Grigori Perelman
+### 0.7] Obstacle and Final Puzzle by Grigori Perelman
 
 ---
 
