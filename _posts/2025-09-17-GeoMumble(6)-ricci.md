@@ -66,6 +66,14 @@ or
 > 2) the Euclidean plane;
 > 3) the Hyperbolic plane.
 
+or 
+
+> For each __conformal class__ of metrics on a __closed__ surface, there is a special metric with _constant curvature_.
+
+or 
+
+> For any Riemannian metric on a __closed__ surface, there exists a __conformally equivalent__ metric with _constant curvature_, and it is __unique__ within that conformal class.
+
 Consequently, all 2-dimensional geometries collapse into three universal models. This works because curvature in dimension 2 is very simple: the entire curvature tensor is determined by one scalar, the __Gaussian curvature__.
 
 Note that the above is a gentler version. The actual theorem has a stronger claim (conformal transformation, and could also classify non-orientable surfaces). 
@@ -133,7 +141,18 @@ $$
 T^2 = \mathbb{R}/\Lambda
 $$
 
-where $$\Lambda$$ is a lattice and different lattices produce different flat geometries. This parameter space is studied in _Teichmüller Theory_. 
+where $$\Lambda$$ is a lattice and different lattices produce different flat geometries. This parameter space is studied in _moduli space_ and _Teichmüller Theory_. 
+
+This hints at the final subtlety we've neglected so far, on what “unique” means in the Uniformization Theorem. As we said, for a closed genus-1 surface the constant curvature must be 0, but there are many flat metrics, not just one. The uniqueness statement is within a __conformal class__, not among all metrics.
+
+Rmemember one of our version of this theorem:
+
+> For any Riemannian metric on a __closed__ surface, there exists a __conformally equivalent__ metric with _constant curvature_, and it is __unique__ within that __conformal class__.
+
+So the key phrase is __conformal class__.
+
+Two metrics are conformally equivalent if they differ by scaling with a positive function:
+
 
 Finally, you might wonder why this has anything to do with our main topic today. Well, as we will learn later, the Ricci Flow evolves the metric so that the surface flows toward the uniformization metric. On a surface it essentially smooths the curvature until it becomes constant, recovering the three cases above.That is why the Uniformization Theorem is the 2-dimensional precursor to the Poincaré Conjecture program in 3 dimensions.
 
@@ -148,7 +167,9 @@ The topology could be determined by the surface classification theorem (if we kn
 
 Geometry does __NOT__ necessarily mean a shape in $$\mathbb{R}^3$$. This is perhaps a subtle point: A metric defines intrinsic geometry, meaning measurements made within the surface itself. We already saw this idea from Gauss in his Theorema Egregium: It says curvature depends only on the metric, but __not on how the surface sits in space__. Consequently, a geometry does not require an embedding into $$\mathbb{R}^3$$.
 
-Some geometries cannot appear as smooth surfaces in $$\mathbb{R}^3$$. For example, the flat Torus exists as an intrinsic geometry but it cannot be smoothly embedded in $$\mathbb{R}^3$$.
+Some geometries cannot appear as smooth surfaces in $$\mathbb{R}^3$$. For example, the flat Torus exists as an intrinsic geometry but it cannot be smoothly embedded in $$\mathbb{R}^3$$. In fact, Most intrinsic geometries do not correspond to a simple shape in $$\mathbb{R}^3$$. 
+
+Then, an embedding places the surface inside space. For example: the familiar Torus embedded in $$\mathbb{R}^3$$. This embedding induces a particular metric (from Euclidean space), which has positive and negative curvature, and that donut corresponds to one specific geometry among infinitely many possible metrics on the torus.
 
 ---
 

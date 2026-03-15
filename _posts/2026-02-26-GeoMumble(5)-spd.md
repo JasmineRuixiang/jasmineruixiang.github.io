@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'The Dance of Space: Geom/Topo/Dynam Mumble(6): Symmetric Positive Definite Matrix'
+title: 'The Dance of Space: Geom/Topo/Dynam Mumble(5): Symmetric Positive Definite Matrix'
 date: 2026-02-26 14:58:02
 description: SPD, Riemannian/Information Geometry, Optimal Transport
 series: The Dance of Space
