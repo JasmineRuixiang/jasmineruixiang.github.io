@@ -92,6 +92,12 @@ $$
 
 Now the result depends **only on the values of \(X,Y,Z\) at the point**, making it a tensor.
 
+Actually, to require that the operator $$R(X, Y)$$ is linear:
+
+* $$R(X, Y)fZ = fR(X, Y)Z$$
+
+we need to include the term $$\nabla_{[X, Y]}Z$$
+
 ---
 
 #### 1.4] Geometric Picture: Transport around a Tiny Loop
@@ -164,4 +170,79 @@ This definition is powerful because **all classical curvature quantities come fr
 Everything about curvature in Riemannian geometry originates from this operator.
 
 ---
+
+#### 1.8] Expression in Christoffel Symbols
+
+---
+
+#### 1.9] Differences between Riemannian Curvature and Covariant Derivative
+
+---
+
+### 2] Sectional Curvature 
+
+
+#### 2.1] Definition
+
+We will use the following notation:
+
+$$
+|x \wedge y|
+$$
+
+represents
+
+$$
+\sqrt{|x|^2|y|^2 - <x, y>^2}
+$$
+
+which is the are of a two-dimensional parallelogram spanned by $$x, y \in V$$. Here $$V$$ is a vector space. 
+
+We define sectional curvature as the following:
+
+
+What's also very important about sectional curvature is that once we know $$K(\sigma), \forall \sigma$$ then we know $$R$$ completely. 
+
+---
+
+#### 2.2] Meaning of the Numerator
+
+Recall the geometric meaning of $$R(x, y)z$$: it measures how much the vector $$z$$ changes when parallel transported around a tiny parallelogram spanned by $$x$$ and $$y$$. Now we specialize: 
+
+* $$z = y$$
+* Measure the component in direction $$x$$
+
+So $$ <R(x,y)y,x> $$
+
+measures how much curvature bends the vector $$y$$ toward $$x$$ when moving around the $$x-y$$ parallelogram. It captures the curvature restricted to that plane.
+
+---
+
+#### 2.3] Why Divide by $$|x \wedge y|^2$$
+Dividing by it removes dependence on the lengths of $$x,y$$, which is the scaling of the parallelogram. This ensures $$K(x,y)$$ depends only on the plane, not the particular vectors chosen.
+
+Consequently, really it is
+
+$$
+K(\sigma) = K(x, y), \forall x, y \in \sigma
+$$
+
+---
+
+#### 2.4] The Geometric Picture
+Imagine a tiny geodesic parallelogram spanned by $$x,y$$. Curvature causes the parallel transport loop to fail to close perfectly. The Riemann tensor measures this failure. Sectional curvature extracts the scalar curvature intensity of that failure __inside the chosen plane__. 
+
+Sectional curvature answers the following question: If I walk in two infinitesimal directions $$x$$ and $$y$$, how much does the manifold curve within that plane?
+
+Positive curvatur indicates that geodesics bend toward each other. Negative curvature indicates geodesics bend away from each other, while zero curvature says that geodesics stay parallel.
+
+---
+
+#### 2.5] 
+
+
+
+
+
+
 
