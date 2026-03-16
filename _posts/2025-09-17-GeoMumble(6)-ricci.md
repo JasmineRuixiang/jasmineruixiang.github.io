@@ -149,9 +149,23 @@ Rmemember one of our version of this theorem:
 
 > For any Riemannian metric on a __closed__ surface, there exists a __conformally equivalent__ metric with _constant curvature_, and it is __unique__ within that __conformal class__.
 
-So the key phrase is __conformal class__.
+So the key phrase is __conformal class__. Two metrics are conformally equivalent if they differ by scaling with a positive function:
 
-Two metrics are conformally equivalent if they differ by scaling with a positive function:
+$$
+g' = e^{2u}g
+$$
+
+As conformality suggests, this preserves angles but changes lengths.
+
+Still use the flat torus example: For a torus, the constant curvature must be 0, so the uniformization metric is flat/ 
+
+But a torus has __infinitely many conformal classes__, and each one produces its own flat metric. Hence there are infinitely many flat torus geometries.
+
+
+
+
+
+
 
 
 Finally, you might wonder why this has anything to do with our main topic today. Well, as we will learn later, the Ricci Flow evolves the metric so that the surface flows toward the uniformization metric. On a surface it essentially smooths the curvature until it becomes constant, recovering the three cases above.That is why the Uniformization Theorem is the 2-dimensional precursor to the Poincaré Conjecture program in 3 dimensions.
