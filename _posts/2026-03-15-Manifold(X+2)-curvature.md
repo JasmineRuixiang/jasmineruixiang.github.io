@@ -30,7 +30,9 @@ $$
 R(X,Y)Z = \nabla_Y\nabla_X Z - \nabla_X\nabla_Y Z + \nabla_{[X, Y]}Z .
 $$
 
-This expression measures **how much the vector field $$Z$$ changes when we transport it around an infinitesimal parallelogram spanned by \(X\) and \(Y\)**.
+This expression measures **how much the vector field $$Z$$ changes when we transport it around an infinitesimal parallelogram spanned by $$X$$ and $$Y$$**.
+
+Let me elaborate below. 
 
 ---
 
@@ -57,7 +59,7 @@ $$
 $$
 
 But this expression alone **does not behave tensorially**.  
-The issue is that the vector fields \(X\) and \(Y\) themselves may not commute.
+The issue is that the vector fields $$X$$ and $$Y$$ themselves may not commute.
 
 Recall their Lie bracket
 
@@ -65,13 +67,13 @@ $$
 [X,Y]
 $$
 
-which measures the difference between flowing along \(X\) then \(Y\) versus \(Y\) then \(X\).
+which measures the difference between flowing along $$X$$ then $$Y$$ versus $$Y$$ then $$X$$.
 
 So part of the difference above is simply caused by **the coordinate grid twisting**, not curvature.
 
 ---
 
-## 3. Subtract the coordinate artifact
+#### 1.3] Subtract the Coordinate Artifact
 
 To isolate the **true geometric effect**, we subtract the derivative along the Lie bracket direction:
 
@@ -85,55 +87,32 @@ So the curvature tensor becomes
 
 $$
 R(X,Y)Z
-=
-\nabla_Y\nabla_X Z
--
-\nabla_X\nabla_Y Z
-+
-\nabla_{[X,Y]}Z .
+= \nabla_Y\nabla_X Z - \nabla_X\nabla_Y Z + \nabla_{[X,Y]}Z .
 $$
 
 Now the result depends **only on the values of \(X,Y,Z\) at the point**, making it a tensor.
 
 ---
 
-## 4. Geometric picture: transport around a tiny loop
+#### 1.4] Geometric Picture: Transport around a Tiny Loop
 
 Imagine the following process:
 
-1. Start at a point \(p\).
-2. Move a tiny distance along \(X\).
-3. Then along \(Y\).
-4. Then back along \(-X\).
-5. Then back along \(-Y\).
+1. Start at a point $$p$$.
+2. Move a tiny distance along $$X$$.
+3. Then along $$Y$$.
+4. Then back along $$-X$$.
+5. Then back along $$-Y$$.
 
-This forms an **infinitesimal parallelogram**.
+This forms an **infinitesimal parallelogram**. Now parallel transport the vector $$Z$$ around this loop.
 
-Now parallel transport the vector \(Z\) around this loop.
-
-In **flat space**
-
-- The vector returns unchanged.
-
-On a **curved manifold**
-
-- The vector comes back slightly rotated.
-
-The curvature tensor measures exactly that change.
-
-More precisely,
-
-$$
-R(X,Y)Z
-$$
-
-is the **infinitesimal failure of parallel transport around the loop to return \(Z\)**.
+In **flat space**, the vector returns unchanged. However, on a **curved manifold**, the vector comes back slightly rotated. The curvature tensor measures exactly that change. More precisely, $$ R(X,Y)Z $$ is the **infinitesimal failure of parallel transport around the loop to return $$Z$$**.
 
 ---
 
-## 5. What kind of object it is
+#### 1.5] What Kind of Object It Is
 
-At each point \(p\):
+At each point $$p$$:
 
 $$
 R_p : T_pM \times T_pM \times T_pM \to T_pM
@@ -141,20 +120,12 @@ $$
 
 So it takes
 
-- two directions defining a **2-plane** (\(X,Y\))
-- a vector \(Z\)
+- two directions defining a **2-plane** ($$X,Y$$)
+- a vector $$Z$$
 
-and returns **how \(Z\) twists when transported around that plane**.
+and returns **how $$Z$$ twists when transported around that plane**. Thus curvature is fundamentally a **property of planes**, not just directions. Spoiler alert: This is why sectional curvature depends on a **2-dimensional plane** (see below).
 
-Thus curvature is fundamentally a **property of planes**, not just directions.
-
-This is why sectional curvature later depends on a **2-dimensional plane**.
-
----
-
-## 6. A very compact interpretation
-
-You can summarize the meaning as:
+We could summarize the meaning of curvature as:
 
 $$
 \textbf{Curvature = failure of covariant derivatives to commute}
@@ -164,29 +135,27 @@ after correcting for the fact that vector fields themselves might not commute.
 
 ---
 
-## 7. One more intuition (important)
+#### 1.6] One More Intuition
 
-Think of \( \nabla_X Z \) as:
+Think of $$ \nabla_X Z $$ as:
 
-> the rate of change of \(Z\) when moving in direction \(X\).
+> the rate of change of $$Z$$ when moving in direction $$X$$.
 
 Then
 
-- \( \nabla_Y\nabla_X Z \)  
-  means: change \(Z\) along \(X\), then see how that result changes along \(Y\).
+- $$ \nabla_Y\nabla_X Z $$
+  means: change $$Z$$ along $$X$$, then see how that result changes along $$Y$$.
 
-- \( \nabla_X\nabla_Y Z \)  
+- $$ \nabla_X\nabla_Y Z $$
   means: reverse the order.
 
 If the space is curved, **these two operations do not give the same result**, and the difference is exactly what the curvature tensor measures.
 
 ---
 
-## 8. Why this definition is fundamental
+#### 1.7] Why This Definition is Fundamental
 
-This definition is powerful because **all classical curvature quantities come from it**.
-
-From \(R\) we derive
+This definition is powerful because **all classical curvature quantities come from it**. From $$R$$ we derive
 
 - **Sectional curvature**
 - **Ricci curvature**
@@ -196,15 +165,3 @@ Everything about curvature in Riemannian geometry originates from this operator.
 
 ---
 
-## 9. A clean geometric interpretation
-
-A modern geometric interpretation is
-
-$$
-R(X,Y)Z
-=
-\lim_{\text{area}\to 0}
-\frac{\text{parallel transport error of }Z}{\text{area}}
-$$
-
-which expresses curvature as the **infinitesimal error of parallel transport around a tiny loop**.
