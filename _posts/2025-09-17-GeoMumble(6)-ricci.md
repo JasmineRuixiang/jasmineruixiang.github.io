@@ -111,6 +111,8 @@ Locally it looks exactly like the Euclidean plane, but globally the edges wrap a
 
 Also notice that compact surfaces with non-positive curvature cannot be smoothly immersed in $$\mathbb{R}^3$$. 
 
+[TODO]: This has to do with embedding theorems (Isometric embedding theorems from John Nash and Mikhail Gromov).
+
 You might have a natural question here: aren't there donuts everywhere in coffee shops (thus in this 3D world)? The key issue is the difference between intrinsic curvature and extrinsic shape. The above statement refers to intrinsic flatness, not just the object sitting in 3D space. 
 
 A physical donut shape in $$\mathbb{R}^3$$ is a torus embedded in space. Mathematically this is the standard Torus, but this surface is not __intrinsically__ flat.
@@ -206,7 +208,13 @@ A deep reason this happens (and one that surprises many people) is that dimensio
 
 ### 0.5] Poincaré Conjecture
 
-> __Poincaré Conjecture__: The only topology of a three dimensional compact simply-connected manifold is the three dimensional sphere. 
+From the previous surface classification theorem and the uniformization theorem we know that a simply connected compact surface is topologically equivalent to a sphere. Can we extend this claim to higher dimensions? Or, what about just 3D? Here's the Poincaré conjecture:
+
+> __Poincaré Conjecture__: Any compact and simply connected three dimensional manifold is topologically equivalent to a three dimensional ball.
+
+The Poincaré conjecture and the higher dimensional counterparts have attracted mathematicians' interest for decades. Numerous brilliant minds are setlted upon strivng to solve it, resulting in all higher dimensions resolved except 3 by the 80s. 
+
+
 
 ---
 
