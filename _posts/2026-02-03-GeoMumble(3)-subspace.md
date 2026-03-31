@@ -227,3 +227,218 @@ $$
 = 2r - 2\|U_{\text{train}}^{\top}U_{\text{test}}\|_F^2
 = 2\sum_{i=1}^r \sin^2(\theta_i).
 $$
+
+
+---
+
+## 6] QR Decomposition
+
+### 6.1] Definition and Interpretation
+
+Given a matrix $$A \in \mathbb{R}^{m \times n}$$, the **QR decomposition** writes:
+
+$$
+A = QR
+$$
+
+- $$Q$$: matrix with **orthonormal columns**
+- $$R$$: **upper triangular** matrix
+
+Note that $$m$$ is not necessarily the same as $$n$$. Also, here I'm being deliberately vague on the shapes of $$Q$$ and $$R$$. 
+
+QR decomposition clearly separates a linear map into:
+
+> **direction (orthonormal basis) + scaling/mixing (coordinates)**
+
+- $$Q$$ = rotation/reflection (rigid transformation), since orthogonal matrix has determinant $$\pm 1$$.
+- $$R$$ = coordinates of the columns of $$A$$ in the orthonormal basis
+
+Specifically, to be more precise, let:
+
+$$
+A = [a_1, a_2, \dots, a_n]
+$$
+
+Then QR constructs orthonormal vectors:
+$$
+q_1, q_2, \dots, q_n
+$$
+
+such that:
+$$
+a_j = \sum_{i=1}^j r_{ij} q_i
+$$
+
+where:
+$$
+r_{ij} = \langle q_i, a_j \rangle
+$$
+
+In other words, $$R$$ tells us how much each column of $$A$$ points in each orthonormal direction. Furthermore, if $$Q$$ is square:
+
+$$
+Q^T Q = QQ^T = I
+$$
+
+Then:
+$$
+\det(Q) = \pm 1
+$$
+
+- $\det(Q) = +1$ → **rotation**
+- $\det(Q) = -1$ → **reflection (or rotation + reflection)**
+
+---
+
+### 6.2] Important Clarifications
+
+#### 6.2.1] Orthogonal matrix ≠ pure rotation
+
+- Orthogonal matrices can include **reflections**
+- QR decomposition may produce reflections depending on construction
+
+
+#### 6.2.2] Existence of QR
+- QR decomposition exists for **any matrix** $A \in \mathbb{R}^{m \times n}$
+
+
+#### 6.2.3] Uniqueness of QR
+
+The QR solution of a matrix is not unique in general. 
+
+If:
+$$
+A = QR
+$$
+
+then for example
+$$
+Q' = QD, \quad R' = DR
+$$
+
+where $$D$$ is diagonal with entries $\pm 1$. To make it unique, we could impose:
+
+$$
+\text{diag}(R) > 0
+$$
+
+and now QR becomes **unique** and $$Q$$ has $$\det(Q) = +1 \rightarrow$$ pure rotation
+
+---
+
+#### 6.2.4] Rank Considerations
+
+- If columns of $$A$$ are linearly independent:
+  - $$R$$ has nonzero diagonal entries
+- If rank-deficient:
+  - some diagonal entries of $$R$$ are **zero**
+
+Actually, there's subtle question: in the case of rank-deficiency, it's the entries of $$R$$ being $$0$$, instead of the columns of $$Q$$ being $$0$$ vectors. 
+
+Let $$\operatorname{rank}(A) = r < n$$. We could interpret what happens through the lens of Gram–Schmidt (anyhow, QR is inherently doing Gram-Schmidt). 
+
+At step $$j$$:
+
+$$
+\tilde{q}_j = a_j - \sum_{i=1}^{j-1} \langle q_i, a_j \rangle q_i
+$$
+
+- If $$a_j$$ is independent $$ \rightarrow \tilde{q}_j \ne 0$$
+- If dependent $$ \rightarrow \tilde{q}_j = 0$$
+
+However, columns of $$Q$$ are **never zero**: $$Q$$ has orthonormal columns. 
+
+In $$R$$:
+
+$$
+R = \begin{pmatrix} * & * & * & * \\
+0 & * & * & * \\
+0 & 0 & * & * \\
+0 & 0 & 0 & 0 \\
+\end{pmatrix}
+$$
+
+- Diagonal entries:
+$$
+r_{jj} = 0 \quad \text{when column } a_j \text{ is dependent}
+$$
+
+
+---
+
+#### 6.2.5] Two Forms of QR
+
+Let $$A \in \mathbb{R}^{m \times n}$$ with $$m \ge n$$. The most common version of QR is the reduced (thin) QR:
+
+$$
+A = QR
+$$
+
+- $Q \in \mathbb{R}^{m \times n}$
+- $R \in \mathbb{R}^{n \times n}$
+
+Just to be super clear:
+
+$$
+Q^T Q = I_n, \quad QQ^T \ne I_m
+$$
+
+Obviously, $$Q$$ is an orthonormal basis of $$\operatorname{col}(A)$$.
+
+On the other hand, for full QR: 
+
+$$
+A = QR
+$$
+
+- $Q \in \mathbb{R}^{m \times m}$
+- $R \in \mathbb{R}^{m \times n}$
+
+Properties:
+$$
+Q^T Q = QQ^T = I_m
+$$
+
+Now, only the first $$n$$ columns span $$\operatorname{col}(A)$$, and the remaining columns span the orthogonal complement. 
+
+The special case is where $$m = n$$. In this case, $$Q \in \mathbb{R}^{n \times n}$$ and both the reduced and the full QR concide. 
+
+---
+
+### 6.3] Methods of Computation
+
+- Gram–Schmidt (conceptual)
+- Householder reflections (numerically stable), so $$Q$$ often includes reflections in practice
+
+---
+
+## 6.4] Least Squares Interpretation
+
+Solve:
+$$
+\min_x \|Ax - b\|^2
+$$
+
+Using $A = QR$:
+
+$$
+QRx = b \Rightarrow Rx = Q^T b
+$$
+
+This tells us that $$Q^T b$$ is the projection of $$b$$ onto orthonormal basis. On the other hand, $$R$$ = triangular means that this equation is easy to solve. 
+
+The projection onto $$\operatorname{col}(A)$$ is:
+
+$$
+QQ^T
+$$
+
+(when $$Q$$ has orthonormal columns)
+
+---
+
+### Summary fro QR
+QR decomposition is actually just Gram–Schmidt written in matrix form, where:
+
+- $$Q$$: orthonormal basis  
+- $$R$$: coordinate transformation
