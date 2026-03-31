@@ -54,8 +54,8 @@ $$
 
 such that:
 
-* $x \sim \mathcal{N}(0, I)$
-* $T$ is the **Brenier map** (gradient of a convex function)
+* $$x \sim \mathcal{N}(0, I)$$
+* $$T$$ is the **Brenier map** (gradient of a convex function)
 
 This satisfies the change-of-variables formula:
 $$
@@ -84,7 +84,7 @@ $$
 
 So:
 
-* The components $x_i$ are **independent**
+* The components $$x_i$$ are **independent**
 
 Here comes the key idea:
 
@@ -102,9 +102,9 @@ $$
 z_j = u_j^\top x
 $$
 
-where ${u_j}$ are orthonormal directions in the $$x$$ space. By the way, you could also contend that it's the same space since both $$y, x$$ live in $$\mathbb{R}^d$$.
+where $${u_j}$$ are orthonormal directions in the $$x$$ space. By the way, you could also contend that it's the same space since both $$y, x$$ live in $$\mathbb{R}^d$$.
 
-Here you might wonder, since $x \sim \mathcal{N}(0, I)$ is isotropic, aren’t all directions equivalent?
+Here you might wonder, since $$x \sim \mathcal{N}(0, I)$$ is isotropic, aren’t all directions equivalent?
 
 The answer is Yes, in $$x$$-space.
 
@@ -214,7 +214,7 @@ Interested readers please feel free to refer to the original paper for more mate
 
 | PCA                        | INCA                          |
 | -------------------------- | ----------------------------- |
-| Covariance matrix $\Sigma$ | $\bar J = -\mathbb{E}[\ln J]$ |
+| Covariance matrix $$\Sigma$$ | $$\bar J = -\mathbb{E}[\ln J]$$ |
 | Variance                   | Entropy                       |
 | Linear projection          | Nonlinear mapping             |
 | Uncorrelated components    | Independent components        |
@@ -300,14 +300,14 @@ So INCA = PCA
 
 Practically, there are a sequence of steps to fulfil, and many numerical problems might occur. 
 
-1. Estimate density $f(y)$
-2. Compute Brenier map $T$
-3. Compute Jacobian $J(y)$
+1. Estimate density $$f(y)$$
+2. Compute Brenier map $$T$$
+3. Compute Jacobian $$J(y)$$
 4. Compute:
    $$
    \bar J = -\mathbb{E}[\ln J(y)]
    $$
-5. Eigen-decompose $\bar J$
+5. Eigen-decompose $$\bar J$$
 6. Extract top components
 
 As you might know, computing $$T$$ is expensive in high dimensions. Consequently, the authors propose a **hybrid approach**: apply PCA for small components and INCA for the dominant ones. 
