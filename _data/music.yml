@@ -1,0 +1,6 @@
+- title: "Example Highlighted Track"
+  description: "A short description of the inspiration, mood, or concepts behind this piece. You can add more tracks by copying this block and pasting it below."
+  release_date: "2023-01-01"
+  # To get the embed_code, click "Share" -> "Embed" on a SoundCloud track, copy the iframe, and paste it securely in single quotes.
+  # We've changed the color to blue (#1e90ff)!
+  embed_code: '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/114888185&color=%231e90ff&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>'
