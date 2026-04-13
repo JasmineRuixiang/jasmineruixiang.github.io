@@ -172,6 +172,41 @@ The definiton of homeomorphism and charts allow us to pull functional analysis f
 The point of adding smooth structure to a topological manifold: this enables us to characterize a real-valued function $$f$$ on $$M$$ to be smooth or not ---- for a chart $$(U, \Phi)$$, $$f$$ is smooth when it composed with the inverse map $$\Phi^{-1}: \Phi(U) \rightarrow U$$: $$f \circ \Phi^{-1}: \Phi(U) \subset \mathbb{R}^n \rightarrow \mathbb{R}$$ is smooth (the composed function $$f \circ \Phi^{-1}$$ maps from Euclidean space to Euclidean space so we could solicit the familiar definitions of smoothness/differentiability). Careful readers might have spotted a subtle issue: the above definition of smoothness (the composed function) hinges upon the specific selection of chart. So we are led to use
 only some charts, not all charts. 
 
+---
+One core/practical difference between homeomorphism vs diffeomorphism is that in general, **a homeomorphism does *not* imply that \( dF \) is invertible**.
+
+In fact, there are two separate issues:
+
+* 1. A homeomorphism may not even be differentiable:
+
+A homeomorphism only preserves topology (continuity + continuous inverse). It says nothing about smoothness. Consequently, $$ F $$ might **not be differentiable at all**, in which case $$ dF_p $$ is simply **undefined**.
+
+* 2. Even if differentiable, $$ dF_p $$ can fail to be invertible. Even if we assume $$ F $$ is differentiable, invertibility of the derivative can fail badly.
+
+A classic example is:
+$$
+F : \mathbb{R} \to \mathbb{R}, \quad F(x) = x^3.
+$$
+
+where $$ F $$ is a **homeomorphism** (continuous, bijective, continuous inverse $$ x^{1/3} $$). Actually, $$ F $$ is smooth, but:
+
+$$
+dF_0 = 3x^2\big|_{x=0} = 0.
+$$
+
+So at $$ x = 0 $$, the derivative is **not invertible**.
+
+Why does this happen?
+
+A homeomorphism can:
+- “flatten” directions (derivative loses rank),
+- “slow down” arbitrarily (derivative → 0),
+- without breaking continuity or invertibility at the topological level.
+
+In some sense, topology is **too weak** to control infinitesimal behavior.
+
+The key takeaway is that **Diffeomorphism ⇒ $$ dF $$ invertible everywhere** and **Homeomorphism ⇏ differentiability ⇏ invertible derivative**.
+
 
 
 ### A few others? 
