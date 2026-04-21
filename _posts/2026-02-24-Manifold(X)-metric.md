@@ -24,6 +24,75 @@ toc:
 
 ## 1] Riemannian Metric
 
+Note: There's a fundamental difference and perhaps surprising connection between Riemannian metric and the usual term of metric used in metric space:
+
+### 1.1] Metric space: global distance as a primitive
+
+In a metric space, we start with a function  
+$$
+d : X \times X \to \mathbb{R}
+$$  
+satisfying positivity, symmetry, and the triangle inequality. That’s it. There's no smoothness, no coordinates, and no tangent spaces: a metric space is **purely topological/analytic**: it tells us how far apart two points are, globally, with no notion of infinitesimal structure.
+
+---
+
+### 1.2] Riemannian metric: infinitesimal inner product
+
+On a smooth manifold, a Riemannian metric assigns to each point $$p \in M$$ an inner product  
+$$
+g_p : T_p M \times T_p M \to \mathbb{R}
+$$  
+that varies smoothly with $$p$$.
+
+So instead of distances between points, we get:
+- lengths of tangent vectors  
+- angles  
+- infinitesimal geometry  
+
+This is fundamentally **local** (infinitesimal) data.
+
+---
+
+### 1.3] The key bridge: Riemannian metric ⇒ metric space
+
+A Riemannian metric *induces* a metric space structure.
+
+Given $$g$$, define the length of a curve 
+$$
+L(\gamma) = \int \sqrt{g_{\gamma(t)}(\dot{\gamma}(t), \dot{\gamma}(t))} \, dt
+$$
+
+Then define distance:
+$$
+d(p,q) = \inf_{\gamma: p \to q} L(\gamma)
+$$
+
+This turns the manifold into a metric space: consequently, we know that **Riemannian metric always induces a metric space**
+
+However, it'snot the other way around: A general metric space **does not come from a Riemannian metric**. Why not?
+
+Because a metric space:
+- has no notion of tangent space  
+- no smooth structure  
+- no way to define inner products locally  
+
+Even worse:
+- many metric spaces are highly singular (fractals, graphs, etc.)
+- even smooth manifolds can carry metrics that are not induced by any Riemannian structure (e.g. Finsler metrics)
+
+Here's a nice conceptual hierarchy:
+$$
+\text{Riemannian geometry}
+\;\subset\;
+\text{length spaces}
+\;\subset\;
+\text{metric spaces}
+$$
+
+While Riemannian metric is **infinitesimal inner product**, metric space is **global distance function**. A Riemannian metric is like specifying a **quadratic form at each point**, and the metric space distance is what we get after **integrating that local data globally**. In a word, a Riemannian metric is a *differential (local) object*,  while a metric space metric is an *integrated (global) object*.
+
+---
+
 ## 2] Riemannian Manifold
 
 ### 2.1] Definitions
