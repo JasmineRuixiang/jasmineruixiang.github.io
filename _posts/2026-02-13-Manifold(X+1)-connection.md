@@ -722,3 +722,12 @@ Theoretical (sanity check) questions to ponder:
 2] Why do we say that we can define curvature and geodesics from a connection alone 
 3] Or how geodesics make sense without embedding
 4] How curvature arises from metric compatibility
+
+
+
+
+
+---
+
+## x] Geodesics
+Another way to interpret geodesics is from the retraction principle (see section 9 of Hyperbolic Geometry from the 1997 Cannon's paper)
