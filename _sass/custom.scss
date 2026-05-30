@@ -1,5 +1,24 @@
 // Added on 08/29/2025, could add more customized changes here
 
+// Nature-style typography: Merriweather serif body, Merriweather Sans for UI
+body {
+  font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Merriweather Sans', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
+
+.navbar,
+.nav-link,
+.dropdown-item,
+footer {
+  font-family: 'Merriweather Sans', Helvetica, Arial, sans-serif;
+}
+
 /* Make blog titles thicker */
 ul.post-list .post-title {
   font-weight: 600;   /* normal=400, medium=500, bold=700, extra-bold=800 */
