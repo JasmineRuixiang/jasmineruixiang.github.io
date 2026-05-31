@@ -6,7 +6,7 @@ subtitle: # Ph.D. candidate in BME at Brown University
 
 profile:
   align: right
-  image: prof_ruixiang.jpg
+  image: prof_ruixiang.png
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>BrainGate Lab</p>
