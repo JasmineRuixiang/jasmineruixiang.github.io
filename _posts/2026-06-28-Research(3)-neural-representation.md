@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Neural Representation: A Rewinding Narrative (in progress)
+title: 'Neural Representation: A Rewinding Narrative (in progress)'
 date: 2026-06-28 16:56:31
 description: Neural representation, computation, dynamics
 series: Computational Neuroscience/BCI Research
@@ -73,6 +73,8 @@ The actual discussion/support of algorithmic vs organismic usage will be in sect
 
 #### [1.x] A sidenote about neural information
 Not necessarily in Shanon's entropy information sense (the Brain, in theory BrainInspired podcast). Also, how do we verify that it's actually used by the brain? 
+
+Usually, from the information theory perspective, how are the research conducted? By finding out some correlations?
 
 ---
 
@@ -152,6 +154,15 @@ Second—this is the back-door re-entry your project has been tracking—their p
 
 ---
 
+#### [5.3] Context and task dependence, one more time
+
+Now perhaps we have more in-depth understanding of task dependence.
+
+For the encoding view, it's usually interpreted that each subcomponent along the chain of processing lines only take inputs and exports functionally specific outputs as its representation for the next subsystem. By this breaking down of complex cognitive processes, each compoent does not necessarily need to "understand/interpret" the ultimate task goal or context. 
+
+
+
+---
 
 ### [6] The world model and generation
 
