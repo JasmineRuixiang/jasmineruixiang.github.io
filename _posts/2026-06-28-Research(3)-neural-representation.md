@@ -5,7 +5,7 @@ date: 2026-06-28 16:56:31
 description: Neural representation, computation, dynamics
 series: Computational Neuroscience/BCI Research
 tags: 
-    - "Representation
+    - "Representation"
     - "Learning"
     - "Neural Manifold"
     - "Dimensionality Reduction"
@@ -21,7 +21,7 @@ toc:
   sidebar: left
 ---
 
-This blog is a collection of thoughts on the concept of neural representation, a notion lonng proposed and debated, yet demonstrates a relentless trajectory of thoughts devoted to understand neural computation and dynamics. In this blog I will share my thoughts revolving around certain key assumptions, concepts, and applications of this notion, based on various sources of research articles, reviews, and opinion papers. 
+This blog is a collection of thoughts on the concept of neural representation, a notion lonng proposed and debated, yet demonstrates a relentless trajectory of thoughts devoted to understanding neural computation and dynamics. In this blog I will share my thoughts revolving around certain key assumptions, concepts, and applications of this notion, based on various sources of research articles, reviews, and opinion papers I read and pondered upon through the past few years. 
 
 ---
 
@@ -202,6 +202,8 @@ If we know the coding properties, we would know the map from stimulus to firing 
 2) It gives us the falloff relationship explicitly. For example, we know that place cells "have correlations that decrease with distance between represented ... locations" and that this "is easy to see by correlating neural responses directly to the relevant stimuli" (Giusti). So with the labels in hand, detecting geometry reduces to a supervised check: correlate responses against the known stimulus and recover each tuning curve.
 
 Without knowledge of coding properties we have only the correlation matrix, and there's no stimulus labels, no field centers, no idea which variable is even being represented. So a priori it's unclear if we can recover the geometry from correlations alone. Their claim (Giusti clique topology paper, restated in the Discussion, page 5) is that geometric organization "can be detected from pairwise correlations alone, without any a priori knowledge about the nature of receptive fields." Of course knowing the coding properties would let us assign each neuron a coordinate in the represented space and verify the manifold directly perhaps, but Giusti argues for doing it unlabeled, from the correlation ordering alone, and invariant to an unknown monotone nonlinear function.
+
+Something to notice is that 
 
 ---
 
