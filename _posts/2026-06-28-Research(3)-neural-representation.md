@@ -78,6 +78,14 @@ Usually, from the information theory perspective, how are the research conducted
 
 ---
 
+#### [1.x+1] A sidenote about correlation
+
+Does correlation matrix capture the goemetric information? 
+
+
+
+---
+
 ### [2] Representation as an encoding
 
 The usual analogy we hear about is that a representation encodes the structural patterns of the external/internal stimuli, the environment, or the world around us. This is naturally an encoder/decoder or information-theoretic view. Very intuitive and explanatory, satisfying with the conditions in the definition of representation above (carry structures, normativity, used by downstream processes (as decoders)). What might potentially go wrong? 
@@ -161,10 +169,102 @@ Now perhaps we have more in-depth understanding of task dependence.
 For the encoding view, it's usually interpreted that each subcomponent along the chain of processing lines only take inputs and exports functionally specific outputs as its representation for the next subsystem. By this breaking down of complex cognitive processes, each compoent does not necessarily need to "understand/interpret" the ultimate task goal or context. 
 
 
+---
+
+### [6] Representation and behavior
+
+The authors of (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective, "Neuroscience Needs Behavior: Correcting a Reductionist Bias.")  push back against a tacit reductionist program that has come to dominate neuroscience — the belief that if you get powerful enough tools (optogenetics, connectomics, genetic targeting, large-scale recording) and establish causal necessity/sufficiency relationships between circuits and behavior, understanding will follow. Their claim: causal-mechanistic explanation at the neural level is not sufficient to explain how the brain generates behavior. What's needed alongside it is careful theoretical and experimental decomposition of behavior itself. Their slogan for the division of labor: behavioral work provides understanding, neural interventions test causality, and behavioral work is epistemologically prior.
+
+Why is causality intervention not enough? Well, two structural problems undercut the "just manipulate the circuit" view. First, degeneracy and multiple realizability: the same behavior can arise from different circuits, and the same circuit can produce different behaviors, so inspecting lower level properties alone can't fix the mapping to behavior. Second, we usually don't even know which level of organization is the relevant one for a given behavior. They lean on Marr's three levels (computational/"why," algorithmic/"what," implementation/"how") and his metaphor that studying neurons to understand perception is like studying feathers to understand flight: you can't infer the algorithm from the hardware nearly as well as you can from analyzing the problem being solved.
+
+#### [6.1] From correlation and causality to explanation
+
+Conceptual machinery that (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective) invoke: 1) A few recurring ideas: the _substitution bias_ (Kahneman): technique-driven neuroscience quietly swaps a hard question for an easier one. 2) Filler terms:  verbs like "mediates," "underlies," "encodes," "modulates" that dress up a bare correlation or causal claim as if it were an explanation. 3) The mereological fallacy which ascribes to individual neurons psychological properties that only belong to the whole organism, with the mirror-neuron "action understanding" literature as the example (neurons get credited with "understanding" though no behavioral test of understanding was run). 4) Finally emergence / downward causation, which points at components doing different things than the organized whole, so causal claims often only make sense across levels simultaneously (an anaology they draw is that ion channels don't beat, but heart cells do).
+
+
+#### [6.2] The presciption
+The solution that (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective) gave is what they call a more __pluralistic neuroscience__: multiple legitimate modes of explanation, not the assumption that implementation level description will "naively emerge" into algorithmic understanding. Well-designed, ethologically grounded behavioral experiments (they lean on Tinbergen here: behavior as an evolved entity, VR as a tool only usable once you understand the natural behavior) can stand alone and must generally come first, so that neural experiments are designed against real algorithmic hypotheses rather than fishing in high-dimensional data.
 
 ---
 
-### [6] The world model and generation
+#### [6.3] The "intrinsic" nature of neural patterns
+
+Giusti's clique topology paper emphasizes the possibility of using clique topology to extract stable neural features intirnsically (irrespective of the stimuli/task structure), opposite view of Krakauer 2017 Perspective above. 
+
+The Giusti's paper wonders that without knowing the neural coding properties (tuning curves and receptive field, etc. like the place field), would we still be able to extract neural patterns intrinsically. 
+
+But first of all, let's think through this: how would knowing the coding properties help?
+
+If we know the coding properties, we would know the map from stimulus to firing rate for each cell, and therefore we can read off each neuron's preferred stimulus value (its place field center, for example). This does two things:
+
+1) It hands us the represented stimulus space and a coordinate for every neuron. Geometric organization is then not something we have to infer — we can just embed the N neurons as N points in some vector space and confirm directly that they live on some low-dimensional structure.
+
+2) It gives us the falloff relationship explicitly. For example, we know that place cells "have correlations that decrease with distance between represented ... locations" and that this "is easy to see by correlating neural responses directly to the relevant stimuli" (Giusti). So with the labels in hand, detecting geometry reduces to a supervised check: correlate responses against the known stimulus and recover each tuning curve.
+
+Without knowledge of coding properties we have only the correlation matrix, and there's no stimulus labels, no field centers, no idea which variable is even being represented. So a priori it's unclear if we can recover the geometry from correlations alone. Their claim (Giusti clique topology paper, restated in the Discussion, page 5) is that geometric organization "can be detected from pairwise correlations alone, without any a priori knowledge about the nature of receptive fields." Of course knowing the coding properties would let us assign each neuron a coordinate in the represented space and verify the manifold directly perhaps, but Giusti argues for doing it unlabeled, from the correlation ordering alone, and invariant to an unknown monotone nonlinear function.
+
+---
+
+#### [6.4] "Reflection" of task/stimuli structure? A three layer dissection
+
+When would the neural activities reflect the task/stimuli structure? In what form? 
+
+__Is it a faithful representation? Do we need to look at the high dimensionla neuron space? Is the so-called neural manifold the correct to think about? Is brain actually using that for doing computation?__ 
+
+In Giusti's paper they claim that intrinc geometry patterns could be recovered from neural data alone using their clique topology method. 
+
+There's actually 3 levels of "geometry" (I actually am very against using this word "geometry", the same as "manifold", as it provides no further clarity while specifying no further mathematical details): 1] task/stimuli structure; 2] neural state (high dimensions or latent space) patterns; 3] Correlation matrix structure (clique topology, SPD matrices). 
+
+Let's start with level 3], perhaps the easiest one: 
+
+What the clique topology method actually targets is most cleanlyt stated in the Supplementary Text (p. 16), where they frame the whole enterprise as two questions: 1) Is the matrix a monotonic transformation of a random or a geometric matrix? 2) Can we distinguish these without knowing a potential monotonic nonlinear function applied to it? Consequently, the output of clique topology is a _model classification_, not a __reconstruction__. It tells us which null our matrix's order complex statistically resembles. It does not hand us the represented "manifold", its coordinates, or even (reliably) its dimension. The authors are explicit that "the precise dimension is sensitive to noise and currently difficult to estimate" (p. 3), so what we get intrinsically from $C_{ij}$ is not the task geometry.
+
+Notice that in the paper when Giusti mentioned geometric matrices, the authors are using that in a specific sense: that the order complex of $C_{ij}$ is statistically consistent with being a monotone transform of a negative Euclidean distance matrix of $N$ points sampled in some $\mathbb{R}^d$. That is a much weaker certificate than saying that hte neurons encodes the stimuli (like the 2D environment box). 
+
+However, Giusti et.al. demonstrated that wheel running and REM sleep also show the geometric signature during REM sleep where there is no task/stimulus geometry at all. What clique topology detects cannot be the task geometry: the authors read this as a property of the intrinsic hippocampal circuit ("not merely a byproduct of spatially structured inputs"). The geometric signature and the task geometry coincide during tasks like navigation, but the method is certifying "Euclidean-like organization," not just the task.
+
+To be fair, such method does capture task geometry in the place field example. During navigation, place fields tile a 2D box and correlation falls off with distance between field centers (Giusti's ref. 3), so $C_{ij} \approx f(||c_i − c_j||)$ with the $c_i$ being positions in the 2D box. The authors showed that the PF / scrambled-PF models isolate this: the spatial coherence of the fields is what produces the geometric signature, and destroying it kills $\bar{\beta}_2$, $\bar{\beta}_3$. Consequently, the source of the structure is (position-coding) task geometry. 
+
+In summary, the geometry the neurons represent (during navigation) is the task geometry, but what $C_{ij}$ yields intrinsically is a dimension-agnostic statistical certificate of Euclidean consistency, distinguishable from both randomness and certain nongeometric structure — but not the task manifold itself.
+
+Some other examples on how neural patterns reflect task geometry: For example, orientation-tuned neurons (Hubel DH, Wiesel TN (1959) Receptive fields of single neurones in the cat’s striate cortex. J Physiol 148:574–591.) and hippocampal place cells (O’Keefe J, Dostrovsky J (1971) The hippocampus as a spatial map. Brain Res 34(1):171–175.) demonstrate correlations which decrease as the corresponding represented variables increase (orientation angles or position locations). How to detect this? This loops back to [6.1], and a simple strategy is just to measure the correlation between neural activities and the corresponding task stimuli.
+
+Let me be explicit and precise on the place cells example:
+
+1. Place cells have spatially localized receptive fields. A place cell fires when the animal's position is inside its place field, i.e. its preferred region of the environment, so each neuron is effectively tagged with a location as its field center or simply a point in a let's say 2D box.
+
+2. Correlation falls off monotonically with distance between field centers. Two cells whose fields are close together co-fire often (the animal passes through both nearly together); cells with distant fields rarely co-fire. In formula we could write $C_{ij} \approx f(||c_i − c_j||)$ with $c_i$ the field centers and $f$ monotone decreasing.
+
+3. That is exactly the definition of a geometric matrix. Giusti's geometric matrix is $C_{ij} = f(−||p_i − p_j||)$: a monotone function of negative Euclidean distances among points in $\mathbb{R}^d$. And because clique topology is invariant under the monotone f, we don't even need to know $f$ because the ordering is what matters.
+
+Notice that here there's no claim or employment of somatotopy (neurons close in anatomical distance share larger covariance). 
+
+To be fair, the whole worry motivating the paper is whether we can detect geometric organization intrinsically, from correlations alone, without using the stimulus labels. Place cells during navigation are the one case where we already know the answer must be "yes, geometric," from decades of receptive-field work. So if the label-free method returned "random" or "nongeometric" here, the clique topology method would be broken. Getting the geometric signature confirms the tool detects what it's supposed to, on ground truth. They actually say as much in the setup: geometric structure "is expected due to the existence of spatially localized receptive fields... but has not previously been detected intrinsically using only the pattern of correlations" (p. 3, Giusti).
+
+
+---
+
+#### [6.5] Euclidean vs Non-euclidean geometry
+
+Giusti's clique topology originally worked with the geometric matrices obtained from uniform sampling from a Euclidean unit ball. Howeve, notice that this method cannot distinguish Euclidean vs non-Euclidean method, because it only relies on the metric property (triangle inequality). 
+
+To be precise, the triangle inequality is a metric axiom, not a Euclidean one. It holds in hyperbolic space, on any Riemannian manifold, in any metric space. So the mechanism in the paper,  near transitivity coupling the edge ordering, cliques filling holes, cycles dying young, fires for any metric geometry where correlation decreases with distance. Therefore the geometric-vs-random detection still works for hyperbolic or other non-Euclidean data. Clique topology would flag hyperbolic neural data as "geometric," not "random."
+
+Of course there're many genuine metric geometries that aren't Euclidean: hyperbolic, spherical, geodesic distance on any Riemannian manifold. These still obey the triangle inequality (it's a theorem for geodesic distance, not a Euclidean special feature). So they don't give us a triangle-violating counterexample (there're two notions of metric coing into play at the same time and that's why it appears confusing).
+
+What is Euclidean-specific is the reference distribution, not the tool. Giusti's "geometric" null is narrowly defined: $N$ points sampled uniformly from the unit cube $[0,1]^d \subset R^d$, $C_{ij} = -||p_i−p_j||$ with the Euclidean norm. The specific Betti curve shapes and the dimension stratification they report are properties of that sampling family. Hyperbolic space has exponential volume growth rather than polynomial, so uniform sampling there produces quantitatively different distance orderings and hence different Betti curves. So:
+
+* Out of the box, Giusti cannot distinguish Euclidean from hyperbolic — both sit in the broad "geometric" bucket, well below random.
+* To characterize which geometry, we would swap the forward model: sample from $\mathbb{H}^d$ (with a chosen curvature), push through the identical clique-topology and Betti-curve pipeline, and compare the data's Betti curves against a family of geometric nulls rather than the single Euclidean one.
+
+That swap is exactly ZhouZhang (Sharpee) 2023's extension (clique topology + hyperbolic forward model for Betti-curve model-comparison). Giusti gives the invariant readout and the Euclidean anchor; the non-Euclidean question is answered by adding candidate-geometry forward models on top of the same persistent-homology substrate. 
+
+
+
+
+---
+
+### [7] The world model and generation
 
 
 
