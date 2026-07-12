@@ -19,7 +19,6 @@ toc:
   sidebar: left
 ---
 
-
 I will follow the structure of *Giusti, Pastalkova, Curto & Itskov (2015), PNAS, and its SI Appendix*, but will add in my own understandings, interpretations, and most importantly reflections on questions you might also have. 
 
 **Provenance conventions used throughout.** Statements marked **[G]** are claims made by Giusti et al., with page references to the SI Appendix. Statements marked **[S]** are synthesis, reconstruction, or standard background that the paper assumes but does not state. Statements marked **[⚠]** flag places where the paper is imprecise or where a technical hypothesis is being suppressed.
@@ -108,13 +107,20 @@ is the $m$-simplex they span. It is the simplest possible $m$-dimensional solid.
 
 A sidenote on the **off-by-one.** $m+1$ vertices span $m$ dimensions. The constraint $\sum t_i = 1$ consumes one degree of freedom. This shift propagates through every definition below and might be the single most common source of confusion (later we will also see m-clique, mth chaingroup, etc.).
 
-**Definition (abstract $m$-simplex) [S].** An $m$-simplex is a set of $m+1$ vertices. Its **faces** are its nonempty subsets; its **facets** are the $m+1$ subsets obtained by deleting one vertex. 
+**Definition (abstract $m$-simplex) [S].** An $m$-simplex is a set of $m+1$ vertices. Its **faces** are its nonempty subsets; its **facets** are the $m+1$ subsets obtained by deleting one vertex. That's the geometry, fully encoded, with no points in space. 
 
 Also, note that the plural form of "simplex" is "simplices". 
 
 [TODO]: Explain more here.
 
 Nothing is ever embedded (just treat embed as a process to put/materialize/realize something in some space, for example Euclidean space of some dimensions). The convex hull is a *picture* used to license the geometric language. Operationally, a simplex is a subset, and its facets are the subsets one smaller. This is why the whole pipeline is combinatorial and computable.
+
+So when the supplement says an $(m+1)$-clique "represents" an $m$-dimensional simplex (p. 6), it means: if you embedded the graph's vertices generically in a high-dimensional space, the clique's convex hull would be an $m$-dimensional shape. You don't actually do the embedding. You just say "this clique is an $m$-simplex" and let $\partial_m$​ do the work.
+
+Both describing "loops", why do we pick simplieces instead of, say, squares? There are two reasons, both practical:
+
+* 1] A simplex is determined by its vertex set. There's no extra data. Consequently, a complex built from simplices is a purely combinatorial object — a list of subsets — and the boundary map is a purely combinatorial formula. Squares would require you to specify a cyclic order.
+* 2] Simplices are the minimal $m$-dimensional cells. You can't span $m$ dimensions with fewer than $m+1$ points. That minimality is what makes $\partial_m$ have a clean uniform formula with $m+1$ terms.
 
 ---
 
@@ -141,19 +147,19 @@ Here's a crucial point as **this is the "filling in."** Where the main text says
 
 1. **It is not a choice.** $X(G)$ is a deterministic function of $G$. You supply no extra data. The moment three vertices are pairwise adjacent, the triangle between them is solid. This is what makes the method applicable to a correlation matrix: you only ever threshold *pairwise* values, yet you obtain structure in every dimension.
 
-2. **It is well-defined only because cliques are closed under subsets.** If $\sigma$ is a clique, so is every facet of $\sigma$. Hence $X(G)$ is genuinely a *simplicial complex* (closed under taking faces), and boundary maps will have somewhere to land. A complex built this way is called a **flag complex**, or, when the graph comes from thresholding a distance matrix, a **Vietoris–Rips complex** **[G, p. 12]**.
+2. **It is well-defined only because cliques are closed under subsets.** If $\sigma$ is a clique, so is every facet of $\sigma$. Hence $X(G)$ is genuinely a *simplicial complex* (closed under taking faces), and boundary maps will have somewhere to land. A complex built this way is called a **flag complex**, or, when the graph comes from thresholding a distance matrix, a **Vietoris–Rips complex** **[G, p. 12]**. [TODO]: Add more explanation here
 
-3. **Without it, there is nothing to compute. [S]** Suppose we did not fill in — suppose $X(G)$ contained only vertices and edges. Then $\beta_1 = |E| - N + \beta_0$, the cyclomatic number, computable in $O(|E|)$ from counting alone; and $\beta_m = 0$ identically for $m \geq 2$. All information about *how* the edges are arranged would be lost. **Filling in is what creates dimensions $2, 3, \dots$, and the paper's entire discriminating signal lives there.**
+3. **Without it, there is nothing to compute [S]**. Suppose we did not fill in — suppose $X(G)$ contained only vertices and edges. Then $\beta_1 = |E| - N + \beta_0$, the cyclomatic number, computable in $O(|E|)$ from counting alone; and $\beta_m = 0$ identically for $m \geq 2$. All information about *how* the edges are arranged would be lost. **Filling in is what creates dimensions $2, 3, \dots$, and the paper's entire discriminating signal lives there.** [TODO]: more explanation
 
-**A triangle in $G$ is filled. A square in $G$ is not.** Both look like closed loops when drawn. But $\{1,2,3\}$ pairwise-adjacent is a clique, while $\{1,2,3,4\}$ arranged as a ring is not — the diagonals are missing. Only cliques get filled. This is exactly why $\beta_1$ measures something: it counts loops that *failed* to be spanned by cliques.
+**A triangle in $G$ is filled. A square in $G$ is not.** Both look like closed loops when drawn. But $\{1,2,3\}$ pairwise-adjacent is a clique, while $\{1,2,3,4\}$ arranged as a ring is not — the diagonals are missing. __Only cliques get filled__. This is exactly why $\beta_1$ measures something: it counts loops that *failed* to be spanned by cliques.
+
+---
 
 ### 2.3 Why filling rate detects geometry
 
 **[G, main text p. 2, expanded here.]** In a geometric matrix, points that are mutually close produce mutually large correlations. Edges therefore arrive in *mutually adjacent bunches*: if $i$ is near $j$ and $j$ is near $k$, then $i$ is near $k$ (approximately — this is the triangle inequality). Triangles form early. Holes get filled almost as soon as they appear.
 
-In a random matrix, edges arrive with no regard for one another. Triangles are rare relative to edges. Holes persist.
-
-**The filling rate is the geometric signature.** Everything downstream — Betti curves, persistence lifetimes — is a way of measuring it.
+In a random matrix, edges arrive with no regard for one another. Triangles are rare relative to edges. Holes persist. In some sense, **the filling rate is the geometric signature.** Everything downstream — Betti curves, persistence lifetimes — is a way of measuring it.
 
 ---
 
@@ -163,9 +169,9 @@ We now make "a collection of cliques whose boundaries cancel" into something a c
 
 ### 3.1 Chains vs. chain groups
 
-Cliques are *sets*. You cannot add two sets, or multiply a set by $-1$. To speak of cancellation we must first embed cliques into a structure where arithmetic exists.
+Cliques are *sets*. You cannot add two sets, or multiply a set by $-1$. To speak of cancellation we must first embed cliques into a structure where arithmetic exists (think more algebraically or geometrically).
 
-Fix a field $k$. For each clique $\sigma \in X_m(G)$, introduce a **formal symbol** $c_\sigma$. This symbol is nothing but a placeholder indexed by $\sigma$ — a basis vector, and nothing more is asserted about it **[G, pp. 6–7]**.
+Fix a field $k$. For each clique $\sigma \in X_m(G)$, introduce a **formal symbol** $c_\sigma$. This symbol is nothing but a placeholder indexed by $\sigma$ — a basis vector, and nothing more. Note that they are cliques!! (you cannot structurally add or multiply by -1 on sets)
 
 **Definition (chain).** A **chain** is a single formal linear combination $\sum_{i=1}^{\ell} a_i c_{\sigma_i}$ with $a_i \in k$.
 
@@ -173,13 +179,15 @@ Fix a field $k$. For each clique $\sigma \in X_m(G)$, introduce a **formal symbo
 
 $$C_m(X(G); k) = \Big\{ \textstyle\sum_{i} a_i c_{\sigma_i} \;:\; \sigma_i \in X_m(G),\; a_i \in k \Big\}$$
 
-**A chain is an element; a chain group is the space of all such elements.** The relation is exactly vector $\in$ vector space. Immediate consequence:
+**A chain is an element; a chain group is the space of all such elements (of the same dimension).** The relation is exactly vector $\in$ vector space. Immediate consequence:
 
 $$\dim_k C_m(X(G)) = |X_m(G)| = \#\{(m{+}1)\text{-cliques of } G\}$$
 
-So $C_0$ is spanned by vertices, $C_1$ by edges, $C_2$ by triangles, $C_3$ by tetrahedra.
+So $C_0$ is spanned by vertices (1-cliques), $C_1$ by edges (2-cliques), $C_2$ by triangles (3-cliques), $C_3$ by tetrahedra (to be precise, spanned by the abstract placeholder basis vectors representing edges/triangles/tetrahedra, etc.).
 
-**[⚠] On the word "group."** $C_m(X(G); k)$ is a $k$-*vector space*, and Giusti et al. say so. It is a group only in the weak sense that every vector space is an abelian group under addition. The name is historical, from the case $k = \mathbb{Z}$, where $C_m$ is a free abelian group and genuinely not a vector space. We follow the paper and drop $k$ from the notation.
+**[⚠] On the word "group."** $C_m(X(G); k)$ is a $k$-*vector space*. It is a group only in the weak sense that every vector space is an abelian group under addition. The name is historical, from the case $k = \mathbb{Z}$, where $C_m$ is a free abelian group and genuinely not a vector space. Note also that for simplicity we might drop $k$ from the notation.
+
+---
 
 ### 3.2 Orientation
 
@@ -191,7 +199,15 @@ This is bookkeeping, not extra structure on the clique. It exists only to make t
 
 **[G, footnote 2, p. 7]** Giusti et al. compute over $k = \mathbb{Z}/2\mathbb{Z}$, where $-1 = +1$ and orientation becomes vacuous. The convention is conceptually load-bearing and computationally invisible in their pipeline. (Ripser also defaults to $\mathbb{Z}/2\mathbb{Z}$, so this carries over.)
 
+---
+
 ### 3.3 The boundary map
+
+Before the topological definitino, it's important to establish first an intuitive picture of a boundary. When we say a boundary of a disk is its rim, or the boundary of a sphere is the surface (earth), we are descending on dimension down to look for some structure that's closed and has no edges. 
+
+Well, to slightly make it more formal. Recall cliques: the boundary of a clique $\sigma$ is the collection of subcliques $\tau \subset \sigma$ with one fewer vertex.
+
+With this rough feeling, let's see the following:
 
 **Definition [G, Def. 3.3, p. 7].** For $m > 0$, the **boundary map** $\partial_m : C_m(X(G)) \to C_{m-1}(X(G))$ is defined on basis elements by
 
@@ -199,12 +215,14 @@ $$\partial_m(c_{v_0 v_1 \cdots v_m}) = \sum_{i=0}^{m} (-1)^i \, c_{v_0 v_1 \cdot
 
 and extended linearly: $\partial_m(\sum_j a_j c_{\sigma_j}) = \sum_j a_j \partial_m(c_{\sigma_j})$. By convention $\partial_0 = 0$.
 
-Three separate things must be true for this to deserve the name "boundary." The definition delivers each.
+To interpret this, we might start with the following three separate perspectives/conditions which must be true for this to deserve the name "boundary." The definition delivers each.
 
-**(i) The support is right: deleting a vertex names a facet. [S]**
+**(i) The support is right: deleting a vertex names a facet [S].**
 The topological boundary of an $m$-simplex is the union of its $m+1$ codimension-one faces, and each such face is the convex hull of all vertices *except one*. So "delete $v_i$" is precisely "name the facet opposite $v_i$." The list $v_0 \cdots \hat{v_i} \cdots v_m$, $i = 0, \dots, m$, enumerates the facets exactly once each.
 
 This lands in $C_{m-1}$ only because $X(G)$ is a clique complex: each facet of a clique is a clique.
+
+Also note that the unsigned $\sum_i c_{v_0\ldots\hat{v_i}\ldots v_m}$​ already captures "the set of facets." The signs are doing something else.
 
 **(ii) The signs install the induced orientation. [S]**
 At $m = 1$: $\partial_1 c_{v_0 v_1} = c_{v_1} - c_{v_0}$. Head minus tail. The sign is what gives a directed edge a direction rather than merely two endpoints.
@@ -220,31 +238,45 @@ This is the *directed circuit* $0 \to 1 \to 2 \to 0$. The alternating sign conve
 
 $$\partial_2(c_{123} - c_{124}) = (c_{23} - c_{13} + \underline{c_{12}}) - (c_{24} - c_{14} + \underline{c_{12}}) = c_{23} - c_{13} - c_{24} + c_{14}$$
 
-The interior edge $c_{12}$ appears in both facet lists and annihilates. The four *outer* edges survive. This is the discrete Stokes theorem: a coherently oriented patch traverses each internal edge twice, in opposite directions.
+The interior edge $c_{12}$ appears in both facet lists and annihilates. The four *outer* edges survive. The interior edge is not part of the boundary of the region, and the algebra knows it.
 
-**Cancellation requires linearity, and linearity is why we needed the formal symbols $c_\sigma$ at all.** The free-vector-space construction of §3.1 exists solely to make step (iii) expressible.
+Why does it know it? Because the induced orientations traverse $\{1,2\}$ once in each direction — the chain $c_{123} - c_{124}$​ is the coherent orientation of the two-triangle patch, and a coherently oriented patch traverses each internal edge twice with opposite sign:
+
+This is the discrete Stokes theorem: a coherently oriented patch traverses each internal edge twice, in opposite directions. By the way, there's an interesting and elegant relationship between the homology we talk about here with differential forms. Maybe next time. 
+
+**Cancellation requires linearity, and linearity is why we needed the formal symbols $c_\sigma$ at all.** The free-vector-space construction of §3.1 exists solely to make step (iii) expressible. [TODO]: perhaps also explain more here. 
+
+---
 
 ### 3.4 A boundary has no boundary
 
 **Lemma [G, Lemma 3.5, p. 8].** $\partial_m \circ \partial_{m+1} = 0$.
 
-*Proof sketch [S].* An $(m{-}1)$-face of an $m$-simplex... more precisely, an $(m{-}1)$-dimensional face of the $(m{+}1)$-simplex $c_{v_0\cdots v_{m+1}}$ is obtained by deleting two vertices $v_i, v_j$ with $i < j$. It arises twice in the double sum: delete $i$ then $j$, or delete $j$ then $i$. The signs are $(-1)^i(-1)^{j-1}$ and $(-1)^j(-1)^i$ — the $j-1$ because deleting $v_i$ first shifts $v_j$ down one index slot. These differ by a factor of $-1$ and cancel. $\square$
+*Proof sketch [S].* An $(m{-}1)$-dimensional face of the $(m{+}1)$-simplex $c_{v_0\cdots v_{m+1}}$ is obtained by deleting two vertices $v_i, v_j$ with $i < j$. It arises twice in the double sum: delete $i$ then $j$, or delete $j$ then $i$. The signs are $(-1)^i(-1)^{j-1}$ and $(-1)^j(-1)^i$ — the $j-1$ because deleting $v_i$ first shifts $v_j$ down one index slot. These differ by a factor of $-1$ and cancel. $\square$ [TODO]
 
 **[G, Example 3.4]** verifies this concretely: $\partial_1\partial_2(c_{123} - c_{124}) = 0$.
 
-Consequence: $\operatorname{im}\partial_{m+1} \subseteq \ker\partial_m$ **[G, p. 8]**. A rim has no rim.
+The consequence for this is that $\operatorname{im}\partial_{m+1} \subseteq \ker\partial_m$ **[G, p. 8]**. A rim has no rim.
 
-The chain groups thus assemble into a **chain complex** **[G, p. 8]**:
+---
+
+### 3.5 Where this lands for the rest of the paper
+
+Thus from te chain groups we assemble them into a **chain complex** **[G, p. 8]**:
 
 $$0 \xrightarrow{\;\partial_{k+1} = 0\;} C_k \xrightarrow{\;\partial_k\;} C_{k-1} \xrightarrow{\;\partial_{k-1}\;} \cdots \xrightarrow{\;\partial_2\;} C_1 \xrightarrow{\;\partial_1\;} C_0 \xrightarrow{\;\partial_0 = 0\;} 0$$
+
+This is just a sequence of chain groups, similar to how a order complex is just a sequence of graphs, but the two directions of sequence are completely different. 
+
+Once (ii) and (iii) hold, "cancellation of boundaries" becomes an exact algebraic condition: $\ker \partial_m$​ is the set of chains whose facets cancel, i.e. cycles (p. 8). And $\operatorname{im}\partial_{m+1}$​ is the set of cycles that are already the rim of something filled in. $\ker\partial_m / \operatorname{im}\partial_{m+1}$​ counts cycles that don't bound — holes. The signs are what let "hole" mean anything.
 
 ---
 
 ## 4. Cycles: what "cancellation" actually means
 
-**[G, p. 8]** writes that a chain is in $\ker\partial_m$ "because the (oriented) boundaries of its constituent cliques cancel one another." This sentence compresses a computation, and it is worth expanding, because *cancel* does **not** mean each clique's own boundary vanishes — that never happens.
+**[G, p. 8]** writes that a chain is in $\ker\partial_m$ "because the (oriented) boundaries of its constituent cliques cancel one another." This sentence compresses a computation, and it is worth expanding, because *cancel* does **not** mean each clique's own boundary vanishes — that never happens. Let me explain in details as understanding what it actually is will decide how deeply we internally the concept of homology, and also appreciate its elegance. 
 
-### 4.1 The mechanism [S]
+### 4.1 The mechanism
 
 Take $c = \sum_j a_j c_{\sigma_j} \in C_m$. By linearity, $\partial_m c = \sum_j a_j \partial_m c_{\sigma_j}$. Each $\partial_m c_{\sigma_j}$ is a signed list of $\sigma_j$'s facets.
 
@@ -256,9 +288,9 @@ a sum over *all* cliques in the chain having $\tau$ as a facet.
 
 $$\partial_m c = 0 \quad\iff\quad \text{for every facet } \tau, \text{ that sum is zero.}$$
 
-The cancellation is a condition *relating the $\sigma_j$ to one another*. No individual clique has it.
+The cancellation is a condition *relating the $\sigma_j$ to one another*. No individual clique has it. In other words, **the surviving terms are exactly the loose ends.** $\partial c = 0$ iff there are none, iff the chain is closed.
 
-**The surviving terms are exactly the loose ends.** $\partial c = 0$ iff there are none, iff the chain is closed.
+---
 
 ### 4.2 Examples
 
@@ -274,7 +306,9 @@ The interior vertex $c_1$ cancels — it is shared. The endpoints $c_0, c_2$ are
 
 **$m = 2$, tetrahedron surface.** $\partial_2(c_{123} - c_{023} + c_{013} - c_{012}) = 0$. Each of the six edges lies in exactly two faces, with opposite induced orientation. A closed surface.
 
-### 4.3 The $\mathbb{Z}/2$ reading [S]
+---
+
+### 4.3 The $\mathbb{Z}/2$ reading
 
 Over $\mathbb{Z}/2\mathbb{Z}$ every coefficient is $0$ or $1$ and $-1 = +1$. A chain is simply a *set* of $m$-cliques, and
 
@@ -288,9 +322,15 @@ Same content, no signs. This is literally what Ripser computes, and it is the cl
 
 ---
 
+### 4.4 Why is this the correct computation?
+
+Now with the above explanations, we should be able to grasp that the definition echos our intuition: a cycle is a collection of simplices glued along their faces with nothing left over — __a closed loop, a closed surface__. "Nothing left over" is a statement about facets being __doubly covered__ with opposing orientation. The boundary map, applied to the whole chain at once, computes precisely the multiset of singly-covered facets (with multiplicity and sign). Kernel = that multiset is empty.
+
+---
+
 ## 5. Homology
 
-### 5.1 The quotient construction, in general [S]
+### 5.1 The quotient construction, in general
 
 Let $V$ be a vector space and $W \subseteq V$ a **subspace**. Define $x \sim y \iff x - y \in W$.
 
@@ -300,21 +340,96 @@ This is an equivalence relation, and each axiom uses one closure property of $W$
 - *symmetric*: $x - y \in W \Rightarrow y - x = -(x-y) \in W$ (closed under scalars);
 - *transitive*: $(x-y), (y-z) \in W \Rightarrow x - z = (x-y)+(y-z) \in W$ (closed under addition).
 
-The class of $x$ is the **coset** $[x] = x + W$. The **quotient space** $V/W$ is the set of cosets with $[x]+[y] = [x+y]$, $a[x] = [ax]$ — well-defined by the same three properties.
+The class of $x$ is called the **coset**: $[x] = x + W = \{x + w: w \in W\}$. The **quotient space** $V/W$ is the set of cosets with operations $[x]+[y] = [x+y]$, $a[x] = [ax]$ — well-defined by the same three properties.
 
-**Where the word "declare" comes from.** The zero of $V/W$ is $[0] = W$. And $[w] = [0]$ for *every* $w \in W$. Passing from $V$ to $V/W$ is exactly the act of setting every vector of $W$ to zero while retaining linear structure. Two vectors of $V$ differing by an element of $W$ become indistinguishable. Nothing more:
+Specifically, notice that the zero of $V/W$ is $[0] = W$. And $[w] = [0]$ for *every* $w \in W$ (since $ w - 0 = w \in W$). Passing from $V$ to $V/W$ is exactly the act of setting every vector of $W$ to zero while retaining linear structure. Two vectors of $V$ differing by an element of $W$ become indistinguishable. Nothing more:
 
 $$[x] = [y] \iff x - y \in W, \qquad \dim(V/W) = \dim V - \dim W$$
 
-### 5.2 Homology groups
+Intuitively, this just means that we loose the perspective/compress the perspective from $W$ and see what's left for $W$. We will apply this interpretation later in section [5.6].
 
-Since $\operatorname{im}\partial_{m+1} \subseteq \ker\partial_m$ (Lemma 3.5), the quotient is legal.
+---
+
+### 5.2 Image and kernel of boundary maps
+
+With understanding of the quotient space, we switch geer to the most important interpretation/intuition needed for simplicial homology groups: the kernel and image of the boundaries maps between chain groups. Basically we need to understand the two subspaces that are being quotiented, where I think much of misconception and confusion come from. Notice that everything in homology is built from $\ker\partial_m$ and $\operatorname{im}\partial_{m+1}$, so it is worth stating exactly what each *is*, geometrically and algebraically, and why those are the objects we want.
+
+**The kernel: closed chains (cycles).**
+
+$$Z_m := \ker\partial_m = \{c \in C_m : \partial_m c = 0\}$$
+
+By §4, $\partial_m c = 0$ says every facet is covered with net-zero coefficient — there are no loose ends. So $Z_m$ is the space of **closed** $m$-chains: triangle rims, tetrahedron surfaces, hollow shells. The name **cycle** is literal at $m=1$, where a closed $1$-chain is a union of edge-loops, and metaphorical above, where it means "boundaryless."
+
+Two structural facts:
+- $Z_m$ is a linear subspace of $C_m$, because it is the kernel of a linear map. Sums and scalar multiples of cycles are cycles. This is what lets us count them with dimension.
+- $Z_m$ contains *all* the candidate holes, but also many boring closed chains that are not holes at all (a triangle rim that happens to be filled in is still in $Z_1$). Distinguishing the two is what the image is for.
+
+**The image: chains that are already the rim of something (boundaries).**
+
+$$B_m := \operatorname{im}\partial_{m+1} = \{\partial_{m+1} b : b \in C_{m+1}\}$$
+
+An element of $B_m$ is, by definition, the boundary of some $(m{+}1)$-chain — it is the rim of a region built from filled cliques. The triangle rim $\tau = c_{23}+c_{35}-c_{25}$ lands in $B_1$ exactly when the triangle $\{2,3,5\}$ is filled, because then $\tau = \partial_2 c_{235}$. A boundary is a cycle that **bounds** — it encloses filled-in material, so it is not a hole.
+
+$B_m$ is also a linear subspace (image of a linear map).
+
+An important question to ponder: **why $B_m \subseteq Z_m$: (the nesting is the whole point!)**
+
+Here we come back to Lemma 3.5 ($\partial_m \partial_{m+1} = 0$), which says precisely $B_m \subseteq Z_m$: **every boundary is a cycle.** Intuitively, the rim of a filled region is itself closed — the boundary of a boundary is empty. This containment is what makes the quotient of §5.2 legal, and in some sense it is the algebraic heart of the entire theory. Without $\partial\partial = 0$ there would be no homology. Again, this has close relationship with differential geometry. Stay tuned. 
+
+So inside $C_m$ we have a nested pair of subspaces:
+
+$$B_m \;\subseteq\; Z_m \;\subseteq\; C_m$$
+
+read as: *(boundaries) $\subseteq$ (cycles) $\subseteq$ (all chains)*.
+
+Ok, now with all the hectic definitions above, **Why do we care? --- Because holes are cycles modulo boundaries!**
+
+The point of the whole construction is to detect **holes** — which are precisely closed chains that are *not* filled in. Rephrase each word:
+- "closed" $=$ lies in $Z_m$;
+- "not filled in" $=$ does *not* lie in $B_m$.
+
+We don't want cycles that are boundaries of some higher order cliques, because we could treat them as a continuous bulb, which topologically could be reshaped and remolded (imagine plasticine). Consequently, a hole is an element of $Z_m$ that is not in $B_m$. But we must be careful: __two cycles that differ by a boundary surround the *same* hole__ (you can slide a loop across filled-in material without changing which hole it encircles) [TODO]: More specification. We do not want to count those separately. The object that identifies cycles differing by a boundary, and reports what is left, is exactly the quotient $Z_m / B_m$ — which is $H_m$, the simplicial homology group, defined next.
+
+This is why homology needs *both* subspaces and neither alone:
+- $Z_m$ alone overcounts: it includes filled-in cycles, which are not holes.
+- Subtracting $B_m$ removes exactly the filled-in ones — and simultaneously merges cycles that encircle the same hole.
+
+To review on the dimension subscript notation, and also to understand how it relates to the chain groups and boundary maps, let's do the following: Since everything is a subspace of a finite-dimensional space, ranks tell the whole story. Rank–nullity applied to $\partial_m : C_m \to C_{m-1}$ gives
+
+$$\dim Z_m = \dim C_m - \operatorname{rank}\partial_m,$$
+
+and directly
+
+$$\dim B_m = \operatorname{rank}\partial_{m+1}.$$
+
+Later we will see that the Betti number is just the count of "cycles that are not boundaries":
+
+$$\beta_m = \dim Z_m - \dim B_m = \big(\dim C_m - \operatorname{rank}\partial_m\big) - \operatorname{rank}\partial_{m+1}.$$
+
+Each subtraction has a meaning: the first ($-\operatorname{rank}\partial_m$) discards chains that fail to close; the second ($-\operatorname{rank}\partial_{m+1}$) discards closed chains that are filled in. What survives is holes.
+
+Maybe **a single diagram to hold all of it.** The chain complex
+
+$$C_{m+1} \xrightarrow{\;\partial_{m+1}\;} C_m \xrightarrow{\;\partial_m\;} C_{m-1}$$
+
+sends, respectively, filled $(m{+}2)$-cliques ($m+2$ nodes but $m+1$ dimensions) to their rims (landing inside $Z_m$), and $m$-chains to their loose ends (which vanish exactly on $Z_m$). Homology reads the gap between "what arrives from the left" ($B_m$) and "what dies going right" ($Z_m$). At a vertex $C_m$ of the complex, $B_m$ is the incoming image and $Z_m$ is the outgoing kernel; the whole subject is the study of $Z_m / B_m$ at each spot.
+
+**Connecting back to prevous sections**: Two special cases already appeared and are worth re-reading through this lens:
+- **§4** is entirely about $Z_m$: what it means for a chain to lie in the kernel.
+- A short lookahread to the future sections: **§5.5** ($H_0$) is the cleanest instance of the general story: there $Z_0 = C_0$ (everything is closed, since $\partial_0 = 0$), so $H_0 = C_0 / B_0$ is *purely* about the image $B_0 = \operatorname{im}\partial_1$, whose cosets turn out to be connected components. It is the one case where the kernel is trivial to describe and all the content sits in the image — a useful sanity anchor for the general $Z_m/B_m$ pattern.
+
+
+---
+
+### 5.3 Homology groups
+
+Since $\operatorname{im}\partial_{m+1} \subseteq \ker\partial_m$ (Lemma 3.5), the quotient is legal. Finally, we formally define the following:
 
 **Definition [G, Def. 3.7, p. 9].**
 
 $$H_m(X(G); k) \;=\; \frac{\ker \partial_m}{\operatorname{im}\partial_{m+1}}$$
 
-**Reading the three ingredients.**
+One more time, the way we **read the three ingredients** is the following:
 
 | object | lives in | meaning |
 |:---|:---|:---|
@@ -322,21 +437,45 @@ $$H_m(X(G); k) \;=\; \frac{\ker \partial_m}{\operatorname{im}\partial_{m+1}}$$
 | **boundary** (a chain) | $\operatorname{im}\partial_{m+1} \subseteq \ker\partial_m$ | closed *and already filled in* |
 | **homology class** | $H_m$ | a cycle, modulo boundaries |
 
-A **homology cycle** is a *nonzero element of $H_m$*: a coset $[z]$ where $z$ is a cycle that is not a boundary. A closed thing that isn't filled. A **hole**.
+A **homology cycle** is a *nonzero element of $H_m$*: a coset $[z] = z + im \partial_{m+1}$ where $z$ is a cycle that is not a boundary, a closed thing that isn't filled: A **hole**.
 
-**[⚠]** The paper writes "let $\omega \in H_m(X(G_r))$ be a non-zero cycle" **[G, Def. 4.2, p. 15]**, conflating a class with a chain. Harmless, but note that $z$ and $z + \partial_{m+1}b$ represent the *same* homology cycle. The hole does not care which loop you drew around it.
+**[⚠]** The paper writes "let $\omega \in H_m(X(G_r))$ be a non-zero cycle" **[G, Def. 4.2, p. 15]**, conflating a class with a chain. This is harmless, but note that $z$ and $z + \partial_{m+1}b$ represent the *same* homology cycle. The hole does not care which loop you drew around it. [TODO]: more explanation
 
-### 5.3 "Filling in," algebraically
+For Example 3.9 (p. 24) is the cleanest illustration of the distinction. In Figure 4b, $\tau = c_{23} + c_{35} - c_{25}$ satisfies $\partial_1\tau = 0$, so $\tau$ is a cycle. But $\tau = \partial_2 c_{235}$​, so $[\tau] = 0$ in $H_1$​ — it is not a homology cycle. The triangle got filled in. Meanwhile $\sigma = c_{12}+c_{23}+c_{34}-c_{14}$is a cycle that bounds nothing, so $[\sigma] \neq 0$, and $\beta_1 = 1$.
 
-Now we can name the operation precisely. **[S]**
+From this we could also tell that $\beta_m = \dim H_m$​ just counts how many independent homology cycles there are (Def. 3.10, p. 24) — discarding their identities, which is what makes it a statistic.
+
+---
+
+### 5.4 "Filling in," algebraically
+
+Now we can name the operation of "filling in" precisely. **[S]** You might be a little confused since a graph just gives us edges and nodes, without any higher order structures. But we need them ---
+
+The filling-in doesn't come from $G$. It comes from $X(G)$ — and $X(G)$ is derived from $G$ by a rule, not supplied as extra data. What is the rule again? Let's go back to the definition:
+
+$X(G)$, the clique complex, contains one $m$-simplex for every $(m+1)$-clique of $G$ (p. 6, notice the difference between $m$ vs $m+1$, which I admit is a little annoying). This is not a choice, but a consequence:
+
+* 1-cliques (vertices) → 0-simplices
+* 2-cliques (edges) → 1-simplices
+* 3-cliques (triangles in $G$: three mutually adjacent vertices) → 2-simplices, i.e. filled triangles
+* 4-cliques → solid tetrahedra
+…
+
+In other words, specifying $m$ already prescribes which dimensions we are looking at: __A collection of $m$-cliques (let's say $3$ edges of a triangle, $m = 2$) do not form a $2$-simplex ("the triangle", because the filling in happens not at $m = 2$, but $m = 3$)__. 
+
+But the moment three vertices are pairwise adjacent in $G$, the corresponding triangle is filled in $X(G)$. You never decide to fill it; it's automatic. This is why $C_2(X(G))$ can be nonzero for a graph you'd casually describe as "just nodes and edges."
+
+Actually same thing said in reverse: the graph $G$ is all the input the method ever gets. Everything about $X(G)$ — every simplex in every dimension — is read off from which edges are present. This is exactly what makes clique topology computable from a correlation matrix: you only ever threshold pairwise values, but you get higher-dimensional structure for free.
 
 To fill in the clique $\sigma \in X_{m+1}(G)$ is to admit the basis element $c_\sigma \in C_{m+1}$. Once $c_\sigma$ exists, $\partial_{m+1} c_\sigma$ is a boundary — so the cycle around $\sigma$'s rim becomes zero in $H_m$.
 
 $$\boxed{\text{``filling in''} \;=\; \text{quotienting } \ker\partial_m \text{ by } \operatorname{im}\partial_{m+1}}$$
 
-Filling a hole *is* declaring its rim to be a boundary. The clique complex construction ($G \mapsto X(G)$) is what makes $C_{m+1}$ nonzero; the quotient is what converts that into the death of cycles.
+__Filling a hole *is* declaring its rim to be a boundary__. The clique complex construction ($G \mapsto X(G)$) is what makes $C_{m+1}$ nonzero; the quotient is what converts that into the death of cycles.
 
-### 5.4 Worked example: the square and the diagonal
+---
+
+### 5.5 Worked example: the square and the diagonal
 
 **[G, Examples 3.8–3.9, pp. 9–10.]**
 
@@ -345,10 +484,15 @@ Filling a hole *is* declaring its rim to be a boundary. The clique complex const
 Check every triple: $\{1,2,3\}$ needs $13$ (absent); $\{1,2,4\}$ needs $24$ (absent); likewise the rest. **No 3-cliques**, so $C_2 = 0$ and $\partial_2 = 0$.
 
 - $\dim C_0 = 4$, $\dim C_1 = 4$.
-- Graph is connected, so $\operatorname{rank}\partial_1 = N - 1 = 3$, hence $\dim\ker\partial_1 = 1$, spanned by $\sigma = c_{12}+c_{23}+c_{34}-c_{14}$.
+- $\ker \partial_1$ is spanned by $c_{12}+c_{23}+c_{34}-c_{14}$,  dimension 1.
+- Rank–nullity on $\partial_1$​: $\dim\operatorname{im}\partial_1 = 4 - 1 = 3$.
 - $\operatorname{im}\partial_2 = 0$.
+- Therefore $\beta_0 = \dim H_0 = \dim C_0 - \operatorname{rank}\partial_1 = 4 - 3 = 1$ ✓ One component
 - $\beta_1 = 1$: the square is a genuine hole, **because it has no chord**.
-- $\beta_0 = \dim C_0 - \operatorname{rank}\partial_1 = 4 - 3 = 1$. One component. ✓
+
+Note how the count works: $3$ independent edge-differences are exactly what's needed to glue $4$ vertices into $1$ blob. In general, a spanning forest of $G$ with $b$ components has $N - b$ edges, and those edge-differences are independent and span the image — so $\dim \operatorname{im}\partial_1 = N - b$ and $\dim H_0 = N - (N-b) = b$. The redundant 4th edge contributes nothing new to the image; instead it creates the 1-cycle, which is why $\beta_1 = 1$ here.
+
+Why this matters for the clique-topology pipeline? $\beta_0$ tracks components across the filtration, so it's monotone-ish in a boring way: at density $0$ you have $N$ components, and it decreases to $1$. It carries no geometric signal, which is exactly why Giusti et al. report $\beta_1, \beta_2, \beta_3$​ and ignore $\beta_0$​. The zeroth Betti curve is essentially a percolation curve determined by the edge-ordering, not by any higher-order structure of the correlation matrix.
 
 **Figure 4b.** Adjoin vertex $5$ and edges $25, 35$.
 
@@ -360,9 +504,22 @@ $\tau$ is a cycle — but it is a *boundary*. $[\tau] = 0$. Meanwhile the square
 
 **This is the distinction that matters.** $\tau$ is a cycle but not a homology cycle. $\sigma$ is both.
 
-### 5.5 The zeroth homology group is special
+This often unsticks people: A triangle in $G$ is filled. A $4$-cycle in $G$ is not. Both look like closed loops in the drawing. The difference is that $\{1,2,3\}$ pairwise-adjacent is a clique, while $\{1,2,3,4\}$ arranged in a ring is not a clique (missing the diagonals). The complex only fills cliques.
+That's precisely why $\beta_1$​ measures something: it counts loops that failed to be spanned by cliques. If every loop were filled, $\beta_1$​ would always be $0$ and the statistic would be useless.
 
-**[G, p. 9]:** $H_0$ has a basis corresponding to the connected components of $G$. Here is why, in detail. **[S]**
+How does connect to filtration? In the order complex $\subset G_1 \subset \cdots$, edges arrive one at a time in order of decreasing $M_{ij}$​. Adding a single edge can:
+
+* create a new $1$-cycle (a loop closes) → birth in $H_1$​
+* complete a triangle, filling an existing loop → death in $H_1$​
+* do both, or neither
+
+A single edge can also complete several triangles at once, and can simultaneously complete a $4$-clique (creating a solid tetrahedron, which kills things in $H_2$​). This is why "adding one edge" is not a small operation on $X(G)$ — the complex can gain many simplices in many dimensions. Terminology worth having: a complex built this way — where a simplex is present iff all its edges are present — is called a flag complex or Vietoris–Rips complex. The supplement notes the identification on p. 12: the geometric order complex "is also referred to as the Vietoris-Rips complex of the underlying points." This is exactly why Ripser can reproduce CliqueTop: Ripser is a flag-complex engine, and clique topology is Vietoris–Rips on the rank-transformed matrix.
+
+---
+
+### 5.6 The zeroth homology group is special
+
+**[G, p. 9]:** $H_0$ has a basis corresponding to the connected components of $G$. Let me explain why in details.
 
 **Kernel: everything.** $\partial_0 = 0$ by definition — a vertex has no faces, and $C_{-1}$ does not exist. So $\ker\partial_0 = C_0$, dimension $N$. Every $0$-chain is vacuously a cycle. **All the information in $H_0$ comes from the image.**
 
@@ -370,17 +527,21 @@ $\tau$ is a cycle — but it is a *boundary*. $[\tau] = 0$. Meanwhile the square
 
 $$\operatorname{im}\partial_1 = \operatorname{span}\{\, c_v - c_u \;:\; \{u,v\} \in X_1(G) \,\}$$
 
-**The quotient glues.** By §5.1, $[c_u] = [c_v] \iff c_v - c_u \in \operatorname{im}\partial_1$. For an edge $\{u,v\}$ this holds by definition. So *adjacent vertices become equal*. That is the entire content: the quotient is a gluing machine.
+**The quotient glues.** By §5.1, $[c_u] = [c_v] \iff c_v - c_u \in \operatorname{im}\partial_1$. For an edge $\{u,v\}$ this holds by definition. That's the whole translation. The question "are two vertices the same in $H_0​?" has become the question "is the $0$-chain $c_v - c_u$​ the boundary of some $1$-chain?" Consequently, *adjacent vertices become equal*. That echoes the entire content: the quotient is a gluing machine.
 
-**Paths.** If $u = w_0, w_1, \dots, w_k = v$ is a path, set $\gamma = \sum_{i} c_{w_i w_{i+1}}$ (signs adjusted for canonical ordering). Then
+Compare this with **paths**: If $u = w_0, w_1, \dots, w_k = v$ is a path, set $\gamma = \sum_{i} c_{w_i w_{i+1}}$ (signs adjusted for canonical ordering). Then
 
 $$\partial_1 \gamma = (c_{w_1} - c_{w_0}) + \cdots + (c_{w_k} - c_{w_{k-1}}) = c_v - c_u$$
 
 by telescoping — which is the same shared-facet cancellation of §4.1. So $[c_u] = [c_v]$.
 
+Path-connectedness is the equivalence relation the quotient imposes. And "connected component" is by definition an equivalence class of that relation.
+
 **Different components.** Fix a component $K$ and define the linear functional $\epsilon_K(\sum_w a_w c_w) = \sum_{w \in K} a_w$. Every generator $c_y - c_x$ of $\operatorname{im}\partial_1$ has both endpoints in a single component, contributing $1-1 = 0$ or $0$. Hence $\epsilon_K$ vanishes on $\operatorname{im}\partial_1$. If $u \in K$ and $v \notin K$, then $\epsilon_K(c_v - c_u) = -1 \neq 0$, so $c_v - c_u \notin \operatorname{im}\partial_1$ and $[c_u] \neq [c_v]$.
 
 $$\boxed{[c_u] = [c_v] \iff u, v \text{ lie in the same connected component}}$$
+
+The quotient didn't decide to identify connected vertices. It identifies vectors differing by an element of $\operatorname{im}\partial_1$​ — and it happens that the differences $c_v - c_u$​ realizable as $\partial_1$ of something are exactly the ones where $u,v$ are path-connected. Connectivity is what $\operatorname{im}\partial_1$ is.
 
 **Basis.** Pick a representative $v_i$ from each component $K_1, \dots, K_b$. Spanning: $[\sum_w a_w c_w] = \sum_i \big(\sum_{w \in K_i} a_w\big)[c_{v_i}]$. Independence: the functionals $\epsilon_{K_j}$ descend to $H_0$ (they kill $\operatorname{im}\partial_1$) and pick out $\lambda_j$ from $\sum_i \lambda_i [c_{v_i}]$.
 
@@ -392,16 +553,6 @@ $$\dim H_0(X(G)) = \#\{\text{connected components}\} = \beta_0$$
 
 **$\mathbb{Z}/2$ picture.** A $0$-chain is a subset $S$ of vertices; $\operatorname{im}\partial_1$ is the set of subsets with an *even* number of vertices in every component. $H_0$ records $b$ independent parity bits.
 
-### 5.6 Minimal holes: cross-polytopes
-
-**[G, Example 3.9, p. 10].** The smallest graph $G_m$ whose clique complex has $H_m \neq 0$ is the 1-skeleton of the $(m{+}1)$-dimensional **cross-polytope**. Build it inductively: $G_0$ is two vertices, no edge; $G_i$ is obtained from $G_{i-1}$ by adding two new vertices and all edges from them to $G_{i-1}$.
-
-$G_m$ therefore has $2(m{+}1)$ vertices in $m{+}1$ antipodal pairs, with every non-antipodal pair adjacent.
-
-**Why $\beta_m = 1$ [S].** Its maximal cliques take one vertex from each pair, so they have $m{+}1$ vertices — they are $m$-simplices, and there are $2^{m+1}$ of them. They assemble into a hollow $m$-sphere. Nothing fills the interior, because that would require an $(m{+}1)$-clique, i.e. two antipodal vertices adjacent. Contradiction.
-
-So the smallest possible $m$-dimensional hole needs $2(m{+}1)$ vertices: $4$ for $\beta_1$, $6$ for $\beta_2$, $8$ for $\beta_3$. This will matter in §8.
-
 ---
 
 ## 6. Betti numbers, Betti curves, and the total Betti number
@@ -412,11 +563,11 @@ So the smallest possible $m$-dimensional hole needs $2(m{+}1)$ vertices: $4$ for
 
 The qualifier does the work. Over a field, rank and dimension coincide, so
 
-$$\beta_m = \dim_k H_m = \big(\dim C_m - \operatorname{rank}\partial_m\big) - \operatorname{rank}\partial_{m+1}$$
+$$\beta_m = \dim_k H_m(X(G); k) = \big(\dim C_m - \operatorname{rank}\partial_m\big) - \operatorname{rank}\partial_{m+1}$$
 
-by rank–nullity. (Here "rank $\partial_m$" is *matrix* rank, which is why the word appears at all; the computation is Gaussian elimination on boundary matrices.)
+by rank–nullity. (Here "rank $\partial_m$" is *matrix* rank, which is why the word appears at all; the computation is Gaussian elimination on boundary matrices.) [TODO]
 
-**[⚠] The two words are not synonyms in general. [S]** With $\mathbb{Z}$ coefficients, $H_m(X;\mathbb{Z}) \cong \mathbb{Z}^{b_m} \oplus (\text{finite torsion})$, and the classical Betti number $b_m$ is the rank of the *free part*; torsion is discarded. That is a different notion from $\dim_k H_m(X;k)$. By the universal coefficient theorem, for $k = \mathbb{Z}/p\mathbb{Z}$,
+**[⚠] The two words are not synonyms in general [S]** With $\mathbb{Z}$ coefficients, $H_m(X;\mathbb{Z}) \cong \mathbb{Z}^{b_m} \oplus (\text{finite torsion})$, and the classical Betti number $b_m$ is the rank of the *free part*; torsion is discarded. That is a different notion from $\dim_k H_m(X;k)$. By the universal coefficient theorem, for $k = \mathbb{Z}/p\mathbb{Z}$,
 
 $$\dim_k H_m(X;k) = b_m + t_p\big(H_m(X;\mathbb{Z})\big) + t_p\big(H_{m-1}(X;\mathbb{Z})\big)$$
 
@@ -426,11 +577,7 @@ where $t_p$ counts $p$-torsion summands. The field computation can **overcount**
 
 This is exactly what **[G, footnote 2, p. 7]** warns about: over $\mathbb{Z}/p$, adding a boundary to itself finitely often can give zero, creating **torsion cycles** absent over $\mathbb{R}$.
 
-**Their defense, which is correct. [G]** Torsion cycles "measure aspects of the clique complex that are not relevant to our purposes," and "so long as all computations are done using the same field, comparing the resulting homology groups across different graphs is entirely valid." The method is *comparative*: observed Betti curves against random and geometric nulls, all over $\mathbb{Z}/2\mathbb{Z}$. Systematic torsion inflation affects all of them equally.
-
-**Two things to carry [S].** (i) $\bar\beta_m$ over $\mathbb{Z}/2$ is a statistic, not literally "the number of holes." (ii) To check whether torsion contributes, recompute over $\mathbb{Z}/3\mathbb{Z}$ and compare (Ripser: `--modulus 3`). Different answers ⟹ torsion.
-
-**Recommendation.** Say **dimension**. It is what is computed. "Rank" is standard but drags in the $\mathbb{Z}$-definition, which means something strictly different.
+---
 
 ### 6.2 Betti curves
 
@@ -448,13 +595,16 @@ Typically $\Delta\rho_r = 1/\binom{N}{2}$ — one edge at a time.
 
 **Why reduce to integers [G, p. 10].** Betti numbers discard the identities of individual cycles, but that is the point: they reduce clique topology to a sequence of integers, which is well-suited to statistical hypothesis testing.
 
+---
+
 ### 6.3 What the method is *not* doing [G, p. 2 of SI]
 
 Prior TDA in biology hunts for *individual persistent cycles* with interpretable meaning. Giusti et al. explicitly do not. They use the **statistical properties of cycles**. The underlying space may possess no meaningful persistent cycles at all — a square box covered by place fields is contractible. What survives is that the ambient Euclidean geometry has a strong effect on *cycle statistics*, and that effect is what discriminates.
 
-**[⚠] Two loose phrases in the main text. [S]**
-"Noncontractible cycles" is homotopy language ($\pi_m$); Betti numbers count homology ($H_m$). A loop can be noncontractible yet homologically trivial (a commutator). Take the supplement's Def. 3.7 as what is actually computed.
-"Bound a hole" is likewise loose. What $\beta_m$ counts is cycles that **fail** to bound.
+**[⚠] Two loose phrases in the main text [S]**
+Rigorously speaking, "noncontractible cycles" is homotopy language ($\pi_m$); Betti numbers count homology ($H_m$). A loop can be noncontractible yet homologically trivial (a commutator). Take the supplement's Def. 3.7 as what is actually computed.
+
+"Bound a hole" is also likewise loose. What $\beta_m$ counts is cycles that **fail** to bound.
 
 ---
 
@@ -464,9 +614,11 @@ Prior TDA in biology hunts for *individual persistent cycles* with interpretable
 
 **Persistent homology is not a new homology theory. It is the simplicial homology of §5, computed at every stage of the filtration, together with the linear maps connecting consecutive stages.** The maps are the only new object.
 
+---
+
 ### 7.2 The maps [G, Lemma 4.1, p. 15]
 
-Take the filtration $X(G_0) \subset X(G_1) \subset \cdots \subset X(G_{p+1})$. The chain of "obvious" extensions:
+Take the filtration (the sequence of clique complex of order complex) $X(G_0) \subset X(G_1) \subset \cdots \subset X(G_{p+1})$. The chain of "obvious" extensions:
 
 1. **Graphs include.** $\iota_r : G_r \hookrightarrow G_{r+1}$, since edges are only ever added.
 2. **Clique complexes include.** If $\sigma$ is a clique of $G_r$, all its edges lie in $G_{r+1}$, so $\sigma$ is a clique of $G_{r+1}$. Hence $X_m(G_r) \subseteq X_m(G_{r+1})$ for all $m$. *This is where "clique complex" earns its keep — the property is inherited for free.*
@@ -480,27 +632,34 @@ $$(\iota_r)_m : H_m(X(G_r)) \longrightarrow H_m(X(G_{r+1})), \qquad [z] \mapsto 
 
 $$H_m(X(G_0)) \xrightarrow{\;\iota_0\;} H_m(X(G_1)) \xrightarrow{\;\iota_1\;} \cdots \xrightarrow{\;\iota_p\;} H_m(X(G_{p+1}))$$
 
-a sequence of vector spaces and linear maps, called a **persistence module**.
+a sequence of vector spaces and linear maps, called a **persistence module**. Each individual $H_m(X(G_r))$ is exactly the simplicial homology group of previously defined in [3.7].
 
-### 7.3 Why the maps are indispensable [S]
+The crucial point here is that $(ι_r​)_m$​ is neither injective nor surjective. $\iota_\#$ on chains is injective. The induced map on homology need not be, and that asymmetry is the entire content of persistence.
 
-Suppose $\beta_1 = 7$ at stage $r$ and $\beta_1 = 7$ at stage $r+1$. Did nothing happen? Or did one cycle die and another get born simultaneously? **The Betti number cannot tell you.** It is a head count.
+- Death (failure of injectivity). A nonzero class $[z] \in H_m(X(G_r))$ can map to $0$. Not because $z$ stopped being a cycle — it can't, by (e) — but because $G_{r+1}$​ acquired new cliques, $\operatorname{im}\partial_{m+1}$​ grew, and $z$ is now a boundary. The hole got filled in. In $X(G)$, $\tau$'s constituent edges aren't all present; once vertex $5$ and its edges arrive, $c_{235}$ is a clique and $\tau = \partial_2 c_{235}$​.
+- Birth (failure of surjectivity). New edges can create new cycles absent from $\operatorname{im}(\iota_{r-1})_m$​. Hence Def. 4.2's condition "not in the image of $\iota_{r-1}$​" — that's what new means.
 
-The maps can, because they say which class at stage $r$ becomes which class at stage $r+1$. That is the entire content of the word *persistent*.
+Lifetime (see below) $\ell(\omega) = s - r$, where $s$ is the first index at which the composite $\iota_{s-1}\circ\cdots\circ\iota_r$​ kills $\omega$.
 
-### 7.4 Birth, death, lifetime
+Note that here death is well-defined (once dead, always dead): if $z$ becomes a boundary at stage $s$, then since $\operatorname{im}\partial_{m+1}$ only grows along the filtration, $z$ remains a boundary at every $s' > s$. No resurrection. This monotonicity is what makes "the smallest such $s$" meaningful.
+
+---
+
+### 7.3 Birth, death, lifetime
 
 **Definition [G, Def. 4.2, p. 15].** Let $\omega \in H_m(X(G_r))$ be nonzero and not in $\operatorname{im}(\iota_{r-1})_m$. Let $s > r$ be least with $\iota_{s-1} \circ \cdots \circ \iota_r(\omega) = 0$. Then $\omega$ is **born at $r$**, **dies at $s$**, with **persistence lifetime** $\ell(\omega) = s - r$.
 
-Two facts make this well-posed. **[S]**
+Two facts make this well-posed **[S]**:
 
-**Cycles cannot stop being cycles.** $\iota_\#$ commutes with $\partial$. The only way to die is to become a **boundary** — to get filled in.
+1) **Cycles cannot stop being cycles.** $\iota_\#$ commutes with $\partial$. The only way to die is to become a **boundary** — to get filled in.
 
-**Death is permanent.** $\operatorname{im}\partial_{m+1}$ only grows along the filtration (more cliques ⟹ more boundaries). Once a cycle bounds, it bounds forever. So "the least such $s$" is meaningful. No resurrection.
+2) **Death is permanent.** $\operatorname{im}\partial_{m+1}$ only grows along the filtration (more cliques ⟹ more boundaries). Once a cycle bounds, it bounds forever. So "the least such $s$" is meaningful. No resurrection.
 
 Failure of injectivity of $(\iota_r)_m$ is **death**; failure of surjectivity is **birth**. That asymmetry — $\iota_\#$ is injective on chains but the induced map need not be on homology — is the whole phenomenon.
 
-### 7.5 A fully worked filtration [S]
+---
+
+### 7.4 A fully worked filtration [S]
 
 $N = 4$, edges in order $12,\; 23,\; 34,\; 14,\; 13,\; 24$.
 
@@ -515,15 +674,35 @@ $N = 4$, edges in order $12,\; 23,\; 34,\; 14,\; 13,\; 24$.
 
 At $r = 4$ the square closes: $\sigma = c_{12}+c_{23}+c_{34}-c_{14}$ is a cycle bounding nothing.
 
-At $r = 5$ the diagonal $13$ arrives, creating 3-cliques $\{1,2,3\}$ and $\{1,3,4\}$. Now $\sigma = \partial_2(c_{123} + c_{134})$.
-
-**The hole vanishes not because the square vanished** — all four edges are still present, and $\sigma$ is still a cycle — **but because $\sigma$ became a boundary.**
+At $r = 5$ the diagonal $13$ arrives, creating 3-cliques $\{1,2,3\}$ and $\{1,3,4\}$. Now $\sigma = \partial_2(c_{123} + c_{134})$. **The hole vanishes not because the square vanished** — all four edges are still present, and $\sigma$ is still a cycle — **but because $\sigma$ became a boundary.**
 
 Barcode for $H_1$: a single bar $[4, 5)$. Lifetime $1$.
+
+---
+
+### 7.5 Why the maps are indispensable [S]
+
+From the above example we could answer the following question: what does the map buy us? 
+
+Here's the key. Suppose I only tell you the Betti numbers: $0,0,0,1,0,0$. You know a hole existed at $r=4$ and not at $r=5$. Fine for $N=4$.
+
+Suppose $\beta_1 = 7$ at stage $r$ and $\beta_1 = 7$ at stage $r+1$. Did nothing happen? Or did one cycle die and another get born simultaneously? **The Betti number cannot tell you.** It is a head count.
+
+The inclusion-induced maps $(\iota_r)_1 : H_1(X(G_r)) \to H_1(X(G_{r+1}))$ can tell you, because they say which class at stage $r$ becomes which class at stage $r+1$. In our example, the map $H_1(X(G_4)) \to H_1(X(G_5))$ sends $[\sigma] \mapsto 0$. That single fact is "the cycle born at 4 dies at 5." The maps exist for free (Lemma 4.1): edges only get added, so cliques only get added, so $c_\sigma \mapsto c_\sigma$​ is a chain map, so it descends to homology. Nothing subtle. But they are the entire content of the word persistent. So, one more time, persistent homology is this object:
+
+$Hm(X(Gp+1))H_m(X(G_0)) \xrightarrow{\;\iota_0\;} H_m(X(G_1)) \xrightarrow{\;\iota_1\;} \cdots \xrightarrow{\;\iota_p\;} H_m(X(G_{p+1}))$
+
+This is a sequence of vector spaces with linear maps between consecutive ones and it's called a persistence module. It's not one homology group, but a whole diagram of them.
+
+---
 
 ### 7.6 The barcode, and how Betti curves fall out of it
 
 The output of persistence is a multiset of half-open intervals $[b, d)$, one per independent cycle: the **barcode** (equivalently, **persistence diagram**).
+
+How this relates back to Betti curves? 
+
+The Betti curve $\beta_m(\rho_r) = \operatorname{rank} H_m(X(G_r))$ (Def. 3.11, p. 24–25) uses no maps at all. It's $p+1$ independent simplicial homology computations, ranks recorded. The persistence data is strictly richer: it knows which cycle at stage $r$ is the same cycle at stage $r+1$. Betti curves see only the head count and persistence sees the identities: the Betti curve is recoverable from the persistence intervals:
 
 **Betti curve from barcode [S]:**
 
@@ -533,11 +712,15 @@ Sweep a vertical line across the barcode at position $r$; count crossings. In §
 
 **Barcode $\Rightarrow$ Betti curve, but not conversely.** The barcode is strictly richer. Giusti et al. use both: Betti curves in §3.4 (the headline result), lifetime distributions in §4.3, which they describe as complementary **[G, p. 15]**.
 
+Note: This is why Giusti et al. can compute one algorithm (persistence) and report both. It's also why §4.3 calls lifetime distributions "complementary to the Betti curves" — same computation, two projections of the output.
+
 **And the total Betti number is total persistence [S].** By Fubini, integrating the bar-counting function over $\rho$ equals summing the bar lengths:
 
 $$\bar\beta_m(M) = \int_0^1 \beta_m(\rho)\,d\rho = \sum_{\text{bars}} (\text{length})$$
 
 So "area under the Betti curve" and "total persistence" are literally the same number here. **[G, footnote 3, p. 11]** notes that $\bar\beta_m$ is the first element of a known basis for the ring of algebraic functions on persistence structures.
+
+---
 
 ### 7.7 Why persistence is the right statistic
 
@@ -549,6 +732,12 @@ So "area under the Betti curve" and "total persistence" are literally the same n
 
 **[⚠] A suppressed hypothesis. [S]** Def. 4.2 assigns birth/death to a *chosen class* $\omega$. Different bases for $H_m(X(G_r))$ give different classes, and it is not obvious that the multiset of intervals is well-defined. It is — but this requires the **structure theorem for persistence modules over a field**: every such module decomposes uniquely into interval summands. Giusti et al. do not state this; they gesture at the stability literature instead. It is also why $k$ must be a field: over $\mathbb{Z}$ the decomposition fails.
 
+To summarize,
+
+* 1) Simplicial homology answers: how many holes does this complex have?
+* 2) Persistent homology answers: as I grow the complex, which holes appear when, and which get filled when?
+* 3) The extra machinery is nothing but the maps $H_m(X(G_r)) \to H_m(X(G_{r+1}))$ induced by inclusion — and the only new phenomenon is that these maps have kernels (death) and fail to be onto (birth).
+
 ---
 
 ## 8. Null models: random vs. geometric
@@ -559,21 +748,25 @@ Sample a matrix ordering $\widehat{M}$ uniformly from all orderings — equivale
 
 Then in $G_\rho$ each edge appears independently with probability $\rho$: **the order complex is a nested family of Erdős–Rényi graphs.** Their clique topology is theoretically well understood (Kahle), and the Betti curves are highly stereotyped and **unimodal**, with peak values that *increase* with $m$.
 
+---
+
 ### 8.2 Geometric order complexes [G, p. 12]
 
 Sample $N$ i.i.d. points $\{p_i\}$ uniformly from the unit cube in $\mathbb{R}^d$, and take $M = -D$, the **negative** distance matrix (so that the largest entries are the nearest distances — consistent with correlations decaying with distance).
 
 The resulting filtration of clique complexes is exactly the **Vietoris–Rips complex** of the point cloud.
 
-Findings: Betti curves are highly stereotyped, nearly independent of $d$ across a huge range; peaks are roughly **an order of magnitude smaller** than random with matching $N$; and peak values *decrease* rather than increase from $\beta_1$ to $\beta_2$ to $\beta_3$. Beyond $d = N$ the peaks saturate. Both families' large-scale features are robust once $N > 50$, which is what licenses using them as null models.
+Note that in the paper Giusti et.al. find out that Betti curves are highly stereotyped, nearly independent of $d$ across a huge range; peaks are roughly **an order of magnitude smaller** than random with matching $N$; and peak values *decrease* rather than increase from $\beta_1$ to $\beta_2$ to $\beta_3$. Beyond $d = N$ the peaks saturate. Both families' large-scale features are robust once $N > 50$, which is what licenses using them as null models.
 
-**The discriminating signal lives in $\beta_2, \beta_3$** — dimensions that exist *only because cliques got filled in* (§2.2, point 3).
+---
 
 ### 8.3 Lifetimes tell the same story [G, p. 16]
 
 Random complexes have **broad** lifetime distributions; geometric complexes are heavily weighted toward **short** lifetimes.
 
 *The mechanism.* Minimal cycles — the cross-polytopes of §5.6 — constitute the large majority of cycles in random order complexes. Such a cycle's lifetime is governed by when the *first additional edge* arrives, since any extra edge creates new cliques and kills the cycle. In a random ordering, that arrival time is unconstrained, so lifetimes are broadly distributed. In a geometric ordering, triangle inequalities (and their higher-dimensional analogues) constrain which edges can arrive late, and holes get filled promptly.
+
+---
 
 ### 8.4 Every ordering is geometrically realizable — in high enough dimension
 
@@ -603,15 +796,19 @@ When $d$ is *constrained*, some orderings become genuinely unrealizable, and the
 
 $\beta_0$ is **not** reported. It is a percolation curve — $N$ components decreasing to $1$ — determined by the edge ordering alone, carrying no higher-order geometric signal.
 
+---
+
 ### 9.2 Modern implementation [S]
 
-Giusti et al. used the MATLAB `CliqueTop` package. The method reduces exactly to **Vietoris–Rips persistent homology on a rank-transformed distance matrix**, so any modern flag-complex engine reproduces it: `ripser.py`, `giotto-tda`, `GUDHI`. No dedicated package is needed.
+Giusti et al. used the MATLAB `CliqueTop` package. The method reduces exactly to **Vietoris–Rips persistent homology on a rank-transformed distance matrix**, so any modern flag-complex engine reproduces it: `ripser`, `giotto-tda`, `GUDHI`. No dedicated package is needed.
 
 Two conveniences follow from order-invariance:
 - You may feed $-M$ directly. Ripser is unaffected by monotone transforms of the input distances, so the rank transform is optional for the *barcode* (though not for reading off $\rho$).
 - Ripser defaults to $\mathbb{Z}/2\mathbb{Z}$, matching the paper. `--modulus 3` gives the torsion check of §6.1.
 
 Ripser never materializes the simplices; it *infers* them from the edge set, exploiting the flag property (a simplex is present iff all its edges are). **That inference is "filling in," implemented.**
+
+---
 
 ### 9.3 Scaling notes for $N = 384$ (Utah array) [S]
 
