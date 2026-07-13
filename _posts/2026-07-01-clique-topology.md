@@ -72,7 +72,7 @@ where $$(ij) \in G_r \iff \widehat{M}_{ij} > p - r$$.
 
 $$G_0$$ is the empty graph. $$G_1$$ contains only the edge of largest correlation. Each subsequent $$G_r$$ adds the next-largest entry. $$G_{p+1}$$ is the complete graph.
 
-A perhaps simple analagoy for this: imagine watching a movie in which edges precipitate out of the correlation matrix, strongest first. The order complex *is* the movie. The individual frames are graphs; each frame has an **edge density** $$\rho_r = \left| E(G_r)\right| / \binom{N}{2}$$, running from $$0$$ to $$1$$.
+A perhaps simple analagoy for this: imagine watching a movie in which edges precipitate out of the correlation matrix, strongest first. The order complex *is* the movie. The individual frames are graphs; each frame has an **edge density** $$\rho_r = \left\lvert E(G_r)\right\rvert / \binom{N}{2}$$, running from $$0$$ to $$1$$.
 
 Well, you might ask **why not just pick one threshold?** Because every choice is arbitrary and the answer depends on it. If we threshold high then there're no edges and no structure surves. If threshold low, we get complete graph and the structure is muffled in noise. Persistence is the disciplined refusal to choose — we use every threshold and record how structure appears and disappears as we sweep.
 
@@ -149,7 +149,7 @@ Here's a crucial point as **this is the "filling in."** Where the main text says
 
 2. **It is well-defined only because cliques are closed under subsets.** If $$\sigma$$ is a clique, so is every facet of $$\sigma$$. Hence $$X(G)$$ is genuinely a *simplicial complex* (closed under taking faces), and boundary maps will have somewhere to land. A complex built this way is called a **flag complex**, or, when the graph comes from thresholding a distance matrix, a **Vietoris–Rips complex** **[G, p. 12]**.
 
-3. **Without it, there is nothing to compute**. Suppose we did not fill in — suppose $$X(G)$$ contained only vertices and edges. Then $$\beta_1 = \left| E \right| - N + \beta_0$$, the cyclomatic number, computable in $$O(\left| E \right|)$$ from counting alone; and $$\beta_m = 0$$ identically for $$m \geq 2$$. All information about *how* the edges are arranged would be lost. **Filling in is what creates dimensions $$2, 3, \dots$$, and the paper's entire discriminating signal lives there.**
+3. **Without it, there is nothing to compute**. Suppose we did not fill in — suppose $$X(G)$$ contained only vertices and edges. Then $$\beta_1 = \left\lvert E \right\rvert - N + \beta_0$$, the cyclomatic number, computable in $$O(\left| E \right|)$$ from counting alone; and $$\beta_m = 0$$ identically for $$m \geq 2$$. All information about *how* the edges are arranged would be lost. **Filling in is what creates dimensions $$2, 3, \dots$$, and the paper's entire discriminating signal lives there.**
 
 **A triangle in $$G$$ is filled. A square in $$G$$ is not.** Both look like closed loops when drawn. But $$\{1,2,3\}$$ pairwise-adjacent is a clique, while $$\{1,2,3,4\}$$ arranged as a ring is not — the diagonals are missing. __Only cliques get filled__. This is exactly why $$\beta_1$$ measures something: it counts loops that *failed* to be spanned by cliques.
 
@@ -500,10 +500,10 @@ Example 3.8/3.9 again: $$\tau = c_{23}+c_{35}-c_{25}$$​ is a cycle either way.
 
 What if we don't introduce this language of clique? Suppose you didn't fill in. Then $$X(G)$$ would have only vertices and edges, $$C_m = 0$$ for $$m \geq 2$$, and:
 
-* $$\beta_1 = \left| E \right| - N + \beta_0$$​ — the cyclomatic number. This is determined entirely by counting edges and components.
+* $$\beta_1 = \left\lvert E \right\rvert - N + \beta_0$$​ — the cyclomatic number. This is determined entirely by counting edges and components.
 * $$\beta_m = 0$$ for all $$m \geq 2$$ identically.
 
-Then you'd get one number, computable in $$O(\left| E \right|)$$, carrying no information about how edges are arranged and thus graph has no higher-dimensional topology. The clique complex is precisely the device that manufactures dimensions $$2, 3, \dots$$ out of purely pairwise data — which is what lets a correlation matrix (an inherently pairwise object) exhibit $$\beta_2$$ and $$\beta_3$$​ at all. And this is also exactly why it detects geometry. Fig. 6 (p. 12) shows the discriminating signal: random matrices have Betti curves whose peaks increase with $$m$$, while geometric matrices have peaks that decrease. That contrast lives entirely in $$\beta_2, \beta_3$$​ — dimensions that only exist because cliques got filled.
+Then you'd get one number, computable in $$O(\left\lvert E \right\rvert)$$, carrying no information about how edges are arranged and thus graph has no higher-dimensional topology. The clique complex is precisely the device that manufactures dimensions $$2, 3, \dots$$ out of purely pairwise data — which is what lets a correlation matrix (an inherently pairwise object) exhibit $$\beta_2$$ and $$\beta_3$$​ at all. And this is also exactly why it detects geometry. Fig. 6 (p. 12) shows the discriminating signal: random matrices have Betti curves whose peaks increase with $$m$$, while geometric matrices have peaks that decrease. That contrast lives entirely in $$\beta_2, \beta_3$$​ — dimensions that only exist because cliques got filled.
 
 The intuition on p. 2 (line 59) is worth mentioning here: in a geometric matrix, nearby points are mutually close, so edges arrive in mutually-adjacent bunches, cliques form early, and holes get filled in quickly. In a random matrix, edges arrive without regard to each other, so triangles are rare relative to edges and holes persist. Filling-in rate is the geometric signature. No filling, no signature.
 
@@ -908,7 +908,7 @@ Ripser never materializes the simplices; it *infers* them from the edge set, exp
 1. A monotone $$f$$ destroys eigenvalues but preserves **order**.
 2. The **order complex** records exactly the order: a filtration of graphs $$G_0 \subset \cdots \subset G_{p+1}$$.
 3. **Filling in cliques** ($$G \mapsto X(G)$$) manufactures higher dimensions from pairwise data.
-4. **Chains** are formal linear combinations of cliques; the **chain group** $$C_m$$ is their span, $$\dim C_m = \left| X_m(G) \right|$$.
+4. **Chains** are formal linear combinations of cliques; the **chain group** $$C_m$$ is their span, $$\dim C_m = \left\lvert X_m(G) \right\rvert$$.
 5. The **boundary map** $$\partial_m$$ lists a simplex's facets with alternating signs, so that shared facets cancel; $$\partial\partial = 0$$.
 6. A **cycle** is a chain whose facets all cancel ($$\ker\partial_m$$). A **boundary** is a cycle already filled in ($$\operatorname{im}\partial_{m+1}$$).
 7. **Homology** $$H_m = \ker\partial_m / \operatorname{im}\partial_{m+1}$$ counts cycles that fail to bound — holes. $$\beta_m = \dim H_m$$. And $$\beta_0$$ counts connected components.
