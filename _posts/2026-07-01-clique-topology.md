@@ -21,7 +21,7 @@ toc:
 
 I will largely follow the structure of *Giusti, Pastalkova, Curto & Itskov (2015), PNAS, and its SI Appendix*, but add in my own understandings, interpretations, and most importantly reflections on questions you might also have. 
 
-**Provenance conventions used throughout.** Statements marked **[G]** are claims made by Giusti et al., with page references to the SI Appendix. Statements marked **[S]** are synthesis, reconstruction, or standard background that the paper assumes but does not state. Statements marked **[⚠]** flag places where the paper is imprecise or where a technical hypothesis is being suppressed.
+**Provenance conventions used throughout.** Statements marked **[G]** are claims made by Giusti et al., with page references to the SI Appendix. Statements marked **** are synthesis, reconstruction, or standard background that the paper assumes but does not state. Statements marked **[⚠]** flag places where the paper is imprecise or where a technical hypothesis is being suppressed.
 
 ---
 
@@ -72,7 +72,7 @@ where $$(ij) \in G_r \iff \widehat{M}_{ij} > p - r$$.
 
 $$G_0$$ is the empty graph. $$G_1$$ contains only the edge of largest correlation. Each subsequent $$G_r$$ adds the next-largest entry. $$G_{p+1}$$ is the complete graph.
 
-A perhaps simple analagoy for this: imagine watching a movie in which edges precipitate out of the correlation matrix, strongest first. The order complex *is* the movie. The individual frames are graphs; each frame has an **edge density** $$\rho_r = \|E(G_r)\| / \binom{N}{2}$$, running from $$0$$ to $$1$$.
+A perhaps simple analagoy for this: imagine watching a movie in which edges precipitate out of the correlation matrix, strongest first. The order complex *is* the movie. The individual frames are graphs; each frame has an **edge density** $$\rho_r = \left| E(G_r)\right| / \binom{N}{2}$$, running from $$0$$ to $$1$$.
 
 Well, you might ask **why not just pick one threshold?** Because every choice is arbitrary and the answer depends on it. If we threshold high then there're no edges and no structure surves. If threshold low, we get complete graph and the structure is muffled in noise. Persistence is the disciplined refusal to choose — we use every threshold and record how structure appears and disappears as we sweep.
 
@@ -92,7 +92,7 @@ I think **realizing that a graph is fundamentally just a collection of vertices 
 
 ### 2.1 Simplices
 
-**Definition (geometric $$m$$-simplex) [S].** Given $$m+1$$ affinely independent points $$v_0, \dots, v_m \in \mathbb{R}^d$$ ($$d \geq m$$), their **convex hull**
+**Definition (geometric $$m$$-simplex).** Given $$m+1$$ affinely independent points $$v_0, \dots, v_m \in \mathbb{R}^d$$ ($$d \geq m$$), their **convex hull**
 
 $$[v_0, \dots, v_m] = \Big\{ \textstyle\sum_{i} t_i v_i \;:\; t_i \geq 0, \; \sum_i t_i = 1 \Big\}$$
 
@@ -147,7 +147,7 @@ Here's a crucial point as **this is the "filling in."** Where the main text says
 
 2. **It is well-defined only because cliques are closed under subsets.** If $$\sigma$$ is a clique, so is every facet of $$\sigma$$. Hence $$X(G)$$ is genuinely a *simplicial complex* (closed under taking faces), and boundary maps will have somewhere to land. A complex built this way is called a **flag complex**, or, when the graph comes from thresholding a distance matrix, a **Vietoris–Rips complex** **[G, p. 12]**.
 
-3. **Without it, there is nothing to compute**. Suppose we did not fill in — suppose $$X(G)$$ contained only vertices and edges. Then $$\beta_1 = \|E\| - N + \beta_0$$, the cyclomatic number, computable in $$O(\|E\|)$$ from counting alone; and $$\beta_m = 0$$ identically for $$m \geq 2$$. All information about *how* the edges are arranged would be lost. **Filling in is what creates dimensions $$2, 3, \dots$$, and the paper's entire discriminating signal lives there.**
+3. **Without it, there is nothing to compute**. Suppose we did not fill in — suppose $$X(G)$$ contained only vertices and edges. Then $$\beta_1 = \left| E \right| - N + \beta_0$$, the cyclomatic number, computable in $$O(\left| E \right|)$$ from counting alone; and $$\beta_m = 0$$ identically for $$m \geq 2$$. All information about *how* the edges are arranged would be lost. **Filling in is what creates dimensions $$2, 3, \dots$$, and the paper's entire discriminating signal lives there.**
 
 **A triangle in $$G$$ is filled. A square in $$G$$ is not.** Both look like closed loops when drawn. But $$\{1,2,3\}$$ pairwise-adjacent is a clique, while $$\{1,2,3,4\}$$ arranged as a ring is not — the diagonals are missing. __Only cliques get filled__. This is exactly why $$\beta_1$$ measures something: it counts loops that *failed* to be spanned by cliques.
 
@@ -215,14 +215,14 @@ and extended linearly: $$\partial_m(\sum_j a_j c_{\sigma_j}) = \sum_j a_j \parti
 
 To interpret this, we might start with the following three separate perspectives/conditions which must be true for this to deserve the name "boundary." The definition delivers each.
 
-**(i) The support is right: deleting a vertex names a facet [S].**
+**(i) The support is right: deleting a vertex names a facet .**
 The topological boundary of an $$m$$-simplex is the union of its $$m+1$$ codimension-one faces, and each such face is the convex hull of all vertices *except one*. So "delete $$v_i$$" is precisely "name the facet opposite $$v_i$$." The list $$v_0 \cdots \hat{v_i} \cdots v_m$$, $$i = 0, \dots, m$$, enumerates the facets exactly once each.
 
 This lands in $$C_{m-1}$$ only because $$X(G)$$ is a clique complex: each facet of a clique is a clique.
 
 Also note that the unsigned $$\sum_i c_{v_0\ldots\hat{v_i}\ldots v_m}$$​ already captures "the set of facets." The signs are doing something else.
 
-**(ii) The signs install the induced orientation. [S]**
+**(ii) The signs install the induced orientation.**
 At $$m = 1$$: $$\partial_1 c_{v_0 v_1} = c_{v_1} - c_{v_0}$$. Head minus tail. The sign is what gives a directed edge a direction rather than merely two endpoints.
 
 At $$m = 2$$: $$\partial_2 c_{012} = c_{12} - c_{02} + c_{01}$$. Rewrite $$-c_{02} = c_{20}$$:
@@ -250,7 +250,7 @@ To summarize, **cancellation requires linearity, and linearity is why we needed 
 
 **Lemma [G, Lemma 3.5, p. 8].** $$\partial_m \circ \partial_{m+1} = 0$$.
 
-*Proof sketch [S].* An $$(m{-}1)$$-dimensional face of the $$(m{+}1)$$-simplex $$c_{v_0\cdots v_{m+1}}$$ is obtained by deleting two vertices $$v_i, v_j$$ with $$i < j$$. It arises twice in the double sum: delete $$i$$ then $$j$$, or delete $$j$$ then $$i$$. The signs are $$(-1)^i(-1)^{j-1}$$ and $$(-1)^j(-1)^i$$ — the $$j-1$$ because deleting $$v_i$$ first shifts $$v_j$$ down one index slot. These differ by a factor of $$-1$$ and cancel. $$\square$$
+*Proof sketch.* An $$(m{-}1)$$-dimensional face of the $$(m{+}1)$$-simplex $$c_{v_0\cdots v_{m+1}}$$ is obtained by deleting two vertices $$v_i, v_j$$ with $$i < j$$. It arises twice in the double sum: delete $$i$$ then $$j$$, or delete $$j$$ then $$i$$. The signs are $$(-1)^i(-1)^{j-1}$$ and $$(-1)^j(-1)^i$$ — the $$j-1$$ because deleting $$v_i$$ first shifts $$v_j$$ down one index slot. These differ by a factor of $$-1$$ and cancel. $$\square$$
 
 **[G, Example 3.4]** verifies this concretely: $$\partial_1\partial_2(c_{123} - c_{124}) = 0$$.
 
@@ -463,7 +463,7 @@ From this we could also tell that $$\beta_m = \dim H_m$$​ just counts how many
 
 ### 5.4 "Filling in," algebraically
 
-Now we can name the operation of "filling in" precisely. **[S]** You might be a little confused since a graph just gives us edges and nodes, without any higher order structures. But we need them ---
+Now we can name the operation of "filling in" precisely. You might be a little confused since a graph just gives us edges and nodes, without any higher order structures. But we need them ---
 
 The filling-in doesn't come from $$G$$. It comes from $$X(G)$$ — and $$X(G)$$ is derived from $$G$$ by a rule, not supplied as extra data. What is the rule again? Let's go back to the definition:
 
@@ -497,10 +497,10 @@ Example 3.8/3.9 again: $$\tau = c_{23}+c_{35}-c_{25}$$​ is a cycle either way.
 
 What if we don't introduce this language of clique? Suppose you didn't fill in. Then $$X(G)$$ would have only vertices and edges, $$C_m = 0$$ for $$m \geq 2$$, and:
 
-* $$\beta_1 = \|E\| - N + \beta_0$$​ — the cyclomatic number. This is determined entirely by counting edges and components.
+* $$\beta_1 = \left| E \right| - N + \beta_0$$​ — the cyclomatic number. This is determined entirely by counting edges and components.
 * $$\beta_m = 0$$ for all $$m \geq 2$$ identically.
 
-Then you'd get one number, computable in $$O(\|E\|)$$, carrying no information about how edges are arranged and thus graph has no higher-dimensional topology. The clique complex is precisely the device that manufactures dimensions $$2, 3, \dots$$ out of purely pairwise data — which is what lets a correlation matrix (an inherently pairwise object) exhibit $$\beta_2$$ and $$\beta_3$$​ at all. And this is also exactly why it detects geometry. Fig. 6 (p. 12) shows the discriminating signal: random matrices have Betti curves whose peaks increase with $$m$$, while geometric matrices have peaks that decrease. That contrast lives entirely in $$\beta_2, \beta_3$$​ — dimensions that only exist because cliques got filled.
+Then you'd get one number, computable in $$O(\left| E \right|)$$, carrying no information about how edges are arranged and thus graph has no higher-dimensional topology. The clique complex is precisely the device that manufactures dimensions $$2, 3, \dots$$ out of purely pairwise data — which is what lets a correlation matrix (an inherently pairwise object) exhibit $$\beta_2$$ and $$\beta_3$$​ at all. And this is also exactly why it detects geometry. Fig. 6 (p. 12) shows the discriminating signal: random matrices have Betti curves whose peaks increase with $$m$$, while geometric matrices have peaks that decrease. That contrast lives entirely in $$\beta_2, \beta_3$$​ — dimensions that only exist because cliques got filled.
 
 The intuition on p. 2 (line 59) is worth mentioning here: in a geometric matrix, nearby points are mutually close, so edges arrive in mutually-adjacent bunches, cliques form early, and holes get filled in quickly. In a random matrix, edges arrive without regard to each other, so triangles are rare relative to edges and holes persist. Filling-in rate is the geometric signature. No filling, no signature.
 
@@ -558,7 +558,7 @@ A single edge can also complete several triangles at once, and can simultaneousl
 
 $$\operatorname{im}\partial_1 = \operatorname{span}\{\, c_v - c_u \;:\; \{u,v\} \in X_1(G) \,\}$$
 
-**The quotient glues.** By §5.1, $$[c_u] = [c_v] \iff c_v - c_u \in \operatorname{im}\partial_1$$. For an edge $$\{u,v\}$$ this holds by definition. That's the whole translation. The question "are two vertices the same in $$H_0​?" has become the question "is the $$0$$-chain $$c_v - c_u$$​ the boundary of some $$1$$-chain?" Consequently, *adjacent vertices become equal*. That echoes the entire content: the quotient is a gluing machine.
+**The quotient glues.** By §5.1, $$[c_u] = [c_v] \iff c_v - c_u \in \operatorname{im}\partial_1$$. For an edge $$\{u,v\}$$ this holds by definition. That's the whole translation. The question "are two vertices the same in $$H_0​$$?" has become the question "is the $$0$$-chain $$c_v - c_u$$​ the boundary of some $$1$$-chain?" Consequently, *adjacent vertices become equal*. That echoes the entire content: the quotient is a gluing machine.
 
 Compare this with **paths**: If $$u = w_0, w_1, \dots, w_k = v$$ is a path, set $$\gamma = \sum_{i} c_{w_i w_{i+1}}$$ (signs adjusted for canonical ordering). Then
 
@@ -580,7 +580,7 @@ $$\dim H_0(X(G)) = \#\{\text{connected components}\} = \beta_0$$
 
 *The quotient did not decide to identify connected vertices. It identifies vectors differing by an element of $$\operatorname{im}\partial_1$$ — and those differences are exactly the path-connected ones. Connectivity is what $$\operatorname{im}\partial_1$$ **is**.*
 
-**Dimension count [S].** A spanning forest with $$b$$ components has $$N - b$$ edges, whose differences are independent and span the image. So $$\operatorname{rank}\partial_1 = N - b$$ and $$\dim H_0 = b$$. In Figure 4a, three of the four edges are spanning; the fourth creates the $$1$$-cycle. Hence $$\beta_1 = 1$$.
+**Dimension count.** A spanning forest with $$b$$ components has $$N - b$$ edges, whose differences are independent and span the image. So $$\operatorname{rank}\partial_1 = N - b$$ and $$\dim H_0 = b$$. In Figure 4a, three of the four edges are spanning; the fourth creates the $$1$$-cycle. Hence $$\beta_1 = 1$$.
 
 **$$\mathbb{Z}/2$$ picture.** A $$0$$-chain is a subset $$S$$ of vertices; $$\operatorname{im}\partial_1$$ is the set of subsets with an *even* number of vertices in every component. $$H_0$$ records $$b$$ independent parity bits.
 
@@ -598,7 +598,7 @@ $$\beta_m = \dim_k H_m(X(G); k) = \big(\dim C_m - \operatorname{rank}\partial_m\
 
 by rank–nullity. (Here "rank $$\partial_m$$" is *matrix* rank, which is why the word appears at all; the computation is Gaussian elimination on boundary matrices.) [TODO]
 
-**[⚠] The two words are not synonyms in general [S]** With $$\mathbb{Z}$$ coefficients, $$H_m(X;\mathbb{Z}) \cong \mathbb{Z}^{b_m} \oplus (\text{finite torsion})$$, and the classical Betti number $$b_m$$ is the rank of the *free part*; torsion is discarded. That is a different notion from $$\dim_k H_m(X;k)$$. By the universal coefficient theorem, for $$k = \mathbb{Z}/p\mathbb{Z}$$,
+**[⚠] The two words are not synonyms in general** With $$\mathbb{Z}$$ coefficients, $$H_m(X;\mathbb{Z}) \cong \mathbb{Z}^{b_m} \oplus (\text{finite torsion})$$, and the classical Betti number $$b_m$$ is the rank of the *free part*; torsion is discarded. That is a different notion from $$\dim_k H_m(X;k)$$. By the universal coefficient theorem, for $$k = \mathbb{Z}/p\mathbb{Z}$$,
 
 $$\dim_k H_m(X;k) = b_m + t_p\big(H_m(X;\mathbb{Z})\big) + t_p\big(H_{m-1}(X;\mathbb{Z})\big)$$
 
@@ -632,7 +632,7 @@ Typically $$\Delta\rho_r = 1/\binom{N}{2}$$ — one edge at a time.
 
 Prior TDA in biology hunts for *individual persistent cycles* with interpretable meaning. Giusti et al. explicitly do not. They use the **statistical properties of cycles**. The underlying space may possess no meaningful persistent cycles at all — a square box covered by place fields is contractible. What survives is that the ambient Euclidean geometry has a strong effect on *cycle statistics*, and that effect is what discriminates.
 
-**[⚠] Two loose phrases in the main text [S]**
+**[⚠] Two loose phrases in the main text **
 Rigorously speaking, "noncontractible cycles" is homotopy language ($$\pi_m$$); Betti numbers count homology ($$H_m$$). A loop can be noncontractible yet homologically trivial (a commutator). Take the supplement's Def. 3.7 as what is actually computed.
 
 "Bound a hole" is also likewise loose. What $$\beta_m$$ counts is cycles that **fail** to bound.
@@ -659,7 +659,7 @@ Take the filtration (the sequence of clique complex of order complex) $$X(G_0) \
 
 $$(\iota_r)_m : H_m(X(G_r)) \longrightarrow H_m(X(G_{r+1})), \qquad [z] \mapsto [\iota_\# z]$$
 
-**Persistent homology is this diagram [S]:**
+**Persistent homology is this diagram :**
 
 $$H_m(X(G_0)) \xrightarrow{\;\iota_0\;} H_m(X(G_1)) \xrightarrow{\;\iota_1\;} \cdots \xrightarrow{\;\iota_p\;} H_m(X(G_{p+1}))$$
 
@@ -728,7 +728,7 @@ Note that here death is well-defined (once dead, always dead): if $$z$$ becomes 
 
 **Definition [G, Def. 4.2, p. 15].** Let $$\omega \in H_m(X(G_r))$$ be nonzero and not in $$\operatorname{im}(\iota_{r-1})_m$$. Let $$s > r$$ be least with $$\iota_{s-1} \circ \cdots \circ \iota_r(\omega) = 0$$. Then $$\omega$$ is **born at $$r$$**, **dies at $$s$$**, with **persistence lifetime** $$\ell(\omega) = s - r$$.
 
-Two facts make this well-posed **[S]**:
+Two facts make this well-posed ****:
 
 1) **Cycles cannot stop being cycles.** $$\iota_\#$$ commutes with $$\partial$$. The only way to die is to become a **boundary** — to get filled in.
 
@@ -738,7 +738,7 @@ Failure of injectivity of $$(\iota_r)_m$$ is **death**; failure of surjectivity 
 
 ---
 
-### 7.4 A fully worked filtration [S]
+### 7.4 A fully worked filtration
 
 $$N = 4$$, edges in order $$12,\; 23,\; 34,\; 14,\; 13,\; 24$$.
 
@@ -759,7 +759,7 @@ Barcode for $$H_1$$: a single bar $$[4, 5)$$. Lifetime $$1$$.
 
 ---
 
-### 7.5 Why the maps are indispensable [S]
+### 7.5 Why the maps are indispensable
 
 From the above example we could answer the following question: what does the map buy us? 
 
@@ -783,7 +783,7 @@ How this relates back to Betti curves?
 
 The Betti curve $$\beta_m(\rho_r) = \operatorname{rank} H_m(X(G_r))$$ (Def. 3.11, p. 24–25) uses no maps at all. It's $$p+1$$ independent simplicial homology computations, ranks recorded. The persistence data is strictly richer: it knows which cycle at stage $$r$$ is the same cycle at stage $$r+1$$. Betti curves see only the head count and persistence sees the identities: the Betti curve is recoverable from the persistence intervals:
 
-**Betti curve from barcode [S]:**
+**Betti curve from barcode:**
 
 $$\beta_m(\rho_r) = \#\{\text{bars } [b,d) \;:\; b \leq r < d\}$$
 
@@ -793,7 +793,7 @@ Sweep a vertical line across the barcode at position $$r$$; count crossings. In 
 
 Note: This is why Giusti et al. can compute one algorithm (persistence) and report both. It's also why §4.3 calls lifetime distributions "complementary to the Betti curves" — same computation, two projections of the output.
 
-**And the total Betti number is total persistence [S].** By Fubini, integrating the bar-counting function over $$\rho$$ equals summing the bar lengths:
+**And the total Betti number is total persistence .** By Fubini, integrating the bar-counting function over $$\rho$$ equals summing the bar lengths:
 
 $$\bar\beta_m(M) = \int_0^1 \beta_m(\rho)\,d\rho = \sum_{\text{bars}} (\text{length})$$
 
@@ -805,11 +805,11 @@ So "area under the Betti curve" and "total persistence" are literally the same n
 
 **Stability [G, p. 14–15].** Small perturbations of $$M$$ produce small perturbations of the barcode — the *bottleneck stability theorem*. Contrast the naive alternative: compute $$\beta_1$$ at one fixed threshold. Nudge one correlation past its neighbor and a hole can appear or vanish. Persistence is stable because a spurious hole is one that is born and dies almost immediately — a **short bar**. Noise makes short bars; structure makes long ones.
 
-**Order-invariance [S].** Only the ranking of $$\{M_{ij}\}$$ enters. Hence the barcode is unchanged by any monotone increasing $$f$$. This is the crux: a *geometric* matrix means $$M_{ij} = f(\|p_i - p_j\|)$$ for some unknown monotone decreasing $$f$$. Clique topology tests geometricity **without ever needing to know $$f$$** — which is precisely Q2. Eigenvalue methods cannot: they see values, not order.
+**Order-invariance .** Only the ranking of $$\{M_{ij}\}$$ enters. Hence the barcode is unchanged by any monotone increasing $$f$$. This is the crux: a *geometric* matrix means $$M_{ij} = f(\|p_i - p_j\|)$$ for some unknown monotone decreasing $$f$$. Clique topology tests geometricity **without ever needing to know $$f$$** — which is precisely Q2. Eigenvalue methods cannot: they see values, not order.
 
 **Computability [G, p. 14].** The nesting $$G_r \subset G_{r+1}$$ means the clique topology of $$G_r$$ is closely related to that of $$G_{r-1}$$. Exploiting this — rather than recomputing homology from scratch at each of $$\binom{N}{2}$$ stages — is what makes the whole thing tractable. The persistence algorithm was developed for exactly this.
 
-**[⚠] A suppressed hypothesis. [S]** Def. 4.2 assigns birth/death to a *chosen class* $$\omega$$. Different bases for $$H_m(X(G_r))$$ give different classes, and it is not obvious that the multiset of intervals is well-defined. It is — but this requires the **structure theorem for persistence modules over a field**: every such module decomposes uniquely into interval summands. Giusti et al. do not state this; they gesture at the stability literature instead. It is also why $$k$$ must be a field: over $$\mathbb{Z}$$ the decomposition fails.
+**[⚠] A suppressed hypothesis. ** Def. 4.2 assigns birth/death to a *chosen class* $$\omega$$. Different bases for $$H_m(X(G_r))$$ give different classes, and it is not obvious that the multiset of intervals is well-defined. It is — but this requires the **structure theorem for persistence modules over a field**: every such module decomposes uniquely into interval summands. Giusti et al. do not state this; they gesture at the stability literature instead. It is also why $$k$$ must be a field: over $$\mathbb{Z}$$ the decomposition fails.
 
 To summarize,
 
@@ -857,7 +857,7 @@ $$p_i = \tfrac{1}{\sqrt 2}\Big(\vec{e}_i - \tfrac{\varepsilon}{2}\sum_{j} M_{ij}
 
 for small $$\varepsilon > 0$$, since $$\|p_i - p_j\|^2 = 1 + \varepsilon M_{ij} + O(\varepsilon^2)$$.
 
-**[S] Why this doesn't undermine the method — and is in fact the point.** Realizability is not the discriminator; *typicality* is. Triangle inequalities among every triple (and their higher analogues) impose strong constraints on $$\widehat{M}$$. For most orderings, the probability that a uniform point configuration in the unit cube realizes it is vanishingly small. **Geometric matrices sample orderings in a highly non-uniform way; random matrices sample them uniformly.** That is the entire origin of the Betti-curve gap **[G, p. 13]**.
+** Why this doesn't undermine the method — and is in fact the point.** Realizability is not the discriminator; *typicality* is. Triangle inequalities among every triple (and their higher analogues) impose strong constraints on $$\widehat{M}$$. For most orderings, the probability that a uniform point configuration in the unit cube realizes it is vanishingly small. **Geometric matrices sample orderings in a highly non-uniform way; random matrices sample them uniformly.** That is the entire origin of the Betti-curve gap **[G, p. 13]**.
 
 When $$d$$ is *constrained*, some orderings become genuinely unrealizable, and the paper constructs explicit examples (Fig. 2a) — e.g. a $$5\times 5$$ ordering realizable in $$\mathbb{R}^3$$ but not $$\mathbb{R}^2$$, proved by a disk-intersection argument **[G, p. 14]**.
 
@@ -877,7 +877,7 @@ $$\beta_0$$ is **not** reported. It is a percolation curve — $$N$$ components 
 
 ---
 
-### 9.2 Modern implementation [S]
+### 9.2 Modern implementation 
 
 Giusti et al. used the MATLAB `CliqueTop` package. The method reduces exactly to **Vietoris–Rips persistent homology on a rank-transformed distance matrix**, so any modern flag-complex engine reproduces it: `ripser`, `giotto-tda`, `GUDHI`. No dedicated package is needed.
 
@@ -889,7 +889,7 @@ Ripser never materializes the simplices; it *infers* them from the edge set, exp
 
 ---
 
-### 9.3 Scaling notes for $$N = 384$$ (Utah array) [S]
+### 9.3 Scaling notes for $$N = 384$$ (Utah array) 
 
 - `maxdim = 3` requires enumerating 4-cliques. Unthresholded, $$\binom{384}{4} \approx 8.9 \times 10^8$$; $$\binom{384}{3} \approx 9.4\times 10^6$$. **The density cap is what makes this tractable** — Ripser only enumerates cliques below the filtration threshold. Capping at $$\rho \leq 0.6$$ is a truncation of the filtration; note that $$\bar\beta_m$$ then becomes $$\int_0^{0.6}$$, so null comparisons must be truncated identically.
 - **Treat SBP and threshold crossings as separate correlation matrices.** Combining them into 768 nodes is unsound: same-channel SBP and TC are near-duplicates, so they are joined by an edge at essentially the highest correlation rank, and every clique containing one tends to contain the other. This manufactures cliques that reflect feature redundancy, not neural geometry.
@@ -903,7 +903,7 @@ Ripser never materializes the simplices; it *infers* them from the edge set, exp
 1. A monotone $$f$$ destroys eigenvalues but preserves **order**.
 2. The **order complex** records exactly the order: a filtration of graphs $$G_0 \subset \cdots \subset G_{p+1}$$.
 3. **Filling in cliques** ($$G \mapsto X(G)$$) manufactures higher dimensions from pairwise data.
-4. **Chains** are formal linear combinations of cliques; the **chain group** $$C_m$$ is their span, $$\dim C_m = |X_m(G)|$$.
+4. **Chains** are formal linear combinations of cliques; the **chain group** $$C_m$$ is their span, $$\dim C_m = \left| X_m(G) \right|$$.
 5. The **boundary map** $$\partial_m$$ lists a simplex's facets with alternating signs, so that shared facets cancel; $$\partial\partial = 0$$.
 6. A **cycle** is a chain whose facets all cancel ($$\ker\partial_m$$). A **boundary** is a cycle already filled in ($$\operatorname{im}\partial_{m+1}$$).
 7. **Homology** $$H_m = \ker\partial_m / \operatorname{im}\partial_{m+1}$$ counts cycles that fail to bound — holes. $$\beta_m = \dim H_m$$. And $$\beta_0$$ counts connected components.
