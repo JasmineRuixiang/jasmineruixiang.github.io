@@ -104,6 +104,7 @@ is the $$m$$-simplex they span. It is the simplest possible $$m$$-dimensional so
 | $$1$$ | line segment | $$2$$ |
 | $$2$$ | filled triangle | $$3$$ |
 | $$3$$ | solid tetrahedron | $$4$$ |
+{:.table.table-bordered}
 
 A sidenote on the **off-by-one.** $$m+1$$ vertices span $$m$$ dimensions. The constraint $$\sum t_i = 1$$ consumes one degree of freedom. This shift propagates through every definition below and might be the single most common source of confusion (later we will also see m-clique, mth chain group, etc.).
 
@@ -140,6 +141,7 @@ Here's a crucial point as **this is the "filling in."** Where the main text says
 | edge | $$1$$ | $$2$$ | 2-clique | $$X_1(G)$$ |
 | filled triangle | $$2$$ | $$3$$ | 3-clique | $$X_2(G)$$ |
 | solid tetrahedron | $$3$$ | $$4$$ | 4-clique | $$X_3(G)$$ |
+{:.table.table-bordered}
 
 **Three things to internalize about filling in.**
 
@@ -326,7 +328,7 @@ Now with the above explanations, we should be able to grasp that the definition 
 
 ---
 
-## 5. Homology
+## 5. Simplicial homology
 
 ### 5.1 The quotient construction, in general
 
@@ -434,6 +436,7 @@ One more time, the way we **read the three ingredients** is the following:
 | **cycle** (a chain) | $$\ker\partial_m \subseteq C_m$$ | facets cancel; closed |
 | **boundary** (a chain) | $$\operatorname{im}\partial_{m+1} \subseteq \ker\partial_m$$ | closed *and already filled in* |
 | **homology class** | $$H_m$$ | a cycle, modulo boundaries |
+{:.table.table-bordered}
 
 A **homology cycle** is a *nonzero element of $$H_m$$*: a coset $$[z] = z + im \partial_{m+1}$$ where $$z$$ is a cycle that is not a boundary, a closed thing that isn't filled: A **hole**.
 
@@ -682,6 +685,7 @@ Take clique complexes. Because $$G_4 \subseteq G_5$$​, every clique of $$G_4$$
 | vertices (0-simplices) | $$1,2,3,4$$ | $$1,2,3,4$$ |
 | edges (1-simplices) | $$12,23,34,14$$ | $$12,23,34,14,\mathbf{13}$$ |
 | triangles (2-simplices) | *none* | $$\mathbf{123},\ \mathbf{134}$$ |
+{:.table.table-bordered}
 
 The edge $$13$$ completes two triangles: $$\{1,2,3\}$$ (needs $$12,23,13$$ ) and $$\{1,3,4\}$$ (needs $$13,34,14$$), so $$X(G_5)$$ gained one edge and two filled triangles.
 
@@ -750,6 +754,7 @@ $$N = 4$$, edges in order $$12,\; 23,\; 34,\; 14,\; 13,\; 24$$.
 | 4 | $$+14$$ | — | 4 | 0 | 3 | 1 | 0 | **1** (birth) |
 | 5 | $$+13$$ | $$123, 134$$ | 5 | 2 | 3 | 2 | 2 | **0** (death) |
 | 6 | $$+24$$ | all 4 | 6 | 4 | 3 | 3 | 3 | 0 |
+{:.table.table-bordered}
 
 At $$r = 4$$ the square closes: $$\sigma = c_{12}+c_{23}+c_{34}-c_{14}$$ is a cycle bounding nothing.
 
