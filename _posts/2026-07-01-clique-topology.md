@@ -72,11 +72,7 @@ where $$(ij) \in G_r \iff \widehat{M}_{ij} > p - r$$.
 
 $$G_0$$ is the empty graph. $$G_1$$ contains only the edge of largest correlation. Each subsequent $$G_r$$ adds the next-largest entry. $$G_{p+1}$$ is the complete graph.
 
-A perhaps simple analagoy for this: imagine watching a movie in which edges precipitate out of the correlation matrix, strongest first. The order complex *is* the movie. The individual frames are graphs; each frame has an **edge density** 
-
-$$\rho_r = |E(G_r)| / \binom{N}{2}$$, 
-
-running from $$0$$ to $$1$$.
+A perhaps simple analagoy for this: imagine watching a movie in which edges precipitate out of the correlation matrix, strongest first. The order complex *is* the movie. The individual frames are graphs; each frame has an **edge density** $$\rho_r = \|E(G_r)\| / \binom{N}{2}$$, running from $$0$$ to $$1$$.
 
 Well, you might ask **why not just pick one threshold?** Because every choice is arbitrary and the answer depends on it. If we threshold high then there're no edges and no structure surves. If threshold low, we get complete graph and the structure is muffled in noise. Persistence is the disciplined refusal to choose — we use every threshold and record how structure appears and disappears as we sweep.
 
@@ -151,7 +147,7 @@ Here's a crucial point as **this is the "filling in."** Where the main text says
 
 2. **It is well-defined only because cliques are closed under subsets.** If $$\sigma$$ is a clique, so is every facet of $$\sigma$$. Hence $$X(G)$$ is genuinely a *simplicial complex* (closed under taking faces), and boundary maps will have somewhere to land. A complex built this way is called a **flag complex**, or, when the graph comes from thresholding a distance matrix, a **Vietoris–Rips complex** **[G, p. 12]**.
 
-3. **Without it, there is nothing to compute**. Suppose we did not fill in — suppose $$X(G)$$ contained only vertices and edges. Then $$\beta_1 = \|E\| - N + \beta_0$$, the cyclomatic number, computable in $$O(\|E\|)$$ from counting alone; and $$\beta_m = 0$$ identically for $$m \geq 2$$. All information about *how* the edges are arranged would be lost. **Filling in is what creates dimensions $$2, 3, \dots$$, and the paper's entire discriminating signal lives there.** [TODO]: more explanation
+3. **Without it, there is nothing to compute**. Suppose we did not fill in — suppose $$X(G)$$ contained only vertices and edges. Then $$\beta_1 = \|E\| - N + \beta_0$$, the cyclomatic number, computable in $$O(\|E\|)$$ from counting alone; and $$\beta_m = 0$$ identically for $$m \geq 2$$. All information about *how* the edges are arranged would be lost. **Filling in is what creates dimensions $$2, 3, \dots$$, and the paper's entire discriminating signal lives there.**
 
 **A triangle in $$G$$ is filled. A square in $$G$$ is not.** Both look like closed loops when drawn. But $$\{1,2,3\}$$ pairwise-adjacent is a clique, while $$\{1,2,3,4\}$$ arranged as a ring is not — the diagonals are missing. __Only cliques get filled__. This is exactly why $$\beta_1$$ measures something: it counts loops that *failed* to be spanned by cliques.
 
@@ -244,9 +240,9 @@ The interior edge $$c_{12}$$ appears in both facet lists and annihilates. The fo
 
 Why does it know it? Because the induced orientations traverse $$\{1,2\}$$ once in each direction — the chain $$c_{123} - c_{124}$$​ is the coherent orientation of the two-triangle patch, and a coherently oriented patch traverses each internal edge twice with opposite sign:
 
-This is the discrete Stokes theorem: a coherently oriented patch traverses each internal edge twice, in opposite directions. By the way, there's an interesting and elegant relationship between the homology we talk about here with differential forms. Maybe next time. 
+This is actually the discrete Stokes theorem: a coherently oriented patch traverses each internal edge twice, in opposite directions. By the way, there's an interesting and elegant relationship between the __homology__ we talk about here with __differential forms__. Maybe next time. 
 
-**Cancellation requires linearity, and linearity is why we needed the formal symbols $$c_\sigma$$ at all.** The free-vector-space construction of §3.1 exists solely to make step (iii) expressible. [TODO]: perhaps also explain more here. 
+To summarize, **cancellation requires linearity, and linearity is why we needed the formal symbols $$c_\sigma$$ at all.** The free-vector-space construction of §3.1 exists solely to make step (iii) expressible.
 
 ---
 
@@ -254,7 +250,7 @@ This is the discrete Stokes theorem: a coherently oriented patch traverses each 
 
 **Lemma [G, Lemma 3.5, p. 8].** $$\partial_m \circ \partial_{m+1} = 0$$.
 
-*Proof sketch [S].* An $$(m{-}1)$$-dimensional face of the $$(m{+}1)$$-simplex $$c_{v_0\cdots v_{m+1}}$$ is obtained by deleting two vertices $$v_i, v_j$$ with $$i < j$$. It arises twice in the double sum: delete $$i$$ then $$j$$, or delete $$j$$ then $$i$$. The signs are $$(-1)^i(-1)^{j-1}$$ and $$(-1)^j(-1)^i$$ — the $$j-1$$ because deleting $$v_i$$ first shifts $$v_j$$ down one index slot. These differ by a factor of $$-1$$ and cancel. $$\square$$ [TODO]
+*Proof sketch [S].* An $$(m{-}1)$$-dimensional face of the $$(m{+}1)$$-simplex $$c_{v_0\cdots v_{m+1}}$$ is obtained by deleting two vertices $$v_i, v_j$$ with $$i < j$$. It arises twice in the double sum: delete $$i$$ then $$j$$, or delete $$j$$ then $$i$$. The signs are $$(-1)^i(-1)^{j-1}$$ and $$(-1)^j(-1)^i$$ — the $$j-1$$ because deleting $$v_i$$ first shifts $$v_j$$ down one index slot. These differ by a factor of $$-1$$ and cancel. $$\square$$
 
 **[G, Example 3.4]** verifies this concretely: $$\partial_1\partial_2(c_{123} - c_{124}) = 0$$.
 
@@ -326,7 +322,7 @@ Same content, no signs. This is literally what Ripser computes, and it is the cl
 
 ### 4.4 Why is this the correct computation?
 
-Now with the above explanations, we should be able to grasp that the definition echos our intuition: a cycle is a collection of simplices glued along their faces with nothing left over — __a closed loop, a closed surface__. "Nothing left over" is a statement about facets being __doubly covered__ with opposing orientation. The boundary map, applied to the whole chain at once, computes precisely the multiset of singly-covered facets (with multiplicity and sign). Kernel = that multiset is empty.
+Now with the above explanations, we should be able to grasp that the definition echoes our intuition: a cycle is a collection of simplices glued along their faces with nothing left over — __a closed loop, a closed surface__. "Nothing left over" is a statement about facets being __doubly covered__ with opposing orientation. The boundary map, applied to the whole chain at once, computes precisely the multiset of singly-covered facets (with multiplicity and sign). Kernel = that multiset is empty.
 
 ---
 
