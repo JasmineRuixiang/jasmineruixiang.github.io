@@ -19,7 +19,7 @@ toc:
   sidebar: left
 ---
 
-I will follow the structure of *Giusti, Pastalkova, Curto & Itskov (2015), PNAS, and its SI Appendix*, but will add in my own understandings, interpretations, and most importantly reflections on questions you might also have. 
+I will largely follow the structure of *Giusti, Pastalkova, Curto & Itskov (2015), PNAS, and its SI Appendix*, but add in my own understandings, interpretations, and most importantly reflections on questions you might also have. 
 
 **Provenance conventions used throughout.** Statements marked **[G]** are claims made by Giusti et al., with page references to the SI Appendix. Statements marked **[S]** are synthesis, reconstruction, or standard background that the paper assumes but does not state. Statements marked **[⚠]** flag places where the paper is imprecise or where a technical hypothesis is being suppressed.
 
@@ -36,7 +36,7 @@ So the two questions are **[G, p. 2]**:
 > **Q1.** Is $$M$$ a monotonic transformation of a random or a geometric matrix?
 > **Q2.** Can we tell which, *without knowing $$f$$*?
 
-**Why eigenvalues fail.** A monotone reparametrization $$M_{ij} \mapsto f(M_{ij})$$ is not a change of basis. It is an entrywise nonlinear map. The spectrum is not merely rotated by it — it is destroyed **[G, p. 2]**. Worse, spectral methods discard basis information, and here the basis is meaningful: index $$i$$ *is* neuron $$i$$.
+You might immediately wonder why not using eigenvalue based methods. However, they mostly likely will fail. Why? ** A monotone reparametrization $$M_{ij} \mapsto f(M_{ij})$$ is not a change of basis. It is an entrywise nonlinear map. The spectrum is not merely rotated by it — it is destroyed **[G, p. 2]**. Worse, spectral methods discard basis information, and here the basis is meaningful: index $$i$$ *is* neuron $$i$$.
 
 The escape is to find an invariant that survives *every* monotone $$f$$. There is an obvious candidate: **the relative order of the entries.** Since $$f$$ is strictly increasing, $$M_{ij} < M_{k\ell} \iff f(M_{ij}) < f(M_{k\ell})$$. Order is exactly what monotone maps preserve, and — this is the paper's bet — order is enough.
 
@@ -56,7 +56,7 @@ The diagonal is left undefined; it's fine since it carries no information. If al
 
 **Lemma (Giusti 2.1) [G, p. 3].** $$\widehat{L} = \widehat{M}$$ if and only if $$L = f \cdot M$$ for some monotone increasing $$f$$
 
-*Interpretation.* $$\widehat{M}$$ is a complete invariant of the monotone transformation. Two matrices have the same ordering precisely when one is a monotone reparametrization of the other. **Anything computed from $$\widehat{M}$$ alone is automatically an answer to Q2**, because it cannot see $$f$$.
+The *interpretation* is that $$\widehat{M}$$ is a complete invariant of the monotone transformation. Two matrices have the same ordering precisely when one is a monotone reparametrization of the other. **Anything computed from $$\widehat{M}$$ alone is automatically an answer to Q2**, because it cannot see $$f$$.
 
 ---
 
@@ -72,9 +72,13 @@ where $$(ij) \in G_r \iff \widehat{M}_{ij} > p - r$$.
 
 $$G_0$$ is the empty graph. $$G_1$$ contains only the edge of largest correlation. Each subsequent $$G_r$$ adds the next-largest entry. $$G_{p+1}$$ is the complete graph.
 
-A perhaps simple analagoy for this: imagine watching a movie in which edges precipitate out of the correlation matrix, strongest first. The order complex *is* the movie. The individual frames are graphs; each frame has an **edge density** $$\rho_r = |E(G_r)| / \binom{N}{2}$$, running from $$0$$ to $$1$$.
+A perhaps simple analagoy for this: imagine watching a movie in which edges precipitate out of the correlation matrix, strongest first. The order complex *is* the movie. The individual frames are graphs; each frame has an **edge density** 
 
-Well, you might ask **why not just pick one threshold? [S]** Because every choice is arbitrary and the answer depends on it. If we threshold high then there're no edges and no structure surves. If threshold low, we get complete graph and the structure is muffled in noise. Persistence is the disciplined refusal to choose — we use every threshold and record how structure appears and disappears as we sweep.
+$$\rho_r = |E(G_r)| / \binom{N}{2}$$, 
+
+running from $$0$$ to $$1$$.
+
+Well, you might ask **why not just pick one threshold?** Because every choice is arbitrary and the answer depends on it. If we threshold high then there're no edges and no structure surves. If threshold low, we get complete graph and the structure is muffled in noise. Persistence is the disciplined refusal to choose — we use every threshold and record how structure appears and disappears as we sweep.
 
 The identity $$\mathrm{ord}(L) = \mathrm{ord}(M) \iff \widehat{L} = \widehat{M}$$ is immediate, so:
 
@@ -86,9 +90,9 @@ This single sentence is the reason the entire construction exists.
 
 ## 2. Filling in cliques: the clique complex
 
-A graph, by itself, has no higher-dimensional topology. To extract more than edge counts we must manufacture dimensions out of purely pairwise data. The device that does this is the clique complex.
+A graph, by itself, has no higher-dimensional topology (ponder this for a second). To extract more than edge counts we must manufacture dimensions out of purely pairwise data. The device that does this is the clique complex.
 
-I think realizing that a graph is fundamentally just a collection of vertices and pairwise edges without high dimensional structure is crucial, as later we will come back to the idea of "filling in" multiple times. That's why I also want to mention the definition of simplices. 
+I think **realizing that a graph is fundamentally just a collection of vertices and pairwise edges without high dimensional structure is crucial**, as later we will come back to the idea of "filling in" multiple times. That's why I also want to mention the definition of simplices. 
 
 ### 2.1 Simplices
 
@@ -105,13 +109,11 @@ is the $$m$$-simplex they span. It is the simplest possible $$m$$-dimensional so
 | $$2$$ | filled triangle | $$3$$ |
 | $$3$$ | solid tetrahedron | $$4$$ |
 
-A sidenote on the **off-by-one.** $$m+1$$ vertices span $$m$$ dimensions. The constraint $$\sum t_i = 1$$ consumes one degree of freedom. This shift propagates through every definition below and might be the single most common source of confusion (later we will also see m-clique, mth chaingroup, etc.).
+A sidenote on the **off-by-one.** $$m+1$$ vertices span $$m$$ dimensions. The constraint $$\sum t_i = 1$$ consumes one degree of freedom. This shift propagates through every definition below and might be the single most common source of confusion (later we will also see m-clique, mth chain group, etc.).
 
-**Definition (abstract $$m$$-simplex) [S].** An $$m$$-simplex is a set of $$m+1$$ vertices. Its **faces** are its nonempty subsets; its **facets** are the $$m+1$$ subsets obtained by deleting one vertex. That's the geometry, fully encoded, with no points in space. 
+**Definition (abstract $$m$$-simplex):** An $$m$$-simplex is a set of $$m+1$$ vertices. Its **faces** are its nonempty subsets; its **facets** are the $$m+1$$ subsets obtained by deleting one vertex. That's the geometry, fully encoded, with no points in space. 
 
 Also, note that the plural form of "simplex" is "simplices". 
-
-[TODO]: Explain more here.
 
 Nothing is ever embedded (just treat embed as a process to put/materialize/realize something in some space, for example Euclidean space of some dimensions). The convex hull is a *picture* used to license the geometric language. Operationally, a simplex is a subset, and its facets are the subsets one smaller. This is why the whole pipeline is combinatorial and computable.
 
@@ -134,7 +136,7 @@ $$X(G) = \{\sigma \subseteq [N] : \sigma \text{ is a clique of } G\}$$
 
 Write $$X_m(G)$$ for the set of $$(m{+}1)$$-cliques — these are the $$m$$-simplices of $$X(G)$$.
 
-Here's a crucial point as **this is the "filling in."** Where the main text says the topological structure of a graph is quantified by *first "filling in" all cliques* and then counting holes **[G, main text, p. 2]**, the operation being named is precisely $$G \mapsto X(G)$$. [TODO]: explain even more explicitly why clique is related to a simplex. 
+Here's a crucial point as **this is the "filling in."** Where the main text says the topological structure of a graph is quantified by *first "filling in" all cliques* and then counting holes **[G, main text, p. 2]**, the operation being named is precisely $$G \mapsto X(G)$$. 
 
 | geometric object | dimension $$m$$ | vertices | clique in $$G$$ | indexed by |
 |:---|:---:|:---:|:---|:---|
@@ -147,9 +149,9 @@ Here's a crucial point as **this is the "filling in."** Where the main text says
 
 1. **It is not a choice.** $$X(G)$$ is a deterministic function of $$G$$. You supply no extra data. The moment three vertices are pairwise adjacent, the triangle between them is solid. This is what makes the method applicable to a correlation matrix: you only ever threshold *pairwise* values, yet you obtain structure in every dimension.
 
-2. **It is well-defined only because cliques are closed under subsets.** If $$\sigma$$ is a clique, so is every facet of $$\sigma$$. Hence $$X(G)$$ is genuinely a *simplicial complex* (closed under taking faces), and boundary maps will have somewhere to land. A complex built this way is called a **flag complex**, or, when the graph comes from thresholding a distance matrix, a **Vietoris–Rips complex** **[G, p. 12]**. [TODO]: Add more explanation here
+2. **It is well-defined only because cliques are closed under subsets.** If $$\sigma$$ is a clique, so is every facet of $$\sigma$$. Hence $$X(G)$$ is genuinely a *simplicial complex* (closed under taking faces), and boundary maps will have somewhere to land. A complex built this way is called a **flag complex**, or, when the graph comes from thresholding a distance matrix, a **Vietoris–Rips complex** **[G, p. 12]**.
 
-3. **Without it, there is nothing to compute [S]**. Suppose we did not fill in — suppose $$X(G)$$ contained only vertices and edges. Then $$\beta_1 = |E| - N + \beta_0$$, the cyclomatic number, computable in $$O(|E|)$$ from counting alone; and $$\beta_m = 0$$ identically for $$m \geq 2$$. All information about *how* the edges are arranged would be lost. **Filling in is what creates dimensions $$2, 3, \dots$$, and the paper's entire discriminating signal lives there.** [TODO]: more explanation
+3. **Without it, there is nothing to compute**. Suppose we did not fill in — suppose $$X(G)$$ contained only vertices and edges. Then $$\beta_1 = \|E\| - N + \beta_0$$, the cyclomatic number, computable in $$O(\|E\|)$$ from counting alone; and $$\beta_m = 0$$ identically for $$m \geq 2$$. All information about *how* the edges are arranged would be lost. **Filling in is what creates dimensions $$2, 3, \dots$$, and the paper's entire discriminating signal lives there.** [TODO]: more explanation
 
 **A triangle in $$G$$ is filled. A square in $$G$$ is not.** Both look like closed loops when drawn. But $$\{1,2,3\}$$ pairwise-adjacent is a clique, while $$\{1,2,3,4\}$$ arranged as a ring is not — the diagonals are missing. __Only cliques get filled__. This is exactly why $$\beta_1$$ measures something: it counts loops that *failed* to be spanned by cliques.
 
