@@ -497,10 +497,10 @@ Example 3.8/3.9 again: $$\tau = c_{23}+c_{35}-c_{25}$$​ is a cycle either way.
 
 What if we don't introduce this language of clique? Suppose you didn't fill in. Then $$X(G)$$ would have only vertices and edges, $$C_m = 0$$ for $$m \geq 2$$, and:
 
-* $$\beta_1 = |E| - N + \beta_0$$​ — the cyclomatic number. This is determined entirely by counting edges and components.
+* $$\beta_1 = \|E\| - N + \beta_0$$​ — the cyclomatic number. This is determined entirely by counting edges and components.
 * $$\beta_m = 0$$ for all $$m \geq 2$$ identically.
 
-Then you'd get one number, computable in $$O(|E|)$$, carrying no information about how edges are arranged and thus graph has no higher-dimensional topology. The clique complex is precisely the device that manufactures dimensions $$2, 3, \dots$$ out of purely pairwise data — which is what lets a correlation matrix (an inherently pairwise object) exhibit $$\beta_2$$ and $$\beta_3$$​ at all. And this is also exactly why it detects geometry. Fig. 6 (p. 12) shows the discriminating signal: random matrices have Betti curves whose peaks increase with $$m$$, while geometric matrices have peaks that decrease. That contrast lives entirely in $$\beta_2, \beta_3$$​ — dimensions that only exist because cliques got filled.
+Then you'd get one number, computable in $$O(\|E\|)$$, carrying no information about how edges are arranged and thus graph has no higher-dimensional topology. The clique complex is precisely the device that manufactures dimensions $$2, 3, \dots$$ out of purely pairwise data — which is what lets a correlation matrix (an inherently pairwise object) exhibit $$\beta_2$$ and $$\beta_3$$​ at all. And this is also exactly why it detects geometry. Fig. 6 (p. 12) shows the discriminating signal: random matrices have Betti curves whose peaks increase with $$m$$, while geometric matrices have peaks that decrease. That contrast lives entirely in $$\beta_2, \beta_3$$​ — dimensions that only exist because cliques got filled.
 
 The intuition on p. 2 (line 59) is worth mentioning here: in a geometric matrix, nearby points are mutually close, so edges arrive in mutually-adjacent bunches, cliques form early, and holes get filled in quickly. In a random matrix, edges arrive without regard to each other, so triangles are rare relative to edges and holes persist. Filling-in rate is the geometric signature. No filling, no signature.
 
