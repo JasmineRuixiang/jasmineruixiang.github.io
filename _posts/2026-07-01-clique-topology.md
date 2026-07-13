@@ -439,9 +439,25 @@ One more time, the way we **read the three ingredients** is the following:
 
 A **homology cycle** is a *nonzero element of $H_m$*: a coset $[z] = z + im \partial_{m+1}$ where $z$ is a cycle that is not a boundary, a closed thing that isn't filled: A **hole**.
 
-**[⚠]** The paper writes "let $\omega \in H_m(X(G_r))$ be a non-zero cycle" **[G, Def. 4.2, p. 15]**, conflating a class with a chain. This is harmless, but note that $z$ and $z + \partial_{m+1}b$ represent the *same* homology cycle. The hole does not care which loop you drew around it. [TODO]: more explanation
+**[⚠]** The paper writes "let $\omega \in H_m(X(G_r))$ be a non-zero cycle" **[G, Def. 4.2, p. 15]**, conflating a class with a chain. This is harmless, but note that $z$ and $z + \partial_{m+1}b$ represent the *same* homology cycle. The hole does not care which loop you drew around it. Ok, this sounds again a little mysterious. Let me unpuac it:
+
+Here **what is $b$?** $b$ is any $(m{+}1)$-chain — an element of $C_{m+1}$​, a formal combination of filled $(m{+}1)$-cliques. Then $\partial_{m+1} b \in B_m$ is its boundary, a specific $m$-cycle that bounds. The claim was that $z$ and $z + \partial_{m+1}b$ are the same class in $H_m$​.
+
+Again, why? Intuitively, we could just contract the bulge and would thus regain the cycle (this really reflects this being a topological concept). More concretely, straight from the quotient definition (§5.1): $[x] = [y] \iff x - y \in B_m$​. Here $(z + \partial_{m+1}b) - z = \partial_{m+1}b \in B_m$ so $[z + \partial_{m+1}b] = [z]$. Adding a boundary never changes the homology class. That's the algebra side behind it. 
 
 For Example 3.9 (p. 24) is the cleanest illustration of the distinction. In Figure 4b, $\tau = c_{23} + c_{35} - c_{25}$ satisfies $\partial_1\tau = 0$, so $\tau$ is a cycle. But $\tau = \partial_2 c_{235}$​, so $[\tau] = 0$ in $H_1$​ — it is not a homology cycle. The triangle got filled in. Meanwhile $\sigma = c_{12}+c_{23}+c_{34}-c_{14}$is a cycle that bounds nothing, so $[\sigma] \neq 0$, and $\beta_1 = 1$.
+
+Another point I want emphasize is that this way of formulation does not care about which cycle it is. Why does the hole not care which loop? Let's picture a single hole in the plane — say an annulus, a disc with a puncture — and a loop $z$ winding around it once. Now push part of that loop sideways, sweeping it across a filled-in patch of the surface. You get a different loop $z'$ that still winds around the same hole once.
+
+The region swept out between the old loop and the new loop is a filled $2$-chain — call it $b$. And the two loops differ exactly by the boundary of that swept region: $z' = z + \partial_2 b$.
+
+Let me make this concrete with the square-plus-diagonals. Vertices $\{1,2,3,4\}$, all edges present except we keep track of two loops around the same square-shaped region.
+
+Loop $z = c_{12} + c_{23} + c_{34} - c_{14}$​, the outer square. Now suppose the triangle $\{1,2,3\}$ is filled, i.e. $c_{123} \in C_2$​. Its boundary is $\partial_2 c_{123} = c_{23} - c_{13} + c_{12}$​. Then $z - \partial_2 c_{123} = (c_{12}+c_{23}+c_{34}-c_{14}) - (c_{12}+c_{23}-c_{13}) = c_{13} + c_{34} - c_{14}$​.
+
+Call that $z' = c_{13} + c_{34} - c_{14}$ representing​ the loop $1 \to 3 \to 4 \to 1$. It's a different loop though: it cuts across the diagonal $13$ instead of going around through $2$. But $z' = z - \partial_2 c_{123}$​, so $[z'] = [z]$. Both loops represent the identical homology class, because they differ by the boundary of the filled triangle you swept across.
+
+Consequently, we could derive the following interpretation: A homology class is not a loop. It's an equivalence class of loops: all the loops you can deform into each other by sliding across filled material. The class is what's invariant; the particular loop is an arbitrary representative, like choosing $v_i$​ to name a component in §5.5. When we say that the hole doesn't care which loop we drew, that means that the thing $\beta_m$​ counts is the class, and every loop in the class is an equally valid name for the same hole. $b$ is the filled region that certifies two names are the same.
 
 From this we could also tell that $\beta_m = \dim H_m$​ just counts how many independent homology cycles there are (Def. 3.10, p. 24) — discarding their identities, which is what makes it a statistic.
 
@@ -467,11 +483,28 @@ But the moment three vertices are pairwise adjacent in $G$, the corresponding tr
 
 Actually same thing said in reverse: the graph $G$ is all the input the method ever gets. Everything about $X(G)$ — every simplex in every dimension — is read off from which edges are present. This is exactly what makes clique topology computable from a correlation matrix: you only ever threshold pairwise values, but you get higher-dimensional structure for free.
 
+The construction has one algebraic consequence: it makes $C_{m+1}(X(G))$ nonzero. And that in turn makes $\operatorname{im}\partial_{m+1}$​ nonzero. And that is what kills cycles in $H_m = \ker\partial_m \,/\, \operatorname{im}\partial_{m+1}$.
+
+Consequently, if you want the single mathematical operation that "filling in" corresponds to, it is:
+
+$$\boxed{\text{quotienting } \ker\partial_m \text{ by } \operatorname{im}\partial_{m+1}}$$
+
 To fill in the clique $\sigma \in X_{m+1}(G)$ is to admit the basis element $c_\sigma \in C_{m+1}$. Once $c_\sigma$ exists, $\partial_{m+1} c_\sigma$ is a boundary — so the cycle around $\sigma$'s rim becomes zero in $H_m$.
 
 $$\boxed{\text{``filling in''} \;=\; \text{quotienting } \ker\partial_m \text{ by } \operatorname{im}\partial_{m+1}}$$
 
 __Filling a hole *is* declaring its rim to be a boundary__. The clique complex construction ($G \mapsto X(G)$) is what makes $C_{m+1}$ nonzero; the quotient is what converts that into the death of cycles.
+
+Example 3.8/3.9 again: $\tau = c_{23}+c_{35}-c_{25}$​ is a cycle either way. What changes is whether $c_{235}$​ exists in $C_2$​. It exists iff $\{2,3,5\}$ is a clique. And $[\tau] = 0$ iff $c_{235}$​ exists.
+
+What if we don't introduce this language of clique? Suppose you didn't fill in. Then $X(G)$ would have only vertices and edges, $C_m = 0$ for $m \geq 2$, and:
+
+* $\beta_1 = |E| - N + \beta_0$​ — the cyclomatic number. This is determined entirely by counting edges and components.
+* $\beta_m = 0$ for all $m \geq 2$ identically.
+
+Then you'd get one number, computable in $O(|E|)$, carrying no information about how edges are arranged and thus graph has no higher-dimensional topology. The clique complex is precisely the device that manufactures dimensions $2, 3, \dots$ out of purely pairwise data — which is what lets a correlation matrix (an inherently pairwise object) exhibit $\beta_2$ and $\beta_3$​ at all. And this is also exactly why it detects geometry. Fig. 6 (p. 12) shows the discriminating signal: random matrices have Betti curves whose peaks increase with $m$, while geometric matrices have peaks that decrease. That contrast lives entirely in $\beta_2, \beta_3$​ — dimensions that only exist because cliques got filled.
+
+The intuition on p. 2 (line 59) is worth mentioning here: in a geometric matrix, nearby points are mutually close, so edges arrive in mutually-adjacent bunches, cliques form early, and holes get filled in quickly. In a random matrix, edges arrive without regard to each other, so triangles are rare relative to edges and holes persist. Filling-in rate is the geometric signature. No filling, no signature.
 
 ---
 
@@ -634,7 +667,55 @@ $$H_m(X(G_0)) \xrightarrow{\;\iota_0\;} H_m(X(G_1)) \xrightarrow{\;\iota_1\;} \c
 
 a sequence of vector spaces and linear maps, called a **persistence module**. Each individual $H_m(X(G_r))$ is exactly the simplicial homology group of previously defined in [3.7].
 
-The crucial point here is that $(ι_r​)_m$​ is neither injective nor surjective. $\iota_\#$ on chains is injective. The induced map on homology need not be, and that asymmetry is the entire content of persistence.
+This might sound very abstract at first. Let me again illustrate through a concrete example:
+
+Note that we claim that $(\iota_r​)_m$​ is the map on homology induced by the inclusion of one complex into the next. Let's build it in the four layers — graph, clique complex, chain groups, homology — on a concrete filtration step. Let's reuse the filtration from §7.5. Let's look at the single step $r=4 \to r=5$.
+
+* $G_4$: vertices $\{1,2,3,4\}$, edges \{12, 23, 34, 14\} — the bare square.
+* $G_5 = G_4$:​ plus edge $13$.
+
+Layer 1 — graph inclusion $\iota : G_4 \hookrightarrow G_5$: This is set inclusion. Every vertex of $G_4$​ is a vertex of $G_5$​; every edge of $G_4$​ is an edge of $G_5$​. It's an honest subgraph. The only new thing in $G_5$​ is the edge $13$. Nothing is removed, nothing is renamed — that's what makes it an inclusion rather than some arbitrary map.
+
+Layer 2 — clique complex inclusion $X(G_4) \hookrightarrow X(G_5)$:
+Take clique complexes. Because $G_4 \subseteq G_5$​, every clique of $G_4$​ is a clique of $G_5$​ (a clique's edges are all still present). So $X(G_4) \subseteq X(G_5)$ as sets of simplices. However, $X(G_5)$ has new simplices that $X(G_4)$ lacked, created by the new edge: 
+
+| | $X(G_4)$ | $X(G_5)$ |
+|---|---|---|
+| vertices (0-simplices) | $1,2,3,4$ | $1,2,3,4$ |
+| edges (1-simplices) | $12,23,34,14$ | $12,23,34,14,\mathbf{13}$ |
+| triangles (2-simplices) | *none* | $\mathbf{123},\ \mathbf{134}$ |
+
+The edge $13$ completes two triangles: $\{1,2,3\}$ (needs $12,23,13$ ) and $\{1,3,4\}$ (needs $13,34,14$), so $X(G_5)$ gained one edge and two filled triangles.
+
+Layer 3 — chain group map $\iota_\# : C_m(X(G_4)) \to C_m(X(G_5))$:
+On each dimension, send every basis simplex to the same simplex, now regarded as living in the bigger complex: $c_\sigma \mapsto c_\sigma$, ​with linear extension.
+
+At $m = 1$:
+
+$\iota_\#: C_1(X(G_4)) \to C_1(X(G_5)), \qquad c_{12}\mapsto c_{12},\ \ c_{23}\mapsto c_{23},\ \ c_{34}\mapsto c_{34},\ \ c_{14}\mapsto c_{14}$
+
+$C_1(X(G_4))$ is 4-dimensional (four edges); $C_1(X(G_5))$ is 5-dimensional (those four plus $c_{13}$​). The map is the obvious injection — it fills in the first four coordinates and puts $0$ in the $c_{13}$ slot. Injective, as always on chains: distinct simplices stay distinct. Note however it is not surjective: $c_{13}$​ is in the target but not the image. New simplices are exactly the room the induced homology map will use to kill things.
+
+It's a chain map: $\partial \iota_\# = \iota_\# \partial$, because deleting a vertex gives the same facet whether you compute in $X(G_4)$ or $X(G_5)$, e.g. $\partial_1 \iota_\# c_{12} = c_2 - c_1 = \iota_\# \partial_1 c_{12}$​. Trivially true here, but it's the property that makes the next layer work.
+
+Layer 4 — the induced map on homology $(\iota_4)_1 : H_1(X(G_4)) \to H_1(X(G_5))$: Now the payoff. Because $\iota_\#$​ is a chain map, it sends cycles to cycles and boundaries to boundaries (§7.2, step 5), so it's well-defined on classes: $[z] \mapsto [\iota_\# z]$. Let's compute both homology groups:
+
+$H_1(X(G_4))$: No triangles, so $B_1 = \operatorname{im}\partial_2 = 0$. The square $z = c_{12} + c_{23} + c_{34} - c_{14}$​ is a cycle ($\partial_1 z = 0$), and it's the only independent one. Then, $H_1(X(G_4)) = Z_1 / B_1 = \langle [z] \rangle / 0 \cong k, \qquad \beta_1 = 1$. The class $[z]$ is nonzero: a genuine hole.
+
+$H_1(X(G_5))$: Now $B_1 = \operatorname{im}\partial_2 = \langle \partial_2 c_{123},\ \partial_2 c_{134}\rangle$, two dimensions, and $\dim Z_1 = 2$ (from the §7.5 table). Consequently, $H_1(X(G_5)) = Z_1 / B_1 \cong k^2 / k^2 = 0, \qquad \beta_1 = 0$. 
+
+What's then the induced map? $(\iota_4)_1$ sends the generator $[z]$ of $H_1(X(G_4))$ to $[\iota_\# z] = [z]$ *computed in $X(G_5)$*. As a chain, $\iota_\# z$ is the same square $c_{12}+c_{23}+c_{34}-c_{14}$. However, in $X(G_5)$ that square is now a boundary:
+$\iota_\# z = c_{12}+c_{23}+c_{34}-c_{14} = \partial_2\big(c_{123} + c_{134}\big)$ (Check: ∂$\partial_2 c_{123} = c_{23} - c_{13} + c_{12}$​, and $\partial_2 c_{134} = c_{34} - c_{14} + c_{13}$​; add them, the $\mp c_{13}$​ cancel, leaving $c_{12}+c_{23}+c_{34}-c_{14}$ (also note *that cancellation of $c_{13}$ is itself a telescoping*, tying back to Q1). 
+
+Consequently, $[\iota_\# z] = 0$ in $H_1(X(G_5))$. The induced map is $(\iota_4)_1 : k \to 0, \qquad [z] \mapsto 0$.  This single fact — "the generator maps to zero" — is the death of the cycle. It's why the barcode has a bar ending at $r=5$. The cycle didn't stop being a cycle (it's still closed); it stopped being a __nonzero class__, because the newly filled triangles made it a boundary. That is exactly the failure-of-injectivity = death mechanism from §7.4, now seen as an explicit map $k \to 0$.
+
+Contrast the aboe with the following, a step where the map is an isomorphism. Look at $r=3 \to r=4$ (adding edge $14$, which closes the square). Here $H_1(X(G_3)) = 0$ (a path, no loop) and $H_1(X(G_4)) = k$. The induced map is $0 \to k$ — not surjective. The generator $[z]$ of the target is not in the image. That failure of surjectivity is the birth of the cycle at $r=4$. Consequently, across the two steps: 
+
+$$\underbrace{0}_{H_1(G_3)} \xrightarrow{\ 0 \to k\ (\text{birth})\ } \underbrace{k}_{H_1(G_4)} \xrightarrow{\ k \to 0\ (\text{death})\ } \underbrace{0}_{H_1(G_5)}$$
+
+The bar $[4,5)$ in the barcode is this: born where the map into it isn't surjective, dead where the map out of it isn't injective.
+
+To summarize, though $\iota_\#$ on chains is injective, the induced map on homology need not be, and that asymmetry is the entire content of persistence. If we just want to **read $(\iota_r)_m$​ in one line,** ask the questions: "take each hole in the smaller complex; is it still a hole in the bigger one?" If the class survives (maps to a nonzero class), the hole persists. If it maps to $0$, some newly-added cliques filled it in. The maps are the bookkeeping that tracks a hole's identity across the filtration — which no single Betti number can do (§7.3).
 
 - Death (failure of injectivity). A nonzero class $[z] \in H_m(X(G_r))$ can map to $0$. Not because $z$ stopped being a cycle — it can't, by (e) — but because $G_{r+1}$​ acquired new cliques, $\operatorname{im}\partial_{m+1}$​ grew, and $z$ is now a boundary. The hole got filled in. In $X(G)$, $\tau$'s constituent edges aren't all present; once vertex $5$ and its edges arrive, $c_{235}$ is a clique and $\tau = \partial_2 c_{235}$​.
 - Birth (failure of surjectivity). New edges can create new cycles absent from $\operatorname{im}(\iota_{r-1})_m$​. Hence Def. 4.2's condition "not in the image of $\iota_{r-1}$​" — that's what new means.
