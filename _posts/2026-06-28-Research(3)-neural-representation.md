@@ -184,11 +184,11 @@ The key problem:
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/neural_representation/krakauer_2017_fig1.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="55%" %}
+        width="70%" %}
     </div>
 </div>
 <div class="caption">
-    figure 1 from  (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective) paper
+    Figure 1 from  (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective) paper: Complex mapping relations between neural activities and behaviors
 </div>
 
 
@@ -206,9 +206,23 @@ Conceptual machinery that (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's
 #### [6.2] The presciption and David Marr's 3 levels
 The solution that (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective) gave is what they call a more __pluralistic neuroscience__: multiple legitimate modes of explanation, not the assumption that implementation level description will "naively emerge" into algorithmic understanding. Well-designed, ethologically grounded behavioral experiments (they lean on Tinbergen here: behavior as an evolved entity, VR as a tool only usable once you understand the natural behavior) can stand alone and must generally come first, so that neural experiments are designed against real algorithmic hypotheses rather than fishing in high-dimensional data.
 
-David Marr's 3 levels of understanding of complex systems:
 
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0 text-center">
+        {% include figure.liquid loading="eager" path="assets/img/neural_representation/krakauer_2017_fig1.png" class="img-fluid rounded z-depth-1" zoomable=true
+        width="70%" %}
+    </div>
+</div>
+<div class="caption">
+    Figure 2 from  (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective) paper:
+    David Marr's 3 levels of understanding of complex systems:
+</div>
 
+Explanation of Marr's 3-level analysis should be self-explanatory from the above figure. 
+
+This 3 level analysis points at a sharp fact, which Krakauer et al. repetitively emphasize throughout: being able to describe or causally perturb sometihng does not amount to an explanation or understanding. As quoted from Marr (1982/2010 Vision): "...trying to understnad perception by understanding neurons is like trying to understand a bird's flight by studying only feathers. It just cannot be done". This is a very strong standpoint, and I do think there's much degree of freedom open to debate. For example, you could say that a proper analogy migt be the end effectors (muscles and glands, for example) instead of neurons themselves. However, this does not obfuscate the critical point that striving to understand the underlying principles/patterns (level 2, what/rules) from the implementation (level 3, how/physical) is much more difficult than from the fundamental computation perspective (level 1, why/problem). 
+
+Consequently, the key issue is that from the implementation level how much of details should we neglect and collapse? This also relates to the perhaps broader question on what is life and mind. Carbon-based materials might not be the necessary condition, the same reasons that neurons as physiological functioning units might also not be necessarily required. You could say that the word implementation contains, on its own, many levels of conditions: materials, hierarchies, compositions, etc., some of which might be redundant for the specific conditions we are referring to. For example, Krakauer gave out the example of chess: "Understanding the game does not depend on knowing anything about the material out of which the board or chesss pieces are made". For the problem of neural computation that we care about, the materials does not matter for sure. However, this reinforces the idea that the word "implementation" smears over many different subcategories which are only collapsable under different given contexts. 
 
 ---
 
