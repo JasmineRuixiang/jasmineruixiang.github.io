@@ -184,7 +184,7 @@ The key problem:
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/neural_representation/krakauer_2017_fig1.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="70%" %}
+        width="90%" %}
     </div>
 </div>
 <div class="caption">
@@ -209,8 +209,8 @@ The solution that (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Ne
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
-        {% include figure.liquid loading="eager" path="assets/img/neural_representation/krakauer_2017_fig1.png" class="img-fluid rounded z-depth-1" zoomable=true
-        width="70%" %}
+        {% include figure.liquid loading="eager" path="assets/img/neural_representation/krakauer_2017_fig2.png" class="img-fluid rounded z-depth-1" zoomable=true
+        width="90%" %}
     </div>
 </div>
 <div class="caption">
