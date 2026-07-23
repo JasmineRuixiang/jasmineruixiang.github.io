@@ -175,15 +175,40 @@ For the encoding view, it's usually interpreted that each subcomponent along the
 
 The authors of (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective, "Neuroscience Needs Behavior: Correcting a Reductionist Bias.")  push back against a tacit reductionist program that has come to dominate neuroscience — the belief that if you get powerful enough tools (optogenetics, connectomics, genetic targeting, large-scale recording) and establish causal necessity/sufficiency relationships between circuits and behavior, understanding will follow. Their claim: causal-mechanistic explanation at the neural level is not sufficient to explain how the brain generates behavior. What's needed alongside it is careful theoretical and experimental decomposition of behavior itself. Their slogan for the division of labor: behavioral work provides understanding, neural interventions test causality, and behavioral work is epistemologically prior.
 
+#### [6.1] The key problem: from correlation and causality to explanation
+
 Why is causality intervention not enough? Well, two structural problems undercut the "just manipulate the circuit" view. First, degeneracy and multiple realizability: the same behavior can arise from different circuits, and the same circuit can produce different behaviors, so inspecting lower level properties alone can't fix the mapping to behavior. Second, we usually don't even know which level of organization is the relevant one for a given behavior. They lean on Marr's three levels (computational/"why," algorithmic/"what," implementation/"how") and his metaphor that studying neurons to understand perception is like studying feathers to understand flight: you can't infer the algorithm from the hardware nearly as well as you can from analyzing the problem being solved.
 
-#### [6.1] From correlation and causality to explanation
+The key problem: 
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0 text-center">
+        {% include figure.liquid loading="eager" path="assets/img/neural_representation/krakauer_2017_fig1.png" class="img-fluid rounded z-depth-1" zoomable=true
+        width="55%" %}
+    </div>
+</div>
+<div class="caption">
+    figure 1 from  (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective) paper
+</div>
+
+
+One interesting question they mentioned in the paper is that we are trying to understand from the implementation of processes (the processors, i.e., the neural systmes, hardware, or the "how") to infer the underlying processing principle (neural computation), which has been muddling and far from easy to solve. One simple analogy on feathers:
+
+Consequently, Krakauer et al. proposed to carefully include (apriori) behavior into the experimental framework. 
+
+In front of an evolving trend of neural technologies (that enable neural population recordings, or perturbations methods such as optogenetics), large-scale neural data and the modeling methods that try to describe them may not ncessarily euqal a conceptual framework for explanation and interpretation. Here Krakauer proposes to go beyond correlation and causation, for a more pluralistic narrative of brain-behavior relationships. And this specifically requires more detailed and carefully planned exploration, stipulation, and control of behaivors in experiments. 
 
 Conceptual machinery that (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective) invoke: 1) A few recurring ideas: the _substitution bias_ (Kahneman): technique-driven neuroscience quietly swaps a hard question for an easier one. 2) Filler terms:  verbs like "mediates," "underlies," "encodes," "modulates" that dress up a bare correlation or causal claim as if it were an explanation. 3) The mereological fallacy which ascribes to individual neurons psychological properties that only belong to the whole organism, with the mirror-neuron "action understanding" literature as the example (neurons get credited with "understanding" though no behavioral test of understanding was run). 4) Finally emergence / downward causation, which points at components doing different things than the organized whole, so causal claims often only make sense across levels simultaneously (an anaology they draw is that ion channels don't beat, but heart cells do).
 
 
-#### [6.2] The presciption
+---
+
+#### [6.2] The presciption and David Marr's 3 levels
 The solution that (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective) gave is what they call a more __pluralistic neuroscience__: multiple legitimate modes of explanation, not the assumption that implementation level description will "naively emerge" into algorithmic understanding. Well-designed, ethologically grounded behavioral experiments (they lean on Tinbergen here: behavior as an evolved entity, VR as a tool only usable once you understand the natural behavior) can stand alone and must generally come first, so that neural experiments are designed against real algorithmic hypotheses rather than fishing in high-dimensional data.
+
+David Marr's 3 levels of understanding of complex systems:
+
+
 
 ---
 
