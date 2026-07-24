@@ -191,7 +191,6 @@ The key problem:
     Figure 1 from  (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective) paper: Complex mapping relations between neural activities and behaviors
 </div>
 
-
 One interesting question they mentioned in the paper is that we are trying to understand from the implementation of processes (the processors, i.e., the neural systmes, hardware, or the "how") to infer the underlying processing principle (neural computation), which has been muddling and far from easy to solve. One simple analogy on feathers:
 
 Consequently, Krakauer et al. proposed to carefully include (apriori) behavior into the experimental framework. 
@@ -224,9 +223,112 @@ This 3 level analysis points at a sharp fact, which Krakauer et al. repetitively
 
 Consequently, the key issue is that from the implementation level how much of details should we neglect and collapse? This also relates to the perhaps broader question on what is life and mind. Carbon-based materials might not be the necessary condition, the same reasons that neurons as physiological functioning units might also not be necessarily required. You could say that the word implementation contains, on its own, many levels of conditions: materials, hierarchies, compositions, etc., some of which might be redundant for the specific conditions we are referring to. For example, Krakauer gave out the example of chess: "Understanding the game does not depend on knowing anything about the material out of which the board or chesss pieces are made". For the problem of neural computation that we care about, the materials does not matter for sure. However, this reinforces the idea that the word "implementation" smears over many different subcategories which are only collapsable under different given contexts. 
 
+Associated with this is the mereological fallacy. Krakauer used the mirror neurons as an example: Mirror neurons are said to encode the "understanding" of others' actions, but "understanding" is a psychological property that can only sensibly be ascribed to the whole organism, not to a single neuron. Attributing a capacity of the whole to one of its parts is a category error (the mereological fallacy, from Bennett & Hacker). In the paper's own register, they wrote "neural circuits do not feel pain, whole organisms do." The same logic applies to neurons "understanding."
+
+At the same time, we usually mistake an interpretation for a result. Again for the mirror neuron example, what was actually measured is that these neurons fire both when an animal performs a goal-directed action and when it observes the same action i.e., goal-linked firing. The leap to "therefore they implement action understanding" is an interpretation layered on top of the recording, with no independent behavioral test of understanding to license it. There's no behavioral decomposition specifying what "understanding an action" consists of and how you'd measure it separately from the neural correlate — so the explanatory word ("understanding") is doing work the evidence hasn't earned.
+
 ---
 
-#### [6.3] The "intrinsic" nature of neural patterns
+#### [6.3] Neural population dynamics or manifold: anything new? 
+
+We might wonder: how would our brain utilize a manifold space? How would our brain employ fixed points? These are next-level questions, which could definitely be included as part of understanding. 
+
+A subtle difference: modern neuroscience employs neural population recordings, which already extend beyong the single neuron narrative. How does this make a different, or not, for characterizing and then interpretating neural-behavior relationships? 
+
+Krakauer thought there's no fundamental difference, but I want to discuss a little more here. Compared to the "feather" analogy, there're two aspects that neural population brings other than single neuron narrative: (a) grain of measurement (single neuron vs. population). (b) the kind of question asked (implementation vs. computation/algorithm — Marr's level 3 vs. levels 1–2). Krakauer's argument is mostly about (b), and the population dynamics/manifold revolution is mostly a fix for (a). That's why neural poulation is more of a partial resolution.
+
+Where does population dynamics genuinely help? 1) Granularity match. Krakauer worries about a granularity mismatch: behavior and neural data described at incommensurable grains can't be aligned. A neural trajectory with a reach trajectory is a level-matched comparison in a way that a single tuning curve with a whole behavior never was. Population geometry buys us a description at the grain behavior actually lives at. 2) Another perhaps interesting point I find is __a candidate invariant across degeneracy__. Because of multiple realizability, single circuits might underdetermine the algorithm. Population geometry is attractive precisely as something that might be conserved across degenerate realizations, where the same low-D structure two different circuits converge on. That's the flavor of thing an algorithmic-level theory should capture. 3) Sometimes the dynamics/manifolds are the algorithm. One of the strongest case is to train an RNN on a task, reverse-engineer its attractor dynamics, e.g. line attractors for integration or curved manifolds for Bayesian estimation. Here the latent dynamics are a mechanistic-but-computational story, which genuinely climbs toward Marr's level 2.
+
+But where it does not resolve it (and can re-create the feather)? Notice again that Marr's deeper claim is that you cannot infer the algorithm from the hardware, no matter how elegantly you coarse-grain the hardware. A latent manifold discovered purely bottom-up (e.g., record $\rightarrow$ PCA/jPCA $\rightarrow$ "look, rotational dynamics!") is still an implementation-level description, just prettier. "Why rotations?" is not answered by the geometry itself — it's answered by a computational argument (rotations are an efficient way to generate multiphasic muscle output), and that argument comes from the behavior/task, not from the manifold: 
+
+* Strip the behavioral anchor and the beautiful latent space is a coarse-grained feather.
+
+This is exactly the question we've targeted all way along:
+
+> Is neural population geometry/dynamics genuinely a computational/algorithmic-level theory (Marr 1–2), or does it risk being sophisticated description of the implementation?
+
+Consequently, the resolution isn't the population lens, but  what we pair it with. Krakauer would probably say that population geometry matters when it's driven by a behavioral/computational decomposition (the very pluralistic loop he advocates). The manifold earns algorithmic status when a task analysis tells us what problem the geometry solves. Discovered geometry-first, it's level-3 description dressed up; discovered behavior-/computation-first and then mapped to geometry, it's the algorithmic theory we're actually asking for. The population move fixes the grain, while only the behavioral anchor fixes the level. Put differently, going from feathers to "the shape of the whole wing in flight" is real progress, but it's still anatomy until we've worked out that flapping, not the wing's material, is what generates lift. The wingbeat is the computation and the manifold is a very good description of the wing. We should focus with equal amount of attention and rigor on the bridge across levels, not simply enhancing the resolution at a specific implementation level. 
+
+This also relates to the ML black box conundrum for interpretability studies. It's not that we do not know each activation value, outputs from a specific layer, we know them. It's because we know all things everything all at once that we do not know how to interprete such massive amount of data. Similarly, figuring out all connectivity and synaptic inputs/outputs might not on its own point to a better understanding of brain-behavior relations.
+
+Take flocking as an example. According to Krakauer, it could "only be understood at the algorithmic level, which in turn an only be determined by studying the emergent behavior itself". The algorithmic level refers to the 2nd level (what/rules) in Marr's 3-level analysis. Well, you might argue that this example exactly supports neural population view: we definitely cannot infer the flockign pattern from a single bird, but instead required to examine the entire population out of which the flocking patterns emerge. Where does the "behavior" enter or is needed?
+
+Let's take a look at how bird flocking is studied: through high-resolution quantitative measurement of the collective behavior: The STARFLAG project (Cavagna, Giardina, Parisi and colleagues in Rome) reconstructed the 3D position and velocity of every individual bird in wild starling flocks of up to ~2,600–4,000 members, using synchronized stereo cameras plus computer-vision stereo-matching. That's the behavioral data — measured at fine granularity, in the animal's natural setting.
+
+Statistical analysis were implemented to extract the interaction rule. From those 3D reconstructions they derived non-obvious, quantitative laws they could never read off one bird:
+* Topological, not metric, interaction: each bird coordinates with a fixed number of nearest neighbors (~six to seven), regardless of how far away they are — not with everyone inside some fixed radius (Ballerini et al., PNAS 2008).
+* Scale-free correlations: velocity fluctuations are correlated across the entire flock no matter its size (Cavagna et al., PNAS 2010), and information (a turn) propagates across the flock with almost no damping (Attanasi et al., Nature Physics 2014)
+
+One famous example is Reynold's boids model: a generative model + simulation, tested against the data, which posits three local rules — separation (avoid crowding), alignment (steer toward the average heading of local flockmates), cohesion (steer toward their average position) — and you simulate to check whether those rules reproduce the measured statistics (Reynolds 1987; overview). When the metric version failed to match real flocks, the data forced the rule to be revised to topological neighbors.
+
+Consequently, "study the behavior itself" is measure the emergent phenomenon quantitatively at matched granularity, hypothesize a generative interaction rule, and validate it by simulation against that data. Observation is step 1; the understanding is the validated generative rule ("align to ~7 topological neighbors"). That rule is a Marr level-1/2 (computational/algorithmic) statement — and, as Krakauer stresses, dissecting one bird could never yield it.
+
+However, there's a suble yet important difference: when we talk about brain to behavior, there's a cascade/hierarchy of transmission/transformation which eventually leads to end muscle movements, whereas the the birds themselves constitute the flocking patterns. A more comparable analogy is between bird flocking with neural population geometry/dynamics. Consequently, when we say we need behavior information of flocking, we are talking about the movements/velocities of each specific bird (that's their behavior), which correspondingly is just the collection of neural population activities.  
+
+However, modern neural population latent/dynamics solved this issue? Do manifold/dynamics offer a new bridge from neurons to behavior? I think the answer is a yes. It's true that dimensionality reduction and dynamics model fitting are themselves intrinsic methods, but later comparisons analyses do reveal how their geometric/dynamic/topological features are correlated (causally) with behavior. 
+
+Then why isn't "geometry correlated with behavior" enough for neuroscience? This is a real subtlety! Manifold studies do relate geometry to behavior, but Krakauer's objection turns on how. There's a distinction:
+
+* 1] Behavior as a label/regressor: "this manifold axis correlates with reach direction / choice / head angle." Behavior is used to annotate and decode neural activity. This is still neural-activity-first, behavior-as-annotation.
+* 2] Behavior as an independent computational theory: a decomposition of the task into its component processes/algorithm, derived by analyzing the behavior itself — into which the neural geometry then slots as the implementation.
+
+Correlating geometry with a label is (A). The flocking analogy makes the gap vivid: the raw 3D bird tracks correlated with flock turns ≈ neural geometry correlated with behavioral labels. Both are necessary data. But the understanding is the boids/topological-interaction model — the analog of which, in neuroscience, is the independently-derived computational algorithm, not "PC1 tracks head direction." Barack & Krakauer put the sharp version in their own review: behavior is "at best given backseat status," and "correlation does not imply computation" (@barack_two_2021).
+
+What Krakauer actually wants — three things:
+
+* 1) A behavior-first task decomposition, done independently of the neural data. His model case is his own bradykinesia work: the theory ("low vigor = a skewed effort/accuracy cost function") came from human psychophysics first, and then guided the mouse optogenetics (@krakauer_neuroscience_2017). You derive the algorithm from the behavior, then ask whether the neural geometry implements it.
+* 2) Ethologically rich, high-granularity behavior, not impoverished lab tasks (a reach direction, a binary choice) chosen for recording convenience. Strikingly, Perich agrees: he warns that "simple, low-dimensional tasks may enforce that neural manifolds appear to be similar owing to behavioral constraints, disguising subtle functional differences" (@perich_neural_2025-1). A binary-choice label is a thin behavioral theory.
+* 3) Causal tests of the behaviorally-derived algorithm's implementation — interventions to test understanding, not substitute for it.
+
+Actually a few years later, in another review, Krakauer advances the claim that the population/Hopfieldian level is the right level, while insisting it must be anchored to the ecological (computational) level, and openly conceding the gap is still open: "a new theory of computation via these neural objects is needed," and "simply describing these operations in terms of linear dynamical systems is insufficient to connect the behavior of these state spaces to their ecological function" (@barack_two_2021). That's Krakauer saying: right level, but we still lack the algorithmic theory. Similarly, Perich et al. 2025 is also sympathetic and cites Krakauer 2017 and calls for ethologically rich behavior + causal manifold experiments, and concedes the field is still largely correlative/post-hoc: manifolds are estimated after the fact by fitting embeddings to trajectories (the "chicken-or-egg" problem), and it remains an open question whether the manifold has more explanatory power than its circuits (@perich_neural_2025-1). It even leans on Krakauer's own emergence analogy ("you wouldn't explain a movie by describing 100 frames").
+
+Maybe the honest verdict could be given as the following: the recent work inherits Krakauer's open problem rather than refuting it. The best exemplars already meet his bar — e.g. Bayesian-timing manifolds (Sohn/Narain/Jazayeri) and context-dependent integration (Mante & Sussillo) have genuine computational theories that the geometry then implements. The bulk of "geometry correlates with variable X" work does not yet: stripping off these terms, we still lack an understanding of how different components come together to implement the neural computation; it's at the level Krakauer wants (population/algorithmic) but stops at description. In flocking terms: the field now has beautiful 3D tracks and is increasingly demanding the boids model — but often still ships the tracks and calls it the model.
+
+I admit that it's still a little fuzzy at the neuron population level. It's a necessary condition for emergence (when we talk about a mechanism, it naturally integrates across many different subcomponents. As Krakauer summarized, "Ion channels do not beat, heart cells do. Neural circuits do not feel pain, whole organisms do"), but how behavior trickles in is still open to debate. 
+
+---
+
+#### [6.4] Causal perturbation
+
+Talk about Sadtler et al. 2014 work. 
+
+With perturbation techniques we could establish causal intervations, but this is still different from understanding how each specific component combines to perform the required neural computation. 
+
+A very interesting example: Jonas and Kording 2017 findings. Jonas & Kording took a fully-understood chip (the 6502 running Donkey Kong / Space Invaders / Pitfall) and threw the full neuroscience toolkit at it: lesioning transistors, computing tuning curves, recording "local field potentials," running dimensionality reduction, and failed to recover the fetch-decode-execute architecture. Krakauer's diagnosis is that they had no behavioral-level hypothesis. The "behavior" they analyzed was even just 10 s of activity with no one playing, which is a stimulus-response fragment. And he adds that even a complete activity map of a full game, with better algorithms, would still yield nothing, "since again no behavioral-level hypothesis is being tested; there is no conceptual structure in place." You're staring at an infinite set of patterns with no principled way to know which ones matter.
+
+The correct strategy Krakauer proposed, is the engineer who inverts the order. She does not start at the transistors. She starts by analyzing the behavior (the game-play) itself, and decomposes it into what the system must be computing and why:
+
+* What does the machine actually do? It plays the game.
+* She studies the game-play at a high level: sprite positions/shapes/colors over time, how the score updates, how outputs depend on joystick input.
+* From that she builds a task analysis: a functional spectrum of the computations the chip must perform, for example track agent positions, detect collisions, update the score, render sprites, respond to input.
+* Only then does she ask: how is the chip fulfilling these higher-order needs? Now transistor-probing is targeted and she knows which functions to hunt for ("where is collision detection implemented?"), so specific parts of the chip finally become interpretable.
+
+The crucial point is what "behavior-guided" means here. It does not refer to __"record the chip's activity while it plays and correlate transistors with game state."__ It means analyze the behavior first to derive the functional/computational decomposition (Marr level 1), and use that to direct and interpret the circuit-level investigation. 
+
+The behavior supplies the __hypotheses and the target functions__ that make the low-level probing productive. Strikingly, the engineer's first move (studying game-play) doesn't even require opening the chip: the behavior is analyzed as an external phenomenon to build the spec that is epistemologically prior.
+
+This is exactly the behavioral theory vs. behavioral label distinction from [6.3]. Correlating transistor activity with game state is just treating behavior as a label (What the failed study amounts to). Deriving "the chip must detect collisions, update score, track sprites" from analyzing game-play is to treat behavior as a theory / task analysis (What the engineer does). 
+
+By the way, it's the same shape as the flocking case: studying the game-play to derive the chip's computational demands amounts to studying the flock to derive "align to ~7 topological neighbors." In both, we extract the generative/functional decomposition of the behavior first, and that's what makes the substrate (transistors / neurons / one bird) interpretable. It's also Marr's top-down level 1 (what problem, why) then towards level 3 (how the hardware implements it), which Krakauer argues is the productive direction, versus trying to read the algorithm off the hardware.
+
+This really echoes with the nullspace research. 
+
+<div class="row mt-3">
+    <div class="col-sm mt-3 mt-md-0 text-center">
+        {% include figure.liquid loading="eager" path="assets/img/neural_representation/krakauer_2017_fig3.png" class="img-fluid rounded z-depth-1" zoomable=true
+        width="90%" %}
+    </div>
+</div>
+<div class="caption">
+    Figure 3 from  (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuron perspective) paper:
+    Why causal intervention is not equivalent to an understanding
+</div>
+
+
+
+---
+
+#### [6.5] The "intrinsic" nature of neural patterns
 
 Giusti's clique topology paper emphasizes the possibility of using clique topology to extract stable neural features intirnsically (irrespective of the stimuli/task structure), opposite view of Krakauer 2017 Perspective above. 
 
@@ -252,7 +354,7 @@ Something to notice is that although Giusti paper demonstrated the intrinsicalit
 
 ---
 
-#### [6.4] "Reflection" of task/stimuli structure? A three layer dissection
+#### [6.6] "Reflection" of task/stimuli structure? A three layer dissection
 
 When would the neural activities reflect the task/stimuli structure? In what form? 
 
@@ -291,7 +393,7 @@ To be fair, the whole worry motivating the paper is whether we can detect geomet
 
 ---
 
-#### [6.5] Euclidean vs Non-euclidean geometry
+#### [6.7] Euclidean vs Non-euclidean geometry
 
 Giusti's clique topology originally worked with the geometric matrices obtained from uniform sampling from a Euclidean unit ball. Howeve, notice that this method cannot distinguish Euclidean vs non-Euclidean method, because it only relies on the metric property (triangle inequality). 
 
