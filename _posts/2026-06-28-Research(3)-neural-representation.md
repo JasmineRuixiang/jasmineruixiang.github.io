@@ -179,6 +179,7 @@ The authors of (Krakauer, Ghazanfar, Gomez-Marin, MacIver & Poeppel's 2017 Neuro
 
 Why is causality intervention not enough? Well, two structural problems undercut the "just manipulate the circuit" view. First, degeneracy and multiple realizability: the same behavior can arise from different circuits, and the same circuit can produce different behaviors, so inspecting lower level properties alone can't fix the mapping to behavior. Second, we usually don't even know which level of organization is the relevant one for a given behavior. They lean on Marr's three levels (computational/"why," algorithmic/"what," implementation/"how") and his metaphor that studying neurons to understand perception is like studying feathers to understand flight: you can't infer the algorithm from the hardware nearly as well as you can from analyzing the problem being solved.
 
+
 The key problem: 
 
 <div class="row mt-3">
@@ -238,6 +239,9 @@ A subtle difference: modern neuroscience employs neural population recordings, w
 Krakauer thought there's no fundamental difference, but I want to discuss a little more here. Compared to the "feather" analogy, there're two aspects that neural population brings other than single neuron narrative: (a) grain of measurement (single neuron vs. population). (b) the kind of question asked (implementation vs. computation/algorithm — Marr's level 3 vs. levels 1–2). Krakauer's argument is mostly about (b), and the population dynamics/manifold revolution is mostly a fix for (a). That's why neural poulation is more of a partial resolution.
 
 Where does population dynamics genuinely help? 1) Granularity match. Krakauer worries about a granularity mismatch: behavior and neural data described at incommensurable grains can't be aligned. A neural trajectory with a reach trajectory is a level-matched comparison in a way that a single tuning curve with a whole behavior never was. Population geometry buys us a description at the grain behavior actually lives at. 2) Another perhaps interesting point I find is __a candidate invariant across degeneracy__. Because of multiple realizability, single circuits might underdetermine the algorithm. Population geometry is attractive precisely as something that might be conserved across degenerate realizations, where the same low-D structure two different circuits converge on. That's the flavor of thing an algorithmic-level theory should capture. 3) Sometimes the dynamics/manifolds are the algorithm. One of the strongest case is to train an RNN on a task, reverse-engineer its attractor dynamics, e.g. line attractors for integration or curved manifolds for Bayesian estimation. Here the latent dynamics are a mechanistic-but-computational story, which genuinely climbs toward Marr's level 2.
+
+One exampe of multiple realizability: in motor learning under perturbation, it was believed that cerebellar circuity implements error-based learning. However, it's now generally regarded that multiple learning algorithms operate together to fulfil such functions. 
+
 
 But where it does not resolve it (and can re-create the feather)? Notice again that Marr's deeper claim is that you cannot infer the algorithm from the hardware, no matter how elegantly you coarse-grain the hardware. A latent manifold discovered purely bottom-up (e.g., record $\rightarrow$ PCA/jPCA $\rightarrow$ "look, rotational dynamics!") is still an implementation-level description, just prettier. "Why rotations?" is not answered by the geometry itself — it's answered by a computational argument (rotations are an efficient way to generate multiphasic muscle output), and that argument comes from the behavior/task, not from the manifold: 
 
@@ -311,8 +315,6 @@ This is exactly the behavioral theory vs. behavioral label distinction from [6.3
 
 By the way, it's the same shape as the flocking case: studying the game-play to derive the chip's computational demands amounts to studying the flock to derive "align to ~7 topological neighbors." In both, we extract the generative/functional decomposition of the behavior first, and that's what makes the substrate (transistors / neurons / one bird) interpretable. It's also Marr's top-down level 1 (what problem, why) then towards level 3 (how the hardware implements it), which Krakauer argues is the productive direction, versus trying to read the algorithm off the hardware.
 
-This really echoes with the nullspace research. 
-
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0 text-center">
         {% include figure.liquid loading="eager" path="assets/img/neural_representation/krakauer_2017_fig3.png" class="img-fluid rounded z-depth-1" zoomable=true
@@ -324,6 +326,46 @@ This really echoes with the nullspace research.
     Why causal intervention is not equivalent to an understanding
 </div>
 
+ the causal/interventionist fact (implementation level).
+
+A simple example from Krakauer 2017 would be Bradykinesia, which is causally related to dopamine depletion in the substantia nigra and is partially and transiently reversed by increasing dopamine with medication. Notice that this is the necessity/sufficiency gold standard: deplete dopamine $\rightarrow$ slowness; restore it $\rightarrow$ improvement. But the key fact is that "nevertheless, work restricted to this level cannot explain why dopamine depletion causes a loss of vigor."
+
+What does this mean? Knowing dopamine causes bradykinesia doesn't tell you what bradykinesia is. Is it an inability to move fast? A broken force generator? A motor-execution fault? The causal fact is silent on this.
+
+Consequently, Step 2 is the behavioral understanding (computational level) from human psychophysics:
+
+"…psychophysical studies in patients with Parkinson disease suggested that low vigor in these patients is caused by a loss of implicit motivation for moving fast because of a skewed cost function containing effort and accuracy terms (Mazzoni et al.)."
+
+This is pure behavior where no cells are touched. Mazzoni/Krakauer showed Parkinson's patients can move fast when it's worth it; they're not unable. Consequently, the deficit is reconceived: the brain implicitly computes that fast movement "isn't worth the effort" — a change in a vigor cost function, not a broken actuator. That's a Marr level-1/2 characterization of what the deficit actually is.
+
+Finally, Step 3: the mechanistic follow-up (this is where cells get suppressed), guided by Step 2:
+
+"These human psychophysical experiments then led to analogously designed experiments in mice that demonstrated that there are cells in the dorsal striatum whose activity correlates with movement vigor, and that suppression of these cells optogenetically reduces vigor (Panigrahi et al.)."
+
+So how are dopamine and the psychophysics connected? They're different Marr levels of the same phenomenon, bridged by one concept: vigor.
+
+* Dopamine depletion = the cause (level 3).
+* "Vigor set by an effort/accuracy cost function" = what that cause actually alters, computationally (level 1–2), discovered from behavior.
+* The full mechanistic chain the field ended up with: dopamine depletion → impaired striatal vigor representation → loss of vigor → bradykinesia.
+
+The behavioral analysis is the connective tissue. It did two things a pure dopamine study could not:
+
+* 1) It made the dopamine fact intelligible. Without "vigor", "dopamine $\rightarrow$ slowness" is a bare correlation, and we'd go looking for a "movement-speed knob." The behavioral work told us dopamine is really setting a cost–benefit computation and that's why depleting it slows movement.
+* 2) It told the neuroscientists what to look for and how to design the experiment. The mouse optogenetics hunted for vigor cells because the human behavior had defined vigor as the right variable.
+
+In summary, the interventionist gold standard (dopamine necessary and sufficient) delivered no understanding of bradykinesia; the behavioral/computational analysis supplied the explanatory concept, which then guided the causal circuit work. Behavior was epistemologically prior and methodologically generative.
+
+Actually, it's the same shape as the two cases we already discussed:
+
+* 1) Engineer/microprocessor: analyze game-play → derive the chip's functional demands → then probe transistors productively.
+* 2) Flocking: measure the flock → derive "align to ~7 neighbors" → then the individual makes sense.
+* 3) Bradykinesia: analyze patients' behavior → derive "vigor = cost function" → then the dopamine/striatal mechanism (and its optogenetic test) makes sense.
+
+In each, behavior gives us the theory (what's being computed and why); the neural intervention then tests the implementation. The dopamine work isn't opposed to the psychophysics — it's the level-3 answer to the level-1 question the psychophysics posed.
+
+Furthermore, this really echoes with the nullspace research.
+
+Also talk about Sadtler 2014 work. 
 
 
 ---
