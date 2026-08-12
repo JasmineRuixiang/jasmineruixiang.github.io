@@ -36,6 +36,8 @@ From the above definitions we could sense a potential urge or risk of confoundin
 
 __Correlation__ is the weakest notion here indeed. Bare correlation is cheap, and any reliable covariation counts, and as we established, mere correlation can't even misrepresent in the right way without extra machinery.
 
+Tree rings carry information about a tree's age. Smoke carries information about fire. A thermometer's mercury level carries information about temperature. None of these means anything to the system containing it; they are natural indicators, causally coupled to their source.
+
 Between __causality and representation__, it's not that representation is non-causal or more than causal in some spooky additive sense. The claim (via Chirimuuta, M. (2024). The brain abstracted: Simplification in the history and philosophy of neuroscience) is about explanatory purchase, not metaphysical surplus: positing a representation lets us explain behavior by reference to the distal relationship between organism and environment, rather than by tracing the full proximal causal chain.
 
 Very concretely: we can in principle explain a rat solving a maze as a giant chain of synaptic events. This is pure causality, no representation talk at all. But that explanation doesn't make the pattern perspicuous: it doesn't tell us why this rat succeeds and that one fails, why a lesion here matters and there doesn't, what the rat is getting right or wrong about the world. Representation talk buys us a compression: it groups the indefinitely many causal micro-stories that all amount to "tracking the location of the goal" and lets us predict and explain at that level. The "beyond" is beyond the micro-causal description, not beyond causation as such.
@@ -68,6 +70,51 @@ Consequently, perhaps the correct, hard-won conclusion of this homomorphism talk
 
 The actual discussion/support of algorithmic vs organismic usage will be in section [5]. But here I intend to point to one logic weakness of the paper. 
 
+
+---
+
+#### [1.3] Detachability
+
+Another subtle point of neural representation is that it needs to be detachable (Barack & Krakauer 2021). 
+
+A representation is detachable if it can be tokened (activated / occur) even when the thing it is about is not present, i.e., it is not stimulus-bound. We can think about an airplane with no airplane in sight; we could plan, imagine, or reason about things that are absent, past, future, or purely hypothetical. Barack & Krakauer 2021 review frames this explicitly as a claim about the causal structure of the nervous system:
+
+> "an explanation that requires that representations are detachable must be organized such that the presence of the representation is not stimulus bound: the representation can occur even in the absence of the stimulus in the world that is the representation's content. But this implies that any models that require stimulus input to cause that representation are wrong."
+
+Their worked example is inferotemporal (IT) cortex "object representations." The usual evidence is: show an image of an airplane → a processing cascade → neural activity that correlates with "airplane." But that only shows a stimulus-evoked response. A genuine representation of an airplane would be one that can occur without any airplane — during planning a trip, imagining the flight, or telling a story about a past vacation. That evidence, they note, "remain(s) to be gathered."
+
+Why is detachability required? The key is that Barack & Krakauer 2021 are defining a strong, semantic notion of representation precisely to explain cognition, as opposed to sensorimotor reflexes. Under neuroscience's default weak notion ("a representation is any informative guiding signal"), even a stimulus-bound sensor counts. Detachability is one of the constraints that separates the two, for three connected reasons:
+
+* 1. __It distinguishes a representation from a mere detector / stimulus–response__. A photoreceptor firing to light, or a neuron that fires only while a specific image is on the screen, is a registration of the stimulus or a transducer reading, not something that stands in for the stimulus. If a state can only ever exist while its cause is present, it isn't representing the thing so much as being causally driven by it. (This mirrors Krakauer 2017's distinction between genuine behavior and a stimulus-response fragment.)
+
+* 2. __Cognition operates on absent things, so it needs offline, decoupled tokens__. The paper opens with: "What is thought? Decision-making, planning, belief, recall, reasoning, all of these mental phenomena are about something." Every one of those requires activating the representation __without__ its referent: we can't plan a trip to Hawaii while requiring Hawaii to be present, or recall an airplane while requiring an airplane. Detachability is what makes representations usable __offline__: in memory, imagination, counterfactual reasoning, prospection. Without it, we'd be locked into reflexive, stimulus-driven responding, which is exactly the "sensorimotor" regime they contrast cognition against.
+
+* 3. __It's a falsifiable, methodological criterion, which tells us what evidence to demand__. Because detachability is a claim about causal structure, it converts "is this really a representation?" into a testable question: does the activity occur when the stimulus is absent (during imagining/planning/recall)? Stimulus-evoked correlation is not enough. This is why they can say the IT "object code" hasn't yet been shown to be a representation in the rich sense.
+
+By the way, detachablity also resonates with the essential philosophical demand behind offline / internally-generated activity in __predictive processing__ (the brain generating representations top-down, not just stimulus-driven). 
+
+One honest caveat worth noting: detachability is a strong criterion, and whether it's the right filter, or too strong (does it wrongly exclude legitimate stimulus-locked representations?)
+
+---
+#### [1.4] So what are the defintions?
+
+Here we require a semantic representation: a state that stands for something, and its semantic content is what it stands for, its referent. 
+
+According to Barack & Krakauer 2021, the following constraints they impose as jointly constituting semanticity:
+
+* Aboutness plus evaluability: A semantic state can be assessed for truth, accuracy, or success. This is decisive, because it implies the state can misrepresent: you can think there is an airplane when there is none. A pure covariance detector cannot be wrong in this way; if the correlation fails, it simply is not firing, and nothing false has been asserted. The possibility of error is a hallmark of meaning.
+
+* Detachability: the state can occur without its referent. A meaning can be entertained offline, in memory, imagination, or planning. Content that only exists while its cause is present is closer to a transducer reading than to a meaning.
+
+* Combinability: Semantic contents compose systematically, the way "snow" and "white" and the predication relation compose into "snow is white." Compositional structure is a signature of a genuine semantic system, and it is why linguistic meaning is their recurring example.
+
+* Produced and consumed by the system: The content must be used by the organism to generate behavior. This is the consumer side familiar from Millikan and Dretske, whom the paper cites in that cluster of references. Meaning is not just in the correlation, it is in the fact that downstream machinery treats the state as standing for something and acts accordingly.
+
+Why such restrictions/descriptions? 
+
+First, it draws the line between cognition and sensorimotor reflex. Reflexes can be fully explained with the weak notion, states causally coupled to stimuli. Decision making, planning, belief, recall, and reasoning are all about things, often absent things, and can be true or false. If we only have covariance signals, we have not explained thought but a sophisticated reflex arc. This is why they say a stronger notion of representation is needed "to go from movements to the mind."
+
+Second, it sets up the critique of Sherringtonianism. Once content must be semantic and compositional, assigning it to individual nodes becomes untenable: either we need a dedicated circuit for every content to behavior mapping, which explodes combinatorially, or we land in grandmother cell semantic atomism, where a single node means "snow is white." Their objection is that in the Sherringtonian scheme complex contents are not really represented at all, since only individual nodes carry content, whereas sentence meaning exceeds the sum of word meanings. Distributed representational spaces, on the Hopfieldian picture, carry compositional semantic content naturally, with different regions of a latent state space assigned different contents.
 
 ---
 
@@ -110,8 +157,45 @@ But why would this directly refute encoding models, favoring a latent structure 
 
 ### [4] Latent world under the surface: dynamics and "manifold"
 
+#### [4.x] Single neurons vs neural population
 
-#### [4.x] What does latent represent?
+Barack 2021 review distinguishes the Sherringtonian view vs the Hopfieldian view.
+
+The problem of Sherringonian view is not that single neuron levels are not important, they are the fundamental building blocks of neural computation adn cognition, but that they should not be the first level of explanation. 
+
+Reasons to counteract it:
+
+* 1) "Combination of stimulus properties": higher dimensions needed for nonlinear combination of feature stimuli; Perceptron failure; 
+
+It's worth mentioning the following two usually misunderstood points (often solicited as counterexamples to attack the Sherringtonian view):
+
+* 1] Attack 1: exclusive disjunction (XOR). The classic anti perceptron result (Minsky and Papert) says a simple linear unit cannot compute XOR, and this became a favorite motivation for the Hopfieldian view. Barack and Krakauer concede the point about perceptrons but deny it transfers to biological neurons. They give a toy example (two inputs onto a cell, one excitatory and one inhibitory, with a nonlinear threshold) showing a single neuron can compute XOR in principle. They also note real dendritic nonlinearity (Gidon et al. 2020, human layer 2/3 neurons). So XOR is not an in principle barrier to the Sherringtonian.
+
+* 2] Attack 2: population level phenomena. Reverberating activity, cell assemblies, central pattern generators, oscillatory communication, and the newer wave of low dimensional latent structure recovered from high dimensional data are often cited against the primacy of neuron to neuron connections. Barack and Krakauer 2021 again defend Sherrington: the view can "sanction" population codes as long as each neuron is committed to a role by its own properties, and low dimensional dynamics are compatible if the specific circuitry that generates them is taken as the first level explainer. Their exact hedge is that population phenomena are "a strike against Sherrington only if attempts to account for them in local circuit terms fail."
+
+Consequently, what are the true problems of Sherringtonian view? 
+
+* 1) The scaling or lookup table problem (from XOR). Even granting that a dedicated triplet of cells (see above) can compute one XOR, that does not scale: every distinct categorization would need its own dedicated circuit, "a giant lookup table," which Barack and Krakauer 2021 call wildly impractical. This grows into a representational critique: assigning content only to individual nodes forces either a __combinatorial explosion__ of dedicated circuits (a new reflex like pathway for every content to movement mapping) or __a grandmother cell style semantic atomism__ that cannot represent compositional content (sentence meaning exceeds the sum of word meanings).
+
+* 2) The first level explainer question (from population phenomena). Notice the Sherringtonian rescue of low dimensional dynamics works only by insisting that single neurons and connections remain the primary explainer, with the population relegated to second level. That concession is the whole ballgame.
+
+As I will explain later, the true dispute is not about which entities exist (both camps grant that neurons and populations both matter). It is about which is the __first level explainer__ of cognition. Barack and Krakauer 2021 signals this by resolving every attack with the phrase "as long as the circuit is taken as the first level explainer." It defers the verdict rather than settling it, because whether the Sherringtonian is entitled to keep single neurons at the first level is argued later on levels of explanation: they make the positive case: __the Hopfieldian view subsumes the Sherringtonian__ (any node to node system can be redescribed as movement through a neural space, but not vice versa), so trajectories through state space that are invariant to which specific neurons are sampled are better first level explainers. That subsumption plus the representational critique, not XOR or population codes, is where they think Sherringtonianism actually fails.
+
+Consequently, the support of a neural population narrative (the Hopfieldian view) is not to neglect single neuron contribution, but to recognize that the first level explanatory power can only be endowed to the population representation space. Single neural activities are projections and only emerge out of the cognitive/computatinal representation space (latent, low dimensinoal) embedded in the high dimensional neural space. 
+
+Problems of the Hopfieldian view? 
+
+One key question is then given that single neuron level connectivity details are not our primary focus, why does the brain feature its specific wiring patterns? As Barack and Krakauer 2021 argued, this could be answered again by stating that "the wiring diagram is a second-level explainer of visual processing. The first-level explainer is the population dynamics of each region, and the wiring helps explain those dynamics". Of course, connectivities among brain regions abound, but it might not be neede to "commit to full specification of the neuron to neuron connections within or between areas". 
+
+There are different ways to view these two branches. First, it's not correct at all that both views deny the existence or the importance of the other side, for which two views are more intermixed than they seem: Sherringtonian/single neuron doctrine does not neglect patterns that emerge only from neural population, and the Hopfieldian view never says that the population is not structured by each neuron unit component. Simply saying these two differ by proposing single neurons vs neural population is a superficial, boring, and incorrect claim. Moreover, Specifically, the Sherringtonian view is not to say that a single neuron encodes computation/representation (which is absurd), nor does it say that individual neurons do so, but that single neurons together with __their interconnections__ achieve neural computation for cognitive ad behaviors. Consequently, supporters for the Sherringtonian view could claim that such connectivities underly the neural maniofld from high dimensional populations, and thus they causally implement all related functions and they are the first-level explainers. Similarly, the Hopfieldian view could also admit the importance of single neurons when asked to explain how population patterns occur. 
+
+Secondly, 
+
+---
+
+
+
+#### [4.x+1] What does latent represent?
 
 Since a representation has many facets and easily confused with many other notions (see [1.1]), we need to state very clearly what representations describe. For example, many times bundling correlation with structural correspondence/homomorphism under one label, "structural relationship," allows interpreting and framing it both ways: invoke the expensive thing to sound like they've got real structure-preservation, then retreat to the cheap thing if anyone demands they actually demonstrate it. So crucially,  which one neural latent structures are supposed to instantiate, or what hangs on the difference. Such undefended slide between the strong and weak readings bother me many times, a little like motte and bailey: The "bailey" is the valuable, exposed claim thay actually want (rich structure preservation). The "motte" is the cheap, easily defended fallback (mere correlation). They advance the bailey when unchallenged and scurry back to the motte when attacked, then re-emerge as if the motte vindicated the bailey. 
 
@@ -458,4 +542,59 @@ That swap is exactly ZhouZhang (Sharpee) 2023's extension (clique topology + hyp
 ### [7] The world model and generation
 
 
+
+---
+### [8] Representation and transformation
+
+To fully understand cognitive phenomena, representation is not enough: we also need to grasp how representations are transformed and how/at what level such transformations are implemented. 
+
+[Niko Kriegeskorte & Diedrichsen Peeling the onion of brain representations]
+
+To be very clear, here transformation means dyanmics, a change of neural states in the representational space (not through different layers, etc.). In this sense, this section is a natural continuation of the previous dynamics vs manifold section. However, now I want to focus more on the properties of transformation itself. 
+
+Also to clarify, there might be different levels/aspects of transformation. We could talk about an __anatomic hierarchical transformation__: an operation localized at a node, with the result shipped along a connection to the next node, cast as information intake by neural transfer functions from neurons to neurons, implemented by particular synaptic operations, specific neurotransmitters, dendritic or axon hillock nonlinearities, and intracellular ion flows. Another __dynamical latent transformation__ is predicated of a space, not of a cell, and it is described in dynamical vocabulary: attractors, bifurcations, limit cycles, trajectories. The same population carries different content at different moments, and the computation is the evolution of the state. This notion of transformation echoes the previous dynamical systems view, and could be movement either within or between representation spaces. Both carry with them spatal and temporal aspects. 
+
+Not so surprisingly, the above two kinds of transformations correspond to the Sherringtonian vs Hopfieldian views. 
+
+#### [8.1] What is a transformation
+Not necessarily a group-theoretic transformation.
+
+For group language: scaling, rotation, reflection.
+
+Could be nonlinear (the diffeomorphism group, but does require invertible transformation). 
+
+What does this extra algebraic structure of group theory bring us?
+
+---
+#### [8.2] Symmetry, invariance, and equivariance
+
+In neuroscience, “transformation” and “symmetry” often get conceptually mixed together, but they're not the same.
+
+For example, if $$f(Rx)=f(x)$$, then $$R$$ is a symmetry of $$f$$.
+
+This distinction becomes extremely important in visual invariance, object recognition, motor control, coordinate transformations, neural population geometry, and equivariant neural networks.
+
+Does equivariance naturally/necessarily/exclusively lead to group theory?
+
+---
+#### [8.3] Computational equivalence
+
+
+---
+#### [8.4] Compositionality
+A group gives us compositionality by definition. Is all composable transformation from groups? 
+
+Group theory deliberately restricts the possible transformations, and that restriction gives us structure.
+
+Something we could study: subgroups, generators, symmetries, invariants, orbits, representations of the group, continuous transformations and their infinitesimal generators, etc.
+
+---
+#### [8.5] An integration of transformations
+The nterface problem: Sensory input enters and motor output exits through Sherringtonian style node and connection processes (sense organs, the final common path to the skeletomuscular system), while the middle is Hopfieldian. Since the two notions of transformation are not the same kind of operation, something has to translate between them, and Barack and Krakauer 2021 say plainly that "a theory of the interface between the two types of circuit is needed."
+
+---
+
+### [9] A broad roadmap
+
+_Cognition_ is one type of _computation_, specifically a "restricted" class of _transformations_ of _representations_ (Barack and Krakauer 2021).
 
