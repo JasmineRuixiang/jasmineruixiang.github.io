@@ -95,6 +95,9 @@ By the way, detachablity also resonates with the essential philosophical demand 
 
 One honest caveat worth noting: detachability is a strong criterion, and whether it's the right filter, or too strong (does it wrongly exclude legitimate stimulus-locked representations?)
 
+By the way, detachability could also be related to intrinsic properties (not behavior/label linked). Remind me of Gardner 2022 Nature on toroidal topology, the finding of persistence during sleep and across environments. The toroidal structure is present when the animal is not navigating anything. That makes it an intrinsic property of the population rather than a stimulus driven one, which is the same point as the detachability criterion we discussed earlier: a representational structure that exists in the absence of its typical cause. 
+ 
+
 ---
 #### [1.4] So what are the defintions?
 
