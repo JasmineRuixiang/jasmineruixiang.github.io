@@ -19,17 +19,21 @@ toc:
   sidebar: left
 ---
 
-In the previous post of this series we built the tangent space $$T_pM$$ at a single point $$p$$. A single tangent space is a lonely object, though. It tells you which directions you could move in from $$p$$, and nothing about anywhere else. Most of the geometry, physics and data analysis I care about happens when we choose a direction at every point at once, and choose it smoothly. Think of a weather map: at every location there is a wind arrow, and nearby arrows look alike. That assignment is a **vector field**.
+In the previous posts of this series (Manifold and Riemannian Geometry (2) and (3)) we already built the tangent spaces $$T_pM$$ at a single point $$p$$. Remember that a single tangent space is a lonely object, though. It tells us which directions we could move in from $$p$$, and nothing about anywhere else. In fact, many visualizations of the "locally Euclidean" property of a manifold employs this tangent space structure (although this is again not rigorously correct since then we would already assume there exists some embedding...). Most of the geometry, physics and data analysis we care about happens when we choose a direction at every point at once, and choose it smoothly. This demand of a very intuitive tool/perspective is called a **vector field**.
 
-This post follows one thread, and each section pulls it a little further:
+Perhaps you've already seen vector fields from a (nonlinear) dynamical systems class. However, here we will make it more abstract and no longer assume the underlying flow-happening space to be a flat Euclidean one. Maybe think about the wind flow upon/on the surface of Earth?
+
+Now, at a hight level view, this post is organized as the following ideas/progression:
 
 1. A vector field is a smooth choice of tangent vector at every point (§0).
 2. A vector field is secretly an ordinary differential equation, so the whole toolbox of dynamical systems moves onto manifolds (§1).
 3. Solving that ODE for every starting point at once produces a **flow**: a one-parameter family of diffeomorphisms. Vector fields and flows are two descriptions of the same thing, one infinitesimal and one global (§2).
-4. Once a vector field can move points around, it can also move *other* vector fields around, which lets us differentiate one field along another. That is the Lie derivative, and it comes out as the Lie bracket (§3).
-5. Finally, a flow moves probability mass as well as points. The bookkeeping is the continuity equation, which is the doorway to optimal transport and flow-based generative models (§4).
+4. Once a vector field can move points around, it can also move *other* vector fields around, which lets us differentiate one field along another. That is the Lie derivative, and it comes out as the Lie bracket (§3). Note that this is subtly different from covariant derivative.
+5. Finally, a flow moves probability mass as well as points. The bookkeeping is the continuity equation, which is an integral component to optimal transport and flow-based generative models (§4).
 
 I'll assume the definitions of a smooth manifold and of $$T_pM$$ from parts (1) and (2), and use $$\partial_i$$ as shorthand for $$\frac{\partial}{\partial x^i}$$.
+
+Let's roll our stone into the vector field.
 
 ---
 
@@ -43,7 +47,7 @@ $$
 TM = \bigsqcup_{p \in M} T_pM = \{(p, v) : p \in M,\ v \in T_pM\},
 $$
 
-together with the projection $$\pi: TM \to M$$, $$\pi(p, v) = p$$. You can picture $$TM$$ as the manifold with a copy of $$\mathbb{R}^n$$ glued on at every point. These copies are the fibers $$\pi^{-1}(p) = T_pM$$.
+together with the projection $$\pi: TM \to M$$, $$\pi(p, v) = p$$. You can picture $$TM$$ as the manifold with a copy of $$\mathbb{R}^n$$ glued on at every point (Easiest case: a stack of papers but gradually rotating the orientation). These copies are the fibers $$\pi^{-1}(p) = T_pM$$.
 
 $$TM$$ is itself a smooth manifold, of dimension $$2n$$. A chart $$(U, \varphi)$$ with coordinates $$(x^1, \dots, x^n)$$ on $$M$$ gives coordinates on $$\pi^{-1}(U)$$: send
 
@@ -51,18 +55,18 @@ $$
 \Big(p,\ \sum_i v^i \,\partial_i\big|_p\Big) \ \longmapsto\ (x^1(p), \dots, x^n(p),\ v^1, \dots, v^n).
 $$
 
-The first $$n$$ numbers say *where* you are, the last $$n$$ say *which arrow* you hold. When you switch to another chart $$(y^1, \dots, y^n)$$, the arrow coordinates change by the Jacobian, $$\tilde v^j = \sum_i \frac{\partial y^j}{\partial x^i}(p)\, v^i$$, which is smooth. So the transition maps are smooth and $$TM$$ is a smooth manifold (Lee, Ch. 3).
+The first $$n$$ numbers say *where* you are (that's the usual coordinates from our given charts), the last $$n$$ say *which arrow* you hold. When you switch to another chart $$(y^1, \dots, y^n)$$, the arrow coordinates change by the Jacobian, $$\tilde v^j = \sum_i \frac{\partial y^j}{\partial x^i}(p)\, v^i$$, which is smooth (this should be very obvious and I will not rederive or further elaborate here). Consequently, the transition maps are smooth and $$TM$$ is a smooth manifold (Lee, Ch. 3).
 
 Two examples are worth keeping in mind:
 
 - For the circle, $$TS^1$$ is a cylinder $$S^1 \times \mathbb{R}$$: at each point of the circle the tangent line is a copy of $$\mathbb{R}$$, and these lines can be lined up consistently all the way around.
-- For the sphere, $$TS^2$$ is **not** $$S^2 \times \mathbb{R}^2$$, even though every fiber is a plane. The reason is the hairy ball theorem below. Locally the bundle is always a product; globally it can twist.
+- For the sphere, $$TS^2$$ is **not** $$S^2 \times \mathbb{R}^2$$, even though every fiber is a plane. The reason is the hairy ball theorem below. An interesting result is that locally the bundle is always a product, but globally it can twist (I will explain later why. Stay tuned!s).
 
 ### 0.2] Vector fields
 
 > **Definition.** A **vector field** on $$M$$ is a map $$X: M \to TM$$ with $$\pi \circ X = \mathrm{id}_M$$. In words, $$X$$ assigns to each $$p$$ a vector $$X_p \in T_pM$$. It is **smooth** if it is smooth as a map between the manifolds $$M$$ and $$TM$$.
 
-The condition $$\pi \circ X = \mathrm{id}$$ only says that the arrow assigned to $$p$$ is attached at $$p$$ and not somewhere else. A map with this property is called a **section** of the bundle.
+The condition $$\pi \circ X = \mathrm{id}$$ says that the arrow assigned to $$p$$ is attached at $$p$$ and not somewhere else. A map with this property is called a **section** of the bundle.
 
 In a chart, any vector field can be written as
 
@@ -70,11 +74,11 @@ $$
 X = \sum_{i=1}^n X^i \,\partial_i, \qquad X^i : U \to \mathbb{R},
 $$
 
-and $$X$$ is smooth exactly when all the component functions $$X^i$$ are smooth in every chart. This is the criterion you actually use. It also makes clear what a vector field is in practice: locally, it is just $$n$$ smooth functions, which are reinterpreted as an arrow at each point.
+and $$X$$ is smooth exactly when all the component functions $$X^i$$ are smooth in every chart. This is the criterion we actually use. It also makes clear what a vector field is in practice: locally, it is just $$n$$ smooth functions, which are reinterpreted as an arrow at each point.
 
-We write $$\mathfrak{X}(M)$$ for the set of smooth vector fields. You can add them pointwise, and you can multiply them by smooth *functions*, not just constants: $$(fX)_p = f(p) X_p$$. So $$\mathfrak{X}(M)$$ is a module over $$C^\infty(M)$$. As a real vector space it is infinite-dimensional, which is a useful reminder that a vector field is much more information than one vector.
+We write $$\mathfrak{X}(M)$$ for the set of smooth vector fields. We can add them pointwise, and we can multiply them by smooth *functions*, not just constants: $$(fX)_p = f(p) X_p$$. So $$\mathfrak{X}(M)$$ is a module over $$C^\infty(M)$$. As a real vector space it is infinite-dimensional, which is a useful reminder that a vector field is much more information than one vector.
 
-### 0.3] A gallery of examples
+### 0.3] A few examples
 
 **In the plane.** Two fields will follow us through the whole post:
 
@@ -84,13 +88,13 @@ $$
 
 At the point $$(x, y)$$, $$W$$ points in the direction $$(-y, x)$$, which is perpendicular to the position vector, so $$W$$ swirls counterclockwise around the origin. $$E$$ points straight outward with length equal to the distance from the origin.
 
-**On the circle.** The angle $$\theta$$ is *not* a global coordinate on $$S^1$$, since it jumps by $$2\pi$$ somewhere. Even so, the field $$\partial_\theta$$ is perfectly well defined everywhere. Any two angle charts differ locally by a constant, $$\tilde\theta = \theta + 2\pi k$$, so $$\partial_{\tilde\theta} = \partial_\theta$$ wherever both are defined. This is the first small example of a recurring theme: a global object can be built out of local coordinates that themselves fail to be global. In fact $$\partial_\theta$$ is just the rotation field $$W$$ restricted to the unit circle. At $$(\cos\theta, \sin\theta)$$, $$W$$ equals $$(-\sin\theta, \cos\theta)$$, which is tangent to the circle.
+**On the circle.** The angle $$\theta$$ is *not* a global coordinate on $$S^1$$, since it jumps by $$2\pi$$ somewhere. Even so, the field $$\partial_\theta$$ is perfectly well defined everywhere. Any two angle charts differ locally by a constant, $$\tilde\theta = \theta + 2\pi k$$, so $$\partial_{\tilde\theta} = \partial_\theta$$ wherever both are defined. This is the yet another small example of a recurring theme: a global object can be built out of local coordinates that themselves fail to be global. In fact $$\partial_\theta$$ is just the rotation field $$W$$ restricted to the unit circle. At $$(\cos\theta, \sin\theta)$$, $$W$$ equals $$(-\sin\theta, \cos\theta)$$, which is tangent to the circle.
 
-**On the sphere.** Rotating $$S^2 \subset \mathbb{R}^3$$ about the $$z$$-axis gives the field $$X(x, y, z) = (-y, x, 0)$$. It is tangent to the sphere because $$X \cdot (x, y, z) = 0$$. It vanishes at the north and south poles. That is unavoidable:
+**On the sphere.** Rotating $$S^2 \subset \mathbb{R}^3$$ about the $$z$$-axis gives the field $$X(x, y, z) = (-y, x, 0)$$. It is tangent to the sphere because $$X \cdot (x, y, z) = 0$$. It vanishes at the north and south poles. And that is unavoidable by a famous theorem:
 
 > **Hairy ball theorem.** Every continuous tangent vector field on $$S^2$$ vanishes at some point.
 
-You cannot comb a hairy ball flat without leaving a cowlick. Equivalently, at any instant there is a point on Earth where the horizontal wind is zero (assuming the wind is continuous). The same holds on every even-dimensional sphere $$S^{2k}$$. On odd-dimensional spheres the obstruction disappears. On $$S^{2k-1} \subset \mathbb{R}^{2k}$$, the field
+You cannot comb a hairy ball flat without leaving a cowlick (3B1B reecently published a [wonderful video](https://www.youtube.com/watch?v=BHdbsHFs2P0&t=11s) on this theorem). Equivalently, at any instant there is a point on Earth where the horizontal wind is zero (assuming the wind is continuous). The same holds on every even-dimensional sphere $$S^{2k}$$. On odd-dimensional spheres the obstruction disappears. On $$S^{2k-1} \subset \mathbb{R}^{2k}$$, the field
 
 $$
 X(x_1, x_2, \dots, x_{2k-1}, x_{2k}) = (-x_2, x_1, \dots, -x_{2k}, x_{2k-1})
@@ -98,11 +102,11 @@ $$
 
 is tangent ($$X \cdot x = 0$$) and has unit length everywhere. The torus also carries a nowhere-vanishing field, namely "go around the long way".
 
-What separates the sphere from the torus is topology. The **Poincaré–Hopf theorem** says that for a vector field with isolated zeros on a compact manifold, the indices of the zeros add up to the Euler characteristic $$\chi(M)$$. Since $$\chi(S^2) = 2 \neq 0$$ there must be at least one zero, while $$\chi(T^2) = 0$$ allows none (Milnor, *Topology from the Differentiable Viewpoint*). I find this one of the first places where you see that vector fields know about global shape. We'll come back to that.
+Why such difference? What separates the sphere from the torus is topology. The **Poincaré–Hopf theorem** says that for a vector field with isolated zeros on a compact manifold, the indices of the zeros add up to the Euler characteristic $$\chi(M)$$. Since $$\chi(S^2) = 2 \neq 0$$ there must be at least one zero, while $$\chi(T^2) = 0$$ allows none (Milnor, *Topology from the Differentiable Viewpoint*). I find this one of the intuitive examples where we could see that __vector fields know about global shape__. We'll come back to that.
 
 ### 0.4] Vector fields are derivations
 
-In part (2), a tangent vector at $$p$$ was a *derivation at $$p$$*: a linear map $$v: C^\infty(M) \to \mathbb{R}$$ satisfying the Leibniz rule $$v(fg) = f(p)\,v(g) + g(p)\,v(f)$$. A vector field does this at every point at once, so it eats a function and returns a function:
+In Manifold and Riemannian Geoemtry(2), a tangent vector at $$p$$ was a *derivation at $$p$$*: a linear map $$v: C^\infty(M) \to \mathbb{R}$$ satisfying the Leibniz rule $$v(fg) = f(p)\,v(g) + g(p)\,v(f)$$. A vector field does this at every point at once, so it eats a function and returns a function:
 
 $$
 (Xf)(p) = X_p f, \qquad Xf = \sum_i X^i\, \frac{\partial f}{\partial x^i} \ \text{ in coordinates}.
@@ -122,11 +126,11 @@ $$
 W(x^2 + y^2) = -y \cdot 2x + x \cdot 2y = 0, \qquad E(x^2 + y^2) = 2x^2 + 2y^2 = 2r^2.
 $$
 
-$$Xf$$ is the rate of change of $$f$$ as you move along $$X$$. The rotation field doesn't change your distance from the origin, and the radial field increases it. Section 1 makes this "moving along $$X$$" literal.
+What $$Xf$$ represents is the rate of change of $$f$$ as we move along $$X$$. The rotation field doesn't change the distance from the origin, and the radial field increases it.
 
 ### 0.5] A warning: vector fields do not push forward along arbitrary maps
 
-A smooth map $$F: M \to N$$ pushes individual tangent vectors forward with its differential, $$dF_p: T_pM \to T_{F(p)}N$$. It is tempting to push a whole vector field forward the same way. In general this fails, for two reasons.
+A smooth map $$F: M \to N$$ pushes individual tangent vectors forward with its differential, $$dF_p: T_pM \to T_{F(p)}N$$. It is tempting to push a whole vector field forward the same way. However, in general this fails, for two reasons.
 
 - **$$F$$ not injective.** Take $$F: \mathbb{R} \to \mathbb{R}$$, $$F(t) = t^2$$, and $$X = \partial_t$$. Both $$t = 1$$ and $$t = -1$$ land on $$1$$, but $$dF(\partial_t) = 2t\,\partial_s$$ gives $$+2\,\partial_s$$ from one and $$-2\,\partial_s$$ from the other. There is no consistent answer at $$s = 1$$.
 - **$$F$$ not surjective.** Points of $$N$$ outside the image receive no vector at all.
@@ -159,18 +163,18 @@ $$
 
 So **a smooth vector field on $$M$$ is exactly an autonomous ODE on $$M$$**, and an integral curve is a solution. Picture dropping a leaf into a stream: the vector field is the current, and the integral curve is the path of the leaf. For our planar examples:
 
-- $$W$$: $$\dot x = -y,\ \dot y = x$$. Solutions are circles traced at unit angular speed, $$(r\cos(t + \phi),\ r\sin(t + \phi))$$.
-- $$E$$: $$\dot x = x,\ \dot y = y$$. Solutions are rays moving outward exponentially, $$e^t(x_0, y_0)$$.
+- $W$: $$\dot x = -y,\ \dot y = x$$. Solutions are circles traced at unit angular speed, $$(r\cos(t + \phi),\ r\sin(t + \phi))$$.
+- $E$: $$\dot x = x,\ \dot y = y$$. Solutions are rays moving outward exponentially, $$e^t(x_0, y_0)$$.
 
 The payoff is that everything in dynamical systems (fixed points, stability, limit cycles, chaos) can now be stated on a manifold without reference to coordinates. The dynamics only cares about the field.
 
 ### 1.2] Existence and uniqueness
 
-Locally, in a chart, the Picard–Lindelöf theorem gives a unique solution through each point for a short time. Uniqueness lets us glue these local pieces together, which yields:
+Locally, in a chart, the Picard–Lindelöf theorem gives a unique solution through each point for a short time (recall the first/second class of your nonlinear dynamical systems!). Uniqueness lets us glue these local pieces together, which yields:
 
 > For each $$p \in M$$ there is a unique **maximal** integral curve $$\gamma_p: J_p \to M$$ with $$\gamma_p(0) = p$$, defined on an open interval $$J_p \ni 0$$. Every other integral curve starting at $$p$$ is a restriction of it.
 
-Uniqueness has a geometric meaning worth stating plainly: **integral curves never cross.** If two of them passed through the same point, they would both solve the same initial value problem there, so they would coincide. This is why phase portraits look like smooth combed hair rather than tangled string.
+Uniqueness has a geometric meaning worth stating plainly: **integral curves never cross.** If two of them passed through the same point, they would both solve the same initial value problem there, so they would coincide. This is why phase portraits look like smooth combed hair rather than tangled string (if indeed tangled, that might suggest we are looking at some low dimensional projection of the real flow...).
 
 ### 1.3] Completeness: can the leaf escape?
 
@@ -194,7 +198,7 @@ $$
 A^i{}_j = \frac{\partial X^i}{\partial x^j}(p).
 $$
 
-There is a subtlety I like here. For a general vector field, the Jacobian matrix of its components is **not** coordinate-independent. At a zero, however, it is. If we change coordinates $$x \mapsto y$$, the components transform as $$\tilde X^k(y) = \sum_i \frac{\partial y^k}{\partial x^i} X^i(x)$$. Differentiating with the product rule,
+There is a subtlety I have to point out. For a general vector field, the Jacobian matrix of its components is **not** coordinate-independent. At a zero, however, it is. If we change coordinates $$x \mapsto y$$, the components transform as $$\tilde X^k(y) = \sum_i \frac{\partial y^k}{\partial x^i} X^i(x)$$. Differentiating with the product rule,
 
 $$
 \frac{\partial \tilde X^k}{\partial y^l}
@@ -202,7 +206,7 @@ $$
 \;+\; \sum_{i,m} \frac{\partial y^k}{\partial x^i}\,\frac{\partial X^i}{\partial x^m}\,\frac{\partial x^m}{\partial y^l}.
 $$
 
-At a zero of $$X$$ the first sum vanishes, leaving $$\tilde A = J A J^{-1}$$ with $$J = \partial y / \partial x$$. So at an equilibrium the linearization is a well-defined linear map $$T_pM \to T_pM$$, and its eigenvalues are intrinsic. Away from zeros, the first sum survives and "the derivative of $$X$$" depends on the coordinates. That is exactly the problem a *connection* solves, and it is also why §3 has to work harder.
+At a zero of $$X$$ the first sum vanishes, leaving $$\tilde A = J A J^{-1}$$ with $$J = \partial y / \partial x$$. So at an equilibrium the linearization is a well-defined linear map $$T_pM \to T_pM$$, and its eigenvalues are intrinsic. Away from zeros, the first sum survives and __"the derivative of $$X$$"__ depends on the coordinates. That is exactly the problem a *connection* solves, and it is also why §3 has to work harder.
 
 For linear fields $$X(x) = Ax$$ on $$\mathbb{R}^2$$, the eigenvalues of $$A$$ determine the whole phase portrait:
 
@@ -221,7 +225,7 @@ Here is a connection to neuroscience that I find satisfying. jPCA models motor-c
 
 ### 1.5] Time-dependent fields
 
-We'll also need vector fields that change in time, $$X_t$$, with ODE $$\dot\gamma(t) = X_t(\gamma(t))$$. Generative models (§4) are built on these. A standard trick reduces them to the autonomous case: on $$M \times \mathbb{R}$$, define the field $$\tilde X = X_t + \partial_t$$, so that time becomes one more coordinate that ticks forward at unit speed. Everything in §1 and §2 then applies, with the caveat that the solution maps compose as a two-time family, $$\theta_{t,s}\circ\theta_{s,r} = \theta_{t,r}$$, rather than as a one-parameter group.
+At times, we'll also need vector fields that change in time, $$X_t$$, with ODE $$\dot\gamma(t) = X_t(\gamma(t))$$. Generative models (§4) are built on these. A standard trick reduces them to the autonomous case: on $$M \times \mathbb{R}$$, define the field $$\tilde X = X_t + \partial_t$$, so that time becomes one more coordinate that ticks forward at unit speed. Everything in §1 and §2 then applies, with the caveat that the solution maps compose as a two-time family, $$\theta_{t,s}\circ\theta_{s,r} = \theta_{t,r}$$, rather than as a one-parameter group.
 
 ---
 
@@ -229,13 +233,13 @@ We'll also need vector fields that change in time, $$X_t$$, with ODE $$\dot\gamm
 
 ### 2.1] From a field to a flow
 
-§1 solved the ODE for one initial point. Now solve it for **all** initial points at once and collect the answers into a single map:
+§1 solved the ODE for one initial point. Now we solve it for **all** initial points at once and collect the answers into a single map:
 
 $$
 \theta(t, p) = \theta_t(p) = \gamma_p(t),
 $$
 
-meaning "where the leaf dropped at $$p$$ is after time $$t$$". This is the **flow** of $$X$$. Instead of following one leaf, picture the whole surface of the stream moving at once.
+meaning "where the leaf dropped at $$p$$ is after time $$t$$". This is the **flow** of $$X$$. Instead of following one leaf, picture the whole surface of the stream moving at once (you might immediately think about the transformation of an entire space or even a distribution...).
 
 > **Fundamental theorem on flows** (Lee, Ch. 9). Let $$X$$ be a smooth vector field. Then $$\theta$$ is defined on an open set $$\mathcal{D} \subseteq \mathbb{R} \times M$$ containing $$\{0\} \times M$$, $$\theta$$ is smooth, and
 > $$
